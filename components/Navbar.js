@@ -1,16 +1,18 @@
-import { Link } from 'react-scroll';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const navItems = [
-  { label: 'Home', to: 'hero' },
-  { label: 'About', to: 'about' },
-  { label: 'Academics', to: 'academics' },
-  { label: 'Admission', to: 'admission' },
-  { label: 'Contact', to: 'contact' }
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Academics', href: '/academics' },
+  { label: 'Admission', href: '/admission' },
+  { label: 'Contact', href: '/contact' }
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => {
@@ -31,14 +33,7 @@ export default function Navbar() {
         <div className="text-2xl font-semibold text-cardinal">Mount Litera School</div>
         <div className="hidden md:flex space-x-6 text-cardinal font-medium">
           {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              smooth
-              duration={600}
-              offset={-100}
-              className="cursor-pointer transition-colors hover:text-gray-800"
-            >
+            <Link key={item.href} href={item.href} className="transition-colors hover:text-gray-800">
               {item.label}
             </Link>
           ))}
@@ -49,17 +44,14 @@ export default function Navbar() {
             onChange={(event) => {
               const target = event.target.value;
               if (target) {
-                const element = document.querySelector(`#${target}`);
-                if (element) {
-                  const top = element.getBoundingClientRect().top + window.pageYOffset - 90;
-                  window.scrollTo({ top, behavior: 'smooth' });
-                }
+                router.push(target);
+                event.target.value = '';
               }
             }}
           >
             <option value="">Navigate</option>
             {navItems.map((item) => (
-              <option key={item.to} value={item.to}>
+              <option key={item.href} value={item.href}>
                 {item.label}
               </option>
             ))}

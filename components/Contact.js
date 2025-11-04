@@ -52,7 +52,7 @@ export default function Contact() {
             </div>
             <div>
               <h3 className="font-semibold text-white">Email</h3>
-              <p>info@mountliteraschool.in</p>
+              <p>smmlzshzb@gmail.com</p>
             </div>
           </div>
         </motion.div>
