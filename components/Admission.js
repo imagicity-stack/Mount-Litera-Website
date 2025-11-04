@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -28,7 +28,8 @@ export default function Admission() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
         >
-          We’re inviting new learners to join this journey of transformation. The systems you see today are evolving into a bold, modern learning experience designed for the next generation.
+          We’re inviting new learners to join this journey of transformation. The systems you see today are evolving into a bold,
+ modern learning experience designed for the next generation.
         </motion.p>
         <motion.div
           variants={fadeUp}
@@ -38,13 +39,10 @@ export default function Admission() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
         >
           <Link
-            to="inquiry"
-            smooth
-            duration={600}
-            offset={-80}
+            href="/admission"
             className="inline-block px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal"
           >
-            Submit Admission Inquiry
+            Read more
           </Link>
         </motion.div>
       </div>

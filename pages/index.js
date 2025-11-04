@@ -4,7 +4,6 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Academics from '@/components/Academics';
 import Admission from '@/components/Admission';
-import InquiryForm from '@/components/InquiryForm';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -25,7 +24,6 @@ export default function Home() {
           <About />
           <Academics />
           <Admission />
-          <InquiryForm />
           <Contact />
         </main>
         <Footer />
