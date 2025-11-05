@@ -25,7 +25,7 @@ export default function AboutPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <About />
+          <About showLink={false} />
           <section className="py-20 bg-[#F8F5F3]">
             <div className="max-w-5xl mx-auto px-6 space-y-12">
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
@@ -55,30 +55,37 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-6">
-                <h2 className="text-3xl font-semibold text-cardinal">Managing Director&apos;s Note</h2>
-                <p>
-                  Mount Litera School has always believed that true education goes beyond classrooms. It shapes the character,
-                  curiosity, and conviction of every child. As we now move toward a new phase of growth and transformation, our
-                  focus is to redefine what schooling means in today’s fast-changing world.
-                </p>
-                <p>
-                  This transition is not merely about upgrading infrastructure or identity. It is about building a future-ready
-                  institution that aligns with modern learning standards while staying grounded in timeless values. Our mission is
-                  to create an ecosystem where students are encouraged to question, explore, and innovate because the future will
-                  belong to thinkers, not followers.
-                </p>
-                <p>
-                  Every step we take is guided by one principle: excellence with purpose. From academic upgrades and
-                  technology-driven systems to holistic development programs, every decision is rooted in long-term value creation
-                  for our students and the community.
-                </p>
-                <p>
-                  We are proud of the foundation that has brought us here and even prouder of the vision that will take us
-                  forward. The road ahead is filled with opportunity, and Mount Litera School is ready to lead that journey with
-                  clarity, conviction, and care.
-                </p>
-                <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-semibold text-cardinal">Managing Director&apos;s Note</h2>
+                  <p>
+                    Mount Litera School has always believed that true education goes beyond classrooms. It shapes the character,
+                    curiosity, and conviction of every child. As we now move toward a new phase of growth and transformation, our
+                    focus is to redefine what schooling means in today’s fast-changing world.
+                  </p>
+                  <p>
+                    This transition is not merely about upgrading infrastructure or identity. It is about building a future-ready
+                    institution that aligns with modern learning standards while staying grounded in timeless values. Our mission
+                    is to create an ecosystem where students are encouraged to question, explore, and innovate because the future
+                    will belong to thinkers, not followers.
+                  </p>
+                  <p>
+                    Every step we take is guided by one principle: excellence with purpose. From academic upgrades and
+                    technology-driven systems to holistic development programs, every decision is rooted in long-term value
+                    creation for our students and the community.
+                  </p>
+                  <p>
+                    We are proud of the foundation that has brought us here and even prouder of the vision that will take us
+                    forward. The road ahead is filled with opportunity, and Mount Litera School is ready to lead that journey with
+                    clarity, conviction, and care.
+                  </p>
+                  <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
+                </div>
+                <div className="w-full max-w-md mx-auto lg:mx-0">
+                  <div className="aspect-[3/4] rounded-3xl border-2 border-dashed border-cardinal/60 flex items-center justify-center text-center text-cardinal/70 bg-white">
+                    Photo Placeholder
+                  </div>
+                </div>
               </div>
             </div>
           </section>
