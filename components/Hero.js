@@ -16,9 +16,9 @@ export default function Hero() {
       id="hero"
       className="relative h-screen flex items-center justify-center bg-white overflow-hidden"
     >
-      <div className="absolute -top-40 -left-40 h-80 w-80 rounded-full bg-cardinal/10 blur-3xl" />
-      <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-cardinal/20 blur-3xl" />
-      <div className="max-w-6xl mx-auto px-6 text-center">
+      <div className="pointer-events-none absolute -top-40 -left-40 h-80 w-80 rounded-full bg-cardinal/10 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-cardinal/20 blur-3xl" aria-hidden="true" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <motion.div
           initial="hidden"
           animate="visible"

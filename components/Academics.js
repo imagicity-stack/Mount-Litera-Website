@@ -57,93 +57,69 @@ export const stageDetails = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
 export default function Academics({ showExplore = true }) {
   return (
-    <section id="academics" className="py-20 bg-cardinal text-white">
+    <section id="academics" className="py-16 bg-[#F8F5F3] text-cardinal">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] items-start">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start">
           <motion.div
-            className="space-y-8"
+            className="space-y-6"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/70">
-              <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1">Academics</span>
-              <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1">Session 2025-26</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight">Building Foundations, Inspiring Futures</h2>
-            <p className="text-white/80">
-              At Mount Litera School, academics go far beyond textbooks. Our curriculum nurtures curiosity, discipline, and creativity —
-              preparing students not just for exams, but for life. Every stage of learning is structured to build strong fundamentals,
-              foster problem-solving ability, and develop confidence in every child while blending traditional academic strength with
-              modern pedagogical practices and digital learning tools.
+            <h2 className="text-3xl md:text-4xl font-bold text-cardinal">Academics</h2>
+            <h3 className="text-2xl md:text-3xl font-semibold leading-tight">
+              Learning that grows with your child
+            </h3>
+            <p className="text-base text-cardinal/80">
+              Mount Litera School follows a simple, age-appropriate path across four stages. Each step gently strengthens
+              confidence, curiosity, and core skills so children feel ready for what comes next.
             </p>
-            <div className="rounded-3xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm shadow-lg">
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-                <div className="space-y-4 text-white/90 sm:flex-1">
-                  <h3 className="text-xl font-semibold text-white">Pinnacle Learning by The Lead Group</h3>
-                  <p>
-                    From the 2026-25 academic session, we are partnering with Pinnacle Learning by The Lead Group for classes LKG to
-                    VIII. This collaboration brings immersive digital content, structured assessments, and teacher training that elevate
-                    classroom experiences while preserving our culture of care.
-                  </p>
-                  <ul className="space-y-2 text-sm text-white/80">
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
-                      Personalised concept reinforcement, adaptive practice, and bilingual resources.
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
-                      Integrated projects and skill builders that connect real-world problems with classroom learning.
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
-                      Dedicated mentor connects for parents and learners to track progress together.
-                    </li>
-                  </ul>
-                  <p className="text-sm text-white/70">
-                    A refreshed resource hub and orientation series will ensure families are ready for the transition.
-                  </p>
-                </div>
-                <div className="sm:w-40 md:w-48">
-                  <div className="aspect-[3/4] w-full rounded-2xl border-2 border-dashed border-white/50 bg-white/10 text-center text-xs font-semibold uppercase tracking-wide text-white/70 flex items-center justify-center">
-                    Photo Space
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ul className="grid gap-3 sm:grid-cols-2 text-sm text-cardinal/80">
+              {[
+                'Warm, caring classrooms',
+                'Balanced academics and activities',
+                'Focus on communication skills',
+                'Early digital awareness'
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             {showExplore && (
               <div>
                 <Link
                   href="/academics"
-                  className="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-cardinal transition hover:bg-cardinal/10 hover:text-white"
+                  className="inline-flex items-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-cardinal/90"
                 >
-                  Explore
+                  Explore Academics
                 </Link>
               </div>
             )}
           </motion.div>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {stageDetails.map((stage, index) => (
               <motion.div
                 key={stage.title}
-                className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 shadow-lg transition hover:border-white/40"
+                className="rounded-2xl border border-cardinal/10 bg-white p-6 shadow-sm"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <span className="text-xs uppercase tracking-[0.3em] text-white/60">{stage.grades}</span>
-                <h3 className="mt-3 text-xl font-semibold">{stage.title}</h3>
-                <p className="mt-3 text-sm text-white/80">{stage.homeSummary}</p>
+                <span className="text-xs uppercase tracking-[0.3em] text-cardinal/60">{stage.grades}</span>
+                <h3 className="mt-2 text-lg font-semibold">{stage.title}</h3>
+                <p className="mt-3 text-sm text-cardinal/70">{stage.homeSummary}</p>
               </motion.div>
             ))}
           </div>
