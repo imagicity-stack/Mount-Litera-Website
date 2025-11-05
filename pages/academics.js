@@ -3,6 +3,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { stageDetails } from '@/components/Academics';
 
+const pinnacleHighlights = [
+  'Immersive digital lessons that keep every child excited to learn',
+  'Adaptive assessments with real-time feedback for parents and teachers',
+  'Continuous teacher training to blend technology with compassionate guidance'
+];
+
 const philosophyPoints = [
   'Individual attention in every class',
   'Periodic assessments for growth tracking',
@@ -45,6 +51,41 @@ export default function AcademicsPage() {
                 We follow the CBSE curriculum, blending traditional academic strength with modern pedagogical practices and digital
                 learning tools.
               </p>
+            </div>
+          </section>
+
+          <section className="py-16 bg-[#FDF9F7]">
+            <div className="max-w-5xl mx-auto px-6">
+              <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_260px] md:items-center">
+                <div className="space-y-5">
+                  <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-cardinal/70">
+                    <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
+                    <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG - VIII</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Pinnacle Learning by The Lead Group</h2>
+                  <p className="text-gray-700">
+                    Beginning with the 2026-25 academic session, Mount Litera School is partnering with Pinnacle Learning by The
+                    Lead Group to enrich our classrooms from LKG to Grade VIII. The collaboration builds on the strong
+                    foundation laid in 2025-26 and unlocks a future-ready ecosystem for our learners.
+                  </p>
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    {pinnacleHighlights.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm text-cardinal/80">
+                    Orientation sessions for families and a dedicated resource hub will ensure a smooth transition.
+                  </p>
+                </div>
+                <div className="mx-auto w-full max-w-[220px] md:max-w-none">
+                  <div className="aspect-[3/4] w-full rounded-3xl border-2 border-dashed border-cardinal/30 bg-white text-center text-xs font-semibold uppercase tracking-wide text-cardinal/70 flex items-center justify-center">
+                    Photo Placeholder
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 

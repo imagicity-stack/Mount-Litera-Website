@@ -169,24 +169,24 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-              <div className="md:hidden">
-                <div className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4">
-                  {coreMentors.map((group) => (
-                    <div
-                      key={`${group.department}-group`}
-                      className="snap-start min-w-[88%] rounded-3xl border border-cardinal/15 bg-white p-6 shadow-lg"
-                    >
-                      <div className="mb-4 text-center">
-                        <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
-                      </div>
-                      <div className="grid gap-4">
+              <div className="md:hidden space-y-10">
+                {coreMentors.map((group) => (
+                  <div key={`${group.department}-mobile`} className="space-y-4">
+                    <div className="text-center">
+                      <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
+                    </div>
+                    <div className="-mx-6 overflow-x-auto px-6">
+                      <div className="flex snap-x snap-mandatory gap-5 pb-2">
                         {group.mentors.map((mentor) => (
-                          <div key={`${group.department}-mobile-${mentor.name}`} className="rounded-2xl border border-cardinal/10 bg-cardinal/5 p-4">
-                            <div className="flex items-center gap-4">
-                              <div className="flex h-16 w-14 items-center justify-center rounded-lg border-2 border-dashed border-cardinal/30 bg-white text-[10px] font-semibold uppercase tracking-wide text-cardinal/60">
+                          <div
+                            key={`${group.department}-mobile-${mentor.name}`}
+                            className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
+                          >
+                            <div className="mb-4 flex flex-col items-center gap-3">
+                              <div className="flex h-20 w-16 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-[10px] font-semibold uppercase tracking-wide text-cardinal/60">
                                 Photo
                               </div>
-                              <div>
+                              <div className="text-center">
                                 <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
                                 <p className="text-sm text-gray-600">{mentor.designation}</p>
                               </div>
@@ -195,8 +195,8 @@ export default function AboutPage() {
                         ))}
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
