@@ -74,11 +74,10 @@ export default function Academics({ showExplore = true }) {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-cardinal/60">
-              <span className="inline-flex items-center rounded-full bg-cardinal/10 px-4 py-1">Academics</span>
-              <span className="inline-flex items-center rounded-full bg-cardinal/10 px-4 py-1">Nursery – Grade X</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight">Learning that grows with your child</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-cardinal">Academics</h2>
+            <h3 className="text-2xl md:text-3xl font-semibold leading-tight">
+              Learning that grows with your child
+            </h3>
             <p className="text-base text-cardinal/80">
               Mount Litera School follows a simple, age-appropriate path across four stages. Each step gently strengthens
               confidence, curiosity, and core skills so children feel ready for what comes next.

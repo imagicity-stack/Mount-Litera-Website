@@ -66,11 +66,46 @@ export default function AcademicsPage() {
               </div>
               <div className="grid gap-4 sm:grid-cols-3">
                 {heroHighlights.map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-white/10 bg-white/10 p-5 shadow-lg backdrop-blur">
-                    <p className="text-xs uppercase tracking-[0.3em] text-white/60">{item.label}</p>
-                    <p className="mt-2 text-lg font-semibold">{item.value}</p>
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-lg backdrop-blur flex flex-col items-center justify-center text-center"
+                  >
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/70">{item.label}</p>
+                    <p className="mt-3 text-lg font-semibold leading-snug">{item.value}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
+              <div className="space-y-5">
+                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-cardinal/70">
+                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
+                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG – VIII</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Pinnacle Learning by The Lead Group</h2>
+                <p className="text-gray-700">
+                  Beginning 2026-25, Pinnacle Learning joins our classrooms from LKG to Grade VIII. The partnership deepens the
+                  momentum created in 2025-26 with immersive content, measurable progress, and confident teachers.
+                </p>
+                <ul className="space-y-3 text-sm text-gray-700">
+                  {pinnacleHighlights.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-cardinal/80">
+                  Families will receive orientation support and a refreshed resource hub to make the transition seamless.
+                </p>
+              </div>
+              <div className="mx-auto w-full max-w-sm">
+                <div className="aspect-[4/5] w-full rounded-3xl border-2 border-dashed border-cardinal/20 bg-[#FDF9F7] text-center text-xs font-semibold uppercase tracking-wide text-cardinal/60 flex items-center justify-center">
+                  Visual placeholder
+                </div>
               </div>
             </div>
           </section>
@@ -138,38 +173,6 @@ export default function AcademicsPage() {
                       </div>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
-              <div className="space-y-5">
-                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-cardinal/70">
-                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
-                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG – VIII</span>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Pinnacle Learning by The Lead Group</h2>
-                <p className="text-gray-700">
-                  Beginning 2026-25, Pinnacle Learning joins our classrooms from LKG to Grade VIII. The partnership deepens the
-                  momentum created in 2025-26 with immersive content, measurable progress, and confident teachers.
-                </p>
-                <ul className="space-y-3 text-sm text-gray-700">
-                  {pinnacleHighlights.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-cardinal/80">
-                  Families will receive orientation support and a refreshed resource hub to make the transition seamless.
-                </p>
-              </div>
-              <div className="mx-auto w-full max-w-sm">
-                <div className="aspect-[4/5] w-full rounded-3xl border-2 border-dashed border-cardinal/20 bg-[#FDF9F7] text-center text-xs font-semibold uppercase tracking-wide text-cardinal/60 flex items-center justify-center">
-                  Visual placeholder
                 </div>
               </div>
             </div>
