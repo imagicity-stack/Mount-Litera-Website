@@ -6,7 +6,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-export default function About() {
+export default function About({ showLink = true }) {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
@@ -40,20 +40,22 @@ export default function About() {
         >
           “The future belongs to those who prepare for it today.”
         </motion.blockquote>
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-        >
-          <Link
-            href="/about"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-cardinal bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal"
+        {showLink && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
           >
-            Read more about us
-          </Link>
-        </motion.div>
+            <Link
+              href="/about"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-cardinal bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal"
+            >
+              Read more about us
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
