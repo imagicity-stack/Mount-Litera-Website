@@ -12,6 +12,63 @@ const policies = [
   { title: 'Complaint Procedures', href: '/policies/complaint-procedures' }
 ];
 
+const coreMentors = [
+  {
+    department: 'Administration',
+    mentors: [
+      { name: 'R.K. Singh', designation: 'Principal' },
+      { name: 'Prarthana Mishra', designation: 'Relationship Manager' },
+      { name: 'Piyush Sinha', designation: 'Accountant' },
+      { name: 'MD Hadis', designation: 'Transport & Admin Manager' }
+    ]
+  },
+  {
+    department: 'Teaching',
+    mentors: [
+      { name: 'Anupriya', designation: 'English' },
+      { name: 'Shama Perween', designation: 'Maths' },
+      { name: 'Nitesh Kumar', designation: 'Maths' },
+      { name: 'Sameeksha Sinha', designation: 'Social Studies' },
+      { name: 'Sangeeta Agarwal', designation: 'English' },
+      { name: 'Smita Sinha', designation: 'Maths' },
+      { name: 'Pratiksha Prasoon', designation: 'Hindi' },
+      { name: 'Saba Naaz', designation: 'Multiple Subjects' },
+      { name: 'Nitika Gupta', designation: 'Multiple Subjects' },
+      { name: 'Manila Awadhya', designation: 'Multiple Subjects' },
+      { name: 'Seema Bakshi', designation: 'Multiple Subjects' },
+      { name: 'Kailash Devi', designation: 'Hindi' },
+      { name: 'Ritesh Kumar', designation: 'Science' }
+    ]
+  },
+  {
+    department: 'Music',
+    mentors: [{ name: 'Sushma Minz', designation: 'Vocalist' }]
+  },
+  {
+    department: 'Sports',
+    mentors: [
+      { name: 'Sagar Kumar', designation: 'Yoga & Karate' },
+      { name: 'C.K. Yadav', designation: 'Overall Sports' }
+    ]
+  },
+  {
+    department: 'Store Keeper',
+    mentors: [{ name: 'Santosh Kumar', designation: 'Store Keeper' }]
+  }
+];
+
+const MentorCard = ({ name, designation }) => (
+  <div
+    className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl"
+  >
+    <div className="mb-4 flex h-32 w-28 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-xs font-semibold uppercase tracking-wide text-cardinal/70">
+      Photo
+    </div>
+    <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
+    <p className="mt-1 text-sm text-gray-600">{designation}</p>
+  </div>
+);
+
 export default function AboutPage() {
   return (
     <>
@@ -86,6 +143,60 @@ export default function AboutPage() {
                     Photo Placeholder
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 space-y-12">
+              <div className="space-y-4 text-center">
+                <h2 className="text-3xl font-semibold text-cardinal">Core Mentors</h2>
+                <p className="mx-auto max-w-3xl text-gray-600">
+                  Meet the dedicated mentors guiding our students every day across leadership, teaching, talent, and support
+                  teams.
+                </p>
+              </div>
+              <div className="hidden space-y-8 md:block">
+                {coreMentors.map((group) => (
+                  <div key={group.department} className="space-y-5">
+                    <div>
+                      <h3 className="text-2xl font-semibold text-cardinal">{group.department}</h3>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                      {group.mentors.map((mentor) => (
+                        <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="md:hidden space-y-10">
+                {coreMentors.map((group) => (
+                  <div key={`${group.department}-mobile`} className="space-y-4">
+                    <div className="text-center">
+                      <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
+                    </div>
+                    <div className="-mx-6 overflow-x-auto px-6">
+                      <div className="flex snap-x snap-mandatory gap-5 pb-2">
+                        {group.mentors.map((mentor) => (
+                          <div
+                            key={`${group.department}-mobile-${mentor.name}`}
+                            className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
+                          >
+                            <div className="mb-4 flex flex-col items-center gap-3">
+                              <div className="flex h-20 w-16 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-[10px] font-semibold uppercase tracking-wide text-cardinal/60">
+                                Photo
+                              </div>
+                              <div className="text-center">
+                                <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
+                                <p className="text-sm text-gray-600">{mentor.designation}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
