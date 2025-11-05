@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.mountliteraschool.com/</loc>
+    <loc>https://mlzshazaribagh.in/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/about</loc>
+    <loc>https://mlzshazaribagh.in/about</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/academics</loc>
+    <loc>https://mlzshazaribagh.in/academics</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/admission</loc>
+    <loc>https://mlzshazaribagh.in/admission</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/contact</loc>
+    <loc>https://mlzshazaribagh.in/contact</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/careers</loc>
+    <loc>https://mlzshazaribagh.in/careers</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/disclosures</loc>
+    <loc>https://mlzshazaribagh.in/disclosures</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/privacy-policy</loc>
+    <loc>https://mlzshazaribagh.in/privacy-policy</loc>
   </url>
   <url>
-    <loc>https://www.mountliteraschool.com/terms-and-conditions</loc>
+    <loc>https://mlzshazaribagh.in/terms-and-conditions</loc>
+  </url>
+  <url>
+    <loc>https://mlzshazaribagh.in/policies/anti-ragging-message</loc>
+  </url>
+  <url>
+    <loc>https://mlzshazaribagh.in/policies/code-for-self-discipline</loc>
+  </url>
+  <url>
+    <loc>https://mlzshazaribagh.in/policies/complaint-procedures</loc>
+  </url>
+  <url>
+    <loc>https://mlzshazaribagh.in/policies/disability-policy</loc>
+  </url>
+  <url>
+    <loc>https://mlzshazaribagh.in/policies/parent-child-contact-mechanism</loc>
   </url>
 </urlset>
