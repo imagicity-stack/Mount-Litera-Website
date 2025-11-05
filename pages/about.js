@@ -151,31 +151,53 @@ export default function AboutPage() {
               <div className="space-y-4 text-center">
                 <h2 className="text-3xl font-semibold text-cardinal">Core Mentors</h2>
                 <p className="mx-auto max-w-3xl text-gray-600">
-                  Meet the dedicated mentors guiding our students every day. Hover over each mentor on desktop to feel the
-                  energy they bring, or swipe through the carousel on mobile to explore each department.
+                  Meet the dedicated mentors guiding our students every day across leadership, teaching, talent, and support
+                  teams.
                 </p>
               </div>
-              {coreMentors.map((group) => (
-                <div key={group.department} className="space-y-5">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-cardinal">{group.department}</h3>
-                  </div>
-                  <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {group.mentors.map((mentor) => (
-                      <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
-                    ))}
-                  </div>
-                  <div className="-mx-6 md:hidden">
-                    <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4">
+              <div className="hidden space-y-8 md:block">
+                {coreMentors.map((group) => (
+                  <div key={group.department} className="space-y-5">
+                    <div>
+                      <h3 className="text-2xl font-semibold text-cardinal">{group.department}</h3>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.mentors.map((mentor) => (
-                        <div key={`${group.department}-mobile-${mentor.name}`} className="snap-start min-w-[75%]">
-                          <MentorCard {...mentor} />
-                        </div>
+                        <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
                       ))}
                     </div>
                   </div>
+                ))}
+              </div>
+              <div className="md:hidden">
+                <div className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4">
+                  {coreMentors.map((group) => (
+                    <div
+                      key={`${group.department}-group`}
+                      className="snap-start min-w-[88%] rounded-3xl border border-cardinal/15 bg-white p-6 shadow-lg"
+                    >
+                      <div className="mb-4 text-center">
+                        <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
+                      </div>
+                      <div className="grid gap-4">
+                        {group.mentors.map((mentor) => (
+                          <div key={`${group.department}-mobile-${mentor.name}`} className="rounded-2xl border border-cardinal/10 bg-cardinal/5 p-4">
+                            <div className="flex items-center gap-4">
+                              <div className="flex h-16 w-14 items-center justify-center rounded-lg border-2 border-dashed border-cardinal/30 bg-white text-[10px] font-semibold uppercase tracking-wide text-cardinal/60">
+                                Photo
+                              </div>
+                              <div>
+                                <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
+                                <p className="text-sm text-gray-600">{mentor.designation}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </section>
           <section className="py-20 bg-white">
