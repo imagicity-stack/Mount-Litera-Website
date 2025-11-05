@@ -65,18 +65,19 @@ export default function Academics({ showExplore = true }) {
   return (
     <section id="academics" className="py-20 bg-cardinal text-white">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] items-start">
           <motion.div
-            className="space-y-6"
+            className="space-y-8"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/70">
-              Academics
-            </span>
+            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/70">
+              <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1">Academics</span>
+              <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1">Session 2025-26</span>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold leading-tight">Building Foundations, Inspiring Futures</h2>
             <p className="text-white/80">
               At Mount Litera School, academics go far beyond textbooks. Our curriculum nurtures curiosity, discipline, and creativity —
@@ -84,6 +85,40 @@ export default function Academics({ showExplore = true }) {
               foster problem-solving ability, and develop confidence in every child while blending traditional academic strength with
               modern pedagogical practices and digital learning tools.
             </p>
+            <div className="rounded-3xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm shadow-lg">
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+                <div className="space-y-4 text-white/90 sm:flex-1">
+                  <h3 className="text-xl font-semibold text-white">Pinnacle Learning by The Lead Group</h3>
+                  <p>
+                    From the 2026-25 academic session, we are partnering with Pinnacle Learning by The Lead Group for classes LKG to
+                    VIII. This collaboration brings immersive digital content, structured assessments, and teacher training that elevate
+                    classroom experiences while preserving our culture of care.
+                  </p>
+                  <ul className="space-y-2 text-sm text-white/80">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
+                      Personalised concept reinforcement, adaptive practice, and bilingual resources.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
+                      Integrated projects and skill builders that connect real-world problems with classroom learning.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/70" />
+                      Dedicated mentor connects for parents and learners to track progress together.
+                    </li>
+                  </ul>
+                  <p className="text-sm text-white/70">
+                    A refreshed resource hub and orientation series will ensure families are ready for the transition.
+                  </p>
+                </div>
+                <div className="sm:w-40 md:w-48">
+                  <div className="aspect-[3/4] w-full rounded-2xl border-2 border-dashed border-white/50 bg-white/10 text-center text-xs font-semibold uppercase tracking-wide text-white/70 flex items-center justify-center">
+                    Photo Space
+                  </div>
+                </div>
+              </div>
+            </div>
             {showExplore && (
               <div>
                 <Link
