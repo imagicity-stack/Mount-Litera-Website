@@ -105,19 +105,19 @@ const MentorCard = ({ name, designation }) => {
       className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl"
     >
       {photoSrc ? (
-        <div className="mb-4 flex h-32 w-28 items-center justify-center rounded-xl border-2 border-cardinal/40 bg-cardinal/5">
-          <div className="relative h-28 w-24 overflow-hidden rounded-lg">
+        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-cardinal/40 bg-cardinal/5">
+          <div className="relative h-36 w-32 overflow-hidden rounded-xl">
             <Image
               src={photoSrc}
               alt={`${name} - ${designation}`}
               fill
-              sizes="(max-width: 768px) 96px, 112px"
+              sizes="(max-width: 768px) 144px, 192px"
               className="object-cover"
             />
           </div>
         </div>
       ) : (
-        <div className="mb-4 flex h-32 w-28 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-xs font-semibold uppercase tracking-wide text-cardinal/70">
+        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
           {getInitials(name)}
         </div>
       )}
@@ -258,17 +258,17 @@ export default function AboutPage() {
                             >
                               <div className="mb-4 flex flex-col items-center gap-3">
                                 {photoSrc ? (
-                                  <div className="relative h-24 w-20 overflow-hidden rounded-xl border-2 border-cardinal/30 bg-cardinal/5">
+                                  <div className="relative h-32 w-28 overflow-hidden rounded-2xl border-2 border-cardinal/30 bg-cardinal/5">
                                     <Image
                                       src={photoSrc}
                                       alt={`${mentor.name} - ${mentor.designation}`}
                                       fill
-                                      sizes="(max-width: 768px) 96px, 128px"
+                                      sizes="(max-width: 768px) 176px, 192px"
                                       className="object-cover"
                                     />
                                   </div>
                                 ) : (
-                                  <div className="flex h-24 w-20 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-xs font-semibold uppercase tracking-wide text-cardinal/60">
+                                  <div className="flex h-32 w-28 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
                                     {getInitials(mentor.name)}
                                   </div>
                                 )}
