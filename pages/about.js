@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import About from '@/components/About';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -11,6 +12,36 @@ const policies = [
   { title: 'Parent Child Contact Mechanism', href: '/policies/parent-child-contact-mechanism' },
   { title: 'Complaint Procedures', href: '/policies/complaint-procedures' }
 ];
+
+const mentorPhotos = {
+  'R.K. Singh': '/teachers/rk-singh.png',
+  'Prarthana Mishra': '/teachers/prarthana-mishra.png',
+  'Piyush Sinha': '/teachers/piyush-sinha.png',
+  'MD Hadis': '/teachers/md-hadis.jpg',
+  'Shama Perween': '/teachers/shama-perween.png',
+  'Nitesh Kumar': '/teachers/nitesh-kumar.png',
+  'Sameeksha Sinha': '/teachers/sameeksha-sinha.png',
+  'Sangeeta Agarwal': '/teachers/sangeeta-agarwal.png',
+  'Smita Sinha': '/teachers/smita-sinha.png',
+  'Pratiksha Prasoon': '/teachers/pratiksha-prasoon.png',
+  'Saba Naaz': '/teachers/saba-naaz.png',
+  'Manila Awadhya': '/teachers/manila-awadhya.png',
+  'Seema Bakshi': '/teachers/seema-bakshi.png',
+  'Kailash Devi': '/teachers/kailash-devi.png',
+  'Sagar Kumar': '/teachers/sagar-kumar.png',
+  'C.K. Yadav': '/teachers/ck-yadav.png'
+};
+
+const leadershipPhotos = {
+  principal: {
+    src: '/teachers/rk-singh.png',
+    alt: 'R.K. Singh, Principal'
+  },
+  managingDirector: {
+    src: '/teachers/shashi-shankar-prasad.jpg',
+    alt: 'Mr. Shashi Shankar Prasad, Managing Director'
+  }
+};
 
 const coreMentors = [
   {
@@ -57,17 +88,44 @@ const coreMentors = [
   }
 ];
 
-const MentorCard = ({ name, designation }) => (
-  <div
-    className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl"
-  >
-    <div className="mb-4 flex h-32 w-28 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-xs font-semibold uppercase tracking-wide text-cardinal/70">
-      Photo
+const getInitials = (name) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
+const MentorCard = ({ name, designation }) => {
+  const photoSrc = mentorPhotos[name];
+
+  return (
+    <div
+      className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl"
+    >
+      {photoSrc ? (
+        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-cardinal/40 bg-cardinal/5">
+          <div className="relative h-36 w-32 overflow-hidden rounded-xl">
+            <Image
+              src={photoSrc}
+              alt={`${name} - ${designation}`}
+              fill
+              sizes="(max-width: 768px) 144px, 192px"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
+          {getInitials(name)}
+        </div>
+      )}
+      <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
+      <p className="mt-1 text-sm text-gray-600">{designation}</p>
     </div>
-    <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
-    <p className="mt-1 text-sm text-gray-600">{designation}</p>
-  </div>
-);
+  );
+};
 
 export default function AboutPage() {
   return (
@@ -107,8 +165,15 @@ export default function AboutPage() {
                   <p className="font-semibold text-cardinal">- R.K Singh</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="aspect-[3/4] rounded-3xl border-2 border-dashed border-cardinal/60 flex items-center justify-center text-center text-cardinal/70 bg-white">
-                    Photo Placeholder
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
+                    <Image
+                      src={leadershipPhotos.principal.src}
+                      alt={leadershipPhotos.principal.alt}
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 320px, 80vw"
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -139,8 +204,14 @@ export default function AboutPage() {
                   <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="aspect-[3/4] rounded-3xl border-2 border-dashed border-cardinal/60 flex items-center justify-center text-center text-cardinal/70 bg-white">
-                    Photo Placeholder
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
+                    <Image
+                      src={leadershipPhotos.managingDirector.src}
+                      alt={leadershipPhotos.managingDirector.alt}
+                      fill
+                      sizes="(min-width: 1024px) 320px, 80vw"
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -177,22 +248,38 @@ export default function AboutPage() {
                     </div>
                     <div className="-mx-6 overflow-x-auto px-6">
                       <div className="flex snap-x snap-mandatory gap-5 pb-2">
-                        {group.mentors.map((mentor) => (
-                          <div
-                            key={`${group.department}-mobile-${mentor.name}`}
-                            className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
-                          >
-                            <div className="mb-4 flex flex-col items-center gap-3">
-                              <div className="flex h-20 w-16 items-center justify-center rounded-xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-[10px] font-semibold uppercase tracking-wide text-cardinal/60">
-                                Photo
-                              </div>
-                              <div className="text-center">
-                                <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
-                                <p className="text-sm text-gray-600">{mentor.designation}</p>
+                        {group.mentors.map((mentor) => {
+                          const photoSrc = mentorPhotos[mentor.name];
+
+                          return (
+                            <div
+                              key={`${group.department}-mobile-${mentor.name}`}
+                              className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
+                            >
+                              <div className="mb-4 flex flex-col items-center gap-3">
+                                {photoSrc ? (
+                                  <div className="relative h-32 w-28 overflow-hidden rounded-2xl border-2 border-cardinal/30 bg-cardinal/5">
+                                    <Image
+                                      src={photoSrc}
+                                      alt={`${mentor.name} - ${mentor.designation}`}
+                                      fill
+                                      sizes="(max-width: 768px) 176px, 192px"
+                                      className="object-cover"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="flex h-32 w-28 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
+                                    {getInitials(mentor.name)}
+                                  </div>
+                                )}
+                                <div className="text-center">
+                                  <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
+                                  <p className="text-sm text-gray-600">{mentor.designation}</p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
