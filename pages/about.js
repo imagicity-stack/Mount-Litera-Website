@@ -52,8 +52,14 @@ const coreMentors = [
     mentors: [
       { name: 'R.K. Singh', designation: 'Principal' },
       { name: 'Prarthana Mishra', designation: 'Relationship Manager' },
-      { name: 'Piyush Sinha', designation: 'Accountant' },
+      { name: 'Piyush Sinha', designation: 'Accounting Manager' },
       { name: 'MD Hadis', designation: 'Transport & Admin Manager' }
+    ]
+  },
+  {
+    department: 'IT',
+    mentors: [
+      { name: 'Sushil Sinha', designation: 'It Head' },
     ]
   },
   {
