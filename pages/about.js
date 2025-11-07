@@ -25,16 +25,19 @@ const mentorPhotos = {
   'Smita Sinha': '/teachers/smita-sinha.png',
   'Pratiksha Prasoon': '/teachers/pratiksha-prasoon.png',
   'Saba Naaz': '/teachers/saba-naaz.png',
+  'Nitika Gupta': '/teachers/nitika gupta.png',
   'Manila Awadhya': '/teachers/manila-awadhya.png',
   'Seema Bakshi': '/teachers/seema-bakshi.png',
   'Kailash Devi': '/teachers/kailash-devi.png',
+  'Ritesh Kumar': '/teachers/ritesh kumar.png',
+  'Sushma Minz': '/teachers/sushma minz.png',
   'Sagar Kumar': '/teachers/sagar-kumar.png',
   'C.K. Yadav': '/teachers/ck-yadav.png'
 };
 
 const leadershipPhotos = {
   principal: {
-    src: '/teachers/rk-singh.png',
+    src: '/teachers/principal.png',
     alt: 'R.K. Singh, Principal'
   },
   managingDirector: {
