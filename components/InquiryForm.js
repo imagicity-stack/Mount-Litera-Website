@@ -73,21 +73,16 @@ export default function InquiryForm() {
         messageDetails: formData.message
       };
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        mode: 'no-cors',
         body: JSON.stringify(payload)
       });
 
-      const resultText = await response.text();
-
-      if (!response.ok || !resultText.toLowerCase().includes('success')) {
-        throw new Error(resultText || 'Unable to submit the form. Please try again later.');
-      }
-
-      setSubmissionStatus({ type: 'success', message: 'Thank you! We have received your inquiry.' });
+      setSubmissionStatus({
+        type: 'success',
+        message: 'Thank you! We have received your inquiry. Our team will contact you soon.'
+      });
       setFormData({
         studentName: '',
         parentName: '',
