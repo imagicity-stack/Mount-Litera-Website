@@ -57,9 +57,9 @@ const coreMentors = [
     ]
   },
   {
-    department: 'IT',
+    department: 'Information Technology',
     mentors: [
-      { name: 'Sushil Sinha', designation: 'It Head' },
+      { name: 'Sushil Sinha', designation: 'IT Head' },
     ]
   },
   {
