@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+const GOOGLE_SCRIPT_URL =
+  process.env.NEXT_PUBLIC_ADMISSION_FORM_ENDPOINT ||
+  'https://script.google.com/macros/s/AKfycbyVWomekvD6gKo0FCSF8_ZSEpzudVuzw_UH3yDbbdWHNNBMLr7v044F53n96fypn9YWBA/exec';
+
 const textInputs = [
   { name: 'studentName', label: 'Student’s Full Name', type: 'text' },
   { name: 'parentName', label: 'Parent’s / Guardian’s Name', type: 'text' },
@@ -41,18 +45,64 @@ export default function InquiryForm() {
     address: '',
     message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState({ type: null, message: '' });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setSubmitted(false);
+    if (submissionStatus.type) {
+      setSubmissionStatus({ type: null, message: '' });
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Admission Inquiry', formData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmissionStatus({ type: null, message: '' });
+
+    try {
+      const payload = {
+        studentFullName: formData.studentName,
+        parentGuardianName: formData.parentName,
+        contactNumber: formData.contactNumber,
+        emailAddress: formData.email,
+        currentSchool: formData.currentSchool,
+        classInterestedIn: formData.classInterested,
+        residentialAddress: formData.address,
+        messageDetails: formData.message
+      };
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const resultText = await response.text();
+
+      if (!response.ok || !resultText.toLowerCase().includes('success')) {
+        throw new Error(resultText || 'Unable to submit the form. Please try again later.');
+      }
+
+      setSubmissionStatus({ type: 'success', message: 'Thank you! We have received your inquiry.' });
+      setFormData({
+        studentName: '',
+        parentName: '',
+        contactNumber: '',
+        email: '',
+        classInterested: '',
+        currentSchool: '',
+        address: '',
+        message: ''
+      });
+    } catch (error) {
+      setSubmissionStatus({ type: 'error', message: error.message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -148,13 +198,16 @@ export default function InquiryForm() {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal"
+              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
-            {submitted && (
-              <p className="mt-3 text-sm text-green-600">
-                Thank you! We have received your inquiry.
+            {submissionStatus.message && (
+              <p
+                className={`mt-3 text-sm ${submissionStatus.type === 'error' ? 'text-red-600' : 'text-green-600'}`}
+              >
+                {submissionStatus.message}
               </p>
             )}
           </div>
