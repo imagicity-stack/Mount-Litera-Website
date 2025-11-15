@@ -7,7 +7,7 @@ const AdmissionOpenPopup = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 300);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -18,34 +18,50 @@ const AdmissionOpenPopup = () => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="admission-open-title"
       aria-describedby="admission-open-description"
     >
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl">
-        <button
-          type="button"
-          onClick={() => setIsVisible(false)}
-          className="absolute right-3 top-3 rounded-full p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
-          aria-label="Close admission announcement"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h2 id="admission-open-title" className="text-2xl font-semibold text-gray-900">
-          Admissions Open
-        </h2>
-        <p id="admission-open-description" className="mt-3 text-base text-gray-600">
-          Secure your child&apos;s seat today.
-        </p>
-        <Link
-          href="/admissions"
-          className="mt-6 inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          onClick={() => setIsVisible(false)}
-        >
-          Enroll Now
-        </Link>
+      <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white text-center shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-cardinal/10 via-white to-white" aria-hidden="true" />
+        <div className="relative p-8">
+          <button
+            type="button"
+            onClick={() => setIsVisible(false)}
+            className="absolute right-3 top-3 rounded-full p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
+            aria-label="Close admission announcement"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p className="mx-auto inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cardinal">
+            Admissions 2024–2025
+          </p>
+          <h2 id="admission-open-title" className="mt-4 text-3xl font-semibold text-cardinal">
+            Admissions Now Open
+          </h2>
+          <p id="admission-open-description" className="mt-4 text-base text-gray-700">
+            Secure your child&apos;s seat before the priority window closes. Limited seats remain across our flagship programmes and early applicants enjoy priority campus tours.
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-gray-600">
+            <li className="flex items-start justify-center gap-2">
+              <span className="mt-1 h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
+              <span>Priority enrollment interviews happening this week.</span>
+            </li>
+            <li className="flex items-start justify-center gap-2">
+              <span className="mt-1 h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
+              <span>Scholarship consideration for the first 25 confirmed admissions.</span>
+            </li>
+          </ul>
+          <Link
+            href="/admissions"
+            className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-cardinal/90 focus:outline-none focus:ring-2 focus:ring-cardinal/40 focus:ring-offset-2"
+            onClick={() => setIsVisible(false)}
+          >
+            Enroll Now
+          </Link>
+        </div>
       </div>
     </div>
   );
