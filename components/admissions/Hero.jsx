@@ -32,7 +32,7 @@ export default function Hero({ onCtaClick }) {
             Admissions Open 2026–27
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
-            Fastest way to secure your child’s seat. No entrance test. No interview pressure.
+            Fastest way to secure your child’s seat. No pressure.
           </p>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-center md:justify-start pt-4">
             <button
@@ -40,7 +40,7 @@ export default function Hero({ onCtaClick }) {
               onClick={handleClick}
               className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal hover:shadow-xl border border-cardinal"
             >
-              Reserve Your Seat (500 Refundable Token)
+              Reserve Your Seat
             </button>
           </div>
         </div>
