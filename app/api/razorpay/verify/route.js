@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import Razorpay from 'razorpay';
+import Razorpay from '../order/razorpay';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {

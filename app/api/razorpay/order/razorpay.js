@@ -1,8 +1,11 @@
 import { Buffer } from 'node:buffer';
 
-class Razorpay {
+const RAZORPAY_ORDER_ENDPOINT = 'https://api.razorpay.com/v1/orders';
+
+export default class Razorpay {
   constructor(options = {}) {
     const { key_id, key_secret } = options;
+
     this.keyId = key_id;
     this.keySecret = key_secret;
 
@@ -22,7 +25,7 @@ class Razorpay {
 
     const authToken = Buffer.from(`${this.keyId}:${this.keySecret}`).toString('base64');
 
-    const response = await fetch('https://api.razorpay.com/v1/orders', {
+    const response = await fetch(RAZORPAY_ORDER_ENDPOINT, {
       method: 'POST',
       headers: {
         Authorization: `Basic ${authToken}`,
@@ -43,5 +46,3 @@ class Razorpay {
     return data;
   }
 }
-
-export default Razorpay;

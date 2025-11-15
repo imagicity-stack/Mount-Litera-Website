@@ -1,4 +1,4 @@
-import Razorpay from 'razorpay';
+import Razorpay from './razorpay';
 import { NextResponse } from 'next/server';
 
 const TOKEN_AMOUNT_IN_PAISE = 50000;
