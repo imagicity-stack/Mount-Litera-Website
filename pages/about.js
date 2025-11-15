@@ -156,11 +156,7 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <h2 className="text-3xl font-semibold text-cardinal">Principal’s Note</h2>
                   <p>
-                    Mount Litera School is entering a defining phase of transformation. This is not just a change of name or
-                    design; it’s a complete evolution of thought, vision, and purpose. Our goal is to prepare every student for a
-                    world that’s fast, digital, and demanding — without losing the human values that define great education. The
-                    upcoming transition is a strategic step toward building a learning environment that’s modern, data-driven, and
-                    globally relevant, yet deeply rooted in discipline, empathy, and academic excellence.
+                    Mount Litera School is moving into a decisive stage of transformation, and let me put it straight. This is not a facelift or a fancy redesign. This is a complete reset of how we teach, how we think, and how we prepare our students for a world that is fast, digital, and demanding. Anyone who thinks this is a small shift is living like a confused bugger who missed the briefing.
                   </p>
                   <p>
                     We’re strengthening our academic systems, modernizing our infrastructure, and empowering our teachers with
