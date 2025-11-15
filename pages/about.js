@@ -154,7 +154,7 @@ export default function AboutPage() {
             <div className="max-w-5xl mx-auto px-6 space-y-12">
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-cardinal">Principal’s Note</h2>
+                  <h2 className="text-3xl font-semibold text-cardinal">Note from the Principal</h2>
                   <p>
                     Mount Litera School is stepping into a pivotal phase of transformation, and this shift goes far beyond design or rebranding. It represents a complete evolution in our approach to education. We are preparing our students for a world that is rapidly changing, digitally driven, and increasingly demanding, while ensuring that core human values remain central to everything we do.
                   </p>
@@ -181,7 +181,7 @@ export default function AboutPage() {
               </div>
               <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-cardinal">Managing Director&apos;s Note</h2>
+                  <h2 className="text-3xl font-semibold text-cardinal">Note from the MD </h2>
                   <p>
                     Mount Litera School has always believed that true education goes beyond classrooms. It shapes the character,
                     curiosity, and conviction of every child. As we now move toward a new phase of growth and transformation, our
