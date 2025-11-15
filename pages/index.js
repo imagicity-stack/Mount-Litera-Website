@@ -6,6 +6,7 @@ import Academics from '@/components/Academics';
 import Admission from '@/components/Admission';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import AdmissionOpenPopup from '@/components/popups/AdmissionOpenPopup';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
           content="Mount Litera School is evolving into a new chapter with modern infrastructure, digital innovation, and a renewed vision for every student."
         />
       </Head>
+      <AdmissionOpenPopup />
       <div className="relative min-h-screen bg-white text-gray-800">
         <Navbar />
         <main>
