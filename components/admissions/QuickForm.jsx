@@ -14,8 +14,7 @@ const classOptions = [
   'Grade 6',
   'Grade 7',
   'Grade 8',
-  'Grade 9',
-  'Grade 10'
+  'Grade 9'
 ];
 
 export default function QuickForm() {
@@ -256,7 +255,7 @@ export default function QuickForm() {
                 {isSubmitting ? 'Processing…' : 'Submit & Pay ₹500 Token'}
               </button>
               <p className="text-xs text-gray-500 text-center">
-                Fully adjusted in final admission fees. Refunded if a seat is not allotted.
+                Fully adjusted in final admission fees.
               </p>
             </div>
             {status && (
@@ -276,7 +275,7 @@ export default function QuickForm() {
             <h3 className="text-2xl font-semibold text-cardinal">₹500 Priority Seat Token</h3>
             <p className="text-gray-600 text-sm md:text-base">
               This one-time token confirms your intent and keeps the seat reserved while paperwork is completed. It is fully
-              adjusted in the final admission fees, and refunded if a seat cannot be allotted.
+              adjusted in the final admission fees.
             </p>
             <ul className="space-y-2 text-sm text-gray-600">
               <li className="flex items-start gap-2">
@@ -289,7 +288,7 @@ export default function QuickForm() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 inline-block h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
-                Transparent and secure Razorpay checkout experience
+                Transparent and secure checkout experience
               </li>
             </ul>
           </div>
