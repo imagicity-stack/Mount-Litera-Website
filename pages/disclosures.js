@@ -4,28 +4,24 @@ import Footer from '@/components/Footer';
 
 const disclosures = [
   {
+    title: 'Annual Academic Calendar',
+    file: 'annual-academic-calendar.pdf'
+  },
+  {
     title: 'Affiliation / Upgradation / Extension of Affiliation Letter',
     file: 'affiliation-letter.pdf'
   },
   {
     title: 'Society / Trust / Company Registration Certificate',
-    file: 'society-registration-certificate.pdf'
+    file: 'society-trust-registration-certificate.pdf'
   },
   {
     title: 'No Objection Certificate (NOC) from State Government / UT',
     file: 'noc-state-government.pdf'
   },
   {
-    title: 'Recognition Certificate under RTE Act, 2009 (and Renewal if any)',
-    file: 'rte-recognition-certificate.pdf'
-  },
-  {
     title: 'Building Safety Certificate',
     file: 'building-safety-certificate.pdf'
-  },
-  {
-    title: 'Fire Safety Certificate',
-    file: 'fire-safety-certificate.pdf'
   },
   {
     title: 'DEO Certificate or Self-Certification by School',
@@ -36,8 +32,8 @@ const disclosures = [
     file: 'water-health-sanitation-certificates.pdf'
   },
   {
-    title: 'Land Certificate / Lease Deed / Proof of Ownership of Land',
-    file: 'land-ownership-proof.pdf'
+    title: 'PTA Members Details',
+    file: 'pta-members.pdf'
   }
 ];
 
@@ -66,7 +62,7 @@ export default function DisclosuresPage() {
               {disclosures.map((item) => (
                 <a
                   key={item.file}
-                  href={`/documents/${item.file}`}
+                  href={`/documents/mandatory-disclosures/${item.file}`}
                   download
                   className="flex items-center justify-between rounded-2xl border border-cardinal/15 bg-white px-5 py-4 transition-colors hover:border-cardinal hover:bg-cardinal/5"
                 >
