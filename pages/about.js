@@ -156,16 +156,13 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <h2 className="text-3xl font-semibold text-cardinal">Principal’s Note</h2>
                   <p>
-                    Mount Litera School is moving into a decisive stage of transformation, and let me put it straight. This is not a facelift or a fancy redesign. This is a complete reset of how we teach, how we think, and how we prepare our students for a world that is fast, digital, and demanding. Anyone who thinks this is a small shift is living like a confused bugger who missed the briefing.
+                    Mount Litera School is stepping into a pivotal phase of transformation, and this shift goes far beyond design or rebranding. It represents a complete evolution in our approach to education. We are preparing our students for a world that is rapidly changing, digitally driven, and increasingly demanding, while ensuring that core human values remain central to everything we do.
                   </p>
                   <p>
-                    We’re strengthening our academic systems, modernizing our infrastructure, and empowering our teachers with
-                    innovative methodologies that match global benchmarks. The future of education here will reflect balance —
-                    between tradition and technology, between knowledge and creativity.
+                    As an alumnus of Sainik School, I carry a deep commitment to discipline, integrity, and purposeful action. These principles guide every improvement we are implementing. Our academic systems are being strengthened with precision, our infrastructure is being modernized, and our teachers are being empowered with methodologies that reflect global standards. The aim is clear: to build students who are confident, compassionate, and equipped with both strong fundamentals and creative thinking.
                   </p>
                   <p>
-                    The next chapter of Mount Litera School is not an end — it’s the beginning of something extraordinary. The
-                    foundation has been laid, the direction is clear, and the future is bright.
+                    This new chapter is not an endpoint but the beginning of a stronger journey for Mount Litera School. The groundwork is firm, the direction is set, and the vision is focused on excellence. We are committed to creating an environment where every child grows with clarity, adaptability, and character, ready to meet the future with confidence.
                   </p>
                   <p className="font-semibold text-cardinal">- R.K Singh</p>
                 </div>
