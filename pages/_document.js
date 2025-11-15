@@ -31,6 +31,12 @@ fbq('init', '1349505269968709');
 fbq('track', 'PageView');`,
           }}
         />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1349505269968709&ev=PageView&noscript=1" />',
+          }}
+        />
       </Head>
       <body>
         <Main />
