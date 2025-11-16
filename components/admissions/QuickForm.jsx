@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
 
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 import {
@@ -28,10 +29,24 @@ export default function QuickForm() {
     classApplyingFor: '',
     parentName: '',
     phoneNumber: '',
-    city: ''
+    city: '',
+    email: '',
+    address: '',
+    previousSchool: '',
+    reasonForAdmission: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
+  const [hasAcceptedPolicies, setHasAcceptedPolicies] = useState(false);
+
+  const shouldShowPreviousSchool = useMemo(() => {
+    if (!formData.classApplyingFor?.startsWith('Grade ')) {
+      return false;
+    }
+
+    const gradeNumber = Number(formData.classApplyingFor.replace('Grade ', ''));
+    return Number.isInteger(gradeNumber) && gradeNumber >= 1 && gradeNumber <= 9;
+  }, [formData.classApplyingFor]);
 
   const startPayment = async (parentDetails) => {
     if (typeof window === 'undefined') {
@@ -159,7 +174,10 @@ export default function QuickForm() {
     setStatus(null);
 
     try {
-      const snapshot = { ...formData };
+      const snapshot = {
+        ...formData,
+        previousSchool: shouldShowPreviousSchool ? formData.previousSchool : ''
+      };
 
       trackFacebookEvent('AddToCart', {
         ...PRIORITY_TOKEN_CONTENT_DETAILS,
@@ -205,13 +223,13 @@ export default function QuickForm() {
 
   return (
     <section id="admissions-form" className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
         <div className="text-center space-y-3">
           <p className="text-xs uppercase tracking-[0.3em] text-cardinal">Secure Your Seat</p>
           <h2 className="text-3xl font-semibold text-cardinal">Quick Admission Form</h2>
           <p className="text-gray-600">Complete the form and pay the refundable ₹500 token to hold your child’s seat.</p>
         </div>
-        <div className="mt-10 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)]">
+        <div className="mt-10">
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 gap-6 rounded-3xl bg-[#F8F5F3] p-8 shadow-xl"
@@ -297,10 +315,91 @@ export default function QuickForm() {
               className="rounded-lg border border-gray-300 bg-white p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
             />
           </div>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="email" className="text-sm font-semibold text-cardinal">
+              Email ID
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="rounded-lg border border-gray-300 bg-white p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="address" className="text-sm font-semibold text-cardinal">
+              Address
+            </label>
+            <textarea
+              id="address"
+              name="address"
+              rows={3}
+              value={formData.address}
+              onChange={handleChange}
+              required
+              className="rounded-lg border border-gray-300 bg-white p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
+            />
+          </div>
+          {shouldShowPreviousSchool && (
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="previousSchool" className="text-sm font-semibold text-cardinal">
+                Previous School
+              </label>
+              <input
+                id="previousSchool"
+                name="previousSchool"
+                type="text"
+                value={formData.previousSchool}
+                onChange={handleChange}
+                required
+                className="rounded-lg border border-gray-300 bg-white p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
+              />
+            </div>
+          )}
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="reasonForAdmission" className="text-sm font-semibold text-cardinal">
+              Reason for Admission (Optional)
+            </label>
+            <textarea
+              id="reasonForAdmission"
+              name="reasonForAdmission"
+              rows={3}
+              value={formData.reasonForAdmission}
+              onChange={handleChange}
+              className="rounded-lg border border-gray-300 bg-white p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
+              placeholder="Share any specific goals or expectations you have."
+            />
+          </div>
+          <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-700">
+            <input
+              id="policyAcknowledgement"
+              type="checkbox"
+              className="mt-1 h-4 w-4 rounded border-gray-300 text-cardinal focus:ring-cardinal"
+              checked={hasAcceptedPolicies}
+              onChange={(event) => setHasAcceptedPolicies(event.target.checked)}
+              required
+            />
+            <label htmlFor="policyAcknowledgement" className="leading-relaxed">
+              I have read{' '}
+              <Link href="/terms-and-conditions" className="text-cardinal underline">
+                terms and conditions
+              </Link>{' '}
+              &amp;{' '}
+              <Link href="/policies/admission-policy" className="text-cardinal underline">
+                admission policy
+              </Link>
+              .
+            </label>
+          </div>
             <div className="space-y-4">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !hasAcceptedPolicies}
                 className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Processing…' : 'Submit & Pay ₹500 Token'}
@@ -321,28 +420,6 @@ export default function QuickForm() {
               </div>
             )}
           </form>
-          <div className="rounded-3xl border border-dashed border-cardinal/40 bg-white p-8 shadow-lg space-y-4">
-            <p className="text-xs uppercase tracking-[0.3em] text-cardinal">Priority Token</p>
-            <h3 className="text-2xl font-semibold text-cardinal">₹500 Priority Seat Token</h3>
-            <p className="text-gray-600 text-sm md:text-base">
-              This one-time token confirms your intent and keeps the seat reserved while paperwork is completed. It is fully
-              adjusted in the final admission fees.
-            </p>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-start gap-2">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
-                Priority handling by the admissions counsellor team
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
-                Receipt shared instantly on successful payment
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-cardinal" aria-hidden="true" />
-                Transparent and secure checkout experience
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
