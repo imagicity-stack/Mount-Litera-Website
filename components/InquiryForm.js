@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const GOOGLE_SCRIPT_URL =
   process.env.NEXT_PUBLIC_ADMISSION_FORM_ENDPOINT ||
   'https://script.google.com/macros/s/AKfycbyVWomekvD6gKo0FCSF8_ZSEpzudVuzw_UH3yDbbdWHNNBMLr7v044F53n96fypn9YWBA/exec';
@@ -60,17 +62,18 @@ export default function InquiryForm() {
     event.preventDefault();
     setIsSubmitting(true);
     setSubmissionStatus({ type: null, message: '' });
+    const snapshot = { ...formData };
 
     try {
       const payload = {
-        studentFullName: formData.studentName,
-        parentGuardianName: formData.parentName,
-        contactNumber: formData.contactNumber,
-        emailAddress: formData.email,
-        currentSchool: formData.currentSchool,
-        classInterestedIn: formData.classInterested,
-        residentialAddress: formData.address,
-        messageDetails: formData.message
+        studentFullName: snapshot.studentName,
+        parentGuardianName: snapshot.parentName,
+        contactNumber: snapshot.contactNumber,
+        emailAddress: snapshot.email,
+        currentSchool: snapshot.currentSchool,
+        classInterestedIn: snapshot.classInterested,
+        residentialAddress: snapshot.address,
+        messageDetails: snapshot.message
       };
 
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -82,6 +85,14 @@ export default function InquiryForm() {
       setSubmissionStatus({
         type: 'success',
         message: 'Thank you! We have received your inquiry. Our team will contact you soon.'
+      });
+
+      trackFacebookEvent('Lead', {
+        currency: 'INR',
+        value: 0,
+        student_name: snapshot.studentName,
+        class_interested: snapshot.classInterested,
+        parent_name: snapshot.parentName
       });
       setFormData({
         studentName: '',
