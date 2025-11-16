@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 export const stageDetails = [
   {
     title: 'Foundational Stage',
@@ -100,6 +102,11 @@ export default function Academics({ showExplore = true }) {
                 <Link
                   href="/academics"
                   className="inline-flex items-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-cardinal/90"
+                  onClick={() =>
+                    trackFacebookEvent('ViewContent', {
+                      component: 'academics_section_cta',
+                    })
+                  }
                 >
                   Explore Academics
                 </Link>

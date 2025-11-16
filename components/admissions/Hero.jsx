@@ -1,3 +1,5 @@
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const trustBadges = [
   {
     title: 'CBSE Curriculum',
@@ -15,6 +17,10 @@ const trustBadges = [
 
 export default function Hero({ onCtaClick }) {
   const handleClick = () => {
+    trackFacebookEvent('ViewContent', {
+      component: 'admissions_hero_reserve_cta',
+    });
+
     if (typeof onCtaClick === 'function') {
       onCtaClick();
     }

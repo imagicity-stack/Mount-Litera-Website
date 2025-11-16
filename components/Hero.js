@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const containerVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -38,6 +40,11 @@ export default function Hero() {
             <Link
               href="/admission"
               className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal hover:shadow-xl border border-cardinal"
+              onClick={() =>
+                trackFacebookEvent('ViewContent', {
+                  component: 'home_hero_explore_admissions',
+                })
+              }
             >
               Explore Admissions
             </Link>

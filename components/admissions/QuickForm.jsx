@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-const TOKEN_AMOUNT_IN_PAISE = 50000;
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+import {
+  PRIORITY_TOKEN_AMOUNT_IN_PAISE,
+  PRIORITY_TOKEN_CONTENT_DETAILS,
+  PRIORITY_TOKEN_SESSION_STORAGE_KEY
+} from '@/lib/priorityToken';
 
 const classOptions = [
   'Nursery',
@@ -40,7 +45,7 @@ export default function QuickForm() {
     const orderResponse = await fetch('/api/razorpay/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: TOKEN_AMOUNT_IN_PAISE })
+      body: JSON.stringify({ amount: PRIORITY_TOKEN_AMOUNT_IN_PAISE })
     });
 
     const orderResult = await orderResponse.json().catch(() => ({}));
@@ -48,6 +53,12 @@ export default function QuickForm() {
     if (!orderResponse.ok || !orderResult?.orderId) {
       throw new Error(orderResult?.error || 'Unable to initiate payment. Please try again.');
     }
+
+    trackFacebookEvent('AddPaymentInfo', {
+      ...PRIORITY_TOKEN_CONTENT_DETAILS,
+      class_applying_for: parentDetails.classApplyingFor,
+      city: parentDetails.city
+    });
 
     const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
@@ -58,7 +69,7 @@ export default function QuickForm() {
     return new Promise((resolve, reject) => {
       const checkout = new window.Razorpay({
         key: razorpayKey,
-        amount: TOKEN_AMOUNT_IN_PAISE,
+        amount: PRIORITY_TOKEN_AMOUNT_IN_PAISE,
         currency: 'INR',
         name: 'Mount Litera Zee School',
         description: 'Priority Seat Token',
@@ -94,6 +105,24 @@ export default function QuickForm() {
                 )
               );
               return;
+            }
+
+            const purchasePayload = {
+              ...PRIORITY_TOKEN_CONTENT_DETAILS,
+              class_applying_for: parentDetails.classApplyingFor,
+              city: parentDetails.city,
+              parent_name: parentDetails.parentName
+            };
+
+            if (typeof window !== 'undefined' && window.sessionStorage) {
+              try {
+                window.sessionStorage.setItem(
+                  PRIORITY_TOKEN_SESSION_STORAGE_KEY,
+                  JSON.stringify(purchasePayload)
+                );
+              } catch (storageError) {
+                console.warn('Unable to persist purchase payload for success page tracking.', storageError);
+              }
             }
 
             resolve();
@@ -132,6 +161,13 @@ export default function QuickForm() {
     try {
       const snapshot = { ...formData };
 
+      trackFacebookEvent('AddToCart', {
+        ...PRIORITY_TOKEN_CONTENT_DETAILS,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
+
       const response = await fetch('/api/admissions/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -143,6 +179,21 @@ export default function QuickForm() {
       if (!response.ok || !result?.success) {
         throw new Error(result?.error || 'Something went wrong. Please try again.');
       }
+
+      trackFacebookEvent('CompleteRegistration', {
+        currency: 'INR',
+        value: 0,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
+
+      trackFacebookEvent('InitiateCheckout', {
+        ...PRIORITY_TOKEN_CONTENT_DETAILS,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
 
       await startPayment(snapshot);
     } catch (error) {
