@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 }
@@ -24,6 +26,13 @@ export default function Contact() {
     event.preventDefault();
     console.log('Contact Form', contactData);
     setSubmitted(true);
+
+    trackFacebookEvent('Contact', {
+      currency: 'INR',
+      value: 0,
+      name: contactData.name,
+      email: contactData.email
+    });
   };
 
   return (

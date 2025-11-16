@@ -1,6 +1,23 @@
 import { useState } from 'react';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const TOKEN_AMOUNT_IN_PAISE = 50000;
+const TOKEN_AMOUNT_IN_RUPEES = TOKEN_AMOUNT_IN_PAISE / 100;
+const TOKEN_CONTENT_DETAILS = {
+  content_ids: ['priority-seat-token'],
+  content_type: 'product',
+  contents: [
+    {
+      id: 'priority-seat-token',
+      quantity: 1,
+      item_price: TOKEN_AMOUNT_IN_RUPEES
+    }
+  ],
+  currency: 'INR',
+  num_items: 1,
+  value: TOKEN_AMOUNT_IN_RUPEES
+};
 
 const classOptions = [
   'Nursery',
@@ -49,6 +66,12 @@ export default function QuickForm() {
       throw new Error(orderResult?.error || 'Unable to initiate payment. Please try again.');
     }
 
+    trackFacebookEvent('AddPaymentInfo', {
+      ...TOKEN_CONTENT_DETAILS,
+      class_applying_for: parentDetails.classApplyingFor,
+      city: parentDetails.city
+    });
+
     const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
     if (!razorpayKey) {
@@ -95,6 +118,13 @@ export default function QuickForm() {
               );
               return;
             }
+
+            trackFacebookEvent('Purchase', {
+              ...TOKEN_CONTENT_DETAILS,
+              class_applying_for: parentDetails.classApplyingFor,
+              city: parentDetails.city,
+              parent_name: parentDetails.parentName
+            });
 
             resolve();
             window.location.href = '/payment-success';
@@ -143,6 +173,13 @@ export default function QuickForm() {
       if (!response.ok || !result?.success) {
         throw new Error(result?.error || 'Something went wrong. Please try again.');
       }
+
+      trackFacebookEvent('InitiateCheckout', {
+        ...TOKEN_CONTENT_DETAILS,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
 
       await startPayment(snapshot);
     } catch (error) {
