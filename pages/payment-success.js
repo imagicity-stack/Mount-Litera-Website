@@ -1,9 +1,40 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+import {
+  PRIORITY_TOKEN_CONTENT_DETAILS,
+  PRIORITY_TOKEN_SESSION_STORAGE_KEY
+} from '@/lib/priorityToken';
+
+const FALLBACK_PURCHASE_PAYLOAD = {
+  ...PRIORITY_TOKEN_CONTENT_DETAILS
+};
 
 export default function PaymentSuccess() {
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    let payload = null;
+
+    try {
+      const storedPayload = window.sessionStorage?.getItem(PRIORITY_TOKEN_SESSION_STORAGE_KEY);
+
+      if (storedPayload) {
+        payload = JSON.parse(storedPayload);
+        window.sessionStorage.removeItem(PRIORITY_TOKEN_SESSION_STORAGE_KEY);
+      }
+    } catch (error) {
+      console.warn('Unable to hydrate purchase payload for Meta tracking.', error);
+    }
+
+    trackFacebookEvent('Purchase', payload || FALLBACK_PURCHASE_PAYLOAD);
+  }, []);
+
   return (
     <>
       <Head>

@@ -1,23 +1,11 @@
 import { useState } from 'react';
 
 import { trackFacebookEvent } from '@/lib/facebookPixel';
-
-const TOKEN_AMOUNT_IN_PAISE = 50000;
-const TOKEN_AMOUNT_IN_RUPEES = TOKEN_AMOUNT_IN_PAISE / 100;
-const TOKEN_CONTENT_DETAILS = {
-  content_ids: ['priority-seat-token'],
-  content_type: 'product',
-  contents: [
-    {
-      id: 'priority-seat-token',
-      quantity: 1,
-      item_price: TOKEN_AMOUNT_IN_RUPEES
-    }
-  ],
-  currency: 'INR',
-  num_items: 1,
-  value: TOKEN_AMOUNT_IN_RUPEES
-};
+import {
+  PRIORITY_TOKEN_AMOUNT_IN_PAISE,
+  PRIORITY_TOKEN_CONTENT_DETAILS,
+  PRIORITY_TOKEN_SESSION_STORAGE_KEY
+} from '@/lib/priorityToken';
 
 const classOptions = [
   'Nursery',
@@ -57,7 +45,7 @@ export default function QuickForm() {
     const orderResponse = await fetch('/api/razorpay/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: TOKEN_AMOUNT_IN_PAISE })
+      body: JSON.stringify({ amount: PRIORITY_TOKEN_AMOUNT_IN_PAISE })
     });
 
     const orderResult = await orderResponse.json().catch(() => ({}));
@@ -67,7 +55,7 @@ export default function QuickForm() {
     }
 
     trackFacebookEvent('AddPaymentInfo', {
-      ...TOKEN_CONTENT_DETAILS,
+      ...PRIORITY_TOKEN_CONTENT_DETAILS,
       class_applying_for: parentDetails.classApplyingFor,
       city: parentDetails.city
     });
@@ -81,7 +69,7 @@ export default function QuickForm() {
     return new Promise((resolve, reject) => {
       const checkout = new window.Razorpay({
         key: razorpayKey,
-        amount: TOKEN_AMOUNT_IN_PAISE,
+        amount: PRIORITY_TOKEN_AMOUNT_IN_PAISE,
         currency: 'INR',
         name: 'Mount Litera Zee School',
         description: 'Priority Seat Token',
@@ -119,12 +107,23 @@ export default function QuickForm() {
               return;
             }
 
-            trackFacebookEvent('Purchase', {
-              ...TOKEN_CONTENT_DETAILS,
+            const purchasePayload = {
+              ...PRIORITY_TOKEN_CONTENT_DETAILS,
               class_applying_for: parentDetails.classApplyingFor,
               city: parentDetails.city,
               parent_name: parentDetails.parentName
-            });
+            };
+
+            if (typeof window !== 'undefined' && window.sessionStorage) {
+              try {
+                window.sessionStorage.setItem(
+                  PRIORITY_TOKEN_SESSION_STORAGE_KEY,
+                  JSON.stringify(purchasePayload)
+                );
+              } catch (storageError) {
+                console.warn('Unable to persist purchase payload for success page tracking.', storageError);
+              }
+            }
 
             resolve();
             window.location.href = '/payment-success';
@@ -163,7 +162,7 @@ export default function QuickForm() {
       const snapshot = { ...formData };
 
       trackFacebookEvent('AddToCart', {
-        ...TOKEN_CONTENT_DETAILS,
+        ...PRIORITY_TOKEN_CONTENT_DETAILS,
         class_applying_for: snapshot.classApplyingFor,
         city: snapshot.city,
         parent_name: snapshot.parentName
@@ -190,7 +189,7 @@ export default function QuickForm() {
       });
 
       trackFacebookEvent('InitiateCheckout', {
-        ...TOKEN_CONTENT_DETAILS,
+        ...PRIORITY_TOKEN_CONTENT_DETAILS,
         class_applying_for: snapshot.classApplyingFor,
         city: snapshot.city,
         parent_name: snapshot.parentName
