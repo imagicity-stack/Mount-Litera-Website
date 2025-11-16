@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { trackFacebookEvent } from '@/lib/facebookPixel';
 
 const policyText = `ADMISSION POLICY
 1. Overview
@@ -91,6 +93,14 @@ Admission is finalized only after document verification and fee payment.
 Any misrepresentation can lead to cancellation.`;
 
 export default function AdmissionPolicyPage() {
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      page_path: '/policies/admission-policy',
+      content_name: 'admission_policy',
+      content_category: 'policy',
+    });
+  }, []);
+
   return (
     <>
       <Head>
