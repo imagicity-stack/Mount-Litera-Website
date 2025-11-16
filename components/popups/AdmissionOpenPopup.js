@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import { trackFacebookEvent } from '@/lib/facebookPixel';
+
 const AdmissionOpenPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -11,6 +13,14 @@ const AdmissionOpenPopup = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      trackFacebookEvent('ViewContent', {
+        component: 'admissions_open_popup',
+      });
+    }
+  }, [isVisible]);
 
   if (!isVisible) {
     return null;
@@ -57,7 +67,12 @@ const AdmissionOpenPopup = () => {
           <Link
             href="/admissions"
             className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-cardinal/90 focus:outline-none focus:ring-2 focus:ring-cardinal/40 focus:ring-offset-2"
-            onClick={() => setIsVisible(false)}
+            onClick={() => {
+              setIsVisible(false);
+              trackFacebookEvent('ViewContent', {
+                component: 'admissions_open_popup_cta',
+              });
+            }}
           >
             Enroll Now
           </Link>

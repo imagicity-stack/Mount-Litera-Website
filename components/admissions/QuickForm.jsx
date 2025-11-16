@@ -162,6 +162,13 @@ export default function QuickForm() {
     try {
       const snapshot = { ...formData };
 
+      trackFacebookEvent('AddToCart', {
+        ...TOKEN_CONTENT_DETAILS,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
+
       const response = await fetch('/api/admissions/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -173,6 +180,14 @@ export default function QuickForm() {
       if (!response.ok || !result?.success) {
         throw new Error(result?.error || 'Something went wrong. Please try again.');
       }
+
+      trackFacebookEvent('CompleteRegistration', {
+        currency: 'INR',
+        value: 0,
+        class_applying_for: snapshot.classApplyingFor,
+        city: snapshot.city,
+        parent_name: snapshot.parentName
+      });
 
       trackFacebookEvent('InitiateCheckout', {
         ...TOKEN_CONTENT_DETAILS,
