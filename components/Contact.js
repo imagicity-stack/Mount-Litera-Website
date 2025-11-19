@@ -14,25 +14,56 @@ export default function Contact() {
     email: '',
     message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState({ type: null, message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setContactData((prev) => ({ ...prev, [name]: value }));
-    setSubmitted(false);
+    if (status.type) {
+      setStatus({ type: null, message: '' });
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Contact Form', contactData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setStatus({ type: null, message: '' });
+    const snapshot = { ...contactData };
 
-    trackFacebookEvent('Contact', {
-      currency: 'INR',
-      value: 0,
-      name: contactData.name,
-      email: contactData.email
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(snapshot)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to send your message right now.');
+      }
+
+      setStatus({
+        type: 'success',
+        message: result.message || 'Thank you! We will get back to you soon.'
+      });
+
+      trackFacebookEvent('Contact', {
+        currency: 'INR',
+        value: 0,
+        name: snapshot.name,
+        email: snapshot.email
+      });
+
+      setContactData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({ type: 'error', message: error.message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -119,12 +150,17 @@ export default function Contact() {
           </div>
           <button
             type="submit"
-            className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal"
+            className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            Send Message
+            {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
-          {submitted && (
-            <p className="text-sm text-green-600">Thank you! We will get back to you soon.</p>
+          {status.message && (
+            <p
+              className={`text-sm ${status.type === 'error' ? 'text-red-600' : 'text-green-600'}`}
+            >
+              {status.message}
+            </p>
           )}
         </motion.form>
       </div>

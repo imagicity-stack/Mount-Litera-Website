@@ -3,10 +3,6 @@ import { motion } from 'framer-motion';
 
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 
-const GOOGLE_SCRIPT_URL =
-  process.env.NEXT_PUBLIC_ADMISSION_FORM_ENDPOINT ||
-  'https://script.google.com/macros/s/AKfycbyVWomekvD6gKo0FCSF8_ZSEpzudVuzw_UH3yDbbdWHNNBMLr7v044F53n96fypn9YWBA/exec';
-
 const textInputs = [
   { name: 'studentName', label: 'Student’s Full Name', type: 'text' },
   { name: 'parentName', label: 'Parent’s / Guardian’s Name', type: 'text' },
@@ -65,26 +61,23 @@ export default function InquiryForm() {
     const snapshot = { ...formData };
 
     try {
-      const payload = {
-        studentFullName: snapshot.studentName,
-        parentGuardianName: snapshot.parentName,
-        contactNumber: snapshot.contactNumber,
-        emailAddress: snapshot.email,
-        currentSchool: snapshot.currentSchool,
-        classInterestedIn: snapshot.classInterested,
-        residentialAddress: snapshot.address,
-        messageDetails: snapshot.message
-      };
-
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch('/api/admission-inquiry', {
         method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(payload)
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(snapshot)
       });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to submit your inquiry right now.');
+      }
 
       setSubmissionStatus({
         type: 'success',
-        message: 'Thank you! We have received your inquiry. Our team will contact you soon.'
+        message: result.message || 'Thank you! We have received your inquiry. Our team will contact you soon.'
       });
 
       trackFacebookEvent('Lead', {
