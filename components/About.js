@@ -10,6 +10,16 @@ export default function About({ showLink = true }) {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+        <motion.p
+          className="text-sm font-semibold tracking-wide text-cardinal uppercase"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          A unit of Bhagwati Educational And Charitable Trust
+        </motion.p>
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-cardinal"
           variants={fadeUp}
