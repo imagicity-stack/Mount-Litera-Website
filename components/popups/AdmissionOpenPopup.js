@@ -46,13 +46,13 @@ const AdmissionOpenPopup = () => {
             <span aria-hidden="true">&times;</span>
           </button>
           <p className="mx-auto inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cardinal">
-            Admissions 2024–2025
+            Admissions 2026–27
           </p>
           <h2 id="admission-open-title" className="mt-4 text-3xl font-semibold text-cardinal">
-            Admissions Now Open
+            Admissions Open
           </h2>
           <p id="admission-open-description" className="mt-4 text-base text-gray-700">
-            Secure your child&apos;s seat before the priority window closes. Limited seats remain across our flagship programmes and early applicants enjoy priority campus tours.
+            Limited seats for 2026–27. Early enquiry gives your child priority processing and first preference in admissions. Safe campus, strong English, disciplined learning. Don’t miss your child’s chance.
           </p>
           <ul className="mt-4 space-y-2 text-sm text-gray-600">
             <li className="flex items-start justify-center gap-2">
@@ -65,7 +65,7 @@ const AdmissionOpenPopup = () => {
             </li>
           </ul>
           <Link
-            href="/admissions"
+            href="/admission"
             className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-cardinal/90 focus:outline-none focus:ring-2 focus:ring-cardinal/40 focus:ring-offset-2"
             onClick={() => {
               setIsVisible(false);
