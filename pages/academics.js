@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { stageDetails } from '@/components/Academics';
@@ -103,8 +104,15 @@ export default function AcademicsPage() {
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
-                <div className="aspect-[4/5] w-full rounded-3xl border-2 border-dashed border-cardinal/20 bg-[#FDF9F7] text-center text-xs font-semibold uppercase tracking-wide text-cardinal/60 flex items-center justify-center">
-                  Visual placeholder
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 shadow-lg">
+                  <Image
+                    src="/pinnacle.png"
+                    alt="Students engaging with Pinnacle Learning resources"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 320px, 100vw"
+                    priority
+                  />
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InquiryForm from '@/components/InquiryForm';
+import Link from 'next/link';
 
 export default function AdmissionPage() {
   return (
@@ -76,6 +77,19 @@ export default function AdmissionPage() {
                   vision. All admissions made during this phase remain valid under the recognized CBSE framework and will
                   seamlessly continue through the upgraded system.
                 </p>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-cardinal/10 bg-cardinal/5 p-6 text-center">
+                <h3 className="text-xl font-semibold text-cardinal">Priority booking slots now open</h3>
+                <p className="text-gray-700">
+                  Families who confirm early get the first choice of interaction dates, faster document processing, and
+                  priority in class allocations for the 2026–27 session. Secure your child’s place while seats are still open.
+                </p>
+                <Link
+                  href="/admissions"
+                  className="inline-flex items-center justify-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-cardinal/90 focus:outline-none focus:ring-2 focus:ring-cardinal/40 focus:ring-offset-2"
+                >
+                  Explore Admissions
+                </Link>
               </div>
             </div>
           </section>

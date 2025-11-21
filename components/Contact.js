@@ -88,7 +88,23 @@ export default function Contact() {
             </div>
             <div>
               <h3 className="font-semibold text-white">Phone</h3>
-              <p>+91 XXXXX XXXXX</p>
+              <p>+91 9431904333</p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                <a
+                  href="tel:+919431904333"
+                  className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-cardinal"
+                >
+                  Call Now
+                </a>
+                <a
+                  href="https://wa.me/919431904333"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-600"
+                >
+                  WhatsApp
+                </a>
+              </div>
             </div>
             <div>
               <h3 className="font-semibold text-white">Email</h3>
