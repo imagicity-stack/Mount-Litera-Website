@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { stageDetails } from '@/components/Academics';
 
-const pinnacleHighlights = [
+const learningEnhancements = [
   'Immersive digital lessons that keep every child excited to learn',
   'Adaptive assessments with real-time feedback for parents and teachers',
   'Continuous teacher training to blend technology with compassionate guidance'
@@ -86,13 +85,13 @@ export default function AcademicsPage() {
                   <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
                   <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG – VIII</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Pinnacle Learning by The Lead Group</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Learning resources that amplify every classroom</h2>
                 <p className="text-gray-700">
-                  Beginning 2026-25, Pinnacle Learning joins our classrooms from LKG to Grade VIII. The partnership deepens the
-                  momentum created in 2025-26 with immersive content, measurable progress, and confident teachers.
+                  Beginning 2026-25, our classrooms from LKG to Grade VIII receive refreshed content, measurable progress trackin
+                  g, and added teacher support. The aim: deeper engagement, clearer outcomes, and confident learners.
                 </p>
                 <ul className="space-y-3 text-sm text-gray-700">
-                  {pinnacleHighlights.map((item) => (
+                  {learningEnhancements.map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
                       <span>{item}</span>
@@ -104,15 +103,34 @@ export default function AcademicsPage() {
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 shadow-lg">
-                  <Image
-                    src="/pinnacle.png"
-                    alt="Students engaging with Pinnacle Learning resources"
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 320px, 100vw"
-                    priority
-                  />
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-gradient-to-br from-[#FDF9F7] via-white to-[#F8F5F3] p-6 shadow-lg">
+                  <div className="flex h-full flex-col justify-between text-cardinal">
+                    <div className="space-y-2">
+                      <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Classroom kit</p>
+                      <h3 className="text-2xl font-semibold leading-tight">Interactive learning hub</h3>
+                      <p className="text-sm text-cardinal/80">
+                        Lesson visuals, practice sheets, and assessment snapshots are organized in one place so teachers can move
+                        seamlessly between activities.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-cardinal/10 p-4 text-sm text-cardinal">
+                      <p className="font-semibold">What changes in 2026-25?</p>
+                      <ul className="mt-2 space-y-1">
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                          <span>Unit-wise digital companions for every major concept</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                          <span>Observation-led progress notes shared with families</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                          <span>Quarterly teacher labs to exchange best practices</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
