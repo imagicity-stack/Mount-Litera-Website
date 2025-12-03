@@ -1,11 +1,13 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 import { FACEBOOK_PIXEL_NO_SCRIPT } from '@/lib/facebookPixel';
+import { GTM_HEAD_SCRIPT, GTM_NO_SCRIPT } from '@/lib/googleTagManager';
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <script dangerouslySetInnerHTML={{ __html: GTM_HEAD_SCRIPT }} />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-7SDCLJ3YK5"
@@ -36,6 +38,11 @@ export default function Document() {
         />
       </Head>
       <body>
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: GTM_NO_SCRIPT,
+          }}
+        />
         <noscript
           dangerouslySetInnerHTML={{
             __html: FACEBOOK_PIXEL_NO_SCRIPT,
