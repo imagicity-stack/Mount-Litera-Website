@@ -81,14 +81,6 @@ export default function GalleryPage() {
                       to dream bigger every day.
                     </p>
                   </div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-cardinal/20 bg-cardinal/5 px-4 py-2 text-sm font-medium text-cardinal">
-                      Optimized for mobile &amp; desktop
-                    </span>
-                    <span className="rounded-full border border-cardinal/20 bg-cardinal/5 px-4 py-2 text-sm font-medium text-cardinal">
-                      Tagged for Meta Pixel &amp; Google Analytics
-                    </span>
-                  </div>
                 </div>
                 <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {galleryImages.map((image, index) => (
