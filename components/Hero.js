@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center bg-white overflow-hidden"
+      className="relative min-h-[85vh] flex items-center justify-center bg-gradient-to-br from-white via-cardinal/5 to-white overflow-hidden"
     >
       <div className="pointer-events-none absolute -top-40 -left-40 h-80 w-80 rounded-full bg-cardinal/10 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-cardinal/20 blur-3xl" aria-hidden="true" />
@@ -25,21 +25,23 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="space-y-8"
+          className="space-y-10"
         >
-          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-red-50 text-cardinal font-semibold uppercase tracking-wide text-xs">
-            Transitioning Forward
+          <div className="inline-flex items-center justify-center gap-2 rounded-full border border-cardinal/20 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-cardinal shadow-sm backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-cardinal" />
+            Heritage, Reimagined
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-cardinal leading-tight">
-            Mount Litera School is evolving into a new chapter.
+            The Elden Heights School is evolving into a new chapter.
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            We’re building a brighter, more dynamic future for our students — rooted in excellence and powered by change.
+          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+            A prestigious learning destination blending timeless values with future-ready innovation. Discover refined spaces,
+            premium faculty guidance, and a culture that nurtures confidence, creativity, and character.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link
               href="/admission"
-              className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal hover:shadow-xl border border-cardinal"
+              className="px-6 py-3 rounded-xl bg-cardinal text-white font-semibold shadow-lg transition hover:bg-white hover:text-cardinal hover:shadow-xl border border-cardinal"
               onClick={() =>
                 trackFacebookEvent('ViewContent', {
                   component: 'home_hero_explore_admissions',
@@ -48,6 +50,27 @@ export default function Hero() {
             >
               Explore Admissions
             </Link>
+            <Link
+              href="/academics"
+              className="px-6 py-3 rounded-xl border border-cardinal/30 bg-white/70 text-cardinal font-semibold shadow-sm transition hover:border-cardinal hover:shadow-lg"
+            >
+              Discover Our Academics
+            </Link>
+          </div>
+          <div className="grid gap-4 rounded-2xl bg-white/80 p-6 shadow-xl backdrop-blur md:grid-cols-3">
+            {[ 
+              { title: 'Premium Faculty', detail: 'Seasoned mentors with global perspectives and personalized care.' },
+              { title: 'Holistic Growth', detail: 'Clubs, arts, and leadership labs that celebrate every talent.' },
+              { title: 'Smart Infrastructure', detail: 'Digitally enabled classrooms with serene, secure campus design.' }
+            ].map((item) => (
+              <div key={item.title} className="flex flex-col items-center gap-2 text-center">
+                <div className="h-12 w-12 rounded-full bg-cardinal/10 text-cardinal flex items-center justify-center">
+                  <span className="text-lg font-semibold">•</span>
+                </div>
+                <p className="text-base font-semibold text-cardinal">{item.title}</p>
+                <p className="text-sm text-gray-600">{item.detail}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

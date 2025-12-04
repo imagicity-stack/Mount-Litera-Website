@@ -6,10 +6,10 @@ export default function SelfDisciplinePolicyPage() {
   return (
     <>
       <Head>
-        <title>Code for Self-Discipline | Mount Litera School</title>
+        <title>Code for Self-Discipline | The Elden Heights School</title>
         <meta
           name="description"
-          content="Understand the behavioural expectations and self-discipline charter that guides Mount Litera School students."
+          content="Understand the behavioural expectations and self-discipline charter that guides The Elden Heights School students."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -19,9 +19,9 @@ export default function SelfDisciplinePolicyPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Code for Self-Discipline</h1>
               <p>
-                Mount Litera School nurtures responsible citizens who demonstrate respect, integrity, and resilience. Our Code for
+                The Elden Heights School nurtures responsible citizens who demonstrate respect, integrity, and resilience. Our Code for
                 Self-Discipline empowers students to lead themselves, contribute positively to school life, and uphold the
-                Mount Litera ethos on and off campus.
+                Elden Heights ethos on and off campus.
               </p>
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">Core Expectations</h2>

@@ -12,7 +12,9 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        inter: ["Inter", "sans-serif"]
+        inter: ["Inter", "sans-serif"],
+        manrope: ["Manrope", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        playfair: ["Playfair Display", "Georgia", "serif"]
       }
     }
   },

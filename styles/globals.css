@@ -7,5 +7,24 @@ html {
 }
 
 body {
-  @apply bg-white text-gray-800 font-poppins;
+  @apply bg-white text-gray-800 font-manrope antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-playfair;
+  }
+
+  p,
+  li,
+  blockquote,
+  a,
+  input,
+  textarea,
+  button {
+    @apply font-manrope;
+  }
 }

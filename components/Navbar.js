@@ -49,18 +49,32 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-shadow bg-white ${
+      className={`sticky top-0 z-50 bg-white/90 backdrop-blur transition-shadow ${
         scrolled ? 'shadow-lg' : 'shadow-sm'
       }`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <div className="text-2xl font-semibold text-cardinal">Mount Litera School</div>
-        <div className="hidden md:flex space-x-6 text-cardinal font-medium">
+        <Link href="/" className="flex items-center gap-3 text-cardinal">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cardinal text-white shadow-lg ring-2 ring-cardinal/20">
+            <span className="text-lg font-semibold">EH</span>
+          </div>
+          <div className="leading-tight">
+            <p className="text-lg font-semibold">The Elden Heights School</p>
+            <span className="text-[11px] uppercase tracking-[0.35em] text-gray-500">Hazaribagh</span>
+          </div>
+        </Link>
+        <div className="hidden md:flex items-center space-x-6 text-cardinal font-medium">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="transition-colors hover:text-gray-800">
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/admission"
+            className="rounded-full border border-cardinal/40 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition hover:bg-cardinal hover:text-white"
+          >
+            Apply Now
+          </Link>
         </div>
         <div className="md:hidden">
           <button
@@ -121,6 +135,12 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/admission"
+            className="mt-2 inline-flex items-center justify-center rounded-xl border border-cardinal bg-cardinal px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-white hover:text-cardinal"
+          >
+            Apply Now
+          </Link>
         </div>
       </div>
     </header>
