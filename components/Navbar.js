@@ -59,8 +59,8 @@ export default function Navbar() {
             <span className="text-lg font-semibold">EH</span>
           </div>
           <div className="leading-tight">
-            <p className="text-lg font-semibold">The Elden Heights School</p>
-            <span className="text-[11px] uppercase tracking-[0.35em] text-gray-500">Hazaribagh</span>
+            <p className="text-lg font-semibold tracking-tight">The Elden Heights School</p>
+            <span className="text-[11px] uppercase tracking-[0.38em] text-gray-500">Since 2005 · Hazaribagh</span>
           </div>
         </Link>
         <div className="hidden md:flex items-center space-x-6 text-cardinal font-medium">
@@ -71,7 +71,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/admission"
-            className="rounded-full border border-cardinal/40 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition hover:bg-cardinal hover:text-white"
+            className="rounded-full border border-cardinal/40 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] transition hover:bg-cardinal hover:text-white"
           >
             Apply Now
           </Link>
