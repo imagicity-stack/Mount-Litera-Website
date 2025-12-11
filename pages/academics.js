@@ -33,10 +33,10 @@ export default function AcademicsPage() {
   return (
     <>
       <Head>
-        <title>Academic Framework | Mount Litera School</title>
+        <title>Academic Framework | The Elden Heights School</title>
         <meta
           name="description"
-          content="Discover the learning stages, teaching philosophy, and academic support that power Mount Litera School's curriculum."
+          content="Discover the learning stages, teaching philosophy, and academic support that power The Elden Heights School's curriculum."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -56,7 +56,7 @@ export default function AcademicsPage() {
                   Building foundations that inspire futures
                 </h1>
                 <p className="text-lg text-white/80">
-                  At Mount Litera School, learning is a journey that grows with every child. Our curriculum blends structured
+                  At The Elden Heights School, learning is a journey that grows with every child. Our curriculum blends structured
                   academics with meaningful experiences so students feel ready for life, not just exams.
                 </p>
                 <p className="text-lg text-white/80">
@@ -163,7 +163,7 @@ export default function AcademicsPage() {
           <section className="py-20 bg-[#F8F5F3]">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
               <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">The Mount Litera learning journey</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">The Elden Heights learning journey</h2>
                 <p className="text-gray-700">
                   Take a closer look at how each stage feels inside our classrooms — from foundational play to secondary guidance and
                   mentorship.
@@ -252,7 +252,7 @@ export default function AcademicsPage() {
               <div className="space-y-6">
                 <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Beyond textbooks</h2>
                 <p className="text-gray-700">
-                  Life at Mount Litera School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
+                  Life at The Elden Heights School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
                   talents, collaborate with peers, and learn to express themselves.
                 </p>
                 <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700">

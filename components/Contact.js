@@ -67,117 +67,123 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-cardinal text-white">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <section id="contact" className="py-20">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-start">
         <motion.div
-          className="space-y-6"
+          className="relative overflow-hidden rounded-3xl border border-cardinal/15 bg-gradient-to-br from-cardinal via-midnight to-cardinal text-white p-10 shadow-2xl shadow-cardinal/20"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold">Get in Touch</h2>
-          <p className="text-white/80 text-lg">
-            We’d love to connect with you as we transition into a future-ready school community.
-          </p>
-          <div className="space-y-4 text-white/80">
-            <div>
-              <h3 className="font-semibold text-white">Address</h3>
-              <p>Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-white">Phone</h3>
-              <p>+91 9431904333</p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                <a
-                  href="tel:+919431904333"
-                  className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-cardinal"
-                >
-                  Call Now
-                </a>
-                <a
-                  href="https://wa.me/919431904333"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-600"
-                >
-                  WhatsApp
-                </a>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(195,165,114,0.25),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.18),transparent_40%)]" aria-hidden="true" />
+          <div className="relative space-y-6">
+            <h2 className="text-3xl md:text-4xl font-semibold">Get in Touch</h2>
+            <p className="text-white/80 text-lg">
+              We’d love to connect with you as we transition into a future-ready school community.
+            </p>
+            <div className="space-y-4 text-white/85">
+              <div>
+                <h3 className="font-semibold text-white">Address</h3>
+                <p>Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand</p>
               </div>
-            </div>
-            <div>
-              <h3 className="font-semibold text-white">Email</h3>
-              <p>smmlzshzb@gmail.com</p>
+              <div>
+                <h3 className="font-semibold text-white">Phone</h3>
+                <p>+91 9431904333</p>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  <a
+                    href="tel:+919431904333"
+                    className="inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-cardinal"
+                  >
+                    Call Now
+                  </a>
+                  <a
+                    href="https://wa.me/919431904333"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-600"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">Email</h3>
+                <p>smmlzshzb@gmail.com</p>
+              </div>
             </div>
           </div>
         </motion.div>
         <motion.form
           onSubmit={handleSubmit}
-          className="bg-white text-cardinal rounded-2xl p-8 shadow-xl space-y-4"
+          className="relative rounded-3xl border border-cardinal/10 bg-white/90 p-8 shadow-2xl shadow-cardinal/10 backdrop-blur space-y-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
         >
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="name" className="text-sm font-semibold">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={contactData.name}
-              onChange={handleChange}
-              required
-              className="rounded-lg border border-gray-300 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
-            />
-          </div>
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="email" className="text-sm font-semibold">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={contactData.email}
-              onChange={handleChange}
-              required
-              className="rounded-lg border border-gray-300 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
-            />
-          </div>
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="message" className="text-sm font-semibold">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="4"
-              value={contactData.message}
-              onChange={handleChange}
-              className="rounded-lg border border-gray-300 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal"
-              placeholder="Tell us how we can help"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
-          {status.message && (
-            <p
-              className={`text-sm ${status.type === 'error' ? 'text-red-600' : 'text-green-600'}`}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-parchment/80 to-white" aria-hidden="true" />
+          <div className="relative space-y-4">
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="name" className="text-sm font-semibold text-midnight">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={contactData.name}
+                onChange={handleChange}
+                required
+                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+              />
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="email" className="text-sm font-semibold text-midnight">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={contactData.email}
+                onChange={handleChange}
+                required
+                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+              />
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="message" className="text-sm font-semibold text-midnight">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                value={contactData.message}
+                onChange={handleChange}
+                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+                placeholder="Tell us how we can help"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-6 py-3 rounded-full bg-midnight text-parchment font-semibold shadow-lg shadow-midnight/25 transition hover:-translate-y-0.5 hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={isSubmitting}
             >
-              {status.message}
-            </p>
-          )}
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </button>
+            {status.message && (
+              <p
+                className={`text-sm ${status.type === 'error' ? 'text-red-600' : 'text-green-700'}`}
+              >
+                {status.message}
+              </p>
+            )}
+          </div>
         </motion.form>
       </div>
     </section>

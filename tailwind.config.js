@@ -8,11 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cardinal: "#A50021"
+        cardinal: "#A50021",
+        gold: "#C3A572",
+        parchment: "#F7F2E9",
+        midnight: "#0F172A"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        inter: ["Inter", "sans-serif"]
+        inter: ["Inter", "sans-serif"],
+        garamond: ["Cormorant Garamond", "Garamond", "serif"],
+        avenir: ["Manrope", "Inter", "system-ui", "sans-serif"]
       }
     }
   },
