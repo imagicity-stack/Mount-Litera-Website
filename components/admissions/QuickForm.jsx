@@ -86,7 +86,7 @@ export default function QuickForm() {
         key: razorpayKey,
         amount: PRIORITY_TOKEN_AMOUNT_IN_PAISE,
         currency: 'INR',
-        name: 'Mount Litera Zee School',
+        name: 'The Elden Heights School',
         description: 'Priority Seat Token',
         order_id: orderResult.orderId,
         prefill: {

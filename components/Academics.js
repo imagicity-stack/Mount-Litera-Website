@@ -81,7 +81,7 @@ export default function Academics({ showExplore = true }) {
               Learning that grows with your child
             </h3>
             <p className="text-base text-cardinal/80">
-              Mount Litera School follows a simple, age-appropriate path across four stages. Each step gently strengthens
+              The Elden Heights School follows a simple, age-appropriate path across four stages. Each step gently strengthens
               confidence, curiosity, and core skills so children feel ready for what comes next.
             </p>
             <ul className="grid gap-3 sm:grid-cols-2 text-sm text-cardinal/80">

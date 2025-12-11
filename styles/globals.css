@@ -7,5 +7,24 @@ html {
 }
 
 body {
-  @apply bg-white text-gray-800 font-poppins;
+  @apply bg-[#f9f6f2] text-gray-900 font-heritage antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-garamond;
+  }
+
+  p,
+  li,
+  blockquote,
+  a,
+  input,
+  textarea,
+  button {
+    @apply font-heritage;
+  }
 }

@@ -7,10 +7,10 @@ export default function ContactPage() {
   return (
     <>
       <Head>
-        <title>Contact Mount Litera School | Connect With Us</title>
+        <title>Contact The Elden Heights School | Connect With Us</title>
         <meta
           name="description"
-          content="Reach out to Mount Litera School in Hazaribagh for admission inquiries, campus visits, or general questions."
+          content="Reach out to The Elden Heights School in Hazaribagh for admission inquiries, campus visits, or general questions."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">

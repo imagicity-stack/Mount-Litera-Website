@@ -54,10 +54,10 @@ export default function GalleryPage() {
   return (
     <>
       <Head>
-        <title>Gallery | Mount Litera School</title>
+        <title>Gallery | The Elden Heights School</title>
         <meta
           name="description"
-          content="Explore vibrant moments from Mount Litera School — classroom learning, cultural programs, sports, and celebrations."
+          content="Explore vibrant moments from The Elden Heights School — classroom learning, cultural programs, sports, and celebrations."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -69,13 +69,13 @@ export default function GalleryPage() {
               <h1 className="mt-4 text-3xl md:text-4xl font-bold text-cardinal">Gallery</h1>
               <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-700">
                 Take a walk through our classrooms, celebrations, and sports fields. Every photograph captures the joy of learning,
-                the spirit of teamwork, and the community that makes Mount Litera School feel like home.
+                the spirit of teamwork, and the community that makes The Elden Heights School feel like home.
               </p>
               <div className="mt-8 rounded-3xl bg-white/80 p-6 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-cardinal/10 backdrop-blur">
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div>
                     <p className="text-sm uppercase tracking-[0.25em] text-cardinal/70">Experience</p>
-                    <h2 className="mt-2 text-2xl font-semibold text-cardinal">Life at Mount Litera</h2>
+                    <h2 className="mt-2 text-2xl font-semibold text-cardinal">Life at The Elden Heights School</h2>
                     <p className="mt-2 max-w-2xl text-gray-700">
                       From immersive lessons to spirited performances and athletic triumphs, explore moments that inspire our students
                       to dream bigger every day.

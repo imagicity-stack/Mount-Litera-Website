@@ -22,7 +22,7 @@ export default function AdmissionsPage() {
   return (
     <>
       <Head>
-        <title>Priority Admissions 2026–27 | Mount Litera School</title>
+        <title>Priority Admissions 2026–27 | The Elden Heights School</title>
         <meta
           name="description"
           content="Reserve your child’s seat for the 2026–27 session with a simple token booking. Quick form, transparent process, and a safe CBSE school campus."

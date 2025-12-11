@@ -16,42 +16,27 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center bg-white overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-fixed bg-center bg-cover"
+      style={{
+        backgroundImage: "url('/images/heritage-hero.jpg')",
+        backgroundColor: '#f9f6f2'
+      }}
     >
-      <div className="pointer-events-none absolute -top-40 -left-40 h-80 w-80 rounded-full bg-cardinal/10 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-cardinal/20 blur-3xl" aria-hidden="true" />
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b0b]/65 via-[#111]/55 to-[#1a1a1a]/70 mix-blend-multiply" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(196,180,150,0.35),_transparent_45%),radial-gradient(circle_at_bottom,_rgba(165,0,33,0.25),_transparent_45%)]" aria-hidden="true" />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 text-center md:py-32">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="space-y-8"
+          className="space-y-10"
         >
-          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-red-50 text-cardinal font-semibold uppercase tracking-wide text-xs">
-            Transitioning Forward
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-cardinal leading-tight">
-            Mount Litera School is evolving into a new chapter.
+          <h1 className="text-4xl md:text-6xl font-semibold text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.55)]">
+            Towards eternal glory
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            We’re building a brighter, more dynamic future for our students — rooted in excellence and powered by change.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/admission"
-              className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal hover:shadow-xl border border-cardinal"
-              onClick={() =>
-                trackFacebookEvent('ViewContent', {
-                  component: 'home_hero_explore_admissions',
-                })
-              }
-            >
-              Explore Admissions
-            </Link>
-          </div>
         </motion.div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-cardinal/10 to-transparent pointer-events-none" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#f9f6f2] via-[#f9f6f2]/80 to-transparent" aria-hidden="true" />
     </section>
   );
 }
