@@ -31,18 +31,9 @@ export default function Hero() {
           variants={containerVariants}
           className="space-y-10"
         >
-          <div className="inline-flex items-center justify-center gap-3 rounded-full bg-white/15 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.45em] text-[#f3e6d5] ring-1 ring-white/25 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-[#f3e6d5]" />
-            The Elden Heights School
-          </div>
           <h1 className="text-4xl md:text-6xl font-semibold text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.55)]">
             Towards eternal glory
           </h1>
-          <div className="flex flex-col items-center justify-center gap-3 text-sm uppercase tracking-[0.35em] text-[#e6d6c1]/80">
-            <span className="h-px w-24 bg-[#e6d6c1]/60" />
-            <span>Scholarship · Character · Service</span>
-            <span className="h-px w-24 bg-[#e6d6c1]/60" />
-          </div>
         </motion.div>
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#f9f6f2] via-[#f9f6f2]/80 to-transparent" aria-hidden="true" />

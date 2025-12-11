@@ -156,15 +156,24 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <h2 className="text-3xl font-semibold text-cardinal">Note from the Principal</h2>
                   <p>
-                    The Elden Heights School is stepping into a pivotal phase of transformation, and this shift goes far beyond design or rebranding. It represents a complete evolution in our approach to education. We are preparing our students for a world that is rapidly changing, digitally driven, and increasingly demanding, while ensuring that core human values remain central to everything we do.
+                    Dear Students and Parents,
                   </p>
                   <p>
-                    As an alumnus of Sainik School, I carry a deep commitment to discipline, integrity, and purposeful action. These principles guide every improvement we are implementing. Our academic systems are being strengthened with precision, our infrastructure is being modernized, and our teachers are being empowered with methodologies that reflect global standards. The aim is clear: to build students who are confident, compassionate, and equipped with both strong fundamentals and creative thinking.
+                    At Elden Heights, education is not measured by the pages we cover, but by the depth of understanding we cultivate and the character we shape. Each day within our campus is an opportunity to strengthen one’s foundation, to rise a little higher and to discover the values that define a life of purpose.
                   </p>
                   <p>
-                    This new chapter is not an endpoint but the beginning of a stronger journey for The Elden Heights School. The groundwork is firm, the direction is set, and the vision is focused on excellence. We are committed to creating an environment where every child grows with clarity, adaptability, and character, ready to meet the future with confidence.
+                    Our approach is simple yet profound. We believe that discipline brings clarity, curiosity fuels learning and integrity shapes trustworthy individuals. These principles guide us as we support every student through the stages of Roots, Ascent, Radiance and Eternity. This journey is designed with intention, allowing learners to grow not only in knowledge but also in confidence, resilience and empathy.
                   </p>
-                  <p className="font-semibold text-cardinal">- R.K Singh</p>
+                  <p>
+                    A school becomes meaningful when it becomes a place of consistency, care and high expectations. Here, we strive to create an environment where students feel safe to question, encouraged to participate and motivated to improve. The habits they build today, in classrooms and beyond, will quietly define the adults they become.
+                  </p>
+                  <p>
+                    As you begin this academic year, I urge every student to remain steady in effort, respectful in conduct and honest in reflection. Small actions repeated daily lead to remarkable outcomes. Let this diary be more than a record of homework; let it be a companion in your journey of becoming a thoughtful, capable and responsible individual.
+                  </p>
+                  <p>
+                    Together, let us uphold the values that give Elden Heights its strength and ensure that every learner moves forward with dignity, confidence and a clear sense of direction.
+                  </p>
+                  <p className="font-semibold text-cardinal">Warm regards,<br />Principal<br />The Elden Heights School</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
