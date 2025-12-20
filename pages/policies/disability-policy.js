@@ -6,10 +6,10 @@ export default function DisabilityPolicyPage() {
   return (
     <>
       <Head>
-        <title>Disability Policy | Mount Litera School</title>
+        <title>Disability Policy | The Elden Heights School</title>
         <meta
           name="description"
-          content="Mount Litera School's disability policy outlines inclusive practices, accessible infrastructure, and equal opportunities for all learners."
+          content="The Elden Heights School's disability policy outlines inclusive practices, accessible infrastructure, and equal opportunities for all learners."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -19,7 +19,7 @@ export default function DisabilityPolicyPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Disability Policy</h1>
               <p>
-                Mount Litera School is committed to providing an equitable, dignified, and inclusive learning experience for
+                The Elden Heights School is committed to providing an equitable, dignified, and inclusive learning experience for
                 learners with disabilities. Our policy aligns with national education and disability guidelines and ensures that
                 every student receives personalised support to thrive academically and socially.
               </p>
