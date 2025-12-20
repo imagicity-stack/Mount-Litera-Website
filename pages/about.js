@@ -13,28 +13,6 @@ const policies = [
   { title: 'Complaint Procedures', href: '/policies/complaint-procedures' }
 ];
 
-const mentorPhotos = {
-  'R.K. Singh': '/teachers/rk-singh.png',
-  'Prarthana Mishra': '/teachers/prarthana-mishra.png',
-  'Piyush Sinha': '/teachers/piyush-sinha.png',
-  'MD Hadis': '/teachers/md-hadis.jpg',
-  'Shama Perween': '/teachers/shama-perween.png',
-  'Nitesh Kumar': '/teachers/nitesh-kumar.png',
-  'Sameeksha Sinha': '/teachers/sameeksha-sinha.png',
-  'Sangeeta Agarwal': '/teachers/sangeeta-agarwal.png',
-  'Smita Sinha': '/teachers/smita-sinha.png',
-  'Pratiksha Prasoon': '/teachers/pratiksha-prasoon.png',
-  'Saba Naaz': '/teachers/saba-naaz.png',
-  'Nitika Gupta': '/teachers/nitika gupta.png',
-  'Manila Awadhya': '/teachers/manila-awadhya.png',
-  'Seema Bakshi': '/teachers/seema-bakshi.png',
-  'Kailash Devi': '/teachers/kailash-devi.png',
-  'Ritesh Kumar': '/teachers/ritesh kumar.png',
-  'Sushma Minz': '/teachers/sushma minz.png',
-  'Sagar Kumar': '/teachers/sagar-kumar.png',
-  'C.K. Yadav': '/teachers/ck-yadav.png'
-};
-
 const leadershipPhotos = {
   principal: {
     src: '/teachers/principal.png',
@@ -44,96 +22,6 @@ const leadershipPhotos = {
     src: '/teachers/shashi-shankar-prasad.jpg',
     alt: 'Mr. Shashi Shankar Prasad, Managing Director'
   }
-};
-
-const coreMentors = [
-  {
-    department: 'Administration',
-    mentors: [
-      { name: 'R.K. Singh', designation: 'Principal' },
-      { name: 'Prarthana Mishra', designation: 'Relationship Manager' },
-      { name: 'Piyush Sinha', designation: 'Accounting Manager' },
-      { name: 'MD Hadis', designation: 'Transport & Admin Manager' }
-    ]
-  },
-  {
-    department: 'Information Technology',
-    mentors: [
-      { name: 'Sushil Sinha', designation: 'IT Head' },
-    ]
-  },
-  {
-    department: 'Teaching',
-    mentors: [
-      { name: 'Anupriya', designation: 'English' },
-      { name: 'Shama Perween', designation: 'Maths' },
-      { name: 'Nitesh Kumar', designation: 'Maths' },
-      { name: 'Sameeksha Sinha', designation: 'Social Studies' },
-      { name: 'Sangeeta Agarwal', designation: 'English' },
-      { name: 'Smita Sinha', designation: 'Maths' },
-      { name: 'Pratiksha Prasoon', designation: 'Hindi' },
-      { name: 'Saba Naaz', designation: 'Multiple Subjects' },
-      { name: 'Nitika Gupta', designation: 'Multiple Subjects' },
-      { name: 'Manila Awadhya', designation: 'Multiple Subjects' },
-      { name: 'Seema Bakshi', designation: 'Multiple Subjects' },
-      { name: 'Kailash Devi', designation: 'Hindi' },
-      { name: 'Ritesh Kumar', designation: 'Science' }
-    ]
-  },
-  {
-    department: 'Music',
-    mentors: [{ name: 'Sushma Minz', designation: 'Vocalist' }]
-  },
-  {
-    department: 'Sports',
-    mentors: [
-      { name: 'Sagar Kumar', designation: 'Yoga & Karate' },
-      { name: 'C.K. Yadav', designation: 'Overall Sports' }
-    ]
-  },
-  {
-    department: 'Store Keeper',
-    mentors: [{ name: 'Santosh Kumar', designation: 'Store Keeper' }]
-  }
-];
-
-const getInitials = (name) =>
-  name
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-
-const MentorCard = ({ name, designation }) => {
-  const photoSrc = mentorPhotos[name];
-
-  return (
-    <div
-      className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl"
-    >
-      {photoSrc ? (
-        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-cardinal/40 bg-cardinal/5">
-          <div className="relative h-36 w-32 overflow-hidden rounded-xl">
-            <Image
-              src={photoSrc}
-              alt={`${name} - ${designation}`}
-              fill
-              sizes="(max-width: 768px) 144px, 192px"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
-          {getInitials(name)}
-        </div>
-      )}
-      <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
-      <p className="mt-1 text-sm text-gray-600">{designation}</p>
-    </div>
-  );
 };
 
 export default function AboutPage() {
@@ -150,6 +38,40 @@ export default function AboutPage() {
         <Navbar />
         <main className="flex-1">
           <About showLink={false} />
+          <section className="py-16 bg-white">
+            <div className="max-w-6xl mx-auto px-6 space-y-6">
+              <div className="text-center space-y-3">
+                <h2 className="text-3xl font-semibold text-cardinal">Leadership &amp; Governance</h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Explore the voices and councils that guide The Elden Heights School. Each pillar offers a deeper look at our philosophy, mentors, and stewardship.
+                </p>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {[{
+                  href: '/the-elden-council',
+                  label: 'THE ELDEN COUNCIL'
+                }, {
+                  href: '/core-mentors',
+                  label: 'Core mentors'
+                }, {
+                  href: '/managing-committee',
+                  label: 'MANAGING COMMITTEE'
+                }].map((card) => (
+                  <Link
+                    key={card.href}
+                    href={card.href}
+                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-gradient-to-br from-white via-ivory/60 to-cardinal/5 text-center text-lg font-semibold uppercase tracking-[0.12em] text-cardinal transition transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-cardinal/8 via-transparent to-gold/15 opacity-80 transition duration-300 group-hover:opacity-100" />
+                    <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-cardinal group-hover:text-cardinal/90">
+                      {card.label}
+                    </span>
+                    <div className="absolute inset-x-4 bottom-4 h-0.5 rounded-full bg-cardinal/20 transition-all duration-300 group-hover:bottom-6 group-hover:h-1 group-hover:bg-cardinal/40" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
           <section className="py-20 bg-[#F8F5F3]">
             <div className="max-w-5xl mx-auto px-6 space-y-12">
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
@@ -219,76 +141,6 @@ export default function AboutPage() {
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-12">
-              <div className="space-y-4 text-center">
-                <h2 className="text-3xl font-semibold text-cardinal">Core Mentors</h2>
-                <p className="mx-auto max-w-3xl text-gray-600">
-                  Meet the dedicated mentors guiding our students every day across leadership, teaching, talent, and support
-                  teams.
-                </p>
-              </div>
-              <div className="hidden space-y-8 md:block">
-                {coreMentors.map((group) => (
-                  <div key={group.department} className="space-y-5">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-cardinal">{group.department}</h3>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {group.mentors.map((mentor) => (
-                        <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="md:hidden space-y-10">
-                {coreMentors.map((group) => (
-                  <div key={`${group.department}-mobile`} className="space-y-4">
-                    <div className="text-center">
-                      <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
-                    </div>
-                    <div className="-mx-6 overflow-x-auto px-6">
-                      <div className="flex snap-x snap-mandatory gap-5 pb-2">
-                        {group.mentors.map((mentor) => {
-                          const photoSrc = mentorPhotos[mentor.name];
-
-                          return (
-                            <div
-                              key={`${group.department}-mobile-${mentor.name}`}
-                              className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
-                            >
-                              <div className="mb-4 flex flex-col items-center gap-3">
-                                {photoSrc ? (
-                                  <div className="relative h-32 w-28 overflow-hidden rounded-2xl border-2 border-cardinal/30 bg-cardinal/5">
-                                    <Image
-                                      src={photoSrc}
-                                      alt={`${mentor.name} - ${mentor.designation}`}
-                                      fill
-                                      sizes="(max-width: 768px) 176px, 192px"
-                                      className="object-cover"
-                                    />
-                                  </div>
-                                ) : (
-                                  <div className="flex h-32 w-28 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
-                                    {getInitials(mentor.name)}
-                                  </div>
-                                )}
-                                <div className="text-center">
-                                  <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
-                                  <p className="text-sm text-gray-600">{mentor.designation}</p>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           </section>
