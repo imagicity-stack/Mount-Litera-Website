@@ -140,10 +140,10 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title>About Mount Litera School | Vision &amp; Leadership</title>
+        <title>About The Elden Heights School | Vision &amp; Leadership</title>
         <meta
           name="description"
-          content="Learn more about Mount Litera School's leadership, guiding principles, and core policies during our transformative journey."
+          content="Learn more about The Elden Heights School's leadership, guiding principles, and core policies during our transformative journey."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -155,15 +155,21 @@ export default function AboutPage() {
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
                 <div className="space-y-6">
                   <h2 className="text-3xl font-semibold text-cardinal">Note from the Principal</h2>
-                  <p>
-                    Mount Litera School is stepping into a pivotal phase of transformation, and this shift goes far beyond design or rebranding. It represents a complete evolution in our approach to education. We are preparing our students for a world that is rapidly changing, digitally driven, and increasingly demanding, while ensuring that core human values remain central to everything we do.
-                  </p>
-                  <p>
-                    As an alumnus of Sainik School, I carry a deep commitment to discipline, integrity, and purposeful action. These principles guide every improvement we are implementing. Our academic systems are being strengthened with precision, our infrastructure is being modernized, and our teachers are being empowered with methodologies that reflect global standards. The aim is clear: to build students who are confident, compassionate, and equipped with both strong fundamentals and creative thinking.
-                  </p>
-                  <p>
-                    This new chapter is not an endpoint but the beginning of a stronger journey for Mount Litera School. The groundwork is firm, the direction is set, and the vision is focused on excellence. We are committed to creating an environment where every child grows with clarity, adaptability, and character, ready to meet the future with confidence.
-                  </p>
+                    <p>
+                      At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.
+                    </p>
+                    <p>
+                      Our four-stage philosophy Roots, Ascent, Radiance and Eternity guides each student through a journey that builds discipline, curiosity, communication and leadership. These are not just words on a brochure. These are practices we apply in classrooms, activities and daily interactions.
+                    </p>
+                    <p>
+                      We combine a heritage-inspired culture with modern teaching methods. Students learn to stay grounded while being prepared for a world that is changing fast. They learn to work hard, make responsible choices and take pride in their growth.
+                    </p>
+                    <p>
+                      My commitment as the principal is to maintain a school where learning feels purposeful, teachers stay motivated and parents feel assured about their child’s future. This is a shared responsibility and at Elden Heights, we take it seriously.
+                    </p>
+                    <p>
+                      Your child deserves a school that believes in their potential and helps them rise towards it every day. That is the promise of The Elden Heights.
+                    </p>
                   <p className="font-semibold text-cardinal">- R.K Singh</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
@@ -182,27 +188,24 @@ export default function AboutPage() {
               <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
                 <div className="space-y-6">
                   <h2 className="text-3xl font-semibold text-cardinal">Note from the MD </h2>
-                  <p>
-                    Mount Litera School has always believed that true education goes beyond classrooms. It shapes the character,
-                    curiosity, and conviction of every child. As we now move toward a new phase of growth and transformation, our
-                    focus is to redefine what schooling means in today’s fast-changing world.
-                  </p>
-                  <p>
-                    This transition is not merely about upgrading infrastructure or identity. It is about building a future-ready
-                    institution that aligns with modern learning standards while staying grounded in timeless values. Our mission
-                    is to create an ecosystem where students are encouraged to question, explore, and innovate because the future
-                    will belong to thinkers, not followers.
-                  </p>
-                  <p>
-                    Every step we take is guided by one principle: excellence with purpose. From academic upgrades and
-                    technology-driven systems to holistic development programs, every decision is rooted in long-term value
-                    creation for our students and the community.
-                  </p>
-                  <p>
-                    We are proud of the foundation that has brought us here and even prouder of the vision that will take us
-                    forward. The road ahead is filled with opportunity, and Mount Litera School is ready to lead that journey with
-                    clarity, conviction, and care.
-                  </p>
+                    <p>
+                      The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.
+                    </p>
+                    <p>
+                      Every decision we make infrastructure, teachers, culture, systems, activities reflects one thought. Will this help a child grow into a stronger human being? If the answer is no, we don’t do it. Simple.
+                    </p>
+                    <p>
+                      Our four-stage philosophy Roots, Ascent, Radiance and Eternity is at the core of everything. It ensures our students begin with strong foundations, rise with discipline, express themselves with confidence and eventually step out as capable young adults who can face a complex world with clarity.
+                    </p>
+                    <p>
+                      We are building a school culture that values effort over shortcuts, character over noise and long term growth over temporary wins. The goal is not just good results. The goal is responsible, confident and well-rounded individuals.
+                    </p>
+                    <p>
+                      As the director, my responsibility is to ensure that this institution stays true to its purpose, evolves with time and continues to offer an environment where students, teachers and parents feel aligned towards a shared future.
+                    </p>
+                    <p>
+                      The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.
+                    </p>
                   <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
@@ -293,7 +296,7 @@ export default function AboutPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h2 className="text-3xl font-semibold text-cardinal">Principles and Policies</h2>
               <p className="text-gray-600">
-                Our policies reflect the values and safeguards that guide Mount Litera School. Explore each policy to understand
+                Our policies reflect the values and safeguards that guide The Elden Heights School. Explore each policy to understand
                 how we protect and support our students, parents, and staff community.
               </p>
               <ul className="grid gap-4 sm:grid-cols-2">

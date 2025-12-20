@@ -6,10 +6,10 @@ export default function TermsPage() {
   return (
     <>
       <Head>
-        <title>Terms and Conditions | Mount Litera School</title>
+        <title>Terms and Conditions | The Elden Heights School</title>
         <meta
           name="description"
-          content="Review the terms and conditions for using Mount Litera School's official website."
+          content="Review the terms and conditions for using The Elden Heights School's official website."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -19,17 +19,17 @@ export default function TermsPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Terms and Conditions</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
-              <p>Website: Mount Litera School</p>
+              <p>Website: The Elden Heights School</p>
               <p>Email: <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a></p>
               <p>
-                Welcome to Mount Litera School’s website. By accessing or using this website, you agree to comply with the
+                Welcome to The Elden Heights School’s website. By accessing or using this website, you agree to comply with the
                 following Terms and Conditions. If you do not agree with any part of these terms, please refrain from using the
                 site.
               </p>
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">1. General Use</h2>
                 <p>
-                  This website is managed by Mount Litera School, located in Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
+                  This website is managed by The Elden Heights School, located in Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
                   Jharkhand. The content provided here is intended to share information about our school, admission process,
                   facilities, and events. You agree to use the website only for lawful purposes and in a way that does not violate
                   the rights of, restrict, or inhibit anyone else’s use and enjoyment of it.
@@ -39,7 +39,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">2. Accuracy of Information</h2>
                 <p>
                   We make every effort to ensure that all information on this website is accurate and up-to-date. However, we do
-                  not warrant or guarantee that the information is complete, reliable, or error-free. Mount Litera School
+                  not warrant or guarantee that the information is complete, reliable, or error-free. The Elden Heights School
                   reserves the right to modify content, admission details, or any part of the website at any time without prior
                   notice.
                 </p>
@@ -66,14 +66,14 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">4. Intellectual Property</h2>
                 <p>
                   All content on this website — including text, logos, graphics, layouts, and design elements — is the property
-                  of Mount Litera School unless otherwise stated. You may not reproduce, distribute, or commercially exploit any
+                  of The Elden Heights School unless otherwise stated. You may not reproduce, distribute, or commercially exploit any
                   content without written permission from the school administration.
                 </p>
               </div>
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">5. Limitation of Liability</h2>
                 <p>
-                  Mount Litera School and its representatives are not liable for any direct, indirect, or consequential damages
+                  The Elden Heights School and its representatives are not liable for any direct, indirect, or consequential damages
                   arising out of the use or inability to use the website or any linked content. Users are responsible for
                   ensuring that any materials downloaded from this site are free from viruses or harmful components.
                 </p>
@@ -82,7 +82,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">6. External Links</h2>
                 <p>
                   Our website may contain links to third-party websites or services. These are provided for convenience only.
-                  Mount Litera School is not responsible for the content, accuracy, or practices of these external sites.
+                  The Elden Heights School is not responsible for the content, accuracy, or practices of these external sites.
                 </p>
               </div>
               <div className="space-y-4">
@@ -108,7 +108,7 @@ export default function TermsPage() {
                     <span role="img" aria-label="email">📧</span> <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>
                   </li>
                   <li>
-                    <span role="img" aria-label="location">🏫</span> Mount Litera School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
+                    <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
                     Jharkhand.
                   </li>
                 </ul>

@@ -65,7 +65,7 @@ const fadeUp = {
 
 export default function Academics({ showExplore = true }) {
   return (
-    <section id="academics" className="py-16 bg-[#F8F5F3] text-cardinal">
+    <section id="academics" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start">
           <motion.div
@@ -76,23 +76,23 @@ export default function Academics({ showExplore = true }) {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-cardinal">Academics</h2>
-            <h3 className="text-2xl md:text-3xl font-semibold leading-tight">
-              Learning that grows with your child
-            </h3>
-            <p className="text-base text-cardinal/80">
-              Mount Litera School follows a simple, age-appropriate path across four stages. Each step gently strengthens
+            <div className="inline-flex items-center gap-3 rounded-full bg-cardinal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cardinal">
+              Academic Expanse
+            </div>
+            <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Scholarly design for every stage</h2>
+            <p className="text-base text-midnight/80 leading-relaxed">
+              The Elden Heights School follows a simple, age-appropriate path across four stages. Each step gently strengthens
               confidence, curiosity, and core skills so children feel ready for what comes next.
             </p>
-            <ul className="grid gap-3 sm:grid-cols-2 text-sm text-cardinal/80">
+            <ul className="grid gap-3 sm:grid-cols-2 text-sm text-midnight/70">
               {[
                 'Warm, caring classrooms',
                 'Balanced academics and activities',
                 'Focus on communication skills',
                 'Early digital awareness'
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                <li key={item} className="flex items-start gap-3 rounded-2xl border border-cardinal/10 bg-white/70 p-3 shadow-sm">
+                  <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-cardinal"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -101,7 +101,7 @@ export default function Academics({ showExplore = true }) {
               <div>
                 <Link
                   href="/academics"
-                  className="inline-flex items-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-cardinal/90"
+                  className="inline-flex items-center gap-2 rounded-full bg-midnight px-7 py-3 text-sm font-semibold uppercase tracking-wide text-parchment transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-midnight/20"
                   onClick={() =>
                     trackFacebookEvent('ViewContent', {
                       component: 'academics_section_cta',
@@ -109,24 +109,30 @@ export default function Academics({ showExplore = true }) {
                   }
                 >
                   Explore Academics
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14m-4-4l4 4-4 4" />
+                  </svg>
                 </Link>
               </div>
             )}
           </motion.div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2">
             {stageDetails.map((stage, index) => (
               <motion.div
                 key={stage.title}
-                className="rounded-2xl border border-cardinal/10 bg-white p-6 shadow-sm"
+                className="group relative overflow-hidden rounded-2xl border border-cardinal/15 bg-white/80 p-6 shadow-lg shadow-cardinal/5"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <span className="text-xs uppercase tracking-[0.3em] text-cardinal/60">{stage.grades}</span>
-                <h3 className="mt-2 text-lg font-semibold">{stage.title}</h3>
-                <p className="mt-3 text-sm text-cardinal/70">{stage.homeSummary}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-cardinal/5 via-transparent to-gold/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+                <div className="relative space-y-3">
+                  <span className="text-xs uppercase tracking-[0.3em] text-cardinal/70">{stage.grades}</span>
+                  <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>
+                  <p className="text-sm text-midnight/70 leading-relaxed">{stage.homeSummary}</p>
+                </div>
               </motion.div>
             ))}
           </div>

@@ -49,16 +49,29 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-shadow bg-white ${
-        scrolled ? 'shadow-lg' : 'shadow-sm'
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled ? 'backdrop-blur-md bg-white/85 shadow-xl shadow-cardinal/5' : 'bg-white/80 backdrop-blur'
+      } border-b border-cardinal/10`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <div className="text-2xl font-semibold text-cardinal">Mount Litera School</div>
-        <div className="hidden md:flex space-x-6 text-cardinal font-medium">
+        <div className="flex items-center gap-3">
+          <span className="h-10 w-10 rounded-full bg-cardinal/90 text-white grid place-items-center shadow-lg shadow-cardinal/20">
+            <span className="text-lg font-semibold">E</span>
+          </span>
+          <div className="leading-tight">
+            <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Heritage &amp; Honor</p>
+            <p className="text-xl md:text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
+          </div>
+        </div>
+        <div className="hidden md:flex items-center space-x-6 text-midnight font-medium">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition-colors hover:text-gray-800">
-              {item.label}
+            <Link
+              key={item.href}
+              href={item.href}
+              className="relative pb-1 transition duration-200 hover:text-cardinal"
+            >
+              <span className="relative z-10">{item.label}</span>
+              <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-cardinal/70 transition-transform duration-200 ease-out hover:scale-x-100" />
             </Link>
           ))}
         </div>
@@ -67,7 +80,7 @@ export default function Navbar() {
             type="button"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMenuOpen((open) => !open)}
-            className="relative h-10 w-10 rounded-full border border-cardinal/20 bg-white text-cardinal shadow-sm transition hover:border-cardinal"
+            className="relative h-11 w-11 rounded-full border border-cardinal/20 bg-white/90 text-cardinal shadow-md shadow-cardinal/10 backdrop-blur"
           >
             <span
               className={`absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 -translate-y-2 transform rounded-full bg-cardinal transition ${
@@ -88,35 +101,35 @@ export default function Navbar() {
         </div>
       </nav>
       <div
-        className={`fixed inset-0 z-40 transform bg-black/30 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 transform bg-midnight/30 backdrop-blur transition-opacity duration-300 ${
           menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setMenuOpen(false)}
       />
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 max-w-full transform bg-white shadow-xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white/95 backdrop-blur-xl shadow-2xl transition-transform duration-300 ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-5">
-          <span className="text-lg font-semibold text-cardinal">Menu</span>
+        <div className="flex items-center justify-between border-b border-cardinal/10 px-6 py-5">
+          <span className="text-lg font-semibold text-midnight font-garamond">Navigate</span>
           <button
             type="button"
             aria-label="Close menu"
             onClick={() => setMenuOpen(false)}
-            className="rounded-full border border-cardinal/20 p-2 text-cardinal transition hover:border-cardinal"
+            className="rounded-full border border-cardinal/20 p-2 text-cardinal transition hover:border-cardinal hover:bg-cardinal/5"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div className="flex flex-col space-y-2 px-6 py-6 text-cardinal">
+        <div className="flex flex-col space-y-3 px-6 py-6 text-midnight">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-xl border border-cardinal/10 px-4 py-3 text-base font-medium transition hover:border-cardinal hover:bg-cardinal/5"
+              className="rounded-xl border border-cardinal/10 px-4 py-3 text-base font-medium transition hover:border-cardinal hover:bg-cardinal/5 shadow-sm"
             >
               {item.label}
             </Link>
