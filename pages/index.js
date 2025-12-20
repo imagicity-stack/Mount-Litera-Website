@@ -12,14 +12,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Mount Litera School | Transitioning Into a Brighter Future</title>
+        <title>The Elden Heights School | Transitioning Into a Brighter Future</title>
         <meta
           name="description"
-          content="Mount Litera School is evolving into a new chapter with modern infrastructure, digital innovation, and a renewed vision for every student."
+          content="The Elden Heights School is evolving into a new chapter with modern infrastructure, digital innovation, and a renewed vision for every student."
         />
       </Head>
       <AdmissionOpenPopup />
-      <div className="relative min-h-screen bg-white text-gray-800">
+      <div className="relative min-h-screen text-midnight">
         <Navbar />
         <main>
           <Hero />
