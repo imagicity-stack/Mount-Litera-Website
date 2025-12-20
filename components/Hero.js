@@ -21,10 +21,14 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-br from-midnight/42 via-midnight/28 to-cardinal/28"
+        className="absolute inset-0 bg-gradient-to-b from-midnight/30 via-midnight/20 to-cardinal/35"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_30%_30%,rgba(195,165,114,0.14),transparent_42%),radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.08),transparent_42%)]" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_26%,rgba(255,255,255,0.18),transparent_38%),radial-gradient(circle_at_72%_18%,rgba(195,165,114,0.22),transparent_42%)]"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-midnight/55 via-cardinal/45 to-transparent" aria-hidden="true" />
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
           initial="hidden"
@@ -33,7 +37,7 @@ export default function Hero() {
           className="space-y-6"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white drop-shadow-xl">
-            Towards Eternal glory
+            Towards Eternal Glory
           </h1>
         </motion.div>
       </div>

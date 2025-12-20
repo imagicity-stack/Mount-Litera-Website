@@ -129,53 +129,6 @@ export default function AboutPage() {
                       The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.
                     </p>
                   <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-cardinal/25 bg-white/70 shadow-sm">
-                    <details className="group">
-                      <summary className="flex cursor-pointer items-center justify-between gap-3 px-5 py-4 text-lg font-semibold text-cardinal transition group-open:bg-cardinal/5">
-                        <span>Mission and Vision Statement</span>
-                        <span className="text-sm uppercase tracking-[0.2em] text-cardinal/70">Expand</span>
-                      </summary>
-                      <div className="space-y-6 px-5 pb-6 pt-2 text-gray-700">
-                        <div className="relative overflow-hidden rounded-xl border border-dashed border-cardinal/30 bg-ivory/60 p-4 text-center text-sm text-cardinal/70">
-                          <div className="aspect-[5/2] w-full rounded-lg bg-gradient-to-br from-white via-ivory/70 to-cardinal/10" />
-                          <p className="mt-3 font-medium">Reserved space for mission &amp; vision imagery</p>
-                        </div>
-                        <div className="space-y-3">
-                          <h3 className="text-2xl font-semibold text-cardinal">Vision</h3>
-                          <p>
-                            The Elden Heights School stands as a citadel of heritage and aspiration, where education is not the mere transfer of knowledge but the cultivation of greatness across generations. The very name Elden Heights embodies our purpose: “Elden” signifying the timeless journey of growing old with wisdom, and “Heights” symbolizing the relentless ascent toward excellence and elevated achievement. Together, the name evokes a legacy of refinement, endurance, and elevation.
-                          </p>
-                          <p>
-                            Our emblem translates this philosophy into form. The eagle, sovereign and unyielding, represents the will to soar above the ordinary. The torch, burning eternal, signifies the undimmed pursuit of truth and enlightenment. The four wings of the eagle mirror the four cardinal stages of a student’s passage: Roots, Ascent, Radiance, and Eternity. These stages, like the wings of flight, empower every learner to rise with balance, strength, and purpose, ever guided by our motto “Towards Eternal Glory.”
-                          </p>
-                          <p>
-                            The Elden Heights is thus more than an institution; it is an enduring passage to greatness, where each generation is prepared to stand tall in wisdom, dignity, and eternal legacy.
-                          </p>
-                        </div>
-                        <div className="space-y-3">
-                          <h3 className="text-2xl font-semibold text-cardinal">Mission</h3>
-                          <p>
-                            The mission of The Elden Heights School is to craft not merely scholars, but legacies. We exist to shape a student’s journey through the four timeless stages of life, each one refining their character and elevating their destiny.
-                          </p>
-                          <p>
-                            <strong className="text-cardinal">Roots:</strong> At the foundation, we instill discipline, virtue, and cultural heritage. Here the child is grounded, like the roots of an ancient tree, drawing strength from values that endure through every age.
-                          </p>
-                          <p>
-                            <strong className="text-cardinal">Ascent:</strong> With a firm foundation, the learner begins to rise. This stage is defined by exploration, resilience, and intellectual awakening. We nurture a spirit that questions, seeks, and climbs with dignity and perseverance toward knowledge and truth.
-                          </p>
-                          <p>
-                            <strong className="text-cardinal">Radiance:</strong> As wisdom matures, the individual begins to illuminate. In this stage, talents unfold and leadership emerges. Students radiate brilliance through creativity, innovation, and excellence, becoming beacons of inspiration within their communities and beyond.
-                          </p>
-                          <p>
-                            <strong className="text-cardinal">Eternity:</strong> The pinnacle stage, where learning transcends achievement and becomes legacy. Here, the Eldenite rises beyond self-interest to embody purpose, virtue, and vision that echo through generations. This is the stage of eternal glory, the fulfillment of The Elden Heights journey.
-                          </p>
-                          <p>
-                            The name Elden Heights is fulfilled in this mission: “Elden” to grow wiser with age, and “Heights” to ascend beyond limitation. The eagle with its four wings embodies these stages, carrying the torch of enlightenment as a symbol of knowledge that never fades. Each student, through this sacred passage, is prepared not merely for success, but for significance, to rise, to lead, and to leave behind a mark that is eternal.
-                          </p>
-                        </div>
-                      </div>
-                    </details>
-                  </div>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
@@ -188,6 +141,77 @@ export default function AboutPage() {
                     />
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <section className="py-16 bg-[#f3ede7]">
+            <div className="max-w-5xl mx-auto px-6 space-y-8">
+              <div className="text-center space-y-3">
+                <h2 className="text-3xl font-semibold text-cardinal">Mission and Vision Statement</h2>
+                <p className="max-w-3xl mx-auto text-gray-700">
+                  Discover the legacy behind The Elden Heights School. Expand the panel below to explore how our emblem, ethos, and four-stage philosophy guide every learner toward eternal glory.
+                </p>
+              </div>
+              <div className="overflow-hidden rounded-3xl border border-cardinal/20 bg-white shadow-xl shadow-cardinal/10">
+                <details className="group" open>
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-lg font-semibold text-midnight">
+                    <span className="flex items-center gap-3">
+                      <span className="h-10 w-10 rounded-full bg-cardinal/10 text-cardinal grid place-items-center font-semibold">MV</span>
+                      <span className="text-cardinal">Mission &amp; Vision</span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 transform text-cardinal transition duration-300 group-open:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                  </summary>
+                  <div className="grid gap-8 border-t border-cardinal/10 bg-gradient-to-br from-white via-ivory/40 to-white px-6 pb-8 pt-6 lg:grid-cols-[1fr_320px]">
+                    <div className="space-y-6 text-gray-700">
+                      <div className="space-y-3">
+                        <h3 className="text-2xl font-semibold text-cardinal">Vision</h3>
+                        <p>
+                          The Elden Heights School stands as a citadel of heritage and aspiration, where education is not the mere transfer of knowledge but the cultivation of greatness across generations. The very name Elden Heights embodies our purpose: “Elden” signifying the timeless journey of growing old with wisdom, and “Heights” symbolizing the relentless ascent toward excellence and elevated achievement. Together, the name evokes a legacy of refinement, endurance, and elevation.
+                        </p>
+                        <p>
+                          Our emblem translates this philosophy into form. The eagle, sovereign and unyielding, represents the will to soar above the ordinary. The torch, burning eternal, signifies the undimmed pursuit of truth and enlightenment. The four wings of the eagle mirror the four cardinal stages of a student’s passage: Roots, Ascent, Radiance, and Eternity. These stages, like the wings of flight, empower every learner to rise with balance, strength, and purpose, ever guided by our motto “Towards Eternal Glory.”
+                        </p>
+                        <p>
+                          The Elden Heights is thus more than an institution; it is an enduring passage to greatness, where each generation is prepared to stand tall in wisdom, dignity, and eternal legacy.
+                        </p>
+                      </div>
+                      <div className="space-y-3">
+                        <h3 className="text-2xl font-semibold text-cardinal">Mission</h3>
+                        <p>
+                          The mission of The Elden Heights School is to craft not merely scholars, but legacies. We exist to shape a student’s journey through the four timeless stages of life, each one refining their character and elevating their destiny.
+                        </p>
+                        <p>
+                          <strong className="text-cardinal">Roots:</strong> At the foundation, we instill discipline, virtue, and cultural heritage. Here the child is grounded, like the roots of an ancient tree, drawing strength from values that endure through every age.
+                        </p>
+                        <p>
+                          <strong className="text-cardinal">Ascent:</strong> With a firm foundation, the learner begins to rise. This stage is defined by exploration, resilience, and intellectual awakening. We nurture a spirit that questions, seeks, and climbs with dignity and perseverance toward knowledge and truth.
+                        </p>
+                        <p>
+                          <strong className="text-cardinal">Radiance:</strong> As wisdom matures, the individual begins to illuminate. In this stage, talents unfold and leadership emerges. Students radiate brilliance through creativity, innovation, and excellence, becoming beacons of inspiration within their communities and beyond.
+                        </p>
+                        <p>
+                          <strong className="text-cardinal">Eternity:</strong> The pinnacle stage, where learning transcends achievement and becomes legacy. Here, the Eldenite rises beyond self-interest to embody purpose, virtue, and vision that echo through generations. This is the stage of eternal glory, the fulfillment of The Elden Heights journey.
+                        </p>
+                        <p>
+                          The name Elden Heights is fulfilled in this mission: “Elden” to grow wiser with age, and “Heights” to ascend beyond limitation. The eagle with its four wings embodies these stages, carrying the torch of enlightenment as a symbol of knowledge that never fades. Each student, through this sacred passage, is prepared not merely for success, but for significance, to rise, to lead, and to leave behind a mark that is eternal.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-white/80 p-4 shadow-md shadow-cardinal/10">
+                      <div className="aspect-[4/5] w-full rounded-xl bg-gradient-to-b from-cardinal/10 via-ivory/50 to-white" />
+                      <p className="mt-4 text-center text-sm font-medium text-cardinal/80">Reserved space for mission &amp; vision imagery</p>
+                    </div>
+                  </div>
+                </details>
               </div>
             </div>
           </section>
