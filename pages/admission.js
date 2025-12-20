@@ -8,10 +8,10 @@ export default function AdmissionPage() {
   return (
     <>
       <Head>
-        <title>Admissions 2025–2026 | Mount Litera School</title>
+        <title>Admissions 2025–2026 | The Elden Heights School</title>
         <meta
           name="description"
-          content="Learn about the Mount Litera School admission process for the 2025–2026 session, eligibility, documents required, and how to apply."
+          content="Learn about the The Elden Heights School admission process for the 2025–2026 session, eligibility, documents required, and how to apply."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -22,7 +22,7 @@ export default function AdmissionPage() {
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Admission</h1>
               <p className="text-lg text-gray-600">A New Chapter Begins</p>
               <p>
-                Mount Litera School is opening admissions for the 2025–2026 academic session. As we move through our transition
+                The Elden Heights School is opening admissions for the 2025–2026 academic session. As we move through our transition
                 into a brighter and more dynamic future, we continue to stand for the same values that shaped our legacy —
                 discipline, curiosity, and academic excellence. This is your chance to be part of the next generation of learners
                 who will experience an upgraded, modern, and future-ready school environment.
@@ -32,7 +32,7 @@ export default function AdmissionPage() {
           <section className="py-16 bg-white">
             <div className="max-w-5xl mx-auto px-6 space-y-10">
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Why Choose Mount Litera School</h2>
+                <h2 className="text-2xl font-semibold text-cardinal">Why Choose The Elden Heights School</h2>
                 <p>We are not just preparing students for exams but for life. Our re-imagined structure ensures every child grows with purpose, confidence, and creativity.</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Future-Ready Curriculum – A blend of strong academics and practical learning experiences.</li>
@@ -73,7 +73,7 @@ export default function AdmissionPage() {
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">Important Note</h2>
                 <p>
-                  Mount Litera School is currently undergoing a structured transition toward a renewed identity and academic
+                  The Elden Heights School is currently undergoing a structured transition toward a renewed identity and academic
                   vision. All admissions made during this phase remain valid under the recognized CBSE framework and will
                   seamlessly continue through the upgraded system.
                 </p>
