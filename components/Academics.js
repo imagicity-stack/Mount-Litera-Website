@@ -127,7 +127,6 @@ export default function Academics({ showExplore = true }) {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cardinal/5 via-transparent to-gold/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
                 <div className="relative space-y-3">
                   <span className="text-xs uppercase tracking-[0.3em] text-cardinal/70">{stage.grades}</span>
                   <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>

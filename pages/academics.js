@@ -42,11 +42,7 @@ export default function AcademicsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="relative overflow-hidden bg-gradient-to-br from-[#7f1d1d] via-cardinal to-[#410b0b] py-24 text-white">
-            <div className="absolute inset-0 opacity-20" aria-hidden="true">
-              <div className="absolute -top-24 right-0 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
-              <div className="absolute bottom-0 left-[-4rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-            </div>
+          <section className="relative overflow-hidden bg-cardinal py-24 text-white">
             <div className="relative max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-center">
               <div className="space-y-6">
                 <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/70">
@@ -103,7 +99,7 @@ export default function AcademicsPage() {
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-gradient-to-br from-[#FDF9F7] via-white to-[#F8F5F3] p-6 shadow-lg">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-[#fdf9f7] p-6 shadow-lg">
                   <div className="flex h-full flex-col justify-between text-cardinal">
                     <div className="space-y-2">
                       <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Classroom kit</p>

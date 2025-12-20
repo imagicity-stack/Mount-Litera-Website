@@ -10,7 +10,7 @@ export default function Admission() {
   return (
     <section id="admission" className="py-20">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="overflow-hidden rounded-3xl border border-cardinal/20 bg-gradient-to-br from-white via-parchment to-white shadow-2xl shadow-cardinal/10">
+        <div className="overflow-hidden rounded-3xl border border-cardinal/20 bg-white shadow-xl">
           <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
             <motion.div
               className="space-y-6 p-10 md:p-12"
@@ -46,16 +46,15 @@ export default function Admission() {
               </div>
             </motion.div>
             <motion.div
-              className="relative h-full w-full overflow-hidden"
+              className="relative h-full w-full overflow-hidden bg-ivory"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-cardinal/20 via-gold/10 to-parchment" aria-hidden="true" />
               <div className="relative flex h-full items-center justify-center p-10">
-                <div className="rounded-2xl border border-white/50 bg-white/60 p-8 text-center shadow-xl shadow-cardinal/15 backdrop-blur">
+                <div className="rounded-2xl border border-cardinal/15 bg-white p-8 text-center shadow-md">
                   <p className="text-sm uppercase tracking-[0.3em] text-cardinal/80">Exclusive Entry</p>
                   <p className="mt-3 text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
                   <p className="mt-2 text-midnight/70">Limited seats crafted for families seeking an elite, heritage-inspired education.</p>

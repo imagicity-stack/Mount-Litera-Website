@@ -126,8 +126,7 @@ export default function CoreMentorsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="relative overflow-hidden bg-gradient-to-br from-cardinal/8 via-white to-ivory/50 py-16">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(123,67,151,0.08),transparent_45%),radial-gradient(circle_at_80%_10%,rgba(220,155,60,0.08),transparent_35%)]" />
+          <section className="relative overflow-hidden bg-ivory py-16">
             <div className="relative max-w-5xl mx-auto px-6 space-y-4 text-center">
               <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Leadership &amp; Faculty</p>
               <h1 className="text-4xl font-semibold text-cardinal">Core Mentors</h1>

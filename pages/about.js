@@ -60,9 +60,8 @@ export default function AboutPage() {
                   <Link
                     key={card.href}
                     href={card.href}
-                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-gradient-to-br from-white via-ivory/60 to-cardinal/5 text-center text-lg font-semibold uppercase tracking-[0.12em] text-cardinal transition transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-cardinal transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-cardinal/8 via-transparent to-gold/15 opacity-80 transition duration-300 group-hover:opacity-100" />
                     <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-cardinal group-hover:text-cardinal/90">
                       {card.label}
                     </span>
@@ -170,7 +169,7 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
                   </summary>
-                  <div className="grid gap-8 border-t border-cardinal/10 bg-gradient-to-br from-white via-ivory/40 to-white px-6 pb-8 pt-6 lg:grid-cols-[1fr_320px]">
+                  <div className="grid gap-8 border-t border-cardinal/10 bg-white px-6 pb-8 pt-6 lg:grid-cols-[1fr_320px]">
                     <div className="space-y-6 text-gray-700">
                       <div className="space-y-3">
                         <h3 className="text-2xl font-semibold text-cardinal">Vision</h3>
@@ -206,8 +205,8 @@ export default function AboutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="relative overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-white/80 p-4 shadow-md shadow-cardinal/10">
-                      <div className="aspect-[4/5] w-full rounded-xl bg-gradient-to-b from-cardinal/10 via-ivory/50 to-white" />
+                    <div className="relative overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-ivory p-4 shadow-md shadow-cardinal/10">
+                      <div className="aspect-[4/5] w-full rounded-xl bg-white" />
                       <p className="mt-4 text-center text-sm font-medium text-cardinal/80">Reserved space for mission &amp; vision imagery</p>
                     </div>
                   </div>

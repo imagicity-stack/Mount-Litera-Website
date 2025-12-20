@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-parchment via-white to-parchment border-t border-cardinal/10">
+  <footer className="bg-parchment border-t border-cardinal/10">
       <div className="max-w-6xl mx-auto flex flex-col gap-4 px-6 py-10 text-sm text-midnight md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
           <span className="h-10 w-10 rounded-full bg-cardinal text-white grid place-items-center shadow-lg shadow-cardinal/20">

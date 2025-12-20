@@ -70,14 +70,13 @@ export default function Contact() {
     <section id="contact" className="py-20">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-start">
         <motion.div
-          className="relative overflow-hidden rounded-3xl border border-cardinal/15 bg-gradient-to-br from-cardinal via-midnight to-cardinal text-white p-10 shadow-2xl shadow-cardinal/20"
+          className="relative overflow-hidden rounded-3xl border border-cardinal/15 bg-midnight text-white p-10 shadow-xl"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(195,165,114,0.25),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.18),transparent_40%)]" aria-hidden="true" />
           <div className="relative space-y-6">
             <h2 className="text-3xl md:text-4xl font-semibold">Get in Touch</h2>
             <p className="text-white/80 text-lg">
@@ -117,14 +116,13 @@ export default function Contact() {
         </motion.div>
         <motion.form
           onSubmit={handleSubmit}
-          className="relative rounded-3xl border border-cardinal/10 bg-white/90 p-8 shadow-2xl shadow-cardinal/10 backdrop-blur space-y-4"
+          className="relative rounded-3xl border border-cardinal/10 bg-white p-8 shadow-xl space-y-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
         >
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-parchment/80 to-white" aria-hidden="true" />
           <div className="relative space-y-4">
             <div className="flex flex-col space-y-2">
               <label htmlFor="name" className="text-sm font-semibold text-midnight">

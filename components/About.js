@@ -10,12 +10,8 @@ export default function About({ showLink = true }) {
   return (
     <section id="about" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-cardinal/12 bg-white shadow-2xl shadow-cardinal/8">
-          <div className="absolute inset-0 bg-gradient-to-r from-cardinal/8 via-white to-ivory/70" aria-hidden="true" />
-          <div
-            className="absolute inset-y-0 left-0 w-2 bg-gradient-to-b from-cardinal via-gold to-cardinal"
-            aria-hidden="true"
-          />
+        <div className="relative overflow-hidden rounded-3xl border border-cardinal/12 bg-white shadow-xl">
+          <div className="absolute inset-y-0 left-0 w-2 bg-cardinal" aria-hidden="true" />
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] items-center px-8 py-12 md:px-14 md:py-16">
             <div className="space-y-5">
               <motion.p
@@ -49,7 +45,7 @@ export default function About({ showLink = true }) {
                 The Elden Heights School has been a beacon of learning and values. As we move forward into our next chapter, our goal remains unchanged — to nurture confident, capable, and creative learners ready for tomorrow. This transition marks the start of something extraordinary — modern infrastructure, digital innovation, and a renewed vision for every student.
               </motion.p>
               <motion.blockquote
-                className="relative overflow-hidden rounded-2xl border border-gold/40 bg-white/80 px-6 py-5 text-left text-midnight/80 shadow-lg shadow-cardinal/5"
+                className="relative overflow-hidden rounded-2xl border border-gold/40 bg-white px-6 py-5 text-left text-midnight/80 shadow-md"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -78,7 +74,7 @@ export default function About({ showLink = true }) {
                 </motion.div>
               )}
             </div>
-            <div className="space-y-5 rounded-2xl border border-cardinal/15 bg-ivory/70 p-6 shadow-xl shadow-cardinal/10">
+            <div className="space-y-5 rounded-2xl border border-cardinal/15 bg-ivory p-6 shadow-md">
               <div className="flex items-center justify-between gap-4 border-b border-cardinal/10 pb-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-cardinal/70">Academic Ethos</p>

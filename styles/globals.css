@@ -7,10 +7,7 @@ html {
 }
 
 body {
-  @apply bg-[#f9f6f3] text-midnight font-avenir;
-  background-image: radial-gradient(circle at 12% 24%, rgba(195, 165, 114, 0.18), transparent 26%),
-    radial-gradient(circle at 82% 8%, rgba(165, 0, 33, 0.12), transparent 34%),
-    linear-gradient(180deg, #fff 0%, #f9f6f3 32%, #f7f1e9 100%);
+  @apply bg-[#f8f3ea] text-midnight font-avenir;
   min-height: 100vh;
 }
 
