@@ -21,10 +21,10 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-br from-midnight/85 via-midnight/65 to-cardinal/65"
+        className="absolute inset-0 bg-gradient-to-br from-midnight/65 via-midnight/45 to-cardinal/45"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_30%_30%,rgba(195,165,114,0.25),transparent_35%),radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.15),transparent_35%)]" aria-hidden="true" />
+      <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_30%_30%,rgba(195,165,114,0.18),transparent_38%),radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.12),transparent_38%)]" aria-hidden="true" />
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
           initial="hidden"
