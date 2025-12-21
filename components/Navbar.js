@@ -74,6 +74,14 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-cardinal/70 transition-transform duration-200 ease-out hover:scale-x-100" />
             </Link>
           ))}
+          <a
+            href="https://elnode.in"
+            target="_blank"
+            rel="noreferrer"
+            className="bg-cardinal px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white shadow-md shadow-cardinal/25 transition hover:bg-cardinal/90"
+          >
+            ERP
+          </a>
         </div>
         <div className="md:hidden">
           <button
@@ -134,6 +142,14 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
+          <a
+            href="https://elnode.in"
+            target="_blank"
+            rel="noreferrer"
+            className="border border-cardinal bg-cardinal px-4 py-3 text-center text-base font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-cardinal/90"
+          >
+            ERP
+          </a>
         </div>
       </div>
     </header>

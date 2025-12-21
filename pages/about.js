@@ -169,8 +169,8 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
                   </summary>
-                  <div className="grid gap-8 border-t border-cardinal/10 bg-white px-6 pb-8 pt-6 lg:grid-cols-[1fr_320px]">
-                    <div className="space-y-6 text-gray-700">
+                  <div className="flex flex-col gap-8 border-t border-cardinal/10 bg-white px-6 pb-8 pt-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-start">
+                    <div className="space-y-6 text-gray-700 lg:pr-4">
                       <div className="space-y-3">
                         <h3 className="text-2xl font-semibold text-cardinal">Vision</h3>
                         <p>
@@ -205,9 +205,9 @@ export default function AboutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="relative overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-ivory p-4 shadow-md shadow-cardinal/10">
-                      <div className="aspect-[4/5] w-full rounded-xl bg-white" />
-                      <p className="mt-4 text-center text-sm font-medium text-cardinal/80">Reserved space for mission &amp; vision imagery</p>
+                    <div className="relative ml-auto flex w-full max-w-xs flex-col items-center justify-start overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-ivory p-4 shadow-md shadow-cardinal/10 lg:mt-0">
+                      <div className="h-40 w-full rounded-xl bg-white" />
+                      <p className="mt-3 text-center text-sm font-medium text-cardinal/80">Reserved space for mission &amp; vision imagery</p>
                     </div>
                   </div>
                 </details>
