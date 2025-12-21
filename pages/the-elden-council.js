@@ -16,12 +16,33 @@ export default function TheEldenCouncilPage() {
         <Navbar />
         <main className="flex-1">
           <section className="relative overflow-hidden bg-ivory py-20">
-            <div className="relative max-w-4xl mx-auto px-6 text-center space-y-4">
-              <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Governance</p>
-              <h1 className="text-4xl font-semibold text-cardinal">The Elden Council</h1>
-              <p className="text-gray-700">
-                Coming soon. This space will share the council's perspective on heritage, academics, and the enduring promise of The Elden Heights School.
-              </p>
+            <div className="relative max-w-5xl mx-auto px-6 space-y-12">
+              <div className="space-y-4">
+                <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70 text-center">Governance</p>
+                <h1 className="text-4xl font-semibold text-cardinal text-center">The Elden Council</h1>
+                <div className="max-w-3xl mx-auto space-y-3 text-center text-gray-800 leading-relaxed">
+                  <p>
+                    The Elden Heights School is registered under the Bhagwati Educational and Charitable Trust, an institution devoted to building a lineage of scholars, leaders, and responsible citizens. The Elden Council safeguards this commitment, ensuring that every decision, tradition, and innovation upholds our heritage of excellence and our motto, "Towards Eternal Glory."
+                  </p>
+                  <p>
+                    Guided by trustees who embody integrity and vision, the council shapes policy, nurtures faculty excellence, and strengthens the partnership between families and the school community. Their stewardship keeps The Elden Heights focused on disciplined growth, transparent governance, and a culture where every student can rise.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-8 md:grid-cols-4">
+                {[{ name: 'Anit Ankur', title: 'Settlor' }, { name: 'Shashi Shankar Prasad', title: 'Managing Trustee' }, { name: 'Vinita Ankur', title: 'Trustee' }, { name: 'Vandana Prasad', title: 'Trustee' }].map((member) => (
+                  <div key={member.name} className="flex flex-col bg-white border border-cardinal/15 shadow-sm p-4 space-y-4">
+                    <div className="w-full aspect-square bg-cardinal/5 border border-cardinal/20 flex items-center justify-center text-cardinal text-sm uppercase tracking-[0.2em]">
+                      Image
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-lg font-semibold text-cardinal leading-tight">{member.name}</p>
+                      <p className="text-sm uppercase tracking-[0.15em] text-gray-600">{member.title}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         </main>
