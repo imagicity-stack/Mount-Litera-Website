@@ -6,10 +6,10 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Head>
-        <title>Privacy Policy | Mount Litera School</title>
+        <title>Privacy Policy | The Elden Heights School</title>
         <meta
           name="description"
-          content="Read how Mount Litera School collects, uses, and protects personal information shared through mlzshazaribagh.in."
+          content="Read how The Elden Heights School collects, uses, and protects personal information shared through mlzshazaribagh.in."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
               <p>Website: mlzshazaribagh.in</p>
               <p>Email: <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a></p>
               <p>
-                Mount Litera School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
+                The Elden Heights School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
                 information you share with us through this website. This Privacy Policy explains how we collect, use, and protect
                 your data when you visit our site or submit an inquiry form.
               </p>
@@ -110,7 +110,7 @@ export default function PrivacyPolicyPage() {
                     <span role="img" aria-label="email">📧</span> <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>
                   </li>
                   <li>
-                    <span role="img" aria-label="location">🏫</span> Mount Litera School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
+                    <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
                     Jharkhand.
                   </li>
                 </ul>

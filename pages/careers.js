@@ -6,8 +6,8 @@ export default function CareersPage() {
   return (
     <>
       <Head>
-        <title>Careers | Mount Litera School</title>
-        <meta name="description" content="Explore career opportunities with Mount Litera School." />
+        <title>Careers | The Elden Heights School</title>
+        <meta name="description" content="Explore career opportunities with The Elden Heights School." />
       </Head>
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
         <Navbar />
@@ -19,7 +19,7 @@ export default function CareersPage() {
               </span>
               <h1 className="mt-6 text-3xl font-semibold text-cardinal">We are not hiring right now</h1>
               <p className="mt-4 text-gray-600">
-                Thank you for your interest in joining Mount Litera School. While there are no open positions at the moment,
+                Thank you for your interest in joining The Elden Heights School. While there are no open positions at the moment,
                 we encourage you to check back soon as new opportunities are posted ahead of each academic session.
               </p>
             </div>
