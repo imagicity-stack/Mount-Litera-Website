@@ -10,27 +10,6 @@ const coreSections = [
       'Discover the honours that celebrate excellence, integrity, leadership, and growth across The Elden Heights.',
     href: '/awards-and-recognition',
     cta: 'View Awards'
-  },
-  {
-    title: 'The Elden Council',
-    description:
-      'Understand the trust-led governance that stewards our mission under the Bhagwati Educational and Charitable Trust.',
-    href: '/the-elden-council',
-    cta: 'Explore Council'
-  },
-  {
-    title: 'Managing Committee',
-    description:
-      'Meet the committee entrusted with sustaining operational excellence and heritage standards.',
-    href: '/managing-committee',
-    cta: 'View Committee'
-  },
-  {
-    title: 'Core Mentors',
-    description:
-      'Spend time with the mentors guiding every stage of the Elden journey through Roots, Ascent, Radiance, and Eternity.',
-    href: '/core-mentors',
-    cta: 'Meet Mentors'
   }
 ];
 
@@ -41,7 +20,7 @@ export default function CorePage() {
         <title>Core | The Elden Heights School</title>
         <meta
           name="description"
-          content="Explore the core pillars, governance, and recognition pathways that define The Elden Heights School."
+          content="Explore the core pillars and recognition pathways that define The Elden Heights School."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -53,8 +32,8 @@ export default function CorePage() {
                 <p className="text-xs uppercase tracking-[0.35em] text-cardinal/70">Core Pillars</p>
                 <h1 className="text-4xl font-semibold text-cardinal">Legacy, Discipline, Distinction</h1>
                 <p className="text-gray-700 leading-relaxed">
-                  The Core space gathers the standards, recognitions, and leadership bodies that safeguard our heritage. Navigate
-                  the sections below to explore how The Elden Heights honours excellence and sustains its ethos.
+                  The Core space gathers the honours that safeguard our heritage and celebrate disciplined growth. Explore the
+                  recognitions that uphold The Elden Heights ethos.
                 </p>
               </div>
               <div className="bg-white border border-cardinal/10 shadow-sm p-6 space-y-3">
@@ -73,8 +52,7 @@ export default function CorePage() {
               <div className="space-y-3 max-w-4xl">
                 <h2 className="text-3xl font-semibold text-cardinal">Core Sections</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Choose a section to explore the councils, committees, mentors, and honours that define The Elden Heights School
-                  experience.
+                  Access the awards and recognition pathway that defines excellence within The Elden Heights School experience.
                 </p>
               </div>
 
