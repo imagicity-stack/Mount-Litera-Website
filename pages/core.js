@@ -10,6 +10,13 @@ const coreSections = [
       'Discover the honours that celebrate excellence, integrity, leadership, and growth across The Elden Heights.',
     href: '/awards-and-recognition',
     cta: 'View Awards'
+  },
+  {
+    title: 'Beyond Academics',
+    description:
+      'Explore the dual pathways—Co Curricular Clubs and the Life Readiness Program—that shape confident, well-rounded Eldenites.',
+    href: '/beyond-academics',
+    cta: 'Explore'
   }
 ];
 
@@ -56,7 +63,7 @@ export default function CorePage() {
                 </p>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6 md:grid-cols-1">
                 {coreSections.map((section) => (
                   <div key={section.title} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-4">
                     <div className="space-y-1">
