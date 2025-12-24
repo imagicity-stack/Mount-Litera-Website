@@ -7,78 +7,164 @@ const awards = [
   {
     name: 'The Elden Laureate',
     eligibility: 'Class X students',
-    recognition: 'Medal with formal citation | Gifted with a premium book or fountain pen',
-    represents:
-      'The highest honour of the school, awarded to a student who best embodies the spirit, values, leadership, and character of The Elden Heights.',
-    selection:
-      'Selection is based on overall conduct, leadership, contribution to school life, and consistency over years. Academic performance is considered as a supporting factor. This award may be withheld if no student meets the standard.'
+    natureLabel: 'Nature of Award',
+    nature: 'Medal with formal citation | Premium book or fountain pen',
+    recognitionLabel: 'What This Award Recognises',
+    recognises:
+      'The student who best represents the values, character, leadership, and overall spirit of The Elden Heights.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Be enrolled in the school for a minimum of three years',
+      'Maintain a consistently strong discipline and conduct record',
+      'Demonstrate leadership through actions, not position alone',
+      'Positively contribute to school culture, events, or initiatives',
+      'Maintain above average academic performance across years'
+    ],
+    note: 'This award may not be given every year if the standard is not met.'
   },
   {
     name: 'Founder’s Medal of Distinction',
     eligibility: 'Classes VIII to X',
-    recognition: 'Gold plated medal | Gifted with a personalised memento or premium diary',
-    represents: 'Recognition of students who consistently demonstrate integrity, responsibility, maturity, and institutional values.',
-    selection: 'Awarded through holistic faculty judgement based on behaviour, discipline, and positive influence within the school community.'
+    natureLabel: 'Nature of Award',
+    nature: 'Gold plated medal | Personalised memento or premium diary',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Integrity, responsibility, maturity, and adherence to school values.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Be enrolled for a minimum of two years',
+      'Show respectful behaviour towards peers and staff',
+      'Demonstrate honesty, responsibility, and reliability',
+      'Have no major disciplinary action on record',
+      'Be consistently recognised by teachers for ethical conduct'
+    ]
   },
   {
     name: 'Governor’s Medal for Academic Excellence',
     eligibility: 'Class X students',
-    recognition: 'Academic medal and certificate | Gifted with an academic reference book or learning voucher',
-    represents: 'The highest academic distinction of the graduating cohort.',
-    selection:
-      'Awarded to the student securing the highest aggregate marks in the final board examination, with a minimum attendance requirement and a clean academic conduct record. This award is strictly numerical and data driven.'
+    natureLabel: 'Nature of Award',
+    nature: 'Academic medal and certificate | Academic reference book or learning voucher',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Highest academic achievement in the graduating class.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Secure the highest aggregate marks in the final board examination',
+      'Maintain minimum 90 percent attendance',
+      'Have no record of academic misconduct',
+      'Meet all examination and assessment requirements',
+      'This award is based strictly on numerical academic data'
+    ]
   },
   {
     name: 'Subject Topper Awards',
     eligibility: 'Classes IX and X',
-    recognition: 'Subject wise shield | Gifted with subject specific learning material',
-    represents: 'Recognition of exceptional academic mastery in individual subjects.',
-    selection: 'Awarded to students achieving the highest marks in each subject in the annual examination. Selection is based purely on academic scores.'
+    natureLabel: 'Nature of Award',
+    nature: 'Subject wise shield | Subject specific learning material',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Outstanding mastery in individual subjects.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Achieve the highest marks in the subject in the annual examination',
+      'Meet minimum internal assessment requirements',
+      'In case of a tie, internal assessments may be considered',
+      'Selection is purely academic and score based'
+    ]
   },
   {
     name: 'The Elden Honours Book',
     eligibility: 'Classes IV to X',
-    recognition: 'Permanent entry into the institutional Honours Book | No physical trophy or certificate',
-    represents:
-      'A lasting institutional record of distinction. Names recorded in the Honours Book become part of the school’s permanent legacy.',
-    selection: 'Selection is based on sustained performance, faculty recommendation, and conduct.',
-    categories: ['Academic distinction', 'Leadership and responsibility', 'Sports excellence', 'Cultural excellence']
+    natureLabel: 'Nature of Recognition',
+    nature: 'Permanent entry in the institutional Honours Book',
+    recognitionLabel: 'What This Recognition Represents',
+    recognises: 'Long term distinction recorded as part of the school’s permanent legacy.',
+    categoriesLabel: 'Students May Be Recorded For',
+    categories: [
+      'Consistent academic excellence',
+      'Demonstrated leadership and responsibility',
+      'Sustained sports excellence',
+      'Significant cultural contribution'
+    ],
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Show sustained performance throughout the academic year',
+      'Receive faculty recommendation',
+      'Maintain a clean conduct record'
+    ]
   },
   {
     name: 'The Elden Code Bearer',
     eligibility: 'Classes VI to X',
-    recognition: 'Medal | Gifted with an inspirational book',
-    represents: 'Recognition of exemplary character, honesty, discipline, and adherence to the school’s code of conduct.',
-    selection: 'Awarded through consistent observation of conduct across the academic year. Selection is based entirely on holistic judgement.'
+    natureLabel: 'Nature of Award',
+    nature: 'Medal | Inspirational book',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Exemplary character and adherence to the school code.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Maintain a discipline record free of major violations',
+      'Demonstrate honesty and respect consistently',
+      'Follow school rules even without supervision',
+      'Be recognised by teachers for dependable conduct',
+      'This award is based on continuous observation, not single incidents'
+    ]
   },
   {
     name: 'Young Leader’s Commendation',
     eligibility: 'Classes VIII to X',
-    recognition: 'Trophy | Gifted with a leadership or communication kit',
-    represents: 'Recognition of initiative, responsibility, and leadership within the school community.',
-    selection: 'Based on demonstrated leadership roles, initiative taken, peer impact, and faculty recommendation.'
+    natureLabel: 'Nature of Award',
+    nature: 'Trophy | Leadership or communication kit',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Initiative, responsibility, and leadership through action.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Actively take responsibility in school activities or roles',
+      'Demonstrate accountability and decision making',
+      'Positively influence peers',
+      'Maintain discipline and attendance standards'
+    ]
   },
   {
     name: 'The Ascension Award',
     eligibility: 'Classes IV to X',
-    recognition: 'Shield | Gifted with a personal development book',
-    represents: 'Recognition of exceptional improvement and personal growth across academics, behaviour, or attitude.',
-    selection:
-      'Selection considers visible progress across the academic year supported by internal assessment trends and faculty observation.'
+    natureLabel: 'Nature of Award',
+    nature: 'Shield | Personal development book',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Exceptional improvement and personal growth.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Show clear improvement compared to previous academic terms',
+      'Demonstrate positive behavioural or attitudinal change',
+      'Show commitment to self improvement',
+      'Be recommended by class teachers'
+    ]
   },
   {
     name: 'Colours Award',
     eligibility: 'Classes VI to X',
-    recognition: 'Blazer badge or medal | Gifted with a sports kit accessory',
-    represents: 'Sustained excellence, discipline, and sportsmanship in physical education and competitive sports.',
-    selection: 'Awarded on the recommendation of sports faculty based on consistent participation and conduct over time.'
+    natureLabel: 'Nature of Award',
+    nature: 'Blazer badge or medal | Sports kit accessory',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Sustained excellence and discipline in sports.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Consistently participate in sports activities over time',
+      'Represent school or house teams',
+      'Demonstrate sportsmanship and discipline',
+      'Receive recommendation from sports faculty'
+    ]
   },
   {
     name: 'Cultural Laureate',
     eligibility: 'Classes VI to X',
-    recognition: 'Trophy | Gifted with an art or music related kit',
-    represents: 'Outstanding contribution and excellence in arts, music, theatre, or cultural expression.',
-    selection: 'Selection is based on performance quality, participation, representation of the school, and faculty recommendation.'
+    natureLabel: 'Nature of Award',
+    nature: 'Trophy | Art or music related kit',
+    recognitionLabel: 'What This Award Recognises',
+    recognises: 'Excellence and commitment in arts, music, theatre, or cultural expression.',
+    considerationLabel: 'To Be Considered, a Student Must',
+    considerations: [
+      'Actively participate in cultural activities',
+      'Demonstrate skill and dedication in the chosen discipline',
+      'Represent the school in events or performances',
+      'Be recommended by cultural faculty'
+    ]
   }
 ];
 
@@ -146,19 +232,27 @@ export default function CorePage() {
 
               <div className="grid gap-8 md:grid-cols-2">
                 {awards.map((award) => (
-                  <div key={award.name} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-3">
+                  <div key={award.name} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-4">
                     <div className="space-y-1">
                       <p className="text-xs uppercase tracking-[0.3em] text-cardinal/60">Honour</p>
                       <h3 className="text-2xl font-semibold text-cardinal">{award.name}</h3>
                     </div>
-                    <div className="space-y-2 text-gray-800 text-sm leading-relaxed">
-                      <p><span className="font-semibold text-midnight">Eligibility:</span> {award.eligibility}</p>
-                      <p><span className="font-semibold text-midnight">Nature of Recognition:</span> {award.recognition}</p>
-                      <p><span className="font-semibold text-midnight">What it Represents:</span> {award.represents}</p>
-                      <p><span className="font-semibold text-midnight">How Selection Works:</span> {award.selection}</p>
+                    <div className="space-y-3 text-gray-800 text-sm leading-relaxed">
+                      <p>
+                        <span className="font-semibold text-midnight">Eligibility:</span> {award.eligibility}
+                      </p>
+                      <p>
+                        <span className="font-semibold text-midnight">{award.natureLabel || 'Nature of Award'}:</span>{' '}
+                        {award.nature}
+                      </p>
+                      <p>
+                        <span className="font-semibold text-midnight">{award.recognitionLabel || 'What it Represents'}:</span>{' '}
+                        {award.recognises}
+                      </p>
+
                       {award.categories && (
                         <div className="space-y-1">
-                          <p className="font-semibold text-midnight">Categories of Recognition:</p>
+                          <p className="font-semibold text-midnight">{award.categoriesLabel || 'Categories of Recognition'}:</p>
                           <ul className="list-disc list-inside text-gray-700 space-y-0.5">
                             {award.categories.map((category) => (
                               <li key={`${award.name}-${category}`}>{category}</li>
@@ -166,6 +260,19 @@ export default function CorePage() {
                           </ul>
                         </div>
                       )}
+
+                      {award.considerations && (
+                        <div className="space-y-1">
+                          <p className="font-semibold text-midnight">{award.considerationLabel || 'To Be Considered'}:</p>
+                          <ul className="list-disc list-inside text-gray-700 space-y-0.5">
+                            {award.considerations.map((consideration) => (
+                              <li key={`${award.name}-${consideration}`}>{consideration}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {award.note && <p className="text-cardinal font-medium">{award.note}</p>}
                     </div>
                   </div>
                 ))}
