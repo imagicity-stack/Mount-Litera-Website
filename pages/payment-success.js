@@ -38,7 +38,7 @@ export default function PaymentSuccess() {
   return (
     <>
       <Head>
-        <title>Payment Successful | Mount Litera Zee School</title>
+        <title>Payment Successful | The Elden Heights School</title>
         <meta
           name="description"
           content="Payment successful. Your child’s priority seat is reserved. Our counsellor will connect within 24 hours."
