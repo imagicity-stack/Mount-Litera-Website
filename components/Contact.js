@@ -109,7 +109,7 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Email</h3>
-                <p>smmlzshzb@gmail.com</p>
+                <p>contact@eldenheights.org</p>
               </div>
             </div>
           </div>

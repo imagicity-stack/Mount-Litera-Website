@@ -20,7 +20,7 @@ export default function TermsPage() {
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Terms and Conditions</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
               <p>Website: The Elden Heights School</p>
-              <p>Email: <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a></p>
+              <p>Email: <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a></p>
               <p>
                 Welcome to The Elden Heights School’s website. By accessing or using this website, you agree to comply with the
                 following Terms and Conditions. If you do not agree with any part of these terms, please refrain from using the
@@ -105,7 +105,7 @@ export default function TermsPage() {
                 <p>If you have any questions regarding these Terms and Conditions, please contact us at:</p>
                 <ul className="space-y-1 text-gray-700">
                   <li>
-                    <span role="img" aria-label="email">📧</span> <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>
+                    <span role="img" aria-label="email">📧</span> <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>
                   </li>
                   <li>
                     <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,

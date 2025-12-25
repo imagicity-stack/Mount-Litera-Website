@@ -25,7 +25,7 @@ export default function ComplaintProceduresPage() {
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">Step-by-Step Resolution</h2>
                 <ol className="list-decimal list-inside space-y-2 text-gray-700">
-                  <li>Submit the concern via email to <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a> or through the school office.</li>
+                  <li>Submit the concern via email to <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a> or through the school office.</li>
                   <li>The relevant coordinator acknowledges receipt within two working days and logs the complaint.</li>
                   <li>An internal review is conducted with the concerned faculty or department to gather facts.</li>
                   <li>Resolution, recommendations, or corrective actions are shared with the complainant within ten working days.</li>

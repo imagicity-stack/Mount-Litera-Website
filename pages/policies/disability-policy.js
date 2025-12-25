@@ -48,7 +48,7 @@ export default function DisabilityPolicyPage() {
                 </ul>
               </div>
               <p>
-                Families can reach our inclusion coordinator at <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>
+                Families can reach our inclusion coordinator at <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>
                 to discuss accommodations or share feedback that enhances our inclusive ecosystem.
               </p>
             </div>
