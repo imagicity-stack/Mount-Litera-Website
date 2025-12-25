@@ -116,7 +116,7 @@ export default function Navbar() {
         onClick={() => setMenuOpen(false)}
       />
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white shadow-2xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white bg-opacity-100 backdrop-blur-none shadow-2xl transition-transform duration-300 ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
