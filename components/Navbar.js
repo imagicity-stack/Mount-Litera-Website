@@ -116,10 +116,9 @@ export default function Navbar() {
         onClick={() => setMenuOpen(false)}
       />
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white bg-opacity-100 backdrop-blur-0 shadow-2xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white shadow-2xl transition-transform duration-300 mobile-drawer ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{ backgroundColor: '#ffffff', opacity: 1 }}
       >
         <div className="flex items-center justify-between border-b border-cardinal/10 px-6 py-5">
           <span className="text-lg font-semibold text-midnight font-garamond">Navigate</span>
