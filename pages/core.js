@@ -20,6 +20,39 @@ const coreSections = [
   }
 ];
 
+const accreditationItems = [
+  {
+    title: 'Bhagwati Educational & Charitable Trust',
+    detail: 'Registered Trust Stewardship',
+    description:
+      'The Elden Heights operates under the Bhagwati Educational & Charitable Trust, ensuring transparent governance and responsible oversight.'
+  },
+  {
+    title: 'CBSE-Aligned Academic Framework',
+    detail: 'Affiliation Readiness',
+    description:
+      'Curriculum, safety, and operational protocols are structured to meet CBSE norms with ongoing audits to maintain compliance.'
+  },
+  {
+    title: 'Safety & Child Protection Compliance',
+    detail: 'Annual Policy Review',
+    description:
+      'Safeguarding standards are reviewed each year across transport, campus security, and classroom practices to uphold student well-being.'
+  },
+  {
+    title: 'Operational Excellence Standards',
+    detail: 'Process Documentation',
+    description:
+      'ISO-ready documentation practices guide academic, administrative, and facility workflows for consistent quality delivery.'
+  },
+  {
+    title: 'Sports & Co-Curricular Recognition',
+    detail: 'District & Intra-School Certifications',
+    description:
+      'Teams participate in certified events with documented coaching plans, fair-play pledges, and safety protocols.'
+  }
+];
+
 export default function CorePage() {
   return (
     <>
@@ -58,9 +91,6 @@ export default function CorePage() {
             <div className="max-w-6xl mx-auto px-6 space-y-8">
               <div className="space-y-3 max-w-4xl">
                 <h2 className="text-3xl font-semibold text-cardinal">Core Sections</h2>
-                <p className="text-gray-700 leading-relaxed">
-                  Access the awards and recognition pathway that defines excellence within The Elden Heights School experience.
-                </p>
               </div>
 
               <div className="grid gap-6 md:grid-cols-1">
@@ -89,6 +119,37 @@ export default function CorePage() {
                     </Link>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16 md:py-20 bg-ivory border-t border-cardinal/10">
+            <div className="max-w-6xl mx-auto px-6 space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Accreditation</p>
+                  <h2 className="text-3xl font-semibold text-cardinal">Standards, Trust, and Compliance</h2>
+                </div>
+                <p className="text-sm text-gray-700 md:max-w-xl leading-relaxed">
+                  Review the honours, registrations, and certifications that underpin The Elden Heights School’s operations and
+                  commitments.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto pb-4">
+                <div className="flex gap-4 min-w-full snap-x snap-mandatory">
+                  {accreditationItems.map((item) => (
+                    <div
+                      key={item.title}
+                      className="snap-start min-w-[260px] md:min-w-[300px] bg-white border border-cardinal/15 shadow-sm p-5 flex flex-col gap-2"
+                    >
+                      <p className="text-xs uppercase tracking-[0.28em] text-cardinal/60">Accolade</p>
+                      <h3 className="text-xl font-semibold text-cardinal">{item.title}</h3>
+                      <p className="text-sm text-cardinal/80 font-medium">{item.detail}</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
