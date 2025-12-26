@@ -1,6 +1,29 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailer';
 
+async function parseRequestBody(request) {
+  const contentType = request.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    try {
+      return await request.json();
+    } catch (error) {
+      console.error('Failed to parse admission JSON body:', error);
+      return {};
+    }
+  }
+
+  if (
+    contentType.includes('application/x-www-form-urlencoded') ||
+    contentType.includes('multipart/form-data')
+  ) {
+    const formData = await request.formData();
+    return Object.fromEntries(formData.entries());
+  }
+
+  return {};
+}
+
 function formatFields(fields) {
   const labels = {
     studentName: 'Student’s Full Name',
@@ -35,7 +58,7 @@ export async function POST(request) {
   }
 
   try {
-    const formData = await request.json();
+    const formData = await parseRequestBody(request);
     const applicantEmail = formData?.email;
 
     if (!applicantEmail) {
