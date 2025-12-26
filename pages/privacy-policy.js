@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+import { CONTACT_EMAIL } from '@/lib/contactInfo';
+
 export default function PrivacyPolicyPage() {
   return (
     <>
@@ -20,7 +22,9 @@ export default function PrivacyPolicyPage() {
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Privacy Policy</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
               <p>Website: mlzshazaribagh.in</p>
-              <p>Email: <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a></p>
+              <p>
+                Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>
+              </p>
               <p>
                 The Elden Heights School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
                 information you share with us through this website. This Privacy Policy explains how we collect, use, and protect
@@ -91,7 +95,7 @@ export default function PrivacyPolicyPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">7. Your Rights</h2>
                 <p>
                   You can request access, correction, or deletion of your personal data by writing to
-                  <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>. We will respond within a
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>. We will respond within a
                   reasonable timeframe and take necessary action as per applicable regulations.
                 </p>
               </div>
@@ -107,7 +111,7 @@ export default function PrivacyPolicyPage() {
                 <p>If you have any questions, concerns, or requests related to this Privacy Policy, please contact us at:</p>
                 <ul className="space-y-1 text-gray-700">
                   <li>
-                    <span role="img" aria-label="email">📧</span> <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>
+                    <span role="img" aria-label="email">📧</span> <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>
                   </li>
                   <li>
                     <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,

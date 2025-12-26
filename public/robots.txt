@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://eldenheights.org/sitemap.xml
+Host: https://eldenheights.org

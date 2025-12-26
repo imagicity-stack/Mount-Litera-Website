@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+import { CONTACT_EMAIL } from '@/lib/contactInfo';
+
 export default function DisabilityPolicyPage() {
   return (
     <>
@@ -48,7 +50,10 @@ export default function DisabilityPolicyPage() {
                 </ul>
               </div>
               <p>
-                Families can reach our inclusion coordinator at <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>
+                Families can reach our inclusion coordinator at{' '}
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">
+                  {CONTACT_EMAIL}
+                </a>
                 to discuss accommodations or share feedback that enhances our inclusive ecosystem.
               </p>
             </div>
