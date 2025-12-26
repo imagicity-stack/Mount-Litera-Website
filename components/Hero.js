@@ -13,11 +13,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-midnight text-white"
+      className="relative min-h-[calc(100vh-120px)] md:min-h-[calc(100vh-130px)] lg:min-h-[calc(100vh-150px)] pt-[120px] md:pt-[130px] lg:pt-[150px] flex items-center justify-center overflow-hidden bg-midnight text-white"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/gate.jpg')" }}
+        className="absolute inset-0 bg-center bg-fixed bg-no-repeat"
+        style={{
+          backgroundImage: "url('/gate.jpg')",
+          backgroundSize: '100%'
+        }}
         aria-hidden="true"
       />
       <div
