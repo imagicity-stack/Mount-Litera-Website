@@ -6,10 +6,10 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Head>
-        <title>Privacy Policy | Mount Litera School</title>
+        <title>Privacy Policy | The Elden Heights School</title>
         <meta
           name="description"
-          content="Read how Mount Litera School collects, uses, and protects personal information shared through mlzshazaribagh.in."
+          content="Read how The Elden Heights School collects, uses, and protects personal information shared through mlzshazaribagh.in."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -20,9 +20,9 @@ export default function PrivacyPolicyPage() {
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Privacy Policy</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
               <p>Website: mlzshazaribagh.in</p>
-              <p>Email: <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a></p>
+              <p>Email: <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a></p>
               <p>
-                Mount Litera School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
+                The Elden Heights School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
                 information you share with us through this website. This Privacy Policy explains how we collect, use, and protect
                 your data when you visit our site or submit an inquiry form.
               </p>
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">7. Your Rights</h2>
                 <p>
                   You can request access, correction, or deletion of your personal data by writing to
-                  <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>. We will respond within a
+                  <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>. We will respond within a
                   reasonable timeframe and take necessary action as per applicable regulations.
                 </p>
               </div>
@@ -107,10 +107,10 @@ export default function PrivacyPolicyPage() {
                 <p>If you have any questions, concerns, or requests related to this Privacy Policy, please contact us at:</p>
                 <ul className="space-y-1 text-gray-700">
                   <li>
-                    <span role="img" aria-label="email">📧</span> <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>
+                    <span role="img" aria-label="email">📧</span> <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>
                   </li>
                   <li>
-                    <span role="img" aria-label="location">🏫</span> Mount Litera School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
+                    <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
                     Jharkhand.
                   </li>
                 </ul>

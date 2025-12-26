@@ -6,10 +6,10 @@ export default function AntiRaggingPolicyPage() {
   return (
     <>
       <Head>
-        <title>Anti-Ragging Message | Mount Litera School</title>
+        <title>Anti-Ragging Message | The Elden Heights School</title>
         <meta
           name="description"
-          content="Mount Litera School's zero-tolerance stance on ragging ensures a safe, respectful, and supportive environment."
+          content="The Elden Heights School's zero-tolerance stance on ragging ensures a safe, respectful, and supportive environment."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -19,7 +19,7 @@ export default function AntiRaggingPolicyPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Anti-Ragging Message</h1>
               <p>
-                Mount Litera School enforces a strict zero-tolerance policy against ragging in any form. We believe that every
+                The Elden Heights School enforces a strict zero-tolerance policy against ragging in any form. We believe that every
                 learner must feel safe, valued, and confident within our campus boundaries. Any behaviour that intimidates,
                 humiliates, or harms another individual is unacceptable and attracts immediate disciplinary action.
               </p>
@@ -35,7 +35,7 @@ export default function AntiRaggingPolicyPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">Reporting &amp; Response</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Dedicated anti-ragging committee comprising senior faculty, counsellors, and parent representatives.</li>
-                  <li>Multiple reporting channels, including confidential email (smmlzshzb@gmail.com) and in-person escalation.</li>
+                  <li>Multiple reporting channels, including confidential email (contact@eldenheights.org) and in-person escalation.</li>
                   <li>Swift investigation followed by disciplinary action aligned with school policy and legal requirements.</li>
                 </ul>
               </div>
@@ -49,7 +49,7 @@ export default function AntiRaggingPolicyPage() {
               </div>
               <p>
                 We encourage students to raise their voice without fear. Together, we cultivate a culture of kindness where every
-                member of the Mount Litera community is protected and empowered.
+                member of The Elden Heights School community is protected and empowered.
               </p>
             </div>
           </section>
