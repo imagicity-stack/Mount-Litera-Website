@@ -1,45 +1,79 @@
 import { NextResponse } from 'next/server';
+import { sendEmail } from '@/lib/mailer';
 
-import { sendMail } from '@/lib/mailer';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+async function parseRequestBody(request) {
+  const contentType = request.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    try {
+      return await request.json();
+    } catch (error) {
+      console.error('Failed to parse contact JSON body:', error);
+      return {};
+    }
+  }
+
+  if (
+    contentType.includes('application/x-www-form-urlencoded') ||
+    contentType.includes('multipart/form-data')
+  ) {
+    const formData = await request.formData();
+    return Object.fromEntries(formData.entries());
+  }
+
+  return {};
+}
+
+function formatFields(fields) {
+  const labels = {
+    name: 'Name',
+    email: 'Email',
+    message: 'Message'
+  };
+
+  const entries = Object.entries(fields || {});
+
+  if (entries.length === 0) {
+    return 'No form fields provided.';
+  }
+
+  return entries
+    .map(([key, value]) => `${labels[key] || key}: ${Array.isArray(value) ? value.join(', ') : value}`)
+    .join('\n');
+}
 
 export async function POST(request) {
+  const { CONTACT_TO, SMTP_USER } = process.env;
+
+  if (!CONTACT_TO || !SMTP_USER) {
+    return NextResponse.json(
+      { error: 'Mail configuration is incomplete.' },
+      { status: 500 }
+    );
+  }
+
   try {
-    const formData = await request.json();
-    const { name, email, message } = formData || {};
+    const formData = await parseRequestBody(request);
+    const text = formatFields(formData);
+    const replyTo = formData?.email ? { replyTo: formData.email } : undefined;
 
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Please provide your name, email, and message.' },
-        { status: 400 }
-      );
-    }
-
-    const subject = `Website Contact Request - ${name}`;
-    const text = [`Name: ${name}`, `Email: ${email}`, 'Message:', message].join('\n');
-    const html = `
-      <h2>Website Contact Request</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>
-    `;
-
-    await sendMail({
-      subject,
+    await sendEmail({
+      from: SMTP_USER,
+      to: CONTACT_TO,
+      subject: 'New Website Contact Enquiry',
       text,
-      html,
-      replyTo: email
+      ...replyTo
     });
 
-    return NextResponse.json({
-      success: true,
-      message: 'Thanks for reaching out! We will reply shortly.'
-    });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error submitting contact form:', error);
-    const message =
-      error?.message === 'SMTP credentials are not configured.'
-        ? 'The contact form is temporarily unavailable. Please try again later.'
-        : 'Unable to submit the contact form right now. Please try again later.';
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error('Contact form email error:', error);
+    return NextResponse.json(
+      { error: 'Failed to send contact enquiry.' },
+      { status: 500 }
+    );
   }
 }

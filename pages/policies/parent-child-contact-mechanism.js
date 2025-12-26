@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+import { CONTACT_EMAIL } from '@/lib/contactInfo';
+
 export default function ParentChildContactPage() {
   return (
     <>
@@ -35,7 +37,13 @@ export default function ParentChildContactPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">Dedicated Support Channels</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Class teachers reachable during working hours for quick clarifications.</li>
-                  <li>Academic coordinators and the school office available via <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>.</li>
+                  <li>
+                    Academic coordinators and the school office available via{' '}
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">
+                      {CONTACT_EMAIL}
+                    </a>
+                    .
+                  </li>
                   <li>Counsellors and special educators accessible through scheduled appointments.</li>
                 </ul>
               </div>

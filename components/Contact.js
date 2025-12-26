@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+import { CONTACT_EMAIL } from '@/lib/contactInfo';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 
 const fadeUp = {
@@ -109,7 +110,12 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Email</h3>
-                <p>contact@eldenheights.org</p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="text-white underline decoration-white/70 decoration-2 underline-offset-4 transition hover:decoration-white"
+                >
+                  {CONTACT_EMAIL}
+                </a>
               </div>
             </div>
           </div>
