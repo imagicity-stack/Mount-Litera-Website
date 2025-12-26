@@ -41,10 +41,10 @@ export default function DisclosuresPage() {
   return (
     <>
       <Head>
-        <title>Disclosures | Mount Litera School</title>
+        <title>Disclosures | The Elden Heights School</title>
         <meta
           name="description"
-          content="Download statutory disclosures and certifications for Mount Litera School."
+          content="Download statutory disclosures and certifications for The Elden Heights School."
         />
       </Head>
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">

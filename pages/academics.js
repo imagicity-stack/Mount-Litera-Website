@@ -33,20 +33,16 @@ export default function AcademicsPage() {
   return (
     <>
       <Head>
-        <title>Academic Framework | Mount Litera School</title>
+        <title>Academic Framework | The Elden Heights School</title>
         <meta
           name="description"
-          content="Discover the learning stages, teaching philosophy, and academic support that power Mount Litera School's curriculum."
+          content="Discover the learning stages, teaching philosophy, and academic support that power The Elden Heights School's curriculum."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="relative overflow-hidden bg-gradient-to-br from-[#7f1d1d] via-cardinal to-[#410b0b] py-24 text-white">
-            <div className="absolute inset-0 opacity-20" aria-hidden="true">
-              <div className="absolute -top-24 right-0 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
-              <div className="absolute bottom-0 left-[-4rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-            </div>
+          <section className="relative overflow-hidden bg-cardinal py-24 text-white">
             <div className="relative max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-center">
               <div className="space-y-6">
                 <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/70">
@@ -56,7 +52,7 @@ export default function AcademicsPage() {
                   Building foundations that inspire futures
                 </h1>
                 <p className="text-lg text-white/80">
-                  At Mount Litera School, learning is a journey that grows with every child. Our curriculum blends structured
+                  At The Elden Heights School, learning is a journey that grows with every child. Our curriculum blends structured
                   academics with meaningful experiences so students feel ready for life, not just exams.
                 </p>
                 <p className="text-lg text-white/80">
@@ -103,7 +99,7 @@ export default function AcademicsPage() {
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-gradient-to-br from-[#FDF9F7] via-white to-[#F8F5F3] p-6 shadow-lg">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-[#fdf9f7] p-6 shadow-lg">
                   <div className="flex h-full flex-col justify-between text-cardinal">
                     <div className="space-y-2">
                       <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Classroom kit</p>
@@ -163,7 +159,7 @@ export default function AcademicsPage() {
           <section className="py-20 bg-[#F8F5F3]">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
               <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">The Mount Litera learning journey</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">The Elden Heights learning journey</h2>
                 <p className="text-gray-700">
                   Take a closer look at how each stage feels inside our classrooms — from foundational play to secondary guidance and
                   mentorship.
@@ -252,7 +248,7 @@ export default function AcademicsPage() {
               <div className="space-y-6">
                 <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Beyond textbooks</h2>
                 <p className="text-gray-700">
-                  Life at Mount Litera School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
+                  Life at The Elden Heights School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
                   talents, collaborate with peers, and learn to express themselves.
                 </p>
                 <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700">
