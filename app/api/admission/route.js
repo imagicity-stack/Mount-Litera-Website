@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailer';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 async function parseRequestBody(request) {
   const contentType = request.headers.get('content-type') || '';
 
