@@ -56,15 +56,17 @@ export default function Navbar() {
       : 'bg-white';
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-500 ${headerState} border-b border-cardinal/10`}>
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <header
+      className={`sticky top-0 z-50 h-[120px] md:h-[130px] lg:h-[150px] transition-all duration-500 ${headerState} border-b border-cardinal/10`}
+    >
+      <nav className="max-w-6xl mx-auto flex h-full items-center justify-between px-6">
         <div className="flex items-center">
           <Image
             src="/website/header.png"
             alt="The Elden Heights School logo"
             width={160}
             height={107}
-            className="h-auto w-32 md:w-40"
+            className="h-auto w-[200px] max-h-[116px] md:w-[240px] md:max-h-[126px] lg:w-[280px] lg:max-h-[146px]"
             priority
           />
         </div>
