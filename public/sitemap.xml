@@ -2,132 +2,158 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eldenheights.org/</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/about</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/academics</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/admission</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/admissions</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/awards-and-recognition</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/beyond-academics</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/co-curricular-clubs</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/life-readiness-program</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/core</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/core-mentors</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/the-elden-council</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/managing-committee</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/gallery</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/careers</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/contact</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/disclosures</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/admission-policy</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/anti-ragging-message</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/code-for-self-discipline</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/complaint-procedures</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/disability-policy</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/policies/parent-child-contact-mechanism</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/privacy-policy</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/terms-and-conditions</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://eldenheights.org/payment-success</loc>
-    <lastmod>2024-08-30</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

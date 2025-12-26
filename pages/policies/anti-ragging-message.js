@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+import { CONTACT_EMAIL } from '@/lib/contactInfo';
+
 export default function AntiRaggingPolicyPage() {
   return (
     <>
@@ -35,7 +37,9 @@ export default function AntiRaggingPolicyPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">Reporting &amp; Response</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Dedicated anti-ragging committee comprising senior faculty, counsellors, and parent representatives.</li>
-                  <li>Multiple reporting channels, including confidential email (contact@eldenheights.org) and in-person escalation.</li>
+                  <li>
+                    Multiple reporting channels, including confidential email ({CONTACT_EMAIL}) and in-person escalation.
+                  </li>
                   <li>Swift investigation followed by disciplinary action aligned with school policy and legal requirements.</li>
                 </ul>
               </div>
