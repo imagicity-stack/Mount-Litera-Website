@@ -61,7 +61,7 @@ export default function InquiryForm() {
     const snapshot = { ...formData };
 
     try {
-      const response = await fetch('/api/admission-inquiry', {
+      const response = await fetch('/api/admission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
