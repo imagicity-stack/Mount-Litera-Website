@@ -59,18 +59,18 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 h-[120px] md:h-[130px] lg:h-[150px] transition-all duration-500 ${headerState} border-b border-cardinal/10`}
     >
-      <nav className="max-w-6xl mx-auto flex h-full items-center justify-between px-6">
+      <nav className="max-w-6xl mx-auto flex h-full items-center justify-between px-4 md:px-5 lg:px-6">
         <div className="flex items-center">
           <Image
             src="/website/header.png"
             alt="The Elden Heights School logo"
-            width={160}
-            height={107}
-            className="h-auto w-[170px] max-h-[112px] md:w-[200px] md:max-h-[124px] lg:w-[240px] lg:max-h-[140px]"
+            width={300}
+            height={200}
+            className="h-full w-auto max-h-[120px] md:max-h-[130px] lg:max-h-[150px]"
             priority
           />
         </div>
-        <div className="hidden md:flex items-center space-x-6 text-midnight font-medium">
+        <div className="hidden md:flex items-center space-x-4 md:space-x-5 text-midnight font-medium">
           {navItems.map((item) => (
             <Link
               key={item.href}
