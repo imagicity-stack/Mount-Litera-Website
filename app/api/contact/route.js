@@ -46,14 +46,9 @@ function formatFields(fields) {
 }
 
 export async function POST(request) {
-  const { CONTACT_TO, SMTP_USER } = process.env;
-
-  if (!CONTACT_TO || !SMTP_USER) {
-    return NextResponse.json(
-      { error: 'Mail configuration is incomplete.' },
-      { status: 500 }
-    );
-  }
+  const { CONTACT_TO, SMTP_FROM } = process.env;
+  const recipient = CONTACT_TO || 'contact@eldenheights.org';
+  const sender = SMTP_FROM || 'noreply@eldenheights.org';
 
   try {
     const formData = await parseRequestBody(request);
@@ -61,8 +56,8 @@ export async function POST(request) {
     const replyTo = formData?.email ? { replyTo: formData.email } : undefined;
 
     await sendEmail({
-      from: SMTP_USER,
-      to: CONTACT_TO,
+      from: sender,
+      to: recipient,
       subject: 'New Website Contact Enquiry',
       text,
       ...replyTo
