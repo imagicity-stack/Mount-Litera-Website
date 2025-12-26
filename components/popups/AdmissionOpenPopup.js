@@ -35,7 +35,6 @@ const AdmissionOpenPopup = () => {
       aria-describedby="admission-open-description"
     >
       <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white text-center shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-cardinal/10 via-white to-white" aria-hidden="true" />
         <div className="relative p-8">
           <button
             type="button"
