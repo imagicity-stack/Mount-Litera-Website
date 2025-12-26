@@ -4,30 +4,39 @@ import { sendMail } from '@/lib/mailer';
 
 export async function POST(request) {
   try {
-    const formData = await request.json();
-    const { name, email, message } = formData || {};
+    const formData = await request.json().catch(() => ({}));
 
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Please provide your name, email, and message.' },
-        { status: 400 }
-      );
+    const entries = Object.entries(formData || {});
+
+    if (entries.length === 0) {
+      return NextResponse.json({ error: 'Please provide contact details.' }, { status: 400 });
     }
 
-    const subject = `Website Contact Request - ${name}`;
-    const text = [`Name: ${name}`, `Email: ${email}`, 'Message:', message].join('\n');
-    const html = `
-      <h2>Website Contact Request</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>
+    const formattedText = entries
+      .map(([key, value]) => `${key}: ${value ?? ''}`)
+      .join('\n');
+
+    const formattedHtml = `
+      <h2>New Website Contact Enquiry</h2>
+      <ul>
+        ${entries
+          .map(
+            ([key, value]) =>
+              `<li><strong>${key}:</strong> ${String(value ?? '')}
+              </li>`
+          )
+          .join('')}
+      </ul>
     `;
 
+    const subject = 'New Website Contact Enquiry';
+
     await sendMail({
+      to: process.env.CONTACT_TO || process.env.SMTP_USER,
       subject,
-      text,
-      html,
-      replyTo: email
+      text: formattedText,
+      html: formattedHtml,
+      replyTo: formData?.email
     });
 
     return NextResponse.json({

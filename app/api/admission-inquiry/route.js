@@ -51,6 +51,7 @@ export async function POST(request) {
     `;
 
     await sendMail({
+      to: process.env.ADMISSION_TO || process.env.CONTACT_TO || process.env.SMTP_USER,
       subject,
       text,
       html,
