@@ -1,13 +1,18 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
   <footer className="bg-parchment border-t border-cardinal/10">
       <div className="max-w-6xl mx-auto flex flex-col gap-4 px-6 py-10 text-sm text-midnight md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="h-10 w-10 rounded-full bg-cardinal text-white grid place-items-center shadow-lg shadow-cardinal/20">
-            <span className="text-lg font-semibold">E</span>
-          </span>
+          <Image
+            src="/website/shield.png"
+            alt="The Elden Heights School shield"
+            width={48}
+            height={48}
+            className="h-12 w-12"
+          />
           <div>
             <p className="text-base font-semibold font-garamond">The Elden Heights School</p>
             <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Towards Eternal Glory</p>
