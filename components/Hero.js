@@ -16,7 +16,7 @@ export default function Hero() {
       className="relative h-screen flex items-center justify-center overflow-hidden bg-midnight text-white"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat"
         style={{ backgroundImage: "url('/gate.jpg')" }}
         aria-hidden="true"
       />
