@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-500 ${headerState} border-b border-cardinal/10`}>
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <Image
             src="/website/header.png"
             alt="The Elden Heights School logo"
@@ -67,10 +67,6 @@ export default function Navbar() {
             className="h-auto w-32 md:w-40"
             priority
           />
-          <div className="leading-tight">
-            <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Heritage &amp; Honor</p>
-            <p className="text-xl md:text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
-          </div>
         </div>
         <div className="hidden md:flex items-center space-x-6 text-midnight font-medium">
           {navItems.map((item) => (
