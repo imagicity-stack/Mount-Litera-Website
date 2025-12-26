@@ -66,7 +66,7 @@ export default function Navbar() {
             alt="The Elden Heights School logo"
             width={160}
             height={107}
-            className="h-auto w-[140px] max-h-[110px] md:w-[160px] md:max-h-[120px] lg:w-[190px] lg:max-h-[130px]"
+            className="h-auto w-[155px] max-h-[118px] md:w-[180px] md:max-h-[128px] lg:w-[210px] lg:max-h-[148px]"
             priority
           />
         </div>
