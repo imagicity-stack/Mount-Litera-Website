@@ -7,7 +7,7 @@ import { trackFacebookEvent } from '@/lib/facebookPixel';
 const policyText = `ADMISSION POLICY
 1. Overview
 
-Mount Litera School follows a transparent and structured admission process designed to ensure fairness, discipline, and academic readiness. Admissions are open for classes UKG to Class 10 for the academic session 2026–27. The school reserves the right to approve or reject any application based on eligibility, document verification, and seat availability.
+The Elden Heights School follows a transparent and structured admission process designed to ensure fairness, discipline, and academic readiness. Admissions are open for classes UKG to Class 10 for the academic session 2026–27. The school reserves the right to approve or reject any application based on eligibility, document verification, and seat availability.
 
 2. Admission Funnel & Token Amount
 
@@ -104,10 +104,10 @@ export default function AdmissionPolicyPage() {
   return (
     <>
       <Head>
-        <title>Admission Policy | Mount Litera School</title>
+        <title>Admission Policy | The Elden Heights School</title>
         <meta
           name="description"
-          content="Read the official Mount Litera School admission policy for the 2026–27 academic session."
+          content="Read the official The Elden Heights School admission policy for the 2026–27 academic session."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">

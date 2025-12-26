@@ -6,10 +6,10 @@ export default function ParentChildContactPage() {
   return (
     <>
       <Head>
-        <title>Parent Child Contact Mechanism | Mount Litera School</title>
+        <title>Parent Child Contact Mechanism | The Elden Heights School</title>
         <meta
           name="description"
-          content="Explore the communication channels that keep Mount Litera School parents connected with their child’s progress."
+          content="Explore the communication channels that keep The Elden Heights School parents connected with their child’s progress."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -19,7 +19,7 @@ export default function ParentChildContactPage() {
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Parent Child Contact Mechanism</h1>
               <p>
-                We believe that education thrives when parents, students, and teachers collaborate. Mount Litera School maintains
+                We believe that education thrives when parents, students, and teachers collaborate. The Elden Heights School maintains
                 transparent, timely, and multi-channel communication so that every family stays informed and involved in their
                 child’s learning journey.
               </p>
@@ -35,7 +35,7 @@ export default function ParentChildContactPage() {
                 <h2 className="text-2xl font-semibold text-cardinal">Dedicated Support Channels</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Class teachers reachable during working hours for quick clarifications.</li>
-                  <li>Academic coordinators and the school office available via <a href="mailto:smmlzshzb@gmail.com" className="text-cardinal underline">smmlzshzb@gmail.com</a>.</li>
+                  <li>Academic coordinators and the school office available via <a href="mailto:contact@eldenheights.org" className="text-cardinal underline">contact@eldenheights.org</a>.</li>
                   <li>Counsellors and special educators accessible through scheduled appointments.</li>
                 </ul>
               </div>

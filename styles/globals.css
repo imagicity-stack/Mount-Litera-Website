@@ -7,5 +7,21 @@ html {
 }
 
 body {
-  @apply bg-white text-gray-800 font-poppins;
+  @apply bg-[#f8f3ea] text-midnight font-avenir;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', 'Garamond', serif;
+  letter-spacing: 0.015em;
+}
+
+p, span, input, textarea, label, a, button, li {
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+}
+
+.mobile-drawer {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
 }
