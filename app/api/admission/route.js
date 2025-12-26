@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailer';
 
 function formatFields(fields) {
+  const labels = {
+    studentName: 'Student’s Full Name',
+    parentName: 'Parent/Guardian Name',
+    contactNumber: 'Contact Number',
+    email: 'Parent Email',
+    classInterested: 'Class Interested In',
+    currentSchool: 'Current School',
+    address: 'Residential Address',
+    message: 'Message / Additional Details'
+  };
+
   const entries = Object.entries(fields || {});
 
   if (entries.length === 0) {
@@ -9,7 +20,7 @@ function formatFields(fields) {
   }
 
   return entries
-    .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
+    .map(([key, value]) => `${labels[key] || key}: ${Array.isArray(value) ? value.join(', ') : value}`)
     .join('\n');
 }
 
@@ -25,29 +36,30 @@ export async function POST(request) {
 
   try {
     const formData = await request.json();
-    const { parent_email: parentEmail, ...rest } = formData || {};
+    const applicantEmail = formData?.email;
 
-    if (!parentEmail) {
+    if (!applicantEmail) {
       return NextResponse.json(
-        { error: 'Parent email is required.' },
+        { error: 'Email is required.' },
         { status: 400 }
       );
     }
 
-    const submissionText = formatFields({ parent_email: parentEmail, ...rest });
+    const submissionText = formatFields(formData);
 
     await sendEmail({
       from: SMTP_USER,
       to: ADMISSION_TO,
       subject: 'New Admission Enquiry',
-      text: submissionText
+      text: submissionText,
+      replyTo: applicantEmail
     });
 
     const acknowledgementText = `Dear Parent/Guardian,\n\nThank you for submitting an admission enquiry to The Elden Heights. Our admissions team has received your details and will contact you shortly.\n\nIf you have any urgent questions, please reply to this email.\n\nWarm regards,\nThe Elden Heights Admissions Team`;
 
     await sendEmail({
       from: SMTP_USER,
-      to: parentEmail,
+      to: applicantEmail,
       subject: 'Admission Enquiry Received | The Elden Heights',
       text: acknowledgementText
     });

@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailer';
 
 function formatFields(fields) {
+  const labels = {
+    name: 'Name',
+    email: 'Email',
+    message: 'Message'
+  };
+
   const entries = Object.entries(fields || {});
 
   if (entries.length === 0) {
@@ -9,7 +15,7 @@ function formatFields(fields) {
   }
 
   return entries
-    .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
+    .map(([key, value]) => `${labels[key] || key}: ${Array.isArray(value) ? value.join(', ') : value}`)
     .join('\n');
 }
 
@@ -26,12 +32,14 @@ export async function POST(request) {
   try {
     const formData = await request.json();
     const text = formatFields(formData);
+    const replyTo = formData?.email ? { replyTo: formData.email } : undefined;
 
     await sendEmail({
       from: SMTP_USER,
       to: CONTACT_TO,
       subject: 'New Website Contact Enquiry',
-      text
+      text,
+      ...replyTo
     });
 
     return NextResponse.json({ success: true });
