@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-[#f8f3ea] text-midnight font-avenir;
+  @apply bg-gold text-midnight font-avenir;
   min-height: 100vh;
 }
 
