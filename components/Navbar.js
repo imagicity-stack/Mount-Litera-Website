@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 const navItems = [
@@ -14,9 +14,21 @@ const navItems = [
   { label: 'Contact', href: '/contact' }
 ];
 
+const quickLinks = [
+  { label: 'Quick Links', href: '#' },
+  { label: 'A to Z Index', href: '#' },
+  { label: 'Find a person', href: '#' },
+  { label: 'Events', href: '#' },
+  { label: 'Media Relations', href: '#' },
+  { label: 'Alumni', href: '#' },
+  { label: 'Give Now', href: '#' },
+  { label: 'Emergency', href: '#' }
+];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrollPositionRef = useRef(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,125 +51,121 @@ export default function Navbar() {
 
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
+      scrollPositionRef.current = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflowY = 'scroll';
     } else {
-      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflowY = '';
+      window.scrollTo(0, scrollPositionRef.current);
     }
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflowY = '';
     };
   }, [menuOpen]);
 
   const headerState = menuOpen
-    ? 'bg-white shadow-xl'
+    ? 'bg-parchment shadow-xl'
     : scrolled
-      ? 'backdrop-blur-md bg-white/85 shadow-xl shadow-cardinal/5'
-      : 'bg-white';
+      ? 'backdrop-blur-md bg-parchment/90 shadow-xl shadow-cardinal/10'
+      : 'bg-parchment';
 
   return (
     <header
-      className={`sticky top-0 z-50 h-[120px] md:h-[130px] lg:h-[150px] transition-all duration-500 ${headerState} border-b border-cardinal/10`}
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-cardinal/15`}
     >
-      <nav className="max-w-6xl mx-auto flex h-full items-center justify-between px-4 md:px-5 lg:px-6">
+      <div className="mx-auto flex w-full max-w-full items-center justify-between px-5 py-4 md:px-8 lg:px-10">
         <div className="flex items-center">
           <Image
             src="/website/header.png"
             alt="The Elden Heights School logo"
-            width={300}
-            height={200}
-            className="h-full w-auto max-h-[120px] md:max-h-[130px] lg:max-h-[150px]"
+            width={260}
+            height={120}
+            className="h-[60px] w-auto md:h-[70px] lg:h-[80px]"
             priority
           />
         </div>
-        <div className="hidden md:flex items-center space-x-4 md:space-x-5 text-midnight font-medium">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="relative pb-1 transition duration-200 hover:text-cardinal"
-            >
-              <span className="relative z-10">{item.label}</span>
-              <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-cardinal/70 transition-transform duration-200 ease-out hover:scale-x-100" />
-            </Link>
-          ))}
-          <a
-            href="https://elnode.in"
-            target="_blank"
-            rel="noreferrer"
-            className="bg-cardinal px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white shadow-md shadow-cardinal/25 transition hover:bg-cardinal/90"
-          >
-            ERP
-          </a>
-        </div>
-        <div className="md:hidden">
-          <button
-            type="button"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setMenuOpen((open) => !open)}
-            className="relative h-11 w-11 rounded-full border border-cardinal/20 bg-white/90 text-cardinal shadow-md shadow-cardinal/10 backdrop-blur"
-          >
-            <span
-              className={`absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 -translate-y-2 transform rounded-full bg-cardinal transition ${
-                menuOpen ? 'translate-y-0 rotate-45' : ''
-              }`}
-            />
-            <span
-              className={`absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 transform rounded-full bg-cardinal transition ${
-                menuOpen ? 'opacity-0' : ''
-              }`}
-            />
-            <span
-              className={`absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 translate-y-2 transform rounded-full bg-cardinal transition ${
-                menuOpen ? 'translate-y-0 -rotate-45' : ''
-              }`}
-            />
-          </button>
-        </div>
-      </nav>
+        <button
+          type="button"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMenuOpen((open) => !open)}
+          className="flex items-center space-x-2 rounded-full border border-cardinal/40 bg-parchment/90 px-5 py-2 text-cardinal shadow-md shadow-cardinal/10 backdrop-blur transition hover:border-cardinal hover:text-midnight"
+        >
+          <span className="text-sm font-semibold uppercase tracking-[0.18em]">Menu</span>
+          <span
+            className={`block h-0.5 w-5 bg-cardinal transition-transform duration-300 ${
+              menuOpen ? 'rotate-45 translate-y-[3px]' : ''
+            }`}
+          />
+        </button>
+      </div>
+
       <div
-        className={`fixed inset-0 z-40 transform bg-white transition-opacity duration-300 ${
-          menuOpen ? 'pointer-events-auto opacity-95' : 'pointer-events-none opacity-0'
+        className={`fixed inset-0 z-40 transform bg-midnight text-gold transition-transform transition-opacity duration-600 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform will-change-opacity ${
+          menuOpen
+            ? 'pointer-events-auto opacity-100 translate-y-0'
+            : 'pointer-events-none opacity-0 -translate-y-full'
         }`}
-        onClick={() => setMenuOpen(false)}
-      />
-      <div
-        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-full transform bg-white shadow-2xl transition-transform duration-300 mobile-drawer ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        style={{ backgroundColor: '#ffffff', opacity: 1, backdropFilter: 'none' }}
       >
-        <div className="flex items-center justify-between border-b border-cardinal/10 px-6 py-5">
-          <span className="text-lg font-semibold text-midnight font-garamond">Navigate</span>
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-            className="rounded-full border border-cardinal/20 p-2 text-cardinal transition hover:border-cardinal hover:bg-cardinal/5"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div className="flex flex-col space-y-3 px-6 py-6 text-midnight">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-xl border border-cardinal/10 px-4 py-3 text-base font-medium transition hover:border-cardinal hover:bg-cardinal/5 shadow-sm"
+        <div className="flex h-full flex-col">
+          <div className="flex items-center justify-between px-6 py-5 md:px-10">
+            <Image
+              src="/website/header.png"
+              alt="The Elden Heights School logo"
+              width={220}
+              height={100}
+              className="h-[50px] w-auto md:h-[60px]"
+              priority
+            />
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+              className="text-sm font-semibold uppercase tracking-[0.18em] text-gold transition hover:text-parchment"
             >
-              {item.label}
-            </Link>
-          ))}
-          <a
-            href="https://elnode.in"
-            target="_blank"
-            rel="noreferrer"
-            className="border border-cardinal bg-cardinal px-4 py-3 text-center text-base font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-cardinal/90"
-          >
-            ERP
-          </a>
+              Close
+            </button>
+          </div>
+
+          <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
+            <div className="flex w-full flex-col justify-center space-y-4 px-6 pb-12 md:w-1/2 md:px-10 md:pb-0">
+              {navItems.map((item, idx) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`text-3xl font-semibold leading-tight tracking-tight text-gold transition duration-500 md:text-5xl ${
+                    menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                  }`}
+                  style={{ transitionDelay: `${idx * 80}ms` }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <div className="hidden flex-1 md:block" />
+          </div>
+
+          <div className="border-t border-gold/40 px-6 py-5 md:px-10">
+            <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.14em] text-gold/80 md:text-sm">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="transition hover:text-parchment"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </header>
