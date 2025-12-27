@@ -97,8 +97,10 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 bg-neutral-950/95 text-white transition-opacity duration-500 ease-out ${
-          menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        className={`fixed inset-0 z-40 transform bg-neutral-950/95 text-white transition-all duration-500 ease-out ${
+          menuOpen
+            ? 'pointer-events-auto opacity-100 translate-y-0'
+            : 'pointer-events-none opacity-0 -translate-y-full'
         }`}
       >
         <div className="flex h-full flex-col">
