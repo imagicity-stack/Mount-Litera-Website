@@ -28,7 +28,7 @@ const quickLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const scrollPositionRef = useRef(0);
+  const previousOverflow = useRef({ html: '', body: '' });
   const router = useRouter();
 
   useEffect(() => {
@@ -50,25 +50,25 @@ export default function Navbar() {
   }, [router]);
 
   useEffect(() => {
+    const body = document.body;
+    const root = document.documentElement;
+
     if (menuOpen) {
-      scrollPositionRef.current = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflowY = 'scroll';
+      previousOverflow.current = {
+        html: root.style.overflow,
+        body: body.style.overflow
+      };
+
+      root.style.overflow = 'hidden';
+      body.style.overflow = 'hidden';
     } else {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
-      window.scrollTo(0, scrollPositionRef.current);
+      root.style.overflow = previousOverflow.current.html;
+      body.style.overflow = previousOverflow.current.body;
     }
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
+      root.style.overflow = previousOverflow.current.html;
+      body.style.overflow = previousOverflow.current.body;
     };
   }, [menuOpen]);
 
@@ -108,13 +108,14 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div
-        className={`fixed inset-0 z-40 transform bg-midnight text-gold transition-transform transition-opacity duration-600 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform will-change-opacity ${
-          menuOpen
-            ? 'pointer-events-auto opacity-100 translate-y-0'
-            : 'pointer-events-none opacity-0 -translate-y-full'
-        }`}
-      >
+        <div
+          className={`fixed inset-0 z-60 transform bg-midnight text-gold transition-transform duration-500 ease-out will-change-transform ${
+            menuOpen
+              ? 'pointer-events-auto translate-y-0 opacity-100'
+              : 'pointer-events-none -translate-y-full opacity-0'
+          }`}
+          style={{ transitionProperty: 'transform, opacity' }}
+        >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-6 py-5 md:px-10">
             <Image
