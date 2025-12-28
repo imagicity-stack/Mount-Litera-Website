@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 const navItems = [
@@ -49,26 +49,28 @@ export default function Navbar() {
     };
   }, [router]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const body = document.body;
+    const root = document.documentElement;
+    const previousHtmlOverflow = root.style.overflow;
+    const previousHtmlScrollBehavior = root.style.scrollBehavior;
+    const previousBodyOverflow = body.style.overflow;
+
     if (menuOpen) {
       scrollPositionRef.current = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflowY = 'scroll';
+      root.style.overflow = 'hidden';
+      root.style.scrollBehavior = 'auto';
+      body.style.overflow = 'hidden';
     } else {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
-      window.scrollTo(0, scrollPositionRef.current);
+      root.style.overflow = previousHtmlOverflow;
+      root.style.scrollBehavior = previousHtmlScrollBehavior;
+      body.style.overflow = previousBodyOverflow;
     }
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
+      root.style.overflow = previousHtmlOverflow;
+      root.style.scrollBehavior = previousHtmlScrollBehavior;
+      body.style.overflow = previousBodyOverflow;
     };
   }, [menuOpen]);
 
@@ -109,7 +111,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 transform bg-midnight text-gold transition-transform transition-opacity duration-600 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform will-change-opacity ${
+        className={`fixed inset-0 z-60 transform bg-midnight text-gold transition-all duration-600 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform will-change-opacity ${
           menuOpen
             ? 'pointer-events-auto opacity-100 translate-y-0'
             : 'pointer-events-none opacity-0 -translate-y-full'
