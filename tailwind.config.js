@@ -19,10 +19,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        cardinal: "#A50021",
-        gold: "#C3A572",
-        parchment: "#F7F2E9",
-        midnight: "#0F172A"
+        cardinal: "#890304",
+        gold: "#FFFFFF",
+        parchment: "#FAF9F6",
+        midnight: "#00113A",
+        cobalt: "#002263"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
