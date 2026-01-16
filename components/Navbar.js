@@ -79,43 +79,45 @@ export default function Navbar() {
       : 'bg-parchment';
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-cardinal/15`}
-    >
-      <div className="mx-auto flex w-full max-w-full items-center justify-between px-5 py-4 md:px-8 lg:px-10">
-        <div className="flex items-center">
-          <Image
-            src="/website/header.png"
-            alt="The Elden Heights School logo"
-            width={260}
-            height={120}
-            className="h-[60px] w-auto md:h-[70px] lg:h-[80px]"
-            priority
-          />
+    <>
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-cardinal/15`}
+      >
+        <div className="mx-auto flex w-full max-w-full items-center justify-between px-5 py-4 md:px-8 lg:px-10">
+          <div className="flex items-center">
+            <Image
+              src="/website/header.png"
+              alt="The Elden Heights School logo"
+              width={260}
+              height={120}
+              className="h-[60px] w-auto md:h-[70px] lg:h-[80px]"
+              priority
+            />
+          </div>
+          <button
+            type="button"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex items-center space-x-2 rounded-full border border-cardinal/40 bg-parchment/90 px-5 py-2 text-cardinal shadow-md shadow-cardinal/10 backdrop-blur transition hover:border-cardinal hover:text-midnight"
+          >
+            <span className="text-sm font-semibold uppercase tracking-[0.18em]">Menu</span>
+            <span
+              className={`block h-0.5 w-5 bg-cardinal transition-transform duration-300 ${
+                menuOpen ? 'rotate-45 translate-y-[3px]' : ''
+              }`}
+            />
+          </button>
         </div>
-        <button
-          type="button"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          onClick={() => setMenuOpen((open) => !open)}
-          className="flex items-center space-x-2 rounded-full border border-cardinal/40 bg-parchment/90 px-5 py-2 text-cardinal shadow-md shadow-cardinal/10 backdrop-blur transition hover:border-cardinal hover:text-midnight"
-        >
-          <span className="text-sm font-semibold uppercase tracking-[0.18em]">Menu</span>
-          <span
-            className={`block h-0.5 w-5 bg-cardinal transition-transform duration-300 ${
-              menuOpen ? 'rotate-45 translate-y-[3px]' : ''
-            }`}
-          />
-        </button>
-      </div>
+      </header>
 
-        <div
-          className={`fixed inset-0 z-60 transform bg-midnight text-gold transition-transform duration-500 ease-out will-change-transform ${
-            menuOpen
-              ? 'pointer-events-auto translate-y-0 opacity-100'
-              : 'pointer-events-none -translate-y-full opacity-0'
-          }`}
-          style={{ transitionProperty: 'transform, opacity' }}
-        >
+      <div
+        className={`fixed inset-0 z-[60] transform bg-midnight text-gold transition-transform duration-500 ease-out will-change-transform ${
+          menuOpen
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-full opacity-0'
+        }`}
+        style={{ transitionProperty: 'transform, opacity' }}
+      >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-6 py-5 md:px-10">
             <Image
@@ -169,6 +171,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
