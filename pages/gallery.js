@@ -86,7 +86,7 @@ export default function GalleryPage() {
                   {galleryImages.map((image, index) => (
                     <figure
                       key={image.src}
-                      className={`group relative overflow-hidden rounded-2xl border border-cardinal/10 bg-white/60 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl ${
+                      className={`group relative overflow-hidden rounded-2xl border border-black/10 bg-white/60 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl ${
                         index % 7 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
                       }`}
                     >

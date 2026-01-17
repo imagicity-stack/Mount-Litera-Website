@@ -10,7 +10,7 @@ export default function About({ showLink = true }) {
   return (
     <section id="about" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-cardinal/12 bg-white shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-black/12 bg-white shadow-xl">
           <div className="absolute inset-y-0 left-0 w-2 bg-cardinal" aria-hidden="true" />
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] items-center px-8 py-12 md:px-14 md:py-16">
             <div className="space-y-5">
@@ -74,8 +74,8 @@ export default function About({ showLink = true }) {
                 </motion.div>
               )}
             </div>
-            <div className="space-y-5 rounded-2xl border border-cardinal/15 bg-ivory p-6 shadow-md">
-              <div className="flex items-center justify-between gap-4 border-b border-cardinal/10 pb-5">
+            <div className="space-y-5 rounded-2xl border border-black/15 bg-ivory p-6 shadow-md">
+              <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-black">Academic Ethos</p>
                   <p className="text-2xl font-semibold text-midnight">Excellence with Character</p>

@@ -71,7 +71,7 @@ export default function Contact() {
     <section id="contact" className="py-20">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-start">
         <motion.div
-          className="relative overflow-hidden rounded-3xl border border-cardinal/15 bg-midnight text-white p-10 shadow-xl"
+          className="relative overflow-hidden rounded-3xl border border-black/15 bg-midnight text-white p-10 shadow-xl"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -122,7 +122,7 @@ export default function Contact() {
         </motion.div>
         <motion.form
           onSubmit={handleSubmit}
-          className="relative rounded-3xl border border-cardinal/10 bg-white p-8 shadow-xl space-y-4"
+          className="relative rounded-3xl border border-black/10 bg-white p-8 shadow-xl space-y-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -141,7 +141,7 @@ export default function Contact() {
                 value={contactData.name}
                 onChange={handleChange}
                 required
-                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+                className="rounded-xl border border-black/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -155,7 +155,7 @@ export default function Contact() {
                 value={contactData.email}
                 onChange={handleChange}
                 required
-                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+                className="rounded-xl border border-black/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -168,7 +168,7 @@ export default function Contact() {
                 rows="4"
                 value={contactData.message}
                 onChange={handleChange}
-                className="rounded-xl border border-cardinal/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
+                className="rounded-xl border border-black/20 bg-white/70 p-3 w-full focus:outline-none focus:ring-2 focus:ring-cardinal/60"
                 placeholder="Tell us how we can help"
                 required
               />

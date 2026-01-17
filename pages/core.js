@@ -70,7 +70,7 @@ export default function CorePage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="bg-ivory border-b border-cardinal/10">
+          <section className="section-divider bg-ivory">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.35em] text-black">Core Pillars</p>
@@ -80,7 +80,7 @@ export default function CorePage() {
                   recognitions that uphold The Elden Heights ethos.
                 </p>
               </div>
-              <div className="bg-white border border-cardinal/10 shadow-sm p-6 space-y-3">
+              <div className="bg-white border border-black/10 shadow-sm p-6 space-y-3">
                 <p className="text-sm uppercase tracking-[0.25em] text-black">Essence</p>
                 <h2 className="text-2xl font-semibold text-black">Recognition with Purpose</h2>
                 <p className="text-gray-700 leading-relaxed">
@@ -101,7 +101,7 @@ export default function CorePage() {
                 {coreSections.map((section) => (
                   <div
                     key={section.title}
-                    className="border border-cardinal/15 bg-ivory/60 shadow-sm overflow-hidden"
+                    className="border border-black/15 bg-ivory/60 shadow-sm overflow-hidden"
                   >
                     <div className="grid gap-6 md:grid-cols-[1.1fr,0.9fr] items-stretch">
                       <div className="p-6 md:p-8 space-y-4">
@@ -142,7 +142,7 @@ export default function CorePage() {
             </div>
           </section>
 
-          <section className="py-16 md:py-20 bg-ivory border-t border-cardinal/10">
+          <section className="py-16 md:py-20 bg-ivory">
             <div className="max-w-6xl mx-auto px-6 space-y-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -160,7 +160,7 @@ export default function CorePage() {
                   {accreditationItems.map((item) => (
                     <div
                       key={item.title}
-                      className="snap-start min-w-[260px] md:min-w-[300px] bg-white border border-cardinal/15 shadow-sm p-5 flex flex-col gap-2"
+                      className="snap-start min-w-[260px] md:min-w-[300px] bg-white border border-black/15 shadow-sm p-5 flex flex-col gap-2"
                     >
                       <p className="text-xs uppercase tracking-[0.28em] text-black">Accolade</p>
                       <h3 className="text-xl font-semibold text-black">{item.title}</h3>

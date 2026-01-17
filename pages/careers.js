@@ -13,7 +13,7 @@ export default function CareersPage() {
         <Navbar />
         <main className="flex-1">
           <section className="flex flex-1 items-center justify-center px-6 py-24">
-            <div className="max-w-xl rounded-3xl border border-cardinal/15 bg-white p-10 text-center shadow-lg">
+            <div className="max-w-xl rounded-3xl border border-black/15 bg-white p-10 text-center shadow-lg">
               <span className="inline-flex items-center rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-black">
                 Careers
               </span>

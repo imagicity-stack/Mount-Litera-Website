@@ -60,7 +60,7 @@ export default function AboutPage() {
                   <Link
                     key={card.href}
                     href={card.href}
-                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-black transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-black/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-black transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
                     <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-black group-hover:text-black">
                       {card.label}
@@ -94,7 +94,7 @@ export default function AboutPage() {
                   <p className="font-semibold text-black">- R.K Singh</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-black/60 bg-white shadow-sm">
                     <Image
                       src={leadershipPhotos.principal.src}
                       alt={leadershipPhotos.principal.alt}
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   <p className="font-semibold text-black">- Mr. Shashi Shankar Prasad</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-black/60 bg-white shadow-sm">
                     <Image
                       src={leadershipPhotos.managingDirector.src}
                       alt={leadershipPhotos.managingDirector.alt}
@@ -151,7 +151,7 @@ export default function AboutPage() {
                   Discover the legacy behind The Elden Heights School. Expand the panel below to explore how our emblem, ethos, and four-stage philosophy guide every learner toward eternal glory.
                 </p>
               </div>
-              <div className="overflow-hidden rounded-3xl border border-cardinal/20 bg-white shadow-xl shadow-cardinal/10">
+              <div className="overflow-hidden rounded-3xl border border-black/20 bg-white shadow-xl shadow-cardinal/10">
                 <details className="group" open>
                   <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-lg font-semibold text-midnight">
                     <span className="flex items-center gap-3">
@@ -169,7 +169,7 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
                   </summary>
-                  <div className="flex flex-col gap-8 border-t border-cardinal/10 bg-white px-6 pb-8 pt-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-start">
+                  <div className="flex flex-col gap-8 border-t border-black/10 bg-white px-6 pb-8 pt-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-start">
                     <div className="space-y-6 text-gray-700 lg:pr-4">
                       <div className="space-y-3">
                         <h3 className="text-2xl font-semibold text-black">Vision</h3>
@@ -205,7 +205,7 @@ export default function AboutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="relative ml-auto flex w-full max-w-xs flex-col items-center justify-start overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-ivory p-4 shadow-md shadow-cardinal/10 lg:mt-0">
+                    <div className="relative ml-auto flex w-full max-w-xs flex-col items-center justify-start overflow-hidden rounded-2xl border border-dashed border-black/30 bg-ivory p-4 shadow-md shadow-cardinal/10 lg:mt-0">
                       <div className="h-40 w-full rounded-xl bg-white" />
                       <p className="mt-3 text-center text-sm font-medium text-black">Reserved space for mission &amp; vision imagery</p>
                     </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
               </p>
               <ul className="grid gap-4 sm:grid-cols-2">
                 {policies.map((policy) => (
-                  <li key={policy.href} className="rounded-2xl border border-cardinal/20 bg-cardinal/5 px-5 py-4 transition hover:border-cardinal hover:bg-white">
+                  <li key={policy.href} className="rounded-2xl border border-black/20 bg-cardinal/5 px-5 py-4 transition hover:border-black hover:bg-white">
                     <Link href={policy.href} className="block text-black font-semibold">
                       {policy.title}
                     </Link>

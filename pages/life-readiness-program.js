@@ -52,7 +52,7 @@ export default function LifeReadinessProgramPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="border-b border-cardinal/10 bg-ivory/80">
+          <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4 max-w-5xl">
                 <p className="text-xs uppercase tracking-[0.35em] text-black">Life Readiness Program</p>
@@ -78,7 +78,7 @@ export default function LifeReadinessProgramPage() {
 
               <div className="grid gap-6 md:grid-cols-2">
                 {modules.map((module) => (
-                  <div key={module.title} className="border border-cardinal/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
+                  <div key={module.title} className="border border-black/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
                     <h3 className="text-2xl font-semibold text-black">{module.title}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{module.description}</p>
                     <p className="text-gray-700 text-sm font-semibold">{module.outcome}</p>
@@ -86,7 +86,7 @@ export default function LifeReadinessProgramPage() {
                 ))}
               </div>
 
-              <div className="border border-cardinal/15 bg-ivory/80 p-6 space-y-3 shadow-sm">
+              <div className="border border-black/15 bg-ivory/80 p-6 space-y-3 shadow-sm">
                 <h3 className="text-2xl font-semibold text-black">Key Characteristics of Life Readiness Program</h3>
                 <ul className="list-disc pl-5 space-y-2 text-gray-800 text-sm">
                   {characteristics.map((item) => (
