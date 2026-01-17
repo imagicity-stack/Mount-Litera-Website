@@ -15,14 +15,10 @@ const navItems = [
 ];
 
 const quickLinks = [
-  { label: 'Quick Links', href: '#' },
-  { label: 'A to Z Index', href: '#' },
-  { label: 'Find a person', href: '#' },
-  { label: 'Events', href: '#' },
-  { label: 'Media Relations', href: '#' },
-  { label: 'Alumni', href: '#' },
-  { label: 'Give Now', href: '#' },
-  { label: 'Emergency', href: '#' }
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Admission Policy', href: '/policies/admission-policy' },
+  { label: 'Disclosures', href: '/disclosures' },
+  { label: 'Terms & Conditions', href: '/terms-and-conditions' }
 ];
 
 export default function Navbar() {

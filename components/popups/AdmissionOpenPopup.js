@@ -51,7 +51,7 @@ const AdmissionOpenPopup = () => {
             Admissions Open
           </h2>
           <p id="admission-open-description" className="mt-4 text-base text-gray-700">
-            Limited seats for 2026–27. Early enquiry gives your child priority processing and first preference in admissions. Safe campus, strong English, disciplined learning. Don’t miss your child’s chance.
+            Limited seats for 2026–27. Early enquiry gives your child priority processing and first preference in admissions. Advanced AI Based Learning, safe campus, strong English, disciplined learning. Don’t miss your child’s chance.
           </p>
           <ul className="mt-4 space-y-2 text-sm text-gray-600">
             <li className="flex items-start justify-center gap-2">
