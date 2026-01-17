@@ -22,8 +22,8 @@ module.exports = {
         cardinal: "#890304",
         gold: "#FFFFFF",
         parchment: "#FAF9F6",
-        midnight: "#00113A",
-        cobalt: "#002263"
+        midnight: "#000000",
+        cobalt: "#000000"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

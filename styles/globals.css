@@ -7,17 +7,19 @@ html {
 }
 
 body {
-  @apply bg-gold text-midnight font-avenir;
+  @apply bg-gold text-midnight font-avenir font-medium;
   min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', 'Garamond', serif;
   letter-spacing: 0.015em;
+  font-weight: 600;
 }
 
 p, span, input, textarea, label, a, button, li {
   font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
 }
 
 .mobile-drawer {
