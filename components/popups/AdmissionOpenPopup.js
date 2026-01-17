@@ -44,10 +44,10 @@ const AdmissionOpenPopup = () => {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <p className="mx-auto inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cardinal">
+          <p className="mx-auto inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-black">
             Admissions 2026–27
           </p>
-          <h2 id="admission-open-title" className="mt-4 text-3xl font-semibold text-cardinal">
+          <h2 id="admission-open-title" className="mt-4 text-3xl font-semibold text-black">
             Admissions Open
           </h2>
           <p id="admission-open-description" className="mt-4 text-base text-gray-700">

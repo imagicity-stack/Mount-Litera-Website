@@ -19,7 +19,7 @@ export default function AdmissionPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Admission</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Admission</h1>
               <p className="text-lg text-gray-600">A New Chapter Begins</p>
               <p>
                 The Elden Heights School is opening admissions for the 2026–27 academic session. As we move through our transition
@@ -32,7 +32,7 @@ export default function AdmissionPage() {
           <section className="py-16 bg-white">
             <div className="max-w-5xl mx-auto px-6 space-y-10">
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Why Choose The Elden Heights School</h2>
+                <h2 className="text-2xl font-semibold text-black">Why Choose The Elden Heights School</h2>
                 <p>We are not just preparing students for exams but for life. Our re-imagined structure ensures every child grows with purpose, confidence, and creativity.</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Future-Ready Curriculum – A blend of strong academics and practical learning experiences.</li>
@@ -43,7 +43,7 @@ export default function AdmissionPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Admission Process</h2>
+                <h2 className="text-2xl font-semibold text-black">Admission Process</h2>
                 <ol className="list-decimal list-inside space-y-2 text-gray-700">
                   <li>Step 1: Fill out the Admission Inquiry Form below.</li>
                   <li>Step 2: Our counselor will contact you to schedule a campus visit and interaction.</li>
@@ -52,7 +52,7 @@ export default function AdmissionPage() {
                 </ol>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Eligibility</h2>
+                <h2 className="text-2xl font-semibold text-black">Eligibility</h2>
                 <p>
                   Admissions are open for Nursery to Grade 10 for the 2026–27 session. Seats are limited and will be allocated on
                   a first-come, first-served basis following the interaction round. Classes 11 and 12 are under the upcoming
@@ -60,7 +60,7 @@ export default function AdmissionPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Documents Required</h2>
+                <h2 className="text-2xl font-semibold text-black">Documents Required</h2>
                 <p>Parents are requested to keep the following ready for submission at the time of registration:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Birth Certificate (original and photocopy)</li>
@@ -71,7 +71,7 @@ export default function AdmissionPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Important Note</h2>
+                <h2 className="text-2xl font-semibold text-black">Important Note</h2>
                 <p>
                   The Elden Heights School is currently undergoing a structured transition toward a renewed identity and academic
                   vision. All admissions made during this phase remain valid under the recognized CBSE framework and will
@@ -79,7 +79,7 @@ export default function AdmissionPage() {
                 </p>
               </div>
               <div className="space-y-4 rounded-2xl border border-cardinal/10 bg-cardinal/5 p-6 text-center">
-                <h3 className="text-xl font-semibold text-cardinal">Priority booking slots now open</h3>
+                <h3 className="text-xl font-semibold text-black">Priority booking slots now open</h3>
                 <p className="text-gray-700">
                   Families who confirm early get the first choice of interaction dates, faster document processing, and
                   priority in class allocations for the 2026–27 session. Secure your child’s place while seats are still open.

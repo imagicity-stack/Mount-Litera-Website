@@ -18,7 +18,7 @@ export default function ContactPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F5F5F5] text-center">
             <div className="max-w-3xl mx-auto px-6 space-y-4">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">We’d Love to Hear From You</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">We’d Love to Hear From You</h1>
               <p className="text-gray-600">
                 Our team is ready to guide you through admissions, partnerships, and every step of the transition journey.
               </p>

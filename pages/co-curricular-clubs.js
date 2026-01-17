@@ -51,8 +51,8 @@ export default function CoCurricularClubsPage() {
           <section className="border-b border-cardinal/10 bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-cardinal/70">Co Curricular Clubs</p>
-                <h1 className="text-4xl font-semibold text-cardinal">Discovering Interests. Building Confidence.</h1>
+                <p className="text-xs uppercase tracking-[0.35em] text-black">Co Curricular Clubs</p>
+                <h1 className="text-4xl font-semibold text-black">Discovering Interests. Building Confidence.</h1>
                 <p className="text-gray-700 leading-relaxed max-w-4xl">
                   Co Curricular Clubs are interest based platforms where students explore their passions, develop soft skills,
                   and express themselves beyond academics. Participation is guided by student interest and age appropriateness.
@@ -64,14 +64,14 @@ export default function CoCurricularClubsPage() {
           <section className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-10">
               <div className="space-y-2">
-                <h2 className="text-3xl font-semibold text-cardinal">Clubs We Are Launching</h2>
+                <h2 className="text-3xl font-semibold text-black">Clubs We Are Launching</h2>
                 <p className="text-gray-700">Both purpose and outcomes are clearly defined for every club.</p>
               </div>
 
               <div className="grid gap-6 md:grid-cols-2">
                 {clubs.map((club) => (
                   <div key={club.name} className="border border-cardinal/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
-                    <h3 className="text-2xl font-semibold text-cardinal">{club.name}</h3>
+                    <h3 className="text-2xl font-semibold text-black">{club.name}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{club.description}</p>
                     <p className="text-gray-700 text-sm font-semibold">{club.outcome}</p>
                   </div>

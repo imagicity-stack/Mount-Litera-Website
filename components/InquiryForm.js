@@ -115,7 +115,7 @@ export default function InquiryForm() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-cardinal">Admission Inquiry Form</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-black">Admission Inquiry Form</h2>
           <p className="text-gray-600">
             Share a few details with us and our admission counselor will reach out with the next steps.
           </p>
@@ -131,7 +131,7 @@ export default function InquiryForm() {
         >
           {textInputs.map((field) => (
             <div key={field.name} className="flex flex-col space-y-2">
-              <label htmlFor={field.name} className="text-sm font-semibold text-cardinal">
+              <label htmlFor={field.name} className="text-sm font-semibold text-black">
                 {field.label}
               </label>
               <input
@@ -146,7 +146,7 @@ export default function InquiryForm() {
             </div>
           ))}
           <div className="flex flex-col space-y-2">
-            <label htmlFor="classInterested" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="classInterested" className="text-sm font-semibold text-black">
               Class Interested In
             </label>
             <select
@@ -166,7 +166,7 @@ export default function InquiryForm() {
             </select>
           </div>
           <div className="md:col-span-2 flex flex-col space-y-2">
-            <label htmlFor="address" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="address" className="text-sm font-semibold text-black">
               Residential Address
             </label>
             <textarea
@@ -181,7 +181,7 @@ export default function InquiryForm() {
             />
           </div>
           <div className="md:col-span-2 flex flex-col space-y-2">
-            <label htmlFor="message" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="message" className="text-sm font-semibold text-black">
               Message / Additional Details
             </label>
             <textarea
@@ -197,14 +197,14 @@ export default function InquiryForm() {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
             {submissionStatus.message && (
               <p
-                className={`mt-3 text-sm ${submissionStatus.type === 'error' ? 'text-red-600' : 'text-green-600'}`}
+                className={`mt-3 text-sm ${submissionStatus.type === 'error' ? 'text-black' : 'text-black'}`}
               >
                 {submissionStatus.message}
               </p>

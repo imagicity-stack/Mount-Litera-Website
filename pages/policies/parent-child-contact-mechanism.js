@@ -19,14 +19,14 @@ export default function ParentChildContactPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Parent Child Contact Mechanism</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Parent Child Contact Mechanism</h1>
               <p>
                 We believe that education thrives when parents, students, and teachers collaborate. The Elden Heights School maintains
                 transparent, timely, and multi-channel communication so that every family stays informed and involved in their
                 child’s learning journey.
               </p>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Regular Communication Touchpoints</h2>
+                <h2 className="text-2xl font-semibold text-black">Regular Communication Touchpoints</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Monthly academic updates shared through the school app, email, or printed circulars.</li>
                   <li>Term-wise parent-teacher meetings focusing on progress, goals, and personalised interventions.</li>
@@ -34,12 +34,12 @@ export default function ParentChildContactPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Dedicated Support Channels</h2>
+                <h2 className="text-2xl font-semibold text-black">Dedicated Support Channels</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Class teachers reachable during working hours for quick clarifications.</li>
                   <li>
                     Academic coordinators and the school office available via{' '}
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">
                       {CONTACT_EMAIL}
                     </a>
                     .
@@ -48,7 +48,7 @@ export default function ParentChildContactPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Feedback &amp; Engagement</h2>
+                <h2 className="text-2xl font-semibold text-black">Feedback &amp; Engagement</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Biannual satisfaction surveys to understand parent perspectives and suggestions.</li>
                   <li>Workshops and orientation sessions designed to equip families with academic and wellness resources.</li>

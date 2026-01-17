@@ -55,8 +55,8 @@ export default function LifeReadinessProgramPage() {
           <section className="border-b border-cardinal/10 bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4 max-w-5xl">
-                <p className="text-xs uppercase tracking-[0.35em] text-cardinal/70">Life Readiness Program</p>
-                <h1 className="text-4xl font-semibold text-cardinal">Preparing Children for the Real World</h1>
+                <p className="text-xs uppercase tracking-[0.35em] text-black">Life Readiness Program</p>
+                <h1 className="text-4xl font-semibold text-black">Preparing Children for the Real World</h1>
                 <p className="text-gray-700 leading-relaxed">
                   The Life Readiness Program is a foundational and mandatory initiative designed to equip every child with
                   essential real world skills. These are not optional activities. These are life skills every student must learn
@@ -70,7 +70,7 @@ export default function LifeReadinessProgramPage() {
           <section className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
               <div className="space-y-3">
-                <h2 className="text-3xl font-semibold text-cardinal">Core Life Readiness Modules</h2>
+                <h2 className="text-3xl font-semibold text-black">Core Life Readiness Modules</h2>
                 <p className="text-gray-700 leading-relaxed max-w-4xl">
                   Practical, hands-on learning that grows with every student so readiness becomes second nature.
                 </p>
@@ -79,7 +79,7 @@ export default function LifeReadinessProgramPage() {
               <div className="grid gap-6 md:grid-cols-2">
                 {modules.map((module) => (
                   <div key={module.title} className="border border-cardinal/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
-                    <h3 className="text-2xl font-semibold text-cardinal">{module.title}</h3>
+                    <h3 className="text-2xl font-semibold text-black">{module.title}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{module.description}</p>
                     <p className="text-gray-700 text-sm font-semibold">{module.outcome}</p>
                   </div>
@@ -87,7 +87,7 @@ export default function LifeReadinessProgramPage() {
               </div>
 
               <div className="border border-cardinal/15 bg-ivory/80 p-6 space-y-3 shadow-sm">
-                <h3 className="text-2xl font-semibold text-cardinal">Key Characteristics of Life Readiness Program</h3>
+                <h3 className="text-2xl font-semibold text-black">Key Characteristics of Life Readiness Program</h3>
                 <ul className="list-disc pl-5 space-y-2 text-gray-800 text-sm">
                   {characteristics.map((item) => (
                     <li key={item}>{item}</li>

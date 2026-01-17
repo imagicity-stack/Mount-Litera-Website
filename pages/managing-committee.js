@@ -17,8 +17,8 @@ export default function ManagingCommitteePage() {
         <main className="flex-1">
           <section className="relative overflow-hidden bg-ivory py-20">
             <div className="relative max-w-4xl mx-auto px-6 text-center space-y-4">
-              <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Stewardship</p>
-              <h1 className="text-4xl font-semibold text-cardinal">Managing Committee</h1>
+              <p className="text-sm uppercase tracking-[0.3em] text-black">Stewardship</p>
+              <h1 className="text-4xl font-semibold text-black">Managing Committee</h1>
               <p className="text-gray-700">
                 Coming soon. Details of the committee that safeguards our mission and excellence will be shared here.
               </p>

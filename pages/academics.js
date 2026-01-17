@@ -77,11 +77,11 @@ export default function AcademicsPage() {
           <section className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
               <div className="space-y-5">
-                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-cardinal/70">
+                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-black">
                   <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
                   <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG – VIII</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Learning resources that amplify every classroom</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-black">Learning resources that amplify every classroom</h2>
                 <p className="text-gray-700">
                   Beginning 2026-25, our classrooms from LKG to Grade VIII receive refreshed content, measurable progress trackin
                   g, and added teacher support. The aim: deeper engagement, clearer outcomes, and confident learners.
@@ -94,22 +94,22 @@ export default function AcademicsPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm text-cardinal/80">
+                <p className="text-sm text-black">
                   Families will receive orientation support and a refreshed resource hub to make the transition seamless.
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-[#fdf9f7] p-6 shadow-lg">
-                  <div className="flex h-full flex-col justify-between text-cardinal">
+                  <div className="flex h-full flex-col justify-between text-black">
                     <div className="space-y-2">
-                      <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Classroom kit</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-black">Classroom kit</p>
                       <h3 className="text-2xl font-semibold leading-tight">Interactive learning hub</h3>
-                      <p className="text-sm text-cardinal/80">
+                      <p className="text-sm text-black">
                         Lesson visuals, practice sheets, and assessment snapshots are organized in one place so teachers can move
                         seamlessly between activities.
                       </p>
                     </div>
-                    <div className="rounded-2xl bg-cardinal/10 p-4 text-sm text-cardinal">
+                    <div className="rounded-2xl bg-cardinal/10 p-4 text-sm text-black">
                       <p className="font-semibold">What changes in 2026-25?</p>
                       <ul className="mt-2 space-y-1">
                         <li className="flex items-start gap-2">
@@ -135,7 +135,7 @@ export default function AcademicsPage() {
           <section className="py-16 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-10">
               <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">A clear pathway through every grade</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-black">A clear pathway through every grade</h2>
                 <p className="text-gray-600">
                   Four progressive stages gently guide our learners from playful exploration to focused preparation. Each stage has a
                   simple promise for children and families.
@@ -144,13 +144,13 @@ export default function AcademicsPage() {
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
                 {stageDetails.map((stage) => (
                   <div key={stage.title} className="rounded-3xl border border-cardinal/10 bg-[#FDF9F7] p-6 shadow-sm">
-                    <span className="text-xs uppercase tracking-[0.3em] text-cardinal/70">{stage.grades}</span>
-                    <h3 className="mt-3 text-xl font-semibold text-cardinal">{stage.title}</h3>
+                    <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
+                    <h3 className="mt-3 text-xl font-semibold text-black">{stage.title}</h3>
                     <p className="mt-4 text-sm text-gray-700">{stage.homeSummary}</p>
                   </div>
                 ))}
               </div>
-              <div className="rounded-2xl border-l-4 border-cardinal bg-cardinal/5 px-6 py-4 text-cardinal">
+              <div className="rounded-2xl border-l-4 border-cardinal bg-cardinal/5 px-6 py-4 text-black">
                 <strong>Coming soon:</strong> Senior Secondary Stage with Science, Commerce, and Humanities streams.
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function AcademicsPage() {
           <section className="py-20 bg-[#F8F5F3]">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
               <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">The Elden Heights learning journey</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-black">The Elden Heights learning journey</h2>
                 <p className="text-gray-700">
                   Take a closer look at how each stage feels inside our classrooms — from foundational play to secondary guidance and
                   mentorship.
@@ -170,19 +170,19 @@ export default function AcademicsPage() {
                 <div className="space-y-10">
                   {stageDetails.map((stage, index) => (
                     <div key={stage.title} className="grid gap-6 md:grid-cols-[120px_minmax(0,1fr)] md:items-start">
-                      <div className="flex items-center gap-3 text-cardinal">
+                      <div className="flex items-center gap-3 text-black">
                         <div className="hidden md:flex h-10 w-10 items-center justify-center rounded-full border border-cardinal/30 bg-white font-semibold">
                           {index + 1}
                         </div>
                         <div>
-                          <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">{stage.grades}</p>
+                          <p className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</p>
                           <p className="font-semibold">{stage.title}</p>
                         </div>
                       </div>
                       <div className="rounded-3xl border border-cardinal/10 bg-white p-6 shadow-sm">
                         <p className="text-gray-700">{stage.summary}</p>
                         <div className="mt-5">
-                          <h4 className="text-xs font-semibold uppercase tracking-wide text-cardinal/70">Key focus areas</h4>
+                          <h4 className="text-xs font-semibold uppercase tracking-wide text-black">Key focus areas</h4>
                           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                             {stage.focus.map((item) => (
                               <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
@@ -246,7 +246,7 @@ export default function AcademicsPage() {
           <section className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-semibold text-cardinal">Beyond textbooks</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-black">Beyond textbooks</h2>
                 <p className="text-gray-700">
                   Life at The Elden Heights School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
                   talents, collaborate with peers, and learn to express themselves.
@@ -261,7 +261,7 @@ export default function AcademicsPage() {
                 </ul>
               </div>
               <div className="rounded-3xl border border-cardinal/10 bg-[#FDF9F7] p-8 shadow-sm">
-                <h3 className="text-xl font-semibold text-cardinal">Academic vision ahead</h3>
+                <h3 className="text-xl font-semibold text-black">Academic vision ahead</h3>
                 <p className="mt-4 text-gray-700">
                   As we evolve into a renewed identity, our academic system is becoming more technology-enabled, data-informed, and
                   globally aligned — keeping the balance between tradition and innovation alive.

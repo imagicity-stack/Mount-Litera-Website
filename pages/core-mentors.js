@@ -100,12 +100,12 @@ const MentorCard = ({ name, designation }) => {
           />
         </div>
       ) : (
-        <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
+        <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-black">
           {getInitials(name)}
         </div>
       )}
       <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
-        <h4 className="text-xl font-bold text-cardinal">{name}</h4>
+        <h4 className="text-xl font-bold text-black">{name}</h4>
         <p className="mt-1 text-sm font-medium text-gray-900">{designation}</p>
       </div>
     </div>
@@ -127,8 +127,8 @@ export default function CoreMentorsPage() {
         <main className="flex-1">
           <section className="relative overflow-hidden bg-ivory py-16">
             <div className="relative max-w-5xl mx-auto px-6 space-y-4 text-center">
-              <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Leadership &amp; Faculty</p>
-              <h1 className="text-4xl font-semibold text-cardinal">Core Mentors</h1>
+              <p className="text-sm uppercase tracking-[0.3em] text-black">Leadership &amp; Faculty</p>
+              <h1 className="text-4xl font-semibold text-black">Core Mentors</h1>
               <p className="max-w-3xl mx-auto font-medium text-gray-900">
                 The Elden Heights School is guided by dedicated mentors who bring experience, empathy, and excellence to every classroom and activity.
               </p>
@@ -141,10 +141,10 @@ export default function CoreMentorsPage() {
                 {coreMentors.map((group) => (
                   <div key={group.department} className="space-y-5">
                     <div className="flex items-center gap-4">
-                      <span className="h-10 w-10 rounded-xl bg-cardinal/10 text-cardinal flex items-center justify-center font-semibold">
+                      <span className="h-10 w-10 rounded-xl bg-cardinal/10 text-black flex items-center justify-center font-semibold">
                         {group.department.substring(0, 2).toUpperCase()}
                       </span>
-                      <h2 className="text-2xl font-semibold text-cardinal">{group.department}</h2>
+                      <h2 className="text-2xl font-semibold text-black">{group.department}</h2>
                     </div>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.mentors.map((mentor) => (
@@ -158,7 +158,7 @@ export default function CoreMentorsPage() {
                 {coreMentors.map((group) => (
                   <div key={`${group.department}-mobile`} className="space-y-4">
                     <div className="text-center">
-                      <h3 className="text-xl font-semibold text-cardinal">{group.department}</h3>
+                      <h3 className="text-xl font-semibold text-black">{group.department}</h3>
                     </div>
                     <div className="-mx-6 overflow-x-auto px-6">
                       <div className="flex snap-x snap-mandatory gap-5 pb-2">
@@ -181,12 +181,12 @@ export default function CoreMentorsPage() {
                                   />
                                 </div>
                               ) : (
-                                <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
+                                <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-black">
                                   {getInitials(mentor.name)}
                                 </div>
                               )}
                               <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
-                                <h4 className="text-lg font-bold text-cardinal">{mentor.name}</h4>
+                                <h4 className="text-lg font-bold text-black">{mentor.name}</h4>
                                 <p className="text-sm font-medium text-gray-900">{mentor.designation}</p>
                               </div>
                             </div>

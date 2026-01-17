@@ -17,14 +17,14 @@ export default function SelfDisciplinePolicyPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Code for Self-Discipline</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Code for Self-Discipline</h1>
               <p>
                 The Elden Heights School nurtures responsible citizens who demonstrate respect, integrity, and resilience. Our Code for
                 Self-Discipline empowers students to lead themselves, contribute positively to school life, and uphold the
                 The Elden Heights School ethos on and off campus.
               </p>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Core Expectations</h2>
+                <h2 className="text-2xl font-semibold text-black">Core Expectations</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Arrive on time, prepared for learning, and dressed in the prescribed school attire.</li>
                   <li>Show respect to peers, teachers, staff, and visitors through courteous words and actions.</li>
@@ -32,7 +32,7 @@ export default function SelfDisciplinePolicyPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Responsible Conduct</h2>
+                <h2 className="text-2xl font-semibold text-black">Responsible Conduct</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Follow classroom procedures, listen actively, and participate constructively.</li>
                   <li>Practice digital citizenship by using technology ethically and safeguarding personal information.</li>
@@ -40,7 +40,7 @@ export default function SelfDisciplinePolicyPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">Leadership in Action</h2>
+                <h2 className="text-2xl font-semibold text-black">Leadership in Action</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Take ownership of assignments, deadlines, and collaborative projects.</li>
                   <li>Support peers through empathy, inclusion, and positive encouragement.</li>

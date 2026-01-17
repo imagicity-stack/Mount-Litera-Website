@@ -76,7 +76,7 @@ export default function Academics({ showExplore = true }) {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <div className="inline-flex items-center gap-3 rounded-full bg-cardinal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cardinal">
+            <div className="inline-flex items-center gap-3 rounded-full bg-cardinal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black">
               Academic Expanse
             </div>
             <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Scholarly design for every stage</h2>
@@ -128,7 +128,7 @@ export default function Academics({ showExplore = true }) {
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
                 <div className="relative space-y-3">
-                  <span className="text-xs uppercase tracking-[0.3em] text-cardinal/70">{stage.grades}</span>
+                  <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
                   <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>
                   <p className="text-sm text-midnight/70 leading-relaxed">{stage.homeSummary}</p>
                 </div>
