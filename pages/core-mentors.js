@@ -44,7 +44,6 @@ const coreMentors = [
   {
     department: 'Teaching',
     mentors: [
-      { name: 'Anupriya', designation: 'English' },
       { name: 'Shama Perween', designation: 'Maths' },
       { name: 'Nitesh Kumar', designation: 'Maths' },
       { name: 'Sameeksha Sinha', designation: 'Social Studies' },
@@ -89,26 +88,26 @@ const MentorCard = ({ name, designation }) => {
   const photoSrc = mentorPhotos[name];
 
   return (
-    <div className="group relative flex flex-col items-center rounded-2xl border border-cardinal/20 bg-white p-6 text-center transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+    <div className="group overflow-hidden rounded-2xl border border-cardinal/20 bg-white shadow-sm transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
       {photoSrc ? (
-        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-cardinal/40 bg-cardinal/5">
-          <div className="relative h-36 w-32 overflow-hidden rounded-xl">
-            <Image
-              src={photoSrc}
-              alt={`${name} - ${designation}`}
-              fill
-              sizes="(max-width: 768px) 144px, 192px"
-              className="object-cover"
-            />
-          </div>
+        <div className="relative aspect-[4/5] w-full bg-cardinal/5">
+          <Image
+            src={photoSrc}
+            alt={`${name} - ${designation}`}
+            fill
+            sizes="(max-width: 768px) 240px, 320px"
+            className="object-cover"
+          />
         </div>
       ) : (
-        <div className="mb-5 flex h-40 w-36 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/40 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
+        <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/70">
           {getInitials(name)}
         </div>
       )}
-      <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
-      <p className="mt-1 text-sm text-gray-600">{designation}</p>
+      <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
+        <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
+        <p className="mt-1 text-sm text-gray-600">{designation}</p>
+      </div>
     </div>
   );
 };
@@ -169,28 +168,26 @@ export default function CoreMentorsPage() {
                           return (
                             <div
                               key={`${group.department}-mobile-${mentor.name}`}
-                              className="snap-center w-60 flex-shrink-0 rounded-3xl border border-cardinal/15 bg-white p-5 shadow-md"
+                              className="snap-center w-64 flex-shrink-0 overflow-hidden rounded-3xl border border-cardinal/15 bg-white shadow-md"
                             >
-                              <div className="mb-4 flex flex-col items-center gap-3">
-                                {photoSrc ? (
-                                  <div className="relative h-32 w-28 overflow-hidden rounded-2xl border-2 border-cardinal/30 bg-cardinal/5">
-                                    <Image
-                                      src={photoSrc}
-                                      alt={`${mentor.name} - ${mentor.designation}`}
-                                      fill
-                                      sizes="(max-width: 768px) 176px, 192px"
-                                      className="object-cover"
-                                    />
-                                  </div>
-                                ) : (
-                                  <div className="flex h-32 w-28 items-center justify-center rounded-2xl border-2 border-dashed border-cardinal/30 bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
-                                    {getInitials(mentor.name)}
-                                  </div>
-                                )}
-                                <div className="text-center">
-                                  <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
-                                  <p className="text-sm text-gray-600">{mentor.designation}</p>
+                              {photoSrc ? (
+                                <div className="relative aspect-[4/5] w-full bg-cardinal/5">
+                                  <Image
+                                    src={photoSrc}
+                                    alt={`${mentor.name} - ${mentor.designation}`}
+                                    fill
+                                    sizes="(max-width: 768px) 208px, 240px"
+                                    className="object-cover"
+                                  />
                                 </div>
+                              ) : (
+                                <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-cardinal/60">
+                                  {getInitials(mentor.name)}
+                                </div>
+                              )}
+                              <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
+                                <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
+                                <p className="text-sm text-gray-600">{mentor.designation}</p>
                               </div>
                             </div>
                           );
