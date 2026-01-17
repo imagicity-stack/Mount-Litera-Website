@@ -16,10 +16,9 @@ export default function Hero() {
       className="relative min-h-[calc(100vh-120px)] md:min-h-[calc(100vh-130px)] lg:min-h-[calc(100vh-150px)] pt-[120px] md:pt-[130px] lg:pt-[150px] flex items-center justify-center overflow-hidden bg-midnight text-white"
     >
       <div
-        className="absolute inset-0 bg-center bg-fixed bg-no-repeat"
+        className="absolute inset-0 bg-center bg-no-repeat bg-cover md:bg-fixed"
         style={{
-          backgroundImage: "url('/gate.jpg')",
-          backgroundSize: '100%'
+          backgroundImage: "url('/gate.jpg')"
         }}
         aria-hidden="true"
       />
