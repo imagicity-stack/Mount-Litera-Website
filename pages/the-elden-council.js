@@ -37,7 +37,7 @@ export default function TheEldenCouncilPage() {
                       Image
                     </div>
                     <div className="space-y-1 border-t border-cardinal/15 bg-white px-4 py-3 text-center">
-                      <p className="text-lg font-semibold text-cardinal leading-tight">{member.name}</p>
+                      <p className="text-xl font-bold text-cardinal leading-tight">{member.name}</p>
                       <p className="text-sm uppercase tracking-[0.15em] font-semibold text-gray-900">{member.title}</p>
                     </div>
                   </div>
