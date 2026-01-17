@@ -44,7 +44,6 @@ const coreMentors = [
   {
     department: 'Teaching',
     mentors: [
-      { name: 'Anupriya', designation: 'English' },
       { name: 'Shama Perween', designation: 'Maths' },
       { name: 'Nitesh Kumar', designation: 'Maths' },
       { name: 'Sameeksha Sinha', designation: 'Social Studies' },
