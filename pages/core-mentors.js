@@ -106,7 +106,7 @@ const MentorCard = ({ name, designation }) => {
       )}
       <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
         <h4 className="text-lg font-semibold text-cardinal">{name}</h4>
-        <p className="mt-1 text-sm text-gray-600">{designation}</p>
+        <p className="mt-1 text-sm font-medium text-gray-900">{designation}</p>
       </div>
     </div>
   );
@@ -129,7 +129,7 @@ export default function CoreMentorsPage() {
             <div className="relative max-w-5xl mx-auto px-6 space-y-4 text-center">
               <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Leadership &amp; Faculty</p>
               <h1 className="text-4xl font-semibold text-cardinal">Core Mentors</h1>
-              <p className="text-gray-700 max-w-3xl mx-auto">
+              <p className="max-w-3xl mx-auto font-medium text-gray-900">
                 The Elden Heights School is guided by dedicated mentors who bring experience, empathy, and excellence to every classroom and activity.
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function CoreMentorsPage() {
                               )}
                               <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
                                 <h4 className="text-base font-semibold text-cardinal">{mentor.name}</h4>
-                                <p className="text-sm text-gray-600">{mentor.designation}</p>
+                                <p className="text-sm font-medium text-gray-900">{mentor.designation}</p>
                               </div>
                             </div>
                           );
