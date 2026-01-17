@@ -20,7 +20,7 @@ export default function Admission() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Admissions Open for 2025–26</h2>
+              <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Admissions Open for 2026–27</h2>
               <p className="text-lg text-midnight/80 leading-relaxed">
                 We’re inviting new learners to join this journey of transformation. The systems you see today are evolving into a bold,
                 modern learning experience designed for the next generation.

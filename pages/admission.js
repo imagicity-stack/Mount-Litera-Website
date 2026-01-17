@@ -8,10 +8,10 @@ export default function AdmissionPage() {
   return (
     <>
       <Head>
-        <title>Admissions 2025–2026 | The Elden Heights School</title>
+        <title>Admissions 2026–27 | The Elden Heights School</title>
         <meta
           name="description"
-          content="Learn about the The Elden Heights School admission process for the 2025–2026 session, eligibility, documents required, and how to apply."
+          content="Learn about the The Elden Heights School admission process for the 2026–27 session, eligibility, documents required, and how to apply."
         />
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
@@ -22,7 +22,7 @@ export default function AdmissionPage() {
               <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Admission</h1>
               <p className="text-lg text-gray-600">A New Chapter Begins</p>
               <p>
-                The Elden Heights School is opening admissions for the 2025–2026 academic session. As we move through our transition
+                The Elden Heights School is opening admissions for the 2026–27 academic session. As we move through our transition
                 into a brighter and more dynamic future, we continue to stand for the same values that shaped our legacy —
                 discipline, curiosity, and academic excellence. This is your chance to be part of the next generation of learners
                 who will experience an upgraded, modern, and future-ready school environment.
@@ -54,7 +54,7 @@ export default function AdmissionPage() {
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-cardinal">Eligibility</h2>
                 <p>
-                  Admissions are open for Nursery to Grade 10 for the 2025–2026 session. Seats are limited and will be allocated on
+                  Admissions are open for Nursery to Grade 10 for the 2026–27 session. Seats are limited and will be allocated on
                   a first-come, first-served basis following the interaction round. Classes 11 and 12 are under the upcoming
                   academic expansion phase.
                 </p>
