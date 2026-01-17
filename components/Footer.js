@@ -5,68 +5,23 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
           <div className="space-y-4">
             <p className="text-sm uppercase tracking-[0.32em] text-parchment/70">
-              Security &amp; Brand
+              Quick Links
             </p>
-            <ul className="space-y-3 text-sm text-parchment/70">
-              <li>
-                <a className="transition hover:text-parchment" href="/report-copyright">
-                  Report Copyright Infringement
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/report-security">
-                  Report Security Issue
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/trademark-notice">
-                  Trademark Notice
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <p className="text-sm uppercase tracking-[0.32em] text-parchment/70">
-              Website
-            </p>
-            <ul className="space-y-3 text-sm text-parchment/70">
-              <li>
-                <a className="transition hover:text-parchment" href="/accessibility">
-                  Accessibility
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/digital-accessibility">
-                  Digital Accessibility
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/privacy-policy">
-                  Privacy Statement
-                </a>
-              </li>
+            <ul className="space-y-3 text-base font-semibold text-parchment">
+              <li>Privacy Policy</li>
+              <li>Admission Policy</li>
+              <li>Disclosures</li>
+              <li>Terms &amp; Conditions</li>
             </ul>
           </div>
           <div className="space-y-4 md:justify-self-end">
             <p className="text-sm uppercase tracking-[0.32em] text-parchment/70">
-              Get In Touch
+              Contact Information
             </p>
-            <ul className="space-y-3 text-sm text-parchment/70">
-              <li>
-                <a className="transition hover:text-parchment" href="/contact">
-                  Contact Elden Heights
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/visit">
-                  Maps &amp; Directions
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-parchment" href="/careers">
-                  Jobs
-                </a>
-              </li>
+            <ul className="space-y-3 text-base font-semibold text-parchment">
+              <li>General query - contact@eldenhieghts.org</li>
+              <li>For admissions - admission@eldenheights.org</li>
+              <li>Ph : 9431904333</li>
             </ul>
           </div>
         </div>
@@ -86,7 +41,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4 text-parchment/80">
               <a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/elden.heights"
                 aria-label="Instagram"
                 className="transition hover:text-parchment"
                 rel="noreferrer"
@@ -104,26 +59,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.tiktok.com"
-                aria-label="TikTok"
-                className="transition hover:text-parchment"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="h-6 w-6"
-                >
-                  <path
-                    d="M14.5 5.2c1.1 1.5 2.6 2.4 4.3 2.6v3c-1.9-.1-3.5-.8-4.8-2v6.3c0 3-2.4 5.4-5.4 5.4s-5.4-2.4-5.4-5.4 2.4-5.4 5.4-5.4c.5 0 1 .1 1.5.2v3.1c-.5-.3-1-.5-1.6-.5-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5V3.8h3.5c.1.5.3 1 .5 1.4z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/company/eldenheights/"
                 aria-label="LinkedIn"
                 className="transition hover:text-parchment"
                 rel="noreferrer"
@@ -142,7 +78,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/theeldenheights"
                 aria-label="Facebook"
                 className="transition hover:text-parchment"
                 rel="noreferrer"
@@ -161,7 +97,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.youtube.com"
+                href="https://www.youtube.com/@theeldenheights"
                 aria-label="YouTube"
                 className="transition hover:text-parchment"
                 rel="noreferrer"
