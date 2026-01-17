@@ -19,11 +19,11 @@ export default function TermsPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Terms and Conditions</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Terms and Conditions</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
               <p>Website: The Elden Heights School</p>
               <p>
-                Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>
+                Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">{CONTACT_EMAIL}</a>
               </p>
               <p>
                 Welcome to The Elden Heights School’s website. By accessing or using this website, you agree to comply with the
@@ -31,7 +31,7 @@ export default function TermsPage() {
                 site.
               </p>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">1. General Use</h2>
+                <h2 className="text-2xl font-semibold text-black">1. General Use</h2>
                 <p>
                   This website is managed by The Elden Heights School, located in Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,
                   Jharkhand. The content provided here is intended to share information about our school, admission process,
@@ -40,7 +40,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">2. Accuracy of Information</h2>
+                <h2 className="text-2xl font-semibold text-black">2. Accuracy of Information</h2>
                 <p>
                   We make every effort to ensure that all information on this website is accurate and up-to-date. However, we do
                   not warrant or guarantee that the information is complete, reliable, or error-free. The Elden Heights School
@@ -49,7 +49,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">3. Admissions and Payments</h2>
+                <h2 className="text-2xl font-semibold text-black">3. Admissions and Payments</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>All admissions and related payments are subject to school verification and approval.</li>
                   <li>
@@ -67,7 +67,7 @@ export default function TermsPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">4. Intellectual Property</h2>
+                <h2 className="text-2xl font-semibold text-black">4. Intellectual Property</h2>
                 <p>
                   All content on this website — including text, logos, graphics, layouts, and design elements — is the property
                   of The Elden Heights School unless otherwise stated. You may not reproduce, distribute, or commercially exploit any
@@ -75,7 +75,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">5. Limitation of Liability</h2>
+                <h2 className="text-2xl font-semibold text-black">5. Limitation of Liability</h2>
                 <p>
                   The Elden Heights School and its representatives are not liable for any direct, indirect, or consequential damages
                   arising out of the use or inability to use the website or any linked content. Users are responsible for
@@ -83,21 +83,21 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">6. External Links</h2>
+                <h2 className="text-2xl font-semibold text-black">6. External Links</h2>
                 <p>
                   Our website may contain links to third-party websites or services. These are provided for convenience only.
                   The Elden Heights School is not responsible for the content, accuracy, or practices of these external sites.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">7. Privacy</h2>
+                <h2 className="text-2xl font-semibold text-black">7. Privacy</h2>
                 <p>
-                  Your use of this website is also governed by our <a href="/privacy-policy" className="text-cardinal underline">Privacy Policy</a>.
+                  Your use of this website is also governed by our <a href="/privacy-policy" className="text-black underline">Privacy Policy</a>.
                   By continuing to use this site, you consent to our data collection and usage practices as described there.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">8. Changes to Terms</h2>
+                <h2 className="text-2xl font-semibold text-black">8. Changes to Terms</h2>
                 <p>
                   We reserve the right to modify or replace these Terms and Conditions at any time. Any changes will be posted on
                   this page with an updated effective date. Continued use of the site after changes are made implies your
@@ -105,12 +105,12 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">9. Contact Information</h2>
+                <h2 className="text-2xl font-semibold text-black">9. Contact Information</h2>
                 <p>If you have any questions regarding these Terms and Conditions, please contact us at:</p>
                 <ul className="space-y-1 text-gray-700">
                   <li>
                     <span role="img" aria-label="email">📧</span>{' '}
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">
                       {CONTACT_EMAIL}
                     </a>
                   </li>

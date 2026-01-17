@@ -19,11 +19,11 @@ export default function PrivacyPolicyPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Privacy Policy</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Privacy Policy</h1>
               <p className="text-sm text-gray-500">Effective Date: November 2025</p>
               <p>Website: mlzshazaribagh.in</p>
               <p>
-                Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>
+                Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">{CONTACT_EMAIL}</a>
               </p>
               <p>
                 The Elden Heights School (“we,” “our,” or “us”) respects your privacy and is committed to protecting the personal
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
                 your data when you visit our site or submit an inquiry form.
               </p>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">1. Information We Collect</h2>
+                <h2 className="text-2xl font-semibold text-black">1. Information We Collect</h2>
                 <p>We may collect the following information from you:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">2. How We Use Your Information</h2>
+                <h2 className="text-2xl font-semibold text-black">2. How We Use Your Information</h2>
                 <p>Your data is collected solely for the purpose of:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Processing admission inquiries and applications.</li>
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
                 <p>We do not sell, rent, or trade your personal information with any third party.</p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">3. Data Protection</h2>
+                <h2 className="text-2xl font-semibold text-black">3. Data Protection</h2>
                 <p>
                   We use secure systems and third-party services to protect your data against unauthorized access or misuse. All
                   payment transactions are handled through verified and encrypted gateways (such as Razorpay or other secure
@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">4. Sharing of Information</h2>
+                <h2 className="text-2xl font-semibold text-black">4. Sharing of Information</h2>
                 <p>We may share information only when:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Required by law or government authorities.</li>
@@ -78,40 +78,40 @@ export default function PrivacyPolicyPage() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">5. Cookies</h2>
+                <h2 className="text-2xl font-semibold text-black">5. Cookies</h2>
                 <p>
                   Our website may use cookies to improve user experience and analyze website traffic. You can choose to disable
                   cookies through your browser settings, but certain parts of the website may not function optimally.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">6. External Links</h2>
+                <h2 className="text-2xl font-semibold text-black">6. External Links</h2>
                 <p>
                   Our website may contain links to third-party sites. We are not responsible for the privacy policies or practices
                   of these external websites. Please review their policies before sharing any personal information.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">7. Your Rights</h2>
+                <h2 className="text-2xl font-semibold text-black">7. Your Rights</h2>
                 <p>
                   You can request access, correction, or deletion of your personal data by writing to
-                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>. We will respond within a
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">{CONTACT_EMAIL}</a>. We will respond within a
                   reasonable timeframe and take necessary action as per applicable regulations.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">8. Policy Updates</h2>
+                <h2 className="text-2xl font-semibold text-black">8. Policy Updates</h2>
                 <p>
                   We may update this Privacy Policy periodically to reflect changes in our practices. The revised version will
                   always be available on this page with an updated effective date.
                 </p>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-cardinal">9. Contact Us</h2>
+                <h2 className="text-2xl font-semibold text-black">9. Contact Us</h2>
                 <p>If you have any questions, concerns, or requests related to this Privacy Policy, please contact us at:</p>
                 <ul className="space-y-1 text-gray-700">
                   <li>
-                    <span role="img" aria-label="email">📧</span> <a href={`mailto:${CONTACT_EMAIL}`} className="text-cardinal underline">{CONTACT_EMAIL}</a>
+                    <span role="img" aria-label="email">📧</span> <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">{CONTACT_EMAIL}</a>
                   </li>
                   <li>
                     <span role="img" aria-label="location">🏫</span> The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh,

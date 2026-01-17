@@ -49,8 +49,8 @@ export default function PaymentSuccess() {
         <main className="flex-1">
           <section className="py-24">
             <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-              <p className="text-xs uppercase tracking-[0.3em] text-cardinal">Thank You</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">
+              <p className="text-xs uppercase tracking-[0.3em] text-black">Thank You</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">
                 Payment Successful! Your Child’s Priority Seat Is Reserved
               </h1>
               <p className="text-gray-600 text-base md:text-lg">
@@ -61,7 +61,7 @@ export default function PaymentSuccess() {
                   href="https://wa.me/918668868875"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal"
                 >
                   Chat with Us on WhatsApp
                 </a>

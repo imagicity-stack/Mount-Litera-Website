@@ -115,7 +115,7 @@ export default function AdmissionPolicyPage() {
         <main className="flex-1">
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-cardinal">Admission Policy</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black">Admission Policy</h1>
               <p className="whitespace-pre-line text-gray-700 leading-relaxed">{policyText}</p>
             </div>
           </section>

@@ -15,7 +15,7 @@ export default function About({ showLink = true }) {
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] items-center px-8 py-12 md:px-14 md:py-16">
             <div className="space-y-5">
               <motion.p
-                className="text-sm font-semibold tracking-[0.35em] text-cardinal uppercase"
+                className="text-sm font-semibold tracking-[0.35em] text-black uppercase"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -70,22 +70,22 @@ export default function About({ showLink = true }) {
                   >
                     Read more about us
                   </Link>
-                  <span className="text-sm uppercase tracking-[0.25em] text-cardinal/70">Towards Eternal Glory</span>
+                  <span className="text-sm uppercase tracking-[0.25em] text-black">Towards Eternal Glory</span>
                 </motion.div>
               )}
             </div>
             <div className="space-y-5 rounded-2xl border border-cardinal/15 bg-ivory p-6 shadow-md">
               <div className="flex items-center justify-between gap-4 border-b border-cardinal/10 pb-5">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-cardinal/70">Academic Ethos</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-black">Academic Ethos</p>
                   <p className="text-2xl font-semibold text-midnight">Excellence with Character</p>
                 </div>
-                <span className="rounded-full bg-cardinal/10 px-4 py-2 text-sm font-semibold text-cardinal">Heritage</span>
+                <span className="rounded-full bg-cardinal/10 px-4 py-2 text-sm font-semibold text-black">Heritage</span>
               </div>
               <div className="grid grid-cols-3 gap-3 text-center">
                 {[['90%', 'Parent Trust'], ['Top 10', 'Regional Ranking'], ['No.1', 'Holistic Care']].map(([value, label]) => (
                   <div key={label} className="rounded-xl bg-white/90 px-3 py-4 shadow-sm shadow-cardinal/10">
-                    <p className="text-2xl font-semibold text-cardinal">{value}</p>
+                    <p className="text-2xl font-semibold text-black">{value}</p>
                     <p className="text-xs uppercase tracking-[0.18em] text-midnight/70">{label}</p>
                   </div>
                 ))}

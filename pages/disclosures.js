@@ -52,7 +52,7 @@ export default function DisclosuresPage() {
         <main className="flex-1 py-16">
           <div className="max-w-4xl mx-auto px-6 space-y-8">
             <div className="space-y-3 text-center">
-              <h1 className="text-3xl font-semibold text-cardinal">Mandatory Disclosures</h1>
+              <h1 className="text-3xl font-semibold text-black">Mandatory Disclosures</h1>
               <p className="text-gray-600">
                 Access downloadable copies of our statutory documents. Each link will provide a PDF download; updated files
                 will be added as soon as they are available.
@@ -66,8 +66,8 @@ export default function DisclosuresPage() {
                   download
                   className="flex items-center justify-between rounded-2xl border border-cardinal/15 bg-white px-5 py-4 transition-colors hover:border-cardinal hover:bg-cardinal/5"
                 >
-                  <span className="font-medium text-cardinal">{item.title}</span>
-                  <span className="text-sm font-semibold text-cardinal/70">Download</span>
+                  <span className="font-medium text-black">{item.title}</span>
+                  <span className="text-sm font-semibold text-black">Download</span>
                 </a>
               ))}
             </div>

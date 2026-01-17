@@ -41,7 +41,7 @@ export default function AboutPage() {
           <section className="py-16 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-6">
               <div className="text-center space-y-3">
-                <h2 className="text-3xl font-semibold text-cardinal">Leadership &amp; Governance</h2>
+                <h2 className="text-3xl font-semibold text-black">Leadership &amp; Governance</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                   Explore the voices and councils that guide The Elden Heights School. Each pillar offers a deeper look at our philosophy, mentors, and stewardship.
                 </p>
@@ -60,9 +60,9 @@ export default function AboutPage() {
                   <Link
                     key={card.href}
                     href={card.href}
-                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-cardinal transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-cardinal/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-black transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-cardinal group-hover:text-cardinal/90">
+                    <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-black group-hover:text-black">
                       {card.label}
                     </span>
                     <div className="absolute inset-x-4 bottom-4 h-0.5 rounded-full bg-cardinal/20 transition-all duration-300 group-hover:bottom-6 group-hover:h-1 group-hover:bg-cardinal/40" />
@@ -75,7 +75,7 @@ export default function AboutPage() {
             <div className="max-w-5xl mx-auto px-6 space-y-12">
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-cardinal">Note from the Principal</h2>
+                  <h2 className="text-3xl font-semibold text-black">Note from the Principal</h2>
                     <p>
                       At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.
                     </p>
@@ -91,7 +91,7 @@ export default function AboutPage() {
                     <p>
                       Your child deserves a school that believes in their potential and helps them rise towards it every day. That is the promise of The Elden Heights.
                     </p>
-                  <p className="font-semibold text-cardinal">- R.K Singh</p>
+                  <p className="font-semibold text-black">- R.K Singh</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
@@ -108,7 +108,7 @@ export default function AboutPage() {
               </div>
               <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-cardinal">Note from the MD </h2>
+                  <h2 className="text-3xl font-semibold text-black">Note from the MD </h2>
                     <p>
                       The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.
                     </p>
@@ -127,7 +127,7 @@ export default function AboutPage() {
                     <p>
                       The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.
                     </p>
-                  <p className="font-semibold text-cardinal">- Mr. Shashi Shankar Prasad</p>
+                  <p className="font-semibold text-black">- Mr. Shashi Shankar Prasad</p>
                 </div>
                 <div className="w-full max-w-md mx-auto lg:mx-0">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-cardinal/60 bg-white shadow-sm">
@@ -146,7 +146,7 @@ export default function AboutPage() {
           <section className="py-16 bg-[#f3ede7]">
             <div className="max-w-5xl mx-auto px-6 space-y-8">
               <div className="text-center space-y-3">
-                <h2 className="text-3xl font-semibold text-cardinal">Mission and Vision Statement</h2>
+                <h2 className="text-3xl font-semibold text-black">Mission and Vision Statement</h2>
                 <p className="max-w-3xl mx-auto text-gray-700">
                   Discover the legacy behind The Elden Heights School. Expand the panel below to explore how our emblem, ethos, and four-stage philosophy guide every learner toward eternal glory.
                 </p>
@@ -155,12 +155,12 @@ export default function AboutPage() {
                 <details className="group" open>
                   <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-lg font-semibold text-midnight">
                     <span className="flex items-center gap-3">
-                      <span className="h-10 w-10 rounded-full bg-cardinal/10 text-cardinal grid place-items-center font-semibold">MV</span>
-                      <span className="text-cardinal">Mission &amp; Vision</span>
+                      <span className="h-10 w-10 rounded-full bg-cardinal/10 text-black grid place-items-center font-semibold">MV</span>
+                      <span className="text-black">Mission &amp; Vision</span>
                     </span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 transform text-cardinal transition duration-300 group-open:rotate-180"
+                      className="h-5 w-5 transform text-black transition duration-300 group-open:rotate-180"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -172,7 +172,7 @@ export default function AboutPage() {
                   <div className="flex flex-col gap-8 border-t border-cardinal/10 bg-white px-6 pb-8 pt-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-start">
                     <div className="space-y-6 text-gray-700 lg:pr-4">
                       <div className="space-y-3">
-                        <h3 className="text-2xl font-semibold text-cardinal">Vision</h3>
+                        <h3 className="text-2xl font-semibold text-black">Vision</h3>
                         <p>
                           The Elden Heights School stands as a citadel of heritage and aspiration, where education is not the mere transfer of knowledge but the cultivation of greatness across generations. The very name Elden Heights embodies our purpose: “Elden” signifying the timeless journey of growing old with wisdom, and “Heights” symbolizing the relentless ascent toward excellence and elevated achievement. Together, the name evokes a legacy of refinement, endurance, and elevation.
                         </p>
@@ -184,21 +184,21 @@ export default function AboutPage() {
                         </p>
                       </div>
                       <div className="space-y-3">
-                        <h3 className="text-2xl font-semibold text-cardinal">Mission</h3>
+                        <h3 className="text-2xl font-semibold text-black">Mission</h3>
                         <p>
                           The mission of The Elden Heights School is to craft not merely scholars, but legacies. We exist to shape a student’s journey through the four timeless stages of life, each one refining their character and elevating their destiny.
                         </p>
                         <p>
-                          <strong className="text-cardinal">Roots:</strong> At the foundation, we instill discipline, virtue, and cultural heritage. Here the child is grounded, like the roots of an ancient tree, drawing strength from values that endure through every age.
+                          <strong className="text-black">Roots:</strong> At the foundation, we instill discipline, virtue, and cultural heritage. Here the child is grounded, like the roots of an ancient tree, drawing strength from values that endure through every age.
                         </p>
                         <p>
-                          <strong className="text-cardinal">Ascent:</strong> With a firm foundation, the learner begins to rise. This stage is defined by exploration, resilience, and intellectual awakening. We nurture a spirit that questions, seeks, and climbs with dignity and perseverance toward knowledge and truth.
+                          <strong className="text-black">Ascent:</strong> With a firm foundation, the learner begins to rise. This stage is defined by exploration, resilience, and intellectual awakening. We nurture a spirit that questions, seeks, and climbs with dignity and perseverance toward knowledge and truth.
                         </p>
                         <p>
-                          <strong className="text-cardinal">Radiance:</strong> As wisdom matures, the individual begins to illuminate. In this stage, talents unfold and leadership emerges. Students radiate brilliance through creativity, innovation, and excellence, becoming beacons of inspiration within their communities and beyond.
+                          <strong className="text-black">Radiance:</strong> As wisdom matures, the individual begins to illuminate. In this stage, talents unfold and leadership emerges. Students radiate brilliance through creativity, innovation, and excellence, becoming beacons of inspiration within their communities and beyond.
                         </p>
                         <p>
-                          <strong className="text-cardinal">Eternity:</strong> The pinnacle stage, where learning transcends achievement and becomes legacy. Here, the Eldenite rises beyond self-interest to embody purpose, virtue, and vision that echo through generations. This is the stage of eternal glory, the fulfillment of The Elden Heights journey.
+                          <strong className="text-black">Eternity:</strong> The pinnacle stage, where learning transcends achievement and becomes legacy. Here, the Eldenite rises beyond self-interest to embody purpose, virtue, and vision that echo through generations. This is the stage of eternal glory, the fulfillment of The Elden Heights journey.
                         </p>
                         <p>
                           The name Elden Heights is fulfilled in this mission: “Elden” to grow wiser with age, and “Heights” to ascend beyond limitation. The eagle with its four wings embodies these stages, carrying the torch of enlightenment as a symbol of knowledge that never fades. Each student, through this sacred passage, is prepared not merely for success, but for significance, to rise, to lead, and to leave behind a mark that is eternal.
@@ -207,7 +207,7 @@ export default function AboutPage() {
                     </div>
                     <div className="relative ml-auto flex w-full max-w-xs flex-col items-center justify-start overflow-hidden rounded-2xl border border-dashed border-cardinal/30 bg-ivory p-4 shadow-md shadow-cardinal/10 lg:mt-0">
                       <div className="h-40 w-full rounded-xl bg-white" />
-                      <p className="mt-3 text-center text-sm font-medium text-cardinal/80">Reserved space for mission &amp; vision imagery</p>
+                      <p className="mt-3 text-center text-sm font-medium text-black">Reserved space for mission &amp; vision imagery</p>
                     </div>
                   </div>
                 </details>
@@ -216,7 +216,7 @@ export default function AboutPage() {
           </section>
           <section className="py-20 bg-white">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h2 className="text-3xl font-semibold text-cardinal">Principles and Policies</h2>
+              <h2 className="text-3xl font-semibold text-black">Principles and Policies</h2>
               <p className="text-gray-600">
                 Our policies reflect the values and safeguards that guide The Elden Heights School. Explore each policy to understand
                 how we protect and support our students, parents, and staff community.
@@ -224,7 +224,7 @@ export default function AboutPage() {
               <ul className="grid gap-4 sm:grid-cols-2">
                 {policies.map((policy) => (
                   <li key={policy.href} className="rounded-2xl border border-cardinal/20 bg-cardinal/5 px-5 py-4 transition hover:border-cardinal hover:bg-white">
-                    <Link href={policy.href} className="block text-cardinal font-semibold">
+                    <Link href={policy.href} className="block text-black font-semibold">
                       {policy.title}
                     </Link>
                   </li>

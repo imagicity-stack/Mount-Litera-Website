@@ -184,16 +184,16 @@ export default function AwardsAndRecognitionPage() {
           <section className="bg-ivory border-b border-cardinal/10">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start">
               <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-cardinal/70">Awards</p>
-                <h1 className="text-4xl font-semibold text-cardinal">Awards and Recognition</h1>
+                <p className="text-xs uppercase tracking-[0.35em] text-black">Awards</p>
+                <h1 className="text-4xl font-semibold text-black">Awards and Recognition</h1>
                 <p className="text-gray-700 leading-relaxed">
                   Our honours uphold dignity, scarcity, and purpose. Each is conferred only after careful evaluation to ensure
                   it truly reflects the Elden standard of excellence, character, and contribution.
                 </p>
               </div>
               <div className="bg-white border border-cardinal/10 shadow-sm p-6 space-y-3">
-                <p className="text-sm uppercase tracking-[0.25em] text-cardinal/60">Navigate</p>
-                <h2 className="text-2xl font-semibold text-cardinal">Back to Core</h2>
+                <p className="text-sm uppercase tracking-[0.25em] text-black">Navigate</p>
+                <h2 className="text-2xl font-semibold text-black">Back to Core</h2>
                 <p className="text-gray-700 leading-relaxed">
                   Return to the core sections to explore governance, committees, and mentor-led initiatives that shape every
                   Eldenite.
@@ -221,7 +221,7 @@ export default function AwardsAndRecognitionPage() {
           <section id="awards" className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-10">
               <div className="space-y-3 max-w-4xl">
-                <h2 className="text-3xl font-semibold text-cardinal">Awards and Recognition</h2>
+                <h2 className="text-3xl font-semibold text-black">Awards and Recognition</h2>
                 <p className="text-gray-700 leading-relaxed">
                   Our awards honour excellence, integrity, growth, and contribution. Each recognition is conferred through a
                   balanced approach that combines holistic judgement with clearly defined academic benchmarks where required.
@@ -233,8 +233,8 @@ export default function AwardsAndRecognitionPage() {
                 {awards.map((award) => (
                   <div key={award.name} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-4">
                     <div className="space-y-1">
-                      <p className="text-xs uppercase tracking-[0.3em] text-cardinal/60">Honour</p>
-                      <h3 className="text-2xl font-semibold text-cardinal">{award.name}</h3>
+                      <p className="text-xs uppercase tracking-[0.3em] text-black">Honour</p>
+                      <h3 className="text-2xl font-semibold text-black">{award.name}</h3>
                     </div>
                     <div className="space-y-3 text-gray-800 text-sm leading-relaxed">
                       <p>
@@ -271,14 +271,14 @@ export default function AwardsAndRecognitionPage() {
                         </div>
                       )}
 
-                      {award.note && <p className="text-cardinal font-medium">{award.note}</p>}
+                      {award.note && <p className="text-black font-medium">{award.note}</p>}
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-3">
-                <h3 className="text-2xl font-semibold text-cardinal">A Culture of Meaningful Recognition</h3>
+                <h3 className="text-2xl font-semibold text-black">A Culture of Meaningful Recognition</h3>
                 <p className="text-gray-800 leading-relaxed">
                   At The Elden Heights, awards are not distributed for participation. They are conferred for purpose. Each
                   recognition reflects our belief that true excellence lies not only in achievement, but in character,

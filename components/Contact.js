@@ -94,7 +94,7 @@ export default function Contact() {
                 <div className="mt-3 flex flex-wrap gap-3">
                   <a
                     href="tel:+919431904333"
-                    className="inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-cardinal"
+                    className="inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
                   >
                     Call Now
                   </a>
@@ -182,7 +182,7 @@ export default function Contact() {
             </button>
             {status.message && (
               <p
-                className={`text-sm ${status.type === 'error' ? 'text-red-600' : 'text-green-700'}`}
+                className={`text-sm ${status.type === 'error' ? 'text-black' : 'text-black'}`}
               >
                 {status.message}
               </p>

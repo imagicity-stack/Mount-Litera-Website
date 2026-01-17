@@ -65,8 +65,8 @@ export default function GalleryPage() {
         <main className="flex-1">
           <section className="bg-gradient-to-b from-cardinal/5 via-white to-white py-16">
             <div className="max-w-6xl mx-auto px-6">
-              <p className="text-sm uppercase tracking-[0.3em] text-cardinal/70">Our Story in Frames</p>
-              <h1 className="mt-4 text-3xl md:text-4xl font-bold text-cardinal">Gallery</h1>
+              <p className="text-sm uppercase tracking-[0.3em] text-black">Our Story in Frames</p>
+              <h1 className="mt-4 text-3xl md:text-4xl font-bold text-black">Gallery</h1>
               <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-700">
                 Take a walk through our classrooms, celebrations, and sports fields. Every photograph captures the joy of learning,
                 the spirit of teamwork, and the community that makes The Elden Heights School feel like home.
@@ -74,8 +74,8 @@ export default function GalleryPage() {
               <div className="mt-8 rounded-3xl bg-white/80 p-6 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-cardinal/10 backdrop-blur">
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.25em] text-cardinal/70">Experience</p>
-                    <h2 className="mt-2 text-2xl font-semibold text-cardinal">Life at The Elden Heights School</h2>
+                    <p className="text-sm uppercase tracking-[0.25em] text-black">Experience</p>
+                    <h2 className="mt-2 text-2xl font-semibold text-black">Life at The Elden Heights School</h2>
                     <p className="mt-2 max-w-2xl text-gray-700">
                       From immersive lessons to spirited performances and athletic triumphs, explore moments that inspire our students
                       to dream bigger every day.

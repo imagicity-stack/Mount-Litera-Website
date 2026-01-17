@@ -73,16 +73,16 @@ export default function CorePage() {
           <section className="bg-ivory border-b border-cardinal/10">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start">
               <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-cardinal/70">Core Pillars</p>
-                <h1 className="text-4xl font-semibold text-cardinal">Legacy, Discipline, Distinction</h1>
+                <p className="text-xs uppercase tracking-[0.35em] text-black">Core Pillars</p>
+                <h1 className="text-4xl font-semibold text-black">Legacy, Discipline, Distinction</h1>
                 <p className="text-gray-700 leading-relaxed">
                   The Core space gathers the honours that safeguard our heritage and celebrate disciplined growth. Explore the
                   recognitions that uphold The Elden Heights ethos.
                 </p>
               </div>
               <div className="bg-white border border-cardinal/10 shadow-sm p-6 space-y-3">
-                <p className="text-sm uppercase tracking-[0.25em] text-cardinal/60">Essence</p>
-                <h2 className="text-2xl font-semibold text-cardinal">Recognition with Purpose</h2>
+                <p className="text-sm uppercase tracking-[0.25em] text-black">Essence</p>
+                <h2 className="text-2xl font-semibold text-black">Recognition with Purpose</h2>
                 <p className="text-gray-700 leading-relaxed">
                   Every accolade and leadership body exists to preserve dignity, scarcity, and accountability—ensuring the Elden
                   standard remains uncompromised.
@@ -94,7 +94,7 @@ export default function CorePage() {
           <section className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-8">
               <div className="space-y-3 max-w-4xl">
-                <h2 className="text-3xl font-semibold text-cardinal">Core Sections</h2>
+                <h2 className="text-3xl font-semibold text-black">Core Sections</h2>
               </div>
 
               <div className="grid gap-6 md:grid-cols-1">
@@ -106,8 +106,8 @@ export default function CorePage() {
                     <div className="grid gap-6 md:grid-cols-[1.1fr,0.9fr] items-stretch">
                       <div className="p-6 md:p-8 space-y-4">
                         <div className="space-y-1">
-                          <p className="text-xs uppercase tracking-[0.3em] text-cardinal/60">Section</p>
-                          <h3 className="text-2xl font-semibold text-cardinal">{section.title}</h3>
+                          <p className="text-xs uppercase tracking-[0.3em] text-black">Section</p>
+                          <h3 className="text-2xl font-semibold text-black">{section.title}</h3>
                         </div>
                         <p className="text-gray-800 leading-relaxed text-sm">{section.description}</p>
                         <Link
@@ -146,8 +146,8 @@ export default function CorePage() {
             <div className="max-w-6xl mx-auto px-6 space-y-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-cardinal/70">Accreditation</p>
-                  <h2 className="text-3xl font-semibold text-cardinal">Standards, Trust, and Compliance</h2>
+                  <p className="text-xs uppercase tracking-[0.3em] text-black">Accreditation</p>
+                  <h2 className="text-3xl font-semibold text-black">Standards, Trust, and Compliance</h2>
                 </div>
                 <p className="text-sm text-gray-700 md:max-w-xl leading-relaxed">
                   Review the honours, registrations, and certifications that underpin The Elden Heights School’s operations and
@@ -162,9 +162,9 @@ export default function CorePage() {
                       key={item.title}
                       className="snap-start min-w-[260px] md:min-w-[300px] bg-white border border-cardinal/15 shadow-sm p-5 flex flex-col gap-2"
                     >
-                      <p className="text-xs uppercase tracking-[0.28em] text-cardinal/60">Accolade</p>
-                      <h3 className="text-xl font-semibold text-cardinal">{item.title}</h3>
-                      <p className="text-sm text-cardinal/80 font-medium">{item.detail}</p>
+                      <p className="text-xs uppercase tracking-[0.28em] text-black">Accolade</p>
+                      <h3 className="text-xl font-semibold text-black">{item.title}</h3>
+                      <p className="text-sm text-black font-medium">{item.detail}</p>
                       <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
                     </div>
                   ))}

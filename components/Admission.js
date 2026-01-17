@@ -27,7 +27,7 @@ export default function Admission() {
               </p>
               <div className="flex flex-wrap gap-3 text-sm text-midnight/70">
                 {['Curated mentorship', 'Culture of excellence', 'Future-ready classrooms'].map((item) => (
-                  <span key={item} className="inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-3 py-2 font-semibold text-cardinal">
+                  <span key={item} className="inline-flex items-center gap-2 rounded-full bg-cardinal/10 px-3 py-2 font-semibold text-black">
                     <span className="h-1.5 w-1.5 rounded-full bg-cardinal" />
                     {item}
                   </span>
@@ -55,7 +55,7 @@ export default function Admission() {
             >
               <div className="relative flex h-full items-center justify-center p-10">
                 <div className="rounded-2xl border border-cardinal/15 bg-white p-8 text-center shadow-md">
-                  <p className="text-sm uppercase tracking-[0.3em] text-cardinal/80">Exclusive Entry</p>
+                  <p className="text-sm uppercase tracking-[0.3em] text-black">Exclusive Entry</p>
                   <p className="mt-3 text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
                   <p className="mt-2 text-midnight/70">Limited seats crafted for families seeking an elite, heritage-inspired education.</p>
                 </div>

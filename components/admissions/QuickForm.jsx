@@ -225,8 +225,8 @@ export default function QuickForm() {
     <section id="admissions-form" className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center space-y-3">
-          <p className="text-xs uppercase tracking-[0.3em] text-cardinal">Secure Your Seat</p>
-          <h2 className="text-3xl font-semibold text-cardinal">Quick Admission Form</h2>
+          <p className="text-xs uppercase tracking-[0.3em] text-black">Secure Your Seat</p>
+          <h2 className="text-3xl font-semibold text-black">Quick Admission Form</h2>
           <p className="text-gray-600">Complete the form and pay the refundable ₹500 token to hold your child’s seat.</p>
         </div>
         <div className="mt-10">
@@ -235,7 +235,7 @@ export default function QuickForm() {
             className="grid grid-cols-1 gap-6 rounded-3xl bg-[#F8F5F3] p-8 shadow-xl"
           >
             <div className="flex flex-col space-y-2">
-              <label htmlFor="studentName" className="text-sm font-semibold text-cardinal">
+              <label htmlFor="studentName" className="text-sm font-semibold text-black">
                 Student Name
               </label>
               <input
@@ -250,7 +250,7 @@ export default function QuickForm() {
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="classApplyingFor" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="classApplyingFor" className="text-sm font-semibold text-black">
               Class Applying For
             </label>
             <select
@@ -270,7 +270,7 @@ export default function QuickForm() {
             </select>
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="parentName" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="parentName" className="text-sm font-semibold text-black">
               Parent Name
             </label>
             <input
@@ -285,7 +285,7 @@ export default function QuickForm() {
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="phoneNumber" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="phoneNumber" className="text-sm font-semibold text-black">
               Phone Number
             </label>
             <input
@@ -301,7 +301,7 @@ export default function QuickForm() {
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="city" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="city" className="text-sm font-semibold text-black">
               City
             </label>
             <input
@@ -316,7 +316,7 @@ export default function QuickForm() {
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="email" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="email" className="text-sm font-semibold text-black">
               Email ID
             </label>
             <input
@@ -332,7 +332,7 @@ export default function QuickForm() {
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="address" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="address" className="text-sm font-semibold text-black">
               Address
             </label>
             <textarea
@@ -347,7 +347,7 @@ export default function QuickForm() {
           </div>
           {shouldShowPreviousSchool && (
             <div className="flex flex-col space-y-2">
-              <label htmlFor="previousSchool" className="text-sm font-semibold text-cardinal">
+              <label htmlFor="previousSchool" className="text-sm font-semibold text-black">
                 Previous School
               </label>
               <input
@@ -362,7 +362,7 @@ export default function QuickForm() {
             </div>
           )}
           <div className="flex flex-col space-y-2">
-            <label htmlFor="reasonForAdmission" className="text-sm font-semibold text-cardinal">
+            <label htmlFor="reasonForAdmission" className="text-sm font-semibold text-black">
               Reason for Admission (Optional)
             </label>
             <textarea
@@ -379,18 +379,18 @@ export default function QuickForm() {
             <input
               id="policyAcknowledgement"
               type="checkbox"
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-cardinal focus:ring-cardinal"
+              className="mt-1 h-4 w-4 rounded border-gray-300 text-black focus:ring-cardinal"
               checked={hasAcceptedPolicies}
               onChange={(event) => setHasAcceptedPolicies(event.target.checked)}
               required
             />
             <label htmlFor="policyAcknowledgement" className="leading-relaxed">
               I have read{' '}
-              <Link href="/terms-and-conditions" className="text-cardinal underline">
+              <Link href="/terms-and-conditions" className="text-black underline">
                 terms and conditions
               </Link>{' '}
               &amp;{' '}
-              <Link href="/policies/admission-policy" className="text-cardinal underline">
+              <Link href="/policies/admission-policy" className="text-black underline">
                 admission policy
               </Link>
               .
@@ -400,7 +400,7 @@ export default function QuickForm() {
               <button
                 type="submit"
                 disabled={isSubmitting || !hasAcceptedPolicies}
-                className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-cardinal border border-cardinal disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Processing…' : 'Submit & Pay ₹500 Token'}
               </button>
@@ -412,8 +412,8 @@ export default function QuickForm() {
               <div
                 className={`rounded-lg border p-4 text-sm md:text-base ${
                   status.type === 'success'
-                    ? 'border-green-200 bg-green-50 text-green-700'
-                    : 'border-red-200 bg-red-50 text-red-700'
+                    ? 'border-green-200 bg-green-50 text-black'
+                    : 'border-red-200 bg-red-50 text-black'
                 }`}
               >
                 {status.message}
