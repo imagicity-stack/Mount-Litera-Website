@@ -9,14 +9,18 @@ const coreSections = [
     description:
       'Discover the honours that celebrate excellence, integrity, leadership, and growth across The Elden Heights.',
     href: '/awards-and-recognition',
-    cta: 'View Awards'
+    cta: 'View Awards',
+    image: '/website/images/awards%20and%20recognitions.png',
+    imageAlt: 'Students receiving awards and recognitions'
   },
   {
     title: 'Beyond Academics',
     description:
       'Explore the dual pathways—Co Curricular Clubs and the Life Readiness Program—that shape confident, well-rounded Eldenites.',
     href: '/beyond-academics',
-    cta: 'Explore'
+    cta: 'Explore',
+    image: '/website/images/beyond%20academics.png',
+    imageAlt: 'Students participating in beyond academics activities'
   }
 ];
 
@@ -95,28 +99,43 @@ export default function CorePage() {
 
               <div className="grid gap-6 md:grid-cols-1">
                 {coreSections.map((section) => (
-                  <div key={section.title} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-4">
-                    <div className="space-y-1">
-                      <p className="text-xs uppercase tracking-[0.3em] text-cardinal/60">Section</p>
-                      <h3 className="text-2xl font-semibold text-cardinal">{section.title}</h3>
+                  <div
+                    key={section.title}
+                    className="border border-cardinal/15 bg-ivory/60 shadow-sm overflow-hidden"
+                  >
+                    <div className="grid gap-6 md:grid-cols-[1.1fr,0.9fr] items-stretch">
+                      <div className="p-6 md:p-8 space-y-4">
+                        <div className="space-y-1">
+                          <p className="text-xs uppercase tracking-[0.3em] text-cardinal/60">Section</p>
+                          <h3 className="text-2xl font-semibold text-cardinal">{section.title}</h3>
+                        </div>
+                        <p className="text-gray-800 leading-relaxed text-sm">{section.description}</p>
+                        <Link
+                          href={section.href}
+                          className="inline-flex items-center justify-center bg-cardinal text-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] shadow-sm shadow-cardinal/20 hover:bg-cardinal/90 transition"
+                        >
+                          {section.cta}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            className="ml-3 h-4 w-4"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                          </svg>
+                        </Link>
+                      </div>
+                      <div className="h-full bg-white/80">
+                        <img
+                          src={section.image}
+                          alt={section.imageAlt}
+                          className="w-full h-full object-cover max-h-72 md:max-h-none"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
-                    <p className="text-gray-800 leading-relaxed text-sm">{section.description}</p>
-                    <Link
-                      href={section.href}
-                      className="inline-flex items-center justify-center bg-cardinal text-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] shadow-sm shadow-cardinal/20 hover:bg-cardinal/90 transition"
-                    >
-                      {section.cta}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        className="ml-3 h-4 w-4"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                      </svg>
-                    </Link>
                   </div>
                 ))}
               </div>
