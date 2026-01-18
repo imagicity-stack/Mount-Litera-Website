@@ -142,7 +142,7 @@ export default function CorePage() {
             </div>
           </section>
 
-          <section className="py-16 md:py-20 bg-ivory">
+          <section id="accreditation" className="py-16 md:py-20 bg-ivory">
             <div className="max-w-6xl mx-auto px-6 space-y-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
