@@ -175,8 +175,8 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
-            <div className="flex w-full flex-col justify-center px-6 pb-8 md:w-1/2 md:px-10 md:pb-0">
+          <div className="flex flex-1 flex-col overflow-hidden md:flex-row md:items-center md:justify-start md:gap-12">
+            <div className="flex w-full flex-col justify-center px-6 pb-8 md:w-[360px] md:px-10 md:pb-0">
               <div className="hidden flex-col space-y-4 md:flex">
                 {navItems.map((item, idx) => {
                   const isActive = activeMenu === item.label;
@@ -266,7 +266,7 @@ export default function Navbar() {
                 })}
               </div>
             </div>
-            <div className="hidden w-full md:block md:w-1/2 md:px-4">
+            <div className="hidden w-full md:block md:flex-1 md:pr-10">
               {navItems
                 .find((item) => item.label === activeMenu)
                 ?.subItems && (
