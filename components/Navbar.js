@@ -175,8 +175,8 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
-            <div className="flex w-full flex-col justify-center px-6 pb-8 md:w-1/2 md:px-10 md:pb-0">
+          <div className="flex flex-1 flex-col overflow-hidden md:flex-row md:items-center md:justify-start md:gap-12">
+            <div className="flex w-full flex-col justify-center px-6 pb-8 md:w-[360px] md:px-10 md:pb-0">
               <div className="hidden flex-col space-y-4 md:flex">
                 {navItems.map((item, idx) => {
                   const isActive = activeMenu === item.label;
@@ -202,6 +202,7 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      onClick={() => setMenuOpen(false)}
                       className={`text-3xl font-semibold leading-tight tracking-tight text-gold transition duration-500 md:text-5xl ${
                         menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                       }`}
@@ -221,6 +222,7 @@ export default function Navbar() {
                       <Link
                         key={`${item.label}-mobile-link`}
                         href={item.href}
+                        onClick={() => setMenuOpen(false)}
                         className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.18em] text-gold transition hover:text-parchment"
                       >
                         {item.label}
@@ -251,6 +253,7 @@ export default function Navbar() {
                             <Link
                               key={subItem.href}
                               href={subItem.href}
+                              onClick={() => setMenuOpen(false)}
                               className="block text-sm text-gold/80 transition hover:text-parchment"
                             >
                               {subItem.label}
@@ -263,7 +266,7 @@ export default function Navbar() {
                 })}
               </div>
             </div>
-            <div className="hidden w-full md:block md:w-1/2 md:px-4">
+            <div className="hidden w-full md:block md:flex-1 md:pr-10">
               {navItems
                 .find((item) => item.label === activeMenu)
                 ?.subItems && (
@@ -278,6 +281,7 @@ export default function Navbar() {
                         <Link
                           key={subItem.href}
                           href={subItem.href}
+                          onClick={() => setMenuOpen(false)}
                           className="flex items-center justify-between text-lg font-semibold transition hover:text-parchment"
                         >
                           {subItem.label}
