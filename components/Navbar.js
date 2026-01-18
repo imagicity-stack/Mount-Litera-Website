@@ -4,10 +4,39 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Core', href: '/core' },
-  { label: 'Academics', href: '/academics' },
+  {
+    label: 'About',
+    href: '/about',
+    subItems: [
+      { label: 'About', href: '/about' },
+      { label: "Principal's Note", href: '/about#principal-note' },
+      { label: "MD's Note", href: '/about#md-note' },
+      { label: 'Mission and Vision', href: '/about#mission-vision' },
+      { label: 'The Elden Council', href: '/the-elden-council' },
+      { label: 'Core Mentors', href: '/core-mentors' },
+      { label: 'Managing Committee', href: '/managing-committee' }
+    ]
+  },
+  {
+    label: 'Core',
+    href: '/core',
+    subItems: [
+      { label: 'Core', href: '/core' },
+      { label: 'Awards And Recognition', href: '/awards-and-recognition' },
+      { label: 'BEYOND Academics', href: '/beyond-academics' },
+      { label: 'Accreditation', href: '/core#accreditation' }
+    ]
+  },
+  {
+    label: 'Academics',
+    href: '/academics',
+    subItems: [
+      { label: 'Academics', href: '/academics' },
+      { label: 'Learning journey', href: '/academics#learning-journey' },
+      { label: 'Teaching, support', href: '/academics#teaching-support' },
+      { label: 'Beyond textbooks', href: '/academics#beyond-textbooks' }
+    ]
+  },
   { label: 'Admission', href: '/admission' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Careers', href: '/careers' },
@@ -24,6 +53,9 @@ const quickLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const defaultMenu = navItems.find((item) => item.subItems)?.label ?? '';
+  const [activeMenu, setActiveMenu] = useState(defaultMenu);
+  const [mobileOpenMenu, setMobileOpenMenu] = useState(defaultMenu);
   const previousOverflow = useRef({ html: '', body: '' });
   const router = useRouter();
 
@@ -44,6 +76,13 @@ export default function Navbar() {
       router.events.off('routeChangeComplete', handleRoute);
     };
   }, [router]);
+
+  useEffect(() => {
+    if (menuOpen && defaultMenu) {
+      setActiveMenu((current) => current || defaultMenu);
+      setMobileOpenMenu((current) => current || defaultMenu);
+    }
+  }, [menuOpen, defaultMenu]);
 
   useEffect(() => {
     const body = document.body;
@@ -80,7 +119,7 @@ export default function Navbar() {
         className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-black/15`}
       >
         <div className="mx-auto flex w-full max-w-full items-center justify-between px-5 py-4 md:px-8 lg:px-10">
-          <div className="flex items-center">
+          <Link href="/" aria-label="Go to home page" className="flex items-center">
             <Image
               src="/website/header.png"
               alt="The Elden Heights School logo"
@@ -89,7 +128,7 @@ export default function Navbar() {
               className="h-[60px] w-auto md:h-[70px] lg:h-[80px]"
               priority
             />
-          </div>
+          </Link>
           <button
             type="button"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -116,14 +155,16 @@ export default function Navbar() {
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-6 py-5 md:px-10">
-            <Image
-              src="/website/header.png"
-              alt="The Elden Heights School logo"
-              width={220}
-              height={100}
-              className="h-[50px] w-auto md:h-[60px]"
-              priority
-            />
+            <Link href="/" aria-label="Go to home page" className="flex items-center">
+              <Image
+                src="/website/header.png"
+                alt="The Elden Heights School logo"
+                width={220}
+                height={100}
+                className="h-[50px] w-auto md:h-[60px]"
+                priority
+              />
+            </Link>
             <button
               type="button"
               aria-label="Close menu"
@@ -135,21 +176,118 @@ export default function Navbar() {
           </div>
 
           <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
-            <div className="flex w-full flex-col justify-center space-y-4 px-6 pb-12 md:w-1/2 md:px-10 md:pb-0">
-              {navItems.map((item, idx) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`text-3xl font-semibold leading-tight tracking-tight text-gold transition duration-500 md:text-5xl ${
-                    menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${idx * 80}ms` }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <div className="flex w-full flex-col justify-center px-6 pb-8 md:w-1/2 md:px-10 md:pb-0">
+              <div className="hidden flex-col space-y-4 md:flex">
+                {navItems.map((item, idx) => {
+                  const isActive = activeMenu === item.label;
+                  const hasSubItems = Boolean(item.subItems?.length);
+
+                  if (hasSubItems) {
+                    return (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => setActiveMenu(item.label)}
+                        className={`text-left text-3xl font-semibold leading-tight tracking-tight transition duration-500 md:text-5xl ${
+                          isActive ? 'text-parchment' : 'text-gold'
+                        } ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                        style={{ transitionDelay: `${idx * 80}ms` }}
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`text-3xl font-semibold leading-tight tracking-tight text-gold transition duration-500 md:text-5xl ${
+                        menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                      }`}
+                      style={{ transitionDelay: `${idx * 80}ms` }}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+              <div className="space-y-3 md:hidden">
+                {navItems.map((item) => {
+                  const hasSubItems = Boolean(item.subItems?.length);
+
+                  if (!hasSubItems) {
+                    return (
+                      <Link
+                        key={`${item.label}-mobile-link`}
+                        href={item.href}
+                        className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.18em] text-gold transition hover:text-parchment"
+                      >
+                        {item.label}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    );
+                  }
+
+                  const isOpen = mobileOpenMenu === item.label;
+                  return (
+                    <div key={`${item.label}-mobile`} className="space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => setMobileOpenMenu(isOpen ? '' : item.label)}
+                        className="flex w-full items-center justify-between text-sm font-semibold uppercase tracking-[0.18em] text-gold transition hover:text-parchment"
+                      >
+                        {item.label}
+                        <span
+                          className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                          aria-hidden="true"
+                        >
+                          ▾
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div className="space-y-2 pl-4">
+                          {item.subItems.map((subItem) => (
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              className="block text-sm text-gold/80 transition hover:text-parchment"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="hidden flex-1 md:block" />
+            <div className="hidden w-full md:block md:w-1/2 md:px-4">
+              {navItems
+                .find((item) => item.label === activeMenu)
+                ?.subItems && (
+                <div className="space-y-6">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-gold/70">
+                    {activeMenu}
+                  </h3>
+                  <div className="space-y-4 text-gold">
+                    {navItems
+                      .find((item) => item.label === activeMenu)
+                      ?.subItems.map((subItem) => (
+                        <Link
+                          key={subItem.href}
+                          href={subItem.href}
+                          className="flex items-center justify-between text-lg font-semibold transition hover:text-parchment"
+                        >
+                          {subItem.label}
+                          <span aria-hidden="true">→</span>
+                        </Link>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="border-t border-gold/40 px-6 py-5 md:px-10">
