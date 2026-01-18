@@ -75,7 +75,7 @@ export default function AboutPage() {
             <div className="max-w-5xl mx-auto px-6 space-y-12">
               <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-black">Note from the Principal</h2>
+                  <h2 id="principal-note" className="text-3xl font-semibold text-black">Note from the Principal</h2>
                     <p>
                       At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.
                     </p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
               </div>
               <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-semibold text-black">Note from the MD </h2>
+                  <h2 id="md-note" className="text-3xl font-semibold text-black">Note from the MD </h2>
                     <p>
                       The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.
                     </p>
@@ -146,7 +146,7 @@ export default function AboutPage() {
           <section className="py-16 bg-[#f3ede7]">
             <div className="max-w-5xl mx-auto px-6 space-y-8">
               <div className="text-center space-y-3">
-                <h2 className="text-3xl font-semibold text-black">Mission and Vision Statement</h2>
+                <h2 id="mission-vision" className="text-3xl font-semibold text-black">Mission and Vision Statement</h2>
                 <p className="max-w-3xl mx-auto text-gray-700">
                   Discover the legacy behind The Elden Heights School. Expand the panel below to explore how our emblem, ethos, and four-stage philosophy guide every learner toward eternal glory.
                 </p>

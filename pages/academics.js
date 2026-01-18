@@ -156,7 +156,7 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-[#F8F5F3]">
+          <section id="learning-journey" className="py-20 bg-[#F8F5F3]">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
               <div className="max-w-3xl space-y-3">
                 <h2 className="text-2xl md:text-3xl font-semibold text-black">The Elden Heights learning journey</h2>
@@ -200,7 +200,7 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-[#101727] text-white">
+          <section id="teaching-support" className="py-20 bg-[#101727] text-white">
             <div className="max-w-6xl mx-auto px-6 space-y-10">
               <div className="max-w-3xl space-y-3">
                 <h2 className="text-2xl md:text-3xl font-semibold">Teaching, support, and progress that stay in sync</h2>
@@ -243,7 +243,7 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-white">
+          <section id="beyond-textbooks" className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
               <div className="space-y-6">
                 <h2 className="text-2xl md:text-3xl font-semibold text-black">Beyond textbooks</h2>
