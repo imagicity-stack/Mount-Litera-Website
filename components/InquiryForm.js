@@ -197,7 +197,7 @@ export default function InquiryForm() {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full md:w-auto px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-black disabled:opacity-70 disabled:cursor-not-allowed"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}

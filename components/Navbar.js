@@ -77,7 +77,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-cardinal/15`}
+        className={`sticky top-0 z-50 w-full transition-all duration-500 ${headerState} border-b border-black/15`}
       >
         <div className="mx-auto flex w-full max-w-full items-center justify-between px-5 py-4 md:px-8 lg:px-10">
           <div className="flex items-center">
@@ -94,7 +94,7 @@ export default function Navbar() {
             type="button"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex items-center space-x-2 rounded-full border border-cardinal/40 bg-parchment/90 px-5 py-2 text-black shadow-md shadow-cardinal/10 backdrop-blur transition hover:border-cardinal hover:text-midnight"
+            className="flex items-center space-x-2 rounded-full border border-black/40 bg-parchment/90 px-5 py-2 text-black shadow-md shadow-cardinal/10 backdrop-blur transition hover:border-black hover:text-midnight"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.18em]">Menu</span>
             <span

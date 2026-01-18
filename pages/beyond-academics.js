@@ -16,7 +16,7 @@ export default function BeyondAcademicsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="border-b border-cardinal/10 bg-ivory/80">
+          <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-start">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.35em] text-black">Beyond Academics</p>
@@ -28,7 +28,7 @@ export default function BeyondAcademicsPage() {
                   But they are not the same.
                 </p>
               </div>
-              <div className="border border-cardinal/15 bg-white p-6 space-y-3 shadow-sm">
+              <div className="border border-black/15 bg-white p-6 space-y-3 shadow-sm">
                 <p className="text-xs uppercase tracking-[0.3em] text-black">Access</p>
                 <h2 className="text-2xl font-semibold text-black">Explore the Pathways</h2>
                 <p className="text-gray-700 leading-relaxed">
@@ -42,7 +42,7 @@ export default function BeyondAcademicsPage() {
           <section className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-10">
               <div className="grid gap-6 md:grid-cols-2">
-                <div className="border border-cardinal/15 bg-ivory/70 p-6 space-y-4 shadow-sm">
+                <div className="border border-black/15 bg-ivory/70 p-6 space-y-4 shadow-sm">
                   <p className="text-xs uppercase tracking-[0.3em] text-black">Initiative</p>
                   <h3 className="text-2xl font-semibold text-black">Co Curricular Clubs</h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -67,7 +67,7 @@ export default function BeyondAcademicsPage() {
                   </Link>
                 </div>
 
-                <div className="border border-cardinal/15 bg-ivory/70 p-6 space-y-4 shadow-sm">
+                <div className="border border-black/15 bg-ivory/70 p-6 space-y-4 shadow-sm">
                   <p className="text-xs uppercase tracking-[0.3em] text-black">Initiative</p>
                   <h3 className="text-2xl font-semibold text-black">Life Readiness Program</h3>
                   <p className="text-gray-800 leading-relaxed text-sm">

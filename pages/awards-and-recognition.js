@@ -181,7 +181,7 @@ export default function AwardsAndRecognitionPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="bg-ivory border-b border-cardinal/10">
+          <section className="section-divider bg-ivory">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.35em] text-black">Awards</p>
@@ -191,7 +191,7 @@ export default function AwardsAndRecognitionPage() {
                   it truly reflects the Elden standard of excellence, character, and contribution.
                 </p>
               </div>
-              <div className="bg-white border border-cardinal/10 shadow-sm p-6 space-y-3">
+              <div className="bg-white border border-black/10 shadow-sm p-6 space-y-3">
                 <p className="text-sm uppercase tracking-[0.25em] text-black">Navigate</p>
                 <h2 className="text-2xl font-semibold text-black">Back to Core</h2>
                 <p className="text-gray-700 leading-relaxed">
@@ -231,7 +231,7 @@ export default function AwardsAndRecognitionPage() {
 
               <div className="grid gap-8 md:grid-cols-2">
                 {awards.map((award) => (
-                  <div key={award.name} className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-4">
+                  <div key={award.name} className="border border-black/15 bg-ivory/60 p-6 shadow-sm space-y-4">
                     <div className="space-y-1">
                       <p className="text-xs uppercase tracking-[0.3em] text-black">Honour</p>
                       <h3 className="text-2xl font-semibold text-black">{award.name}</h3>
@@ -277,7 +277,7 @@ export default function AwardsAndRecognitionPage() {
                 ))}
               </div>
 
-              <div className="border border-cardinal/15 bg-ivory/60 p-6 shadow-sm space-y-3">
+              <div className="border border-black/15 bg-ivory/60 p-6 shadow-sm space-y-3">
                 <h3 className="text-2xl font-semibold text-black">A Culture of Meaningful Recognition</h3>
                 <p className="text-gray-800 leading-relaxed">
                   At The Elden Heights, awards are not distributed for participation. They are conferred for purpose. Each

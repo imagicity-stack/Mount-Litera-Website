@@ -88,7 +88,7 @@ const MentorCard = ({ name, designation }) => {
   const photoSrc = mentorPhotos[name];
 
   return (
-    <div className="group overflow-hidden rounded-2xl border border-cardinal/20 bg-white shadow-sm transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+    <div className="group overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
       {photoSrc ? (
         <div className="relative aspect-[4/5] w-full bg-cardinal/5">
           <Image
@@ -104,7 +104,7 @@ const MentorCard = ({ name, designation }) => {
           {getInitials(name)}
         </div>
       )}
-      <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
+      <div className="border-t border-black/15 bg-white px-4 py-3 text-center">
         <h4 className="text-xl font-bold text-black">{name}</h4>
         <p className="mt-1 text-sm font-medium text-gray-900">{designation}</p>
       </div>
@@ -168,7 +168,7 @@ export default function CoreMentorsPage() {
                           return (
                             <div
                               key={`${group.department}-mobile-${mentor.name}`}
-                              className="snap-center w-64 flex-shrink-0 overflow-hidden rounded-3xl border border-cardinal/15 bg-white shadow-md"
+                              className="snap-center w-64 flex-shrink-0 overflow-hidden rounded-3xl border border-black/15 bg-white shadow-md"
                             >
                               {photoSrc ? (
                                 <div className="relative aspect-[4/5] w-full bg-cardinal/5">
@@ -185,7 +185,7 @@ export default function CoreMentorsPage() {
                                   {getInitials(mentor.name)}
                                 </div>
                               )}
-                              <div className="border-t border-cardinal/15 bg-white px-4 py-3 text-center">
+                              <div className="border-t border-black/15 bg-white px-4 py-3 text-center">
                                 <h4 className="text-lg font-bold text-black">{mentor.name}</h4>
                                 <p className="text-sm font-medium text-gray-900">{mentor.designation}</p>
                               </div>

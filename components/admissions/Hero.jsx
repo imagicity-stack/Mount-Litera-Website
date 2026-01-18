@@ -43,7 +43,7 @@ export default function Hero({ onCtaClick }) {
             <button
               type="button"
               onClick={handleClick}
-              className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black hover:shadow-xl border border-cardinal"
+              className="px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black hover:shadow-xl border border-black"
             >
               Reserve Your Seat
             </button>

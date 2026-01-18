@@ -91,7 +91,7 @@ export default function Academics({ showExplore = true }) {
                 'Focus on communication skills',
                 'Early digital awareness'
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 rounded-2xl border border-cardinal/10 bg-white/70 p-3 shadow-sm">
+                <li key={item} className="flex items-start gap-3 rounded-2xl border border-black/10 bg-white/70 p-3 shadow-sm">
                   <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-cardinal"></span>
                   <span>{item}</span>
                 </li>
@@ -120,7 +120,7 @@ export default function Academics({ showExplore = true }) {
             {stageDetails.map((stage, index) => (
               <motion.div
                 key={stage.title}
-                className="group relative overflow-hidden rounded-2xl border border-cardinal/15 bg-white/80 p-6 shadow-lg shadow-cardinal/5"
+                className="group relative overflow-hidden rounded-2xl border border-black/15 bg-white/80 p-6 shadow-lg shadow-cardinal/5"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"

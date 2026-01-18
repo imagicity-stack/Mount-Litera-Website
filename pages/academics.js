@@ -99,7 +99,7 @@ export default function AcademicsPage() {
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cardinal/10 bg-[#fdf9f7] p-6 shadow-lg">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-black/10 bg-[#fdf9f7] p-6 shadow-lg">
                   <div className="flex h-full flex-col justify-between text-black">
                     <div className="space-y-2">
                       <p className="text-xs uppercase tracking-[0.3em] text-black">Classroom kit</p>
@@ -143,14 +143,14 @@ export default function AcademicsPage() {
               </div>
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
                 {stageDetails.map((stage) => (
-                  <div key={stage.title} className="rounded-3xl border border-cardinal/10 bg-[#FDF9F7] p-6 shadow-sm">
+                  <div key={stage.title} className="rounded-3xl border border-black/10 bg-[#FDF9F7] p-6 shadow-sm">
                     <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
                     <h3 className="mt-3 text-xl font-semibold text-black">{stage.title}</h3>
                     <p className="mt-4 text-sm text-gray-700">{stage.homeSummary}</p>
                   </div>
                 ))}
               </div>
-              <div className="rounded-2xl border-l-4 border-cardinal bg-cardinal/5 px-6 py-4 text-black">
+              <div className="rounded-2xl border-l-4 border-black bg-cardinal/5 px-6 py-4 text-black">
                 <strong>Coming soon:</strong> Senior Secondary Stage with Science, Commerce, and Humanities streams.
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function AcademicsPage() {
                   {stageDetails.map((stage, index) => (
                     <div key={stage.title} className="grid gap-6 md:grid-cols-[120px_minmax(0,1fr)] md:items-start">
                       <div className="flex items-center gap-3 text-black">
-                        <div className="hidden md:flex h-10 w-10 items-center justify-center rounded-full border border-cardinal/30 bg-white font-semibold">
+                        <div className="hidden md:flex h-10 w-10 items-center justify-center rounded-full border border-black/30 bg-white font-semibold">
                           {index + 1}
                         </div>
                         <div>
@@ -179,7 +179,7 @@ export default function AcademicsPage() {
                           <p className="font-semibold">{stage.title}</p>
                         </div>
                       </div>
-                      <div className="rounded-3xl border border-cardinal/10 bg-white p-6 shadow-sm">
+                      <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
                         <p className="text-gray-700">{stage.summary}</p>
                         <div className="mt-5">
                           <h4 className="text-xs font-semibold uppercase tracking-wide text-black">Key focus areas</h4>
@@ -260,7 +260,7 @@ export default function AcademicsPage() {
                   ))}
                 </ul>
               </div>
-              <div className="rounded-3xl border border-cardinal/10 bg-[#FDF9F7] p-8 shadow-sm">
+              <div className="rounded-3xl border border-black/10 bg-[#FDF9F7] p-8 shadow-sm">
                 <h3 className="text-xl font-semibold text-black">Academic vision ahead</h3>
                 <p className="mt-4 text-gray-700">
                   As we evolve into a renewed identity, our academic system is becoming more technology-enabled, data-informed, and

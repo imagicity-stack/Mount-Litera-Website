@@ -28,7 +28,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         inter: ["Inter", "sans-serif"],
-        garamond: ["Cormorant Garamond", "Garamond", "serif"],
+        garamond: ["EB Garamond", "Garamond", "serif"],
         avenir: ["Manrope", "Inter", "system-ui", "sans-serif"]
       }
     }

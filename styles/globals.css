@@ -12,8 +12,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', 'Garamond', serif;
-  letter-spacing: 0.015em;
+  font-family: 'EB Garamond', 'Garamond', serif;
+  letter-spacing: 0.02em;
   font-weight: 600;
 }
 
@@ -26,4 +26,21 @@ p, span, input, textarea, label, a, button, li {
   background-color: #ffffff !important;
   opacity: 1 !important;
   backdrop-filter: none !important;
+}
+
+.section-divider {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.section-divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(72%, 1040px);
+  height: 2px;
+  background-color: #000000;
+  opacity: 0.85;
 }

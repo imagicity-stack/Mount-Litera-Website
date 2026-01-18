@@ -78,7 +78,7 @@ export default function AdmissionPage() {
                   seamlessly continue through the upgraded system.
                 </p>
               </div>
-              <div className="space-y-4 rounded-2xl border border-cardinal/10 bg-cardinal/5 p-6 text-center">
+              <div className="space-y-4 rounded-2xl border border-black/10 bg-cardinal/5 p-6 text-center">
                 <h3 className="text-xl font-semibold text-black">Priority booking slots now open</h3>
                 <p className="text-gray-700">
                   Families who confirm early get the first choice of interaction dates, faster document processing, and

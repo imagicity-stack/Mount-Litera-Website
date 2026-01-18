@@ -64,7 +64,7 @@ export default function DisclosuresPage() {
                   key={item.file}
                   href={`/documents/mandatory-disclosures/${item.file}`}
                   download
-                  className="flex items-center justify-between rounded-2xl border border-cardinal/15 bg-white px-5 py-4 transition-colors hover:border-cardinal hover:bg-cardinal/5"
+                  className="flex items-center justify-between rounded-2xl border border-black/15 bg-white px-5 py-4 transition-colors hover:border-black hover:bg-cardinal/5"
                 >
                   <span className="font-medium text-black">{item.title}</span>
                   <span className="text-sm font-semibold text-black">Download</span>

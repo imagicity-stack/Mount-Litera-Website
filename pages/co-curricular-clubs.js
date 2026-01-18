@@ -48,7 +48,7 @@ export default function CoCurricularClubsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="border-b border-cardinal/10 bg-ivory/80">
+          <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.35em] text-black">Co Curricular Clubs</p>
@@ -70,7 +70,7 @@ export default function CoCurricularClubsPage() {
 
               <div className="grid gap-6 md:grid-cols-2">
                 {clubs.map((club) => (
-                  <div key={club.name} className="border border-cardinal/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
+                  <div key={club.name} className="border border-black/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
                     <h3 className="text-2xl font-semibold text-black">{club.name}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{club.description}</p>
                     <p className="text-gray-700 text-sm font-semibold">{club.outcome}</p>

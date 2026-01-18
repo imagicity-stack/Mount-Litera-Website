@@ -61,7 +61,7 @@ export default function PaymentSuccess() {
                   href="https://wa.me/918668868875"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-black"
                 >
                   Chat with Us on WhatsApp
                 </a>

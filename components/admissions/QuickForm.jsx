@@ -400,7 +400,7 @@ export default function QuickForm() {
               <button
                 type="submit"
                 disabled={isSubmitting || !hasAcceptedPolicies}
-                className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-cardinal disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full px-6 py-3 rounded-xl bg-cardinal text-white font-medium shadow-lg transition hover:bg-white hover:text-black border border-black disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Processing…' : 'Submit & Pay ₹500 Token'}
               </button>

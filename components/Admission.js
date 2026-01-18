@@ -10,7 +10,7 @@ export default function Admission() {
   return (
     <section id="admission" className="py-20">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="overflow-hidden rounded-3xl border border-cardinal/20 bg-white shadow-xl">
+        <div className="overflow-hidden rounded-3xl border border-black/20 bg-white shadow-xl">
           <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
             <motion.div
               className="space-y-6 p-10 md:p-12"
@@ -54,7 +54,7 @@ export default function Admission() {
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
             >
               <div className="relative flex h-full items-center justify-center p-10">
-                <div className="rounded-2xl border border-cardinal/15 bg-white p-8 text-center shadow-md">
+                <div className="rounded-2xl border border-black/15 bg-white p-8 text-center shadow-md">
                   <p className="text-sm uppercase tracking-[0.3em] text-black">Exclusive Entry</p>
                   <p className="mt-3 text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
                   <p className="mt-2 text-midnight/70">Limited seats crafted for families seeking an elite, heritage-inspired education.</p>
