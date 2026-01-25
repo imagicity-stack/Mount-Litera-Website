@@ -1,18 +1,12 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function BeyondAcademicsPage() {
   return (
     <>
-      <Head>
-        <title>Beyond Academics | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Explore co-curricular clubs and life readiness programs that prepare Elden Heights students beyond the classroom."
-        />
-      </Head>
+      <Seo path="/beyond-academics" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

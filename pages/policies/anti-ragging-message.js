@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,13 +7,7 @@ import { CONTACT_EMAIL } from '@/lib/contactInfo';
 export default function AntiRaggingPolicyPage() {
   return (
     <>
-      <Head>
-        <title>Anti-Ragging Message | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="The Elden Heights School's zero-tolerance stance on ragging ensures a safe, respectful, and supportive environment."
-        />
-      </Head>
+      <Seo path="/policies/anti-ragging-message" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

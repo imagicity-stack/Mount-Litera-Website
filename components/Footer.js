@@ -1,7 +1,39 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="bg-midnight text-parchment">
       <div className="max-w-6xl mx-auto px-6 py-12">
+        <nav className="sr-only" aria-label="Site navigation">
+          <p>Explore Elden Heights School pages</p>
+          <ul>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/academics">Academics</Link></li>
+            <li><Link href="/admission">Admission</Link></li>
+            <li><Link href="/admissions">Admissions</Link></li>
+            <li><Link href="/awards-and-recognition">Awards and Recognition</Link></li>
+            <li><Link href="/beyond-academics">Beyond Academics</Link></li>
+            <li><Link href="/co-curricular-clubs">Co-Curricular Clubs</Link></li>
+            <li><Link href="/life-readiness-program">Life Readiness Program</Link></li>
+            <li><Link href="/core">Core</Link></li>
+            <li><Link href="/core-mentors">Core Mentors</Link></li>
+            <li><Link href="/the-elden-council">The Elden Council</Link></li>
+            <li><Link href="/managing-committee">Managing Committee</Link></li>
+            <li><Link href="/gallery">Gallery</Link></li>
+            <li><Link href="/careers">Careers</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/disclosures">Disclosures</Link></li>
+            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link href="/terms-and-conditions">Terms and Conditions</Link></li>
+            <li><Link href="/policies/admission-policy">Admission Policy</Link></li>
+            <li><Link href="/policies/anti-ragging-message">Anti-Ragging Message</Link></li>
+            <li><Link href="/policies/code-for-self-discipline">Code for Self-Discipline</Link></li>
+            <li><Link href="/policies/complaint-procedures">Complaint Procedures</Link></li>
+            <li><Link href="/policies/disability-policy">Disability Policy</Link></li>
+            <li><Link href="/policies/parent-child-contact-mechanism">Parent-Child Contact Mechanism</Link></li>
+          </ul>
+        </nav>
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
           <div className="space-y-4">
             <p className="text-sm uppercase tracking-[0.32em] text-parchment/70">

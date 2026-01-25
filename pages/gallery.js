@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
 
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
@@ -53,13 +53,7 @@ export default function GalleryPage() {
 
   return (
     <>
-      <Head>
-        <title>Gallery | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Explore vibrant moments from The Elden Heights School — classroom learning, cultural programs, sports, and celebrations."
-        />
-      </Head>
+      <Seo path="/gallery" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

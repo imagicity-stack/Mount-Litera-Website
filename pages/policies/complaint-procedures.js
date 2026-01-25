@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,13 +7,7 @@ import { CONTACT_EMAIL } from '@/lib/contactInfo';
 export default function ComplaintProceduresPage() {
   return (
     <>
-      <Head>
-        <title>Complaint Procedures | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Learn how The Elden Heights School addresses complaints promptly, fairly, and transparently."
-        />
-      </Head>
+      <Seo path="/policies/complaint-procedures" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

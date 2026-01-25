@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Image from 'next/image';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -115,13 +115,7 @@ const MentorCard = ({ name, designation }) => {
 export default function CoreMentorsPage() {
   return (
     <>
-      <Head>
-        <title>Core Mentors | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Meet the core mentors guiding academics, culture, and student growth at The Elden Heights School."
-        />
-      </Head>
+      <Seo path="/core-mentors" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

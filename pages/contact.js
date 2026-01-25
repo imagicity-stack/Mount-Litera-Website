@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Contact from '@/components/Contact';
@@ -6,13 +6,7 @@ import Contact from '@/components/Contact';
 export default function ContactPage() {
   return (
     <>
-      <Head>
-        <title>Contact The Elden Heights School | Connect With Us</title>
-        <meta
-          name="description"
-          content="Reach out to The Elden Heights School in Hazaribagh for admission inquiries, campus visits, or general questions."
-        />
-      </Head>
+      <Seo path="/contact" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

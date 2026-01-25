@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
@@ -103,13 +103,7 @@ export default function AdmissionPolicyPage() {
 
   return (
     <>
-      <Head>
-        <title>Admission Policy | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Read the official The Elden Heights School admission policy for the 2026–27 academic session."
-        />
-      </Head>
+      <Seo path="/policies/admission-policy" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

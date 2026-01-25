@@ -150,10 +150,4 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
-  <url>
-    <loc>https://eldenheights.org/payment-success</loc>
-    <lastmod>2024-09-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
 </urlset>
