@@ -1,17 +1,11 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function TheEldenCouncilPage() {
   return (
     <>
-      <Head>
-        <title>The Elden Council | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Explore leadership insights and guiding principles from The Elden Council of The Elden Heights School."
-        />
-      </Head>
+      <Seo path="/the-elden-council" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

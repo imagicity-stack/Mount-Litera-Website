@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import About from '@/components/About';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -27,13 +27,7 @@ const leadershipPhotos = {
 export default function AboutPage() {
   return (
     <>
-      <Head>
-        <title>About The Elden Heights School | Vision &amp; Leadership</title>
-        <meta
-          name="description"
-          content="Learn more about The Elden Heights School's leadership, guiding principles, and core policies during our transformative journey."
-        />
-      </Head>
+      <Seo path="/about" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

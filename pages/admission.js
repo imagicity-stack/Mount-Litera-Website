@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InquiryForm from '@/components/InquiryForm';
@@ -7,13 +7,7 @@ import Link from 'next/link';
 export default function AdmissionPage() {
   return (
     <>
-      <Head>
-        <title>Admissions 2026–27 | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Learn about the The Elden Heights School admission process for the 2026–27 session, eligibility, documents required, and how to apply."
-        />
-      </Head>
+      <Seo path="/admission" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

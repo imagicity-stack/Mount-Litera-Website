@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -38,13 +38,7 @@ const clubs = [
 export default function CoCurricularClubsPage() {
   return (
     <>
-      <Head>
-        <title>Co Curricular Clubs | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Discover interest-based co-curricular clubs that build confidence, creativity, leadership, and wellbeing at The Elden Heights."
-        />
-      </Head>
+      <Seo path="/co-curricular-clubs" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

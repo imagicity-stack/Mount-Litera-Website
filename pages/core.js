@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -60,13 +60,7 @@ const accreditationItems = [
 export default function CorePage() {
   return (
     <>
-      <Head>
-        <title>Core | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Explore the core pillars and recognition pathways that define The Elden Heights School."
-        />
-      </Head>
+      <Seo path="/core" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

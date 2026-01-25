@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,13 +7,7 @@ import { CONTACT_EMAIL } from '@/lib/contactInfo';
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Head>
-        <title>Privacy Policy | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Read how The Elden Heights School collects, uses, and protects personal information shared through mlzshazaribagh.in."
-        />
-      </Head>
+      <Seo path="/privacy-policy" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

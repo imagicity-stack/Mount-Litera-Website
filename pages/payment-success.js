@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import Head from 'next/head';
 
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
@@ -37,13 +37,7 @@ export default function PaymentSuccess() {
 
   return (
     <>
-      <Head>
-        <title>Payment Successful | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Payment successful. Your child’s priority seat is reserved. Our counsellor will connect within 24 hours."
-        />
-      </Head>
+      <Seo path="/payment-success" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

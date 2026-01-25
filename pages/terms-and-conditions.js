@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,13 +7,7 @@ import { CONTACT_EMAIL } from '@/lib/contactInfo';
 export default function TermsPage() {
   return (
     <>
-      <Head>
-        <title>Terms and Conditions | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Review the terms and conditions for using The Elden Heights School's official website."
-        />
-      </Head>
+      <Seo path="/terms-and-conditions" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

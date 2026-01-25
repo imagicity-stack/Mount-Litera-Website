@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -42,13 +42,7 @@ const characteristics = [
 export default function LifeReadinessProgramPage() {
   return (
     <>
-      <Head>
-        <title>Life Readiness Program | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Explore the Life Readiness Program that equips Elden Heights students with real-world skills and confident independence."
-        />
-      </Head>
+      <Seo path="/life-readiness-program" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

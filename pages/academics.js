@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { stageDetails } from '@/components/Academics';
@@ -32,13 +32,7 @@ const heroHighlights = [
 export default function AcademicsPage() {
   return (
     <>
-      <Head>
-        <title>Academic Framework | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Discover the learning stages, teaching philosophy, and academic support that power The Elden Heights School's curriculum."
-        />
-      </Head>
+      <Seo path="/academics" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

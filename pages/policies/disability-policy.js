@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,13 +7,7 @@ import { CONTACT_EMAIL } from '@/lib/contactInfo';
 export default function DisabilityPolicyPage() {
   return (
     <>
-      <Head>
-        <title>Disability Policy | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="The Elden Heights School's disability policy outlines inclusive practices, accessible infrastructure, and equal opportunities for all learners."
-        />
-      </Head>
+      <Seo path="/policies/disability-policy" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

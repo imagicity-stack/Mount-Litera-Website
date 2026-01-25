@@ -1,17 +1,11 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function ManagingCommitteePage() {
   return (
     <>
-      <Head>
-        <title>Managing Committee | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Learn about the Managing Committee shaping strategy and stewardship at The Elden Heights School."
-        />
-      </Head>
+      <Seo path="/managing-committee" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

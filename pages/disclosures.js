@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -40,13 +40,7 @@ const disclosures = [
 export default function DisclosuresPage() {
   return (
     <>
-      <Head>
-        <title>Disclosures | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Download statutory disclosures and certifications for The Elden Heights School."
-        />
-      </Head>
+      <Seo path="/disclosures" />
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1 py-16">

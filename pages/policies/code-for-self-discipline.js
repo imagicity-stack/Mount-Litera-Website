@@ -1,17 +1,11 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function SelfDisciplinePolicyPage() {
   return (
     <>
-      <Head>
-        <title>Code for Self-Discipline | The Elden Heights School</title>
-        <meta
-          name="description"
-          content="Understand the behavioural expectations and self-discipline charter that guides The Elden Heights School students."
-        />
-      </Head>
+      <Seo path="/policies/code-for-self-discipline" />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

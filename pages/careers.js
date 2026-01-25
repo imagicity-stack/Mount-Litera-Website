@@ -1,14 +1,11 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function CareersPage() {
   return (
     <>
-      <Head>
-        <title>Careers | The Elden Heights School</title>
-        <meta name="description" content="Explore career opportunities with The Elden Heights School." />
-      </Head>
+      <Seo path="/careers" />
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">

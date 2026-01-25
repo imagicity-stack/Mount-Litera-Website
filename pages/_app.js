@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { FACEBOOK_PIXEL_CODE, trackFacebookEvent } from '@/lib/facebookPixel';
+import SeoContent from '@/components/SeoContent';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function MyApp({ Component, pageProps }) {
           __html: FACEBOOK_PIXEL_CODE,
         }}
       />
+      <SeoContent />
       <Component {...pageProps} />
     </>
   );
