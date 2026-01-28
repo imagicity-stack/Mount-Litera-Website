@@ -17,7 +17,7 @@ export default function AdmissionPage() {
               <p className="text-lg text-gray-600">A New Chapter Begins</p>
               <p>
                 The Elden Heights School is opening admissions for the 2026–27 academic session. As we move through our transition
-                into a brighter and more dynamic future, we continue to stand for the same values that shaped our legacy —
+                as the Best School in Hazaribagh, we continue to stand for the same values that shaped our legacy —
                 discipline, curiosity, and academic excellence. This is your chance to be part of the next generation of learners
                 who will experience an upgraded, modern, and future-ready school environment.
               </p>
