@@ -291,7 +291,7 @@ export default function Navbar() {
                           key={subItem.href}
                           href={subItem.href}
                           onClick={() => setMenuOpen(false)}
-                          className="flex items-center justify-between text-lg font-semibold transition hover:text-parchment"
+                          className="flex items-center gap-2 text-lg font-semibold transition hover:text-parchment"
                         >
                           {subItem.label}
                           <span aria-hidden="true">→</span>
