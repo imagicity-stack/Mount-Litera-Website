@@ -37,7 +37,16 @@ const navItems = [
       { label: 'Beyond textbooks', href: '/academics#beyond-textbooks' }
     ]
   },
-  { label: 'Admission', href: '/admission' },
+  {
+    label: 'Admission',
+    href: '/admission',
+    subItems: [
+      { label: 'Admission', href: '/admission' },
+      { label: 'Why Choose The Elden Heights School', href: '/admission#why-choose-elden-heights' },
+      { label: 'Admission Inquiry Form', href: '/admission#admission-inquiry' },
+      { label: 'Fee Structure', href: '/admission#fee-structure' }
+    ]
+  },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' }
@@ -282,7 +291,7 @@ export default function Navbar() {
                           key={subItem.href}
                           href={subItem.href}
                           onClick={() => setMenuOpen(false)}
-                          className="flex items-center justify-between text-lg font-semibold transition hover:text-parchment"
+                          className="flex items-center gap-2 text-lg font-semibold transition hover:text-parchment"
                         >
                           {subItem.label}
                           <span aria-hidden="true">→</span>

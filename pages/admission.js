@@ -25,7 +25,7 @@ export default function AdmissionPage() {
           </section>
           <section className="py-16 bg-white">
             <div className="max-w-5xl mx-auto px-6 space-y-10">
-              <div className="space-y-4">
+              <div id="why-choose-elden-heights" className="space-y-4 scroll-mt-24">
                 <h2 className="text-2xl font-semibold text-black">Why Choose The Elden Heights School</h2>
                 <p>We are not just preparing students for exams but for life. Our re-imagined structure ensures every child grows with purpose, confidence, and creativity.</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -71,6 +71,197 @@ export default function AdmissionPage() {
                   vision. All admissions made during this phase remain valid under the recognized CBSE framework and will
                   seamlessly continue through the upgraded system.
                 </p>
+              </div>
+              <div id="fee-structure" className="space-y-6 scroll-mt-24">
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-semibold text-black">Fee Structure</h2>
+                  <p className="text-gray-600">Academic Year 2026 to 2027</p>
+                </div>
+                <div className="space-y-6 rounded-2xl border border-black/10 bg-[#F8F5F3] p-6">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-black">1. Admission and Processing Fee</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                        <thead>
+                          <tr className="border-b border-black/20 text-xs uppercase tracking-wide text-gray-500">
+                            <th className="py-3 pr-4">Particulars</th>
+                            <th className="py-3 pr-4">Frequency</th>
+                            <th className="py-3 pr-4">Pre Primary (Nur to KG II)</th>
+                            <th className="py-3 pr-4">Primary (I to III)</th>
+                            <th className="py-3 pr-4">Class IV</th>
+                            <th className="py-3 pr-4">Class V</th>
+                            <th className="py-3 pr-4">Upper Primary (VI to VIII)</th>
+                            <th className="py-3">Secondary (IX)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-gray-700">
+                          <tr className="border-b border-black/10">
+                            <td className="py-3 pr-4 font-medium text-black">Registration Fee</td>
+                            <td className="py-3 pr-4">One Time</td>
+                            <td className="py-3 pr-4">2000</td>
+                            <td className="py-3 pr-4">2000</td>
+                            <td className="py-3 pr-4">2000</td>
+                            <td className="py-3 pr-4">2000</td>
+                            <td className="py-3 pr-4">2000</td>
+                            <td className="py-3">2000</td>
+                          </tr>
+                          <tr className="border-b border-black/10">
+                            <td className="py-3 pr-4 font-medium text-black">Processing Fee (At the time of Admission)</td>
+                            <td className="py-3 pr-4">One Time</td>
+                            <td className="py-3 pr-4">23000</td>
+                            <td className="py-3 pr-4">23000</td>
+                            <td className="py-3 pr-4">23000</td>
+                            <td className="py-3 pr-4">23000</td>
+                            <td className="py-3 pr-4">23000</td>
+                            <td className="py-3">30000</td>
+                          </tr>
+                          <tr>
+                            <td className="py-3 pr-4 font-semibold text-black">Total Admission Charges</td>
+                            <td className="py-3 pr-4" />
+                            <td className="py-3 pr-4 font-semibold text-black">25000</td>
+                            <td className="py-3 pr-4 font-semibold text-black">25000</td>
+                            <td className="py-3 pr-4 font-semibold text-black">25000</td>
+                            <td className="py-3 pr-4 font-semibold text-black">25000</td>
+                            <td className="py-3 pr-4 font-semibold text-black">25000</td>
+                            <td className="py-3 font-semibold text-black">32000</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-black">2. KIT Charges</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[520px] border-collapse text-left text-sm">
+                        <thead>
+                          <tr className="border-b border-black/20 text-xs uppercase tracking-wide text-gray-500">
+                            <th className="py-3 pr-4">Sr No</th>
+                            <th className="py-3 pr-4">Class</th>
+                            <th className="py-3">KIT Price</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-gray-700">
+                          {[
+                            ['1', 'Nursery', '4200'],
+                            ['2', 'KG I', '4400'],
+                            ['3', 'KG II', '5000'],
+                            ['4', 'I', '5500'],
+                            ['5', 'II', '5600'],
+                            ['6', 'III', '6000'],
+                            ['7', 'IV', '6500'],
+                            ['8', 'V', '6500'],
+                            ['9', 'VI', '7000'],
+                            ['10', 'VII', '7000'],
+                            ['11', 'VIII', '7000']
+                          ].map(([sr, className, price]) => (
+                            <tr key={sr} className="border-b border-black/10 last:border-b-0">
+                              <td className="py-3 pr-4">{sr}</td>
+                              <td className="py-3 pr-4 font-medium text-black">{className}</td>
+                              <td className="py-3">{price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-black">3. Tuition Fee Structure</h3>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div className="rounded-xl border border-black/10 bg-white p-4">
+                        <h4 className="text-base font-semibold text-black">Monthly Tuition Fee</h4>
+                        <div className="mt-3 overflow-x-auto">
+                          <table className="w-full min-w-[260px] border-collapse text-left text-sm">
+                            <thead>
+                              <tr className="border-b border-black/20 text-xs uppercase tracking-wide text-gray-500">
+                                <th className="py-3 pr-4">Classes</th>
+                                <th className="py-3">Monthly Fee</th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-gray-700">
+                              {[
+                                ['Nursery, KG I, KG II', '2000'],
+                                ['I to V', '2400'],
+                                ['VI to X', '2700']
+                              ].map(([label, fee]) => (
+                                <tr key={label} className="border-b border-black/10 last:border-b-0">
+                                  <td className="py-3 pr-4 font-medium text-black">{label}</td>
+                                  <td className="py-3">{fee}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div className="rounded-xl border border-black/10 bg-white p-4">
+                        <h4 className="text-base font-semibold text-black">Quarterly Tuition Fee</h4>
+                        <div className="mt-3 overflow-x-auto">
+                          <table className="w-full min-w-[260px] border-collapse text-left text-sm">
+                            <thead>
+                              <tr className="border-b border-black/20 text-xs uppercase tracking-wide text-gray-500">
+                                <th className="py-3 pr-4">Classes</th>
+                                <th className="py-3">Quarterly Fee</th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-gray-700">
+                              {[
+                                ['Nursery, KG I, KG II', '6000'],
+                                ['I to V', '7200'],
+                                ['VI to X', '8100']
+                              ].map(([label, fee]) => (
+                                <tr key={label} className="border-b border-black/10 last:border-b-0">
+                                  <td className="py-3 pr-4 font-medium text-black">{label}</td>
+                                  <td className="py-3">{fee}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-black">4. Annual Miscellaneous Charges</h3>
+                    <p className="text-gray-700">Applicable for Existing Students Only</p>
+                    <div className="rounded-xl border border-black/10 bg-white p-4">
+                      <div className="flex flex-col gap-1 text-sm text-gray-700">
+                        <span className="font-semibold text-black">Amount: 6000 per Year</span>
+                        <span className="text-gray-600">Heads Covered:</span>
+                      </div>
+                      <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                        {[
+                          'Exam Fees',
+                          'Lab Charges',
+                          'ERP Charges',
+                          'Library Fee',
+                          'Activity Fee',
+                          'Sports Fund',
+                          'Smart Class',
+                          'ID Card',
+                          'Maintenance',
+                          'Assessment Fee',
+                          'Event Fund',
+                          'Development Fund'
+                        ].map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-center gap-2 rounded-full bg-cardinal/10 px-3 py-1 text-xs font-semibold text-cardinal"
+                          >
+                            <span className="h-1.5 w-1.5 rounded-full bg-cardinal" aria-hidden="true" />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-semibold text-black">5. Additional Information</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                      <li>Transport Fee: 1500 per month</li>
+                      <li>School Books to be purchased separately</li>
+                      <li>School Uniform to be purchased separately</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div className="space-y-4 rounded-2xl border border-black/10 bg-cardinal/5 p-6 text-center">
                 <h3 className="text-xl font-semibold text-black">Priority booking slots now open</h3>
