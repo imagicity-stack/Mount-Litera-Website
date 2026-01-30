@@ -37,7 +37,15 @@ const navItems = [
       { label: 'Beyond textbooks', href: '/academics#beyond-textbooks' }
     ]
   },
-  { label: 'Admission', href: '/admission' },
+  {
+    label: 'Admission',
+    href: '/admission',
+    subItems: [
+      { label: 'Why Choose The Elden Heights School', href: '/admission#why-choose-elden-heights' },
+      { label: 'Admission Inquiry Form', href: '/admission#admission-inquiry' },
+      { label: 'Fee Structure', href: '/admission#fee-structure' }
+    ]
+  },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' }
