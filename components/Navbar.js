@@ -28,6 +28,14 @@ const navItems = [
     ]
   },
   {
+    label: 'New Initiatives',
+    href: '/new-initiatives',
+    subItems: [
+      { label: 'New Initiatives', href: '/new-initiatives' },
+      { label: 'Ride to Rise', href: '/new-initiatives#ride-to-rise' }
+    ]
+  },
+  {
     label: 'Academics',
     href: '/academics',
     subItems: [
