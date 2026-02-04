@@ -78,6 +78,12 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-35"
+            style={{ backgroundImage: "url('/home/contact-glow.jpg')" }}
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-midnight/70" aria-hidden="true" />
           <div className="relative space-y-6">
             <h2 className="text-3xl md:text-4xl font-semibold">Get in Touch</h2>
             <p className="text-white/80 text-lg">

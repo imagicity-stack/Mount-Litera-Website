@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 
 const galleryImages = [
@@ -57,6 +58,12 @@ export default function GalleryPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Gallery"
+            subtitle="A visual tour of campus life, celebrations, and everyday moments."
+            badge="Gallery"
+            image="/gallery/banner-showcase.jpg"
+          />
           <section className="bg-gradient-to-b from-cardinal/5 via-white to-white py-16">
             <div className="max-w-6xl mx-auto px-6">
               <p className="text-sm uppercase tracking-[0.3em] text-black">Our Story in Frames</p>

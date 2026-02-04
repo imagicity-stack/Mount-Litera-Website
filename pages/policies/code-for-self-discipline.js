@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function SelfDisciplinePolicyPage() {
   return (
@@ -9,6 +10,12 @@ export default function SelfDisciplinePolicyPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Code for Self-Discipline"
+            subtitle="Guiding habits that shape confident, responsible learners."
+            badge="Policy"
+            image="/policies/code-for-self-discipline/banner-policy.jpg"
+          />
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-black">Code for Self-Discipline</h1>

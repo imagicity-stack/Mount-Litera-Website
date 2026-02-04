@@ -6,7 +6,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-export default function About({ showLink = true }) {
+export default function About({ showLink = true, imagePrefix = 'home' }) {
   return (
     <section id="about" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
@@ -42,7 +42,7 @@ export default function About({ showLink = true }) {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
               >
-                The Elden Heights School has been a beacon of learning and values. As we move forward into our next chapter, our goal remains unchanged — to nurture confident, capable, and creative learners ready for tomorrow. This transition marks the start of something extraordinary — modern infrastructure, digital innovation, and a renewed vision for every student.
+                The Elden Heights School continues its next chapter with a simple promise: nurture confident, capable, and creative learners ready for tomorrow.
               </motion.p>
               <motion.blockquote
                 className="relative overflow-hidden rounded-2xl border border-gold/40 bg-white px-6 py-5 text-left text-midnight/80 shadow-md"
@@ -75,6 +75,15 @@ export default function About({ showLink = true }) {
               )}
             </div>
             <div className="space-y-5 rounded-2xl border border-black/15 bg-ivory p-6 shadow-md">
+              <div
+                className="relative h-48 overflow-hidden rounded-2xl border border-black/15 bg-center bg-cover bg-no-repeat shadow-sm"
+                style={{ backgroundImage: `url('/${imagePrefix}/about-vision.jpg')` }}
+              >
+                <div className="absolute inset-0 bg-midnight/25 backdrop-blur-[2px]" aria-hidden="true" />
+                <div className="relative z-10 flex h-full items-end p-4 text-white">
+                  <span className="rounded-full bg-white/20 px-3 py-1 text-xs uppercase tracking-[0.3em]">Campus Lens</span>
+                </div>
+              </div>
               <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-black">Academic Ethos</p>

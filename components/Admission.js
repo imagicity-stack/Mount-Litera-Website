@@ -53,8 +53,14 @@ export default function Admission() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
             >
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/home/admission-archway.jpg')" }}
+                aria-hidden="true"
+              />
+              <div className="absolute inset-0 bg-midnight/20 backdrop-blur-[2px]" aria-hidden="true" />
               <div className="relative flex h-full items-center justify-center p-10">
-                <div className="rounded-2xl border border-black/15 bg-white p-8 text-center shadow-md">
+                <div className="rounded-2xl border border-white/40 bg-white/85 p-8 text-center shadow-md backdrop-blur">
                   <p className="text-sm uppercase tracking-[0.3em] text-black">Exclusive Entry</p>
                   <p className="mt-3 text-2xl font-semibold text-midnight font-garamond">The Elden Heights School</p>
                   <p className="mt-2 text-midnight/70">Limited seats crafted for families seeking an elite, heritage-inspired education.</p>

@@ -58,6 +58,13 @@ export const stageDetails = [
   }
 ];
 
+const stageImages = [
+  '/home/academics-foundation.jpg',
+  '/home/academics-prep.jpg',
+  '/home/academics-middle.jpg',
+  '/home/academics-secondary.jpg'
+];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
@@ -127,6 +134,11 @@ export default function Academics({ showExplore = true }) {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-20 transition duration-300 group-hover:opacity-30"
+                  style={{ backgroundImage: `url('${stageImages[index]}')` }}
+                  aria-hidden="true"
+                />
                 <div className="relative space-y-3">
                   <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
                   <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>

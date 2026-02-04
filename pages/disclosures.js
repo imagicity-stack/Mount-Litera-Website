@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const disclosures = [
   {
@@ -43,7 +44,14 @@ export default function DisclosuresPage() {
       <Seo path="/disclosures" />
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
         <Navbar />
-        <main className="flex-1 py-16">
+        <main className="flex-1">
+          <ImageBanner
+            title="Mandatory Disclosures"
+            subtitle="Clear, visual access to the documents that keep us accountable."
+            badge="Disclosures"
+            image="/disclosures/banner-transparency.jpg"
+          />
+          <section className="py-16">
           <div className="max-w-4xl mx-auto px-6 space-y-8">
             <div className="space-y-3 text-center">
               <h1 className="text-3xl font-semibold text-black">Mandatory Disclosures</h1>
@@ -66,6 +74,7 @@ export default function DisclosuresPage() {
               ))}
             </div>
           </div>
+          </section>
         </main>
         <Footer />
       </div>

@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InquiryForm from '@/components/InquiryForm';
 import Link from 'next/link';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function AdmissionPage() {
   return (
@@ -11,6 +12,12 @@ export default function AdmissionPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Admissions 2026–27"
+            subtitle="Explore the next chapter of learning with a campus designed for confidence and curiosity."
+            badge="Admissions"
+            image="/admission/banner-horizon.jpg"
+          />
           <section className="py-16 bg-[#F8F5F3]">
             <div className="max-w-4xl mx-auto px-6 space-y-6 text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-black">Admission</h1>

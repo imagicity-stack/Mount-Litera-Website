@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import About from '@/components/About';
+import ImageBanner from '@/components/ImageBanner';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -31,7 +32,13 @@ export default function AboutPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <About showLink={false} />
+          <ImageBanner
+            title="About The Elden Heights"
+            subtitle="A visual journey through our ethos, leadership, and the legacy we are building."
+            badge="About"
+            image="/about/banner-aurora.jpg"
+          />
+          <About showLink={false} imagePrefix="about" />
           <section className="py-16 bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-6">
               <div className="text-center space-y-3">

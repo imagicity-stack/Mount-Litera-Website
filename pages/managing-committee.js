@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function ManagingCommitteePage() {
   return (
@@ -9,6 +10,12 @@ export default function ManagingCommitteePage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Managing Committee"
+            subtitle="The leaders ensuring our vision stays bold, transparent, and future-ready."
+            badge="Leadership"
+            image="/managing-committee/banner-lead.jpg"
+          />
           <section className="relative overflow-hidden bg-ivory py-20">
             <div className="relative max-w-4xl mx-auto px-6 text-center space-y-4">
               <p className="text-sm uppercase tracking-[0.3em] text-black">Stewardship</p>

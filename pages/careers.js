@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function CareersPage() {
   return (
@@ -9,6 +10,12 @@ export default function CareersPage() {
       <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Careers at Elden Heights"
+            subtitle="Join a team shaping the next generation of confident learners."
+            badge="Careers"
+            image="/careers/banner-compass.jpg"
+          />
           <section className="flex flex-1 items-center justify-center px-6 py-24">
             <div className="max-w-xl rounded-3xl border border-black/15 bg-white p-10 text-center shadow-lg">
               <span className="inline-flex items-center rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-black">

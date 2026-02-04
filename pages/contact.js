@@ -2,6 +2,7 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Contact from '@/components/Contact';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function ContactPage() {
   return (
@@ -10,14 +11,12 @@ export default function ContactPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <section className="py-16 bg-[#F5F5F5] text-center">
-            <div className="max-w-3xl mx-auto px-6 space-y-4">
-              <h1 className="text-3xl md:text-4xl font-bold text-black">We’d Love to Hear From You</h1>
-              <p className="text-gray-600">
-                Our team is ready to guide you through admissions, partnerships, and every step of the transition journey.
-              </p>
-            </div>
-          </section>
+          <ImageBanner
+            title="We’d Love to Hear From You"
+            subtitle="Our team is ready to guide you through admissions, partnerships, and every step of the journey."
+            badge="Contact"
+            image="/contact/banner-hello.jpg"
+          />
           <Contact />
         </main>
         <Footer />

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function BeyondAcademicsPage() {
   return (
@@ -10,6 +11,12 @@ export default function BeyondAcademicsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Beyond Academics"
+            subtitle="A gallery of clubs, leadership, and character-building experiences."
+            badge="Beyond"
+            image="/beyond-academics/banner-odyssey.jpg"
+          />
           <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-start">
               <div className="space-y-4">

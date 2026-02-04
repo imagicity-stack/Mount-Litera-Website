@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 export default function TheEldenCouncilPage() {
   return (
@@ -9,6 +10,12 @@ export default function TheEldenCouncilPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="The Elden Council"
+            subtitle="Guiding voices that shape strategy, culture, and stewardship."
+            badge="Council"
+            image="/the-elden-council/banner-council.jpg"
+          />
           <section className="relative overflow-hidden bg-ivory py-20">
             <div className="relative max-w-5xl mx-auto px-6 space-y-12">
               <div className="space-y-4">
