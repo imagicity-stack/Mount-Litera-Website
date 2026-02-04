@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '@/components/Seo';
@@ -27,23 +27,36 @@ export default function BlogsPage() {
   const [status, setStatus] = useState('loading');
   const [query, setQuery] = useState('');
 
+  const loadBlogs = useCallback(async () => {
+    try {
+      const res = await fetch('/api/blogs?status=published', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
+      const data = await res.json();
+      setBlogs(data.blogs || []);
+      setStatus('ready');
+    } catch (error) {
+      setStatus('error');
+    }
+  }, []);
+
   useEffect(() => {
-    const loadBlogs = async () => {
-      try {
-        const res = await fetch('/api/blogs?status=published', {
-          cache: 'no-store',
-          headers: { 'Cache-Control': 'no-cache' }
-        });
-        const data = await res.json();
-        setBlogs(data.blogs || []);
-        setStatus('ready');
-      } catch (error) {
-        setStatus('error');
+    loadBlogs();
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        loadBlogs();
       }
     };
 
-    loadBlogs();
-  }, []);
+    window.addEventListener('focus', loadBlogs);
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      window.removeEventListener('focus', loadBlogs);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [loadBlogs]);
 
   const filtered = useMemo(() => {
     const term = query.trim().toLowerCase();
