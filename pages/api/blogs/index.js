@@ -28,10 +28,12 @@ export default async function handler(req, res) {
     try {
       res.setHeader('Cache-Control', 'no-store, max-age=0');
       const status = req.query.status;
-      let query = adminDb.collection(COLLECTION).orderBy('createdAt', 'desc');
+      let query = adminDb.collection(COLLECTION);
 
       if (status) {
         query = query.where('status', '==', status);
+      } else {
+        query = query.orderBy('createdAt', 'desc');
       }
 
       const snapshot = await query.get();
@@ -45,6 +47,13 @@ export default async function handler(req, res) {
           publishedAt: data.publishedAt ? data.publishedAt.toDate().toISOString() : null
         };
       });
+      if (status) {
+        blogs.sort((a, b) => {
+          const aDate = a.publishedAt || a.createdAt || 0;
+          const bDate = b.publishedAt || b.createdAt || 0;
+          return new Date(bDate) - new Date(aDate);
+        });
+      }
 
       return res.status(200).json({ blogs });
     } catch (error) {
