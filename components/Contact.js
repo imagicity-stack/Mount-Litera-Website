@@ -83,6 +83,11 @@ export default function Contact() {
             style={{ backgroundImage: "url('/home/contact-glow.jpg')" }}
             aria-hidden="true"
           />
+          <img
+            src="/home/contact-glow.jpg"
+            alt="School activities at Elden Heights in Hazaribagh Jharkhand"
+            className="sr-only"
+          />
           <div className="absolute inset-0 bg-midnight/70" aria-hidden="true" />
           <div className="relative space-y-6">
             <h2 className="text-3xl md:text-4xl font-semibold">Get in Touch</h2>

@@ -20,7 +20,7 @@ export default function Admission() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Admissions Open for 2026–27</h2>
+              <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Admissions Open at the Best School in Hazaribagh</h2>
               <p className="text-lg text-midnight/80 leading-relaxed">
                 We’re inviting new learners to join this journey of transformation. The systems you see today are evolving into a bold,
                 modern learning experience designed for the next generation.
@@ -38,7 +38,7 @@ export default function Admission() {
                   href="/admission"
                   className="inline-flex items-center gap-2 rounded-full bg-cardinal px-7 py-3 text-base font-semibold text-white shadow-lg shadow-cardinal/25 transition hover:-translate-y-0.5 hover:shadow-xl"
                 >
-                  Begin your application
+                  Apply for Admissions in Hazaribagh
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14m-4-4l4 4-4 4" />
                   </svg>
@@ -57,6 +57,11 @@ export default function Admission() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: "url('/home/admission-archway.jpg')" }}
                 aria-hidden="true"
+              />
+              <img
+                src="/home/admission-archway.jpg"
+                alt="Elden Heights School campus in Hazaribagh Jharkhand"
+                className="sr-only"
               />
               <div className="absolute inset-0 bg-midnight/20 backdrop-blur-[2px]" aria-hidden="true" />
               <div className="relative flex h-full items-center justify-center p-10">

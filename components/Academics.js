@@ -64,6 +64,12 @@ const stageImages = [
   '/home/academics-middle.jpg',
   '/home/academics-secondary.jpg'
 ];
+const stageImageAlts = [
+  'Students learning at best school in Hazaribagh',
+  'Classroom learning at the best school in Hazaribagh',
+  'School activities at Elden Heights in Hazaribagh Jharkhand',
+  'Elden Heights School campus in Hazaribagh Jharkhand'
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -86,7 +92,7 @@ export default function Academics({ showExplore = true }) {
             <div className="inline-flex items-center gap-3 rounded-full bg-cardinal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black">
               Academic Expanse
             </div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Scholarly design for every stage</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Academic Excellence at One of the Leading Private High Schools</h2>
             <p className="text-base text-midnight/80 leading-relaxed">
               The Elden Heights School follows a simple, age-appropriate path across four stages. Each step gently strengthens
               confidence, curiosity, and core skills so children feel ready for what comes next.
@@ -138,7 +144,9 @@ export default function Academics({ showExplore = true }) {
                   className="absolute inset-0 bg-cover bg-center opacity-20 transition duration-300 group-hover:opacity-30"
                   style={{ backgroundImage: `url('${stageImages[index]}')` }}
                   aria-hidden="true"
-                />
+                >
+                  <img src={stageImages[index]} alt={stageImageAlts[index]} className="sr-only" />
+                </div>
                 <div className="relative space-y-3">
                   <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
                   <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>
