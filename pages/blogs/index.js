@@ -78,7 +78,7 @@ export default function BlogsPage() {
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href="/blogs/admin"
-                    className="rounded-full border border-black/30 bg-black px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-cardinal"
+                    className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500 transition hover:text-cardinal"
                   >
                     Admin Login
                   </Link>

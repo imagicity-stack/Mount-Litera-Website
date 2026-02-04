@@ -21,7 +21,7 @@ const emptyForm = {
   authorName: '',
   authorTitle: '',
   tags: '',
-  status: 'draft',
+  status: 'published',
   seoTitle: '',
   seoDescription: '',
   publishedAt: ''
@@ -44,6 +44,7 @@ export default function BlogAdminPage() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const [login, setLogin] = useState({ email: '', password: '', error: '' });
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -156,13 +157,17 @@ export default function BlogAdminPage() {
 
     setSaving(true);
     setMessage('');
+    const resolvedPublishedAt =
+      form.status === 'published' && !form.publishedAt
+        ? new Date().toISOString().split('T')[0]
+        : form.publishedAt;
     const payload = {
       ...form,
       tags: form.tags
         .split(',')
         .map((tag) => tag.trim())
         .filter(Boolean),
-      publishedAt: form.publishedAt || null
+      publishedAt: resolvedPublishedAt || null
     };
 
     try {
@@ -186,6 +191,7 @@ export default function BlogAdminPage() {
       setMessage(selectedId ? 'Blog updated.' : 'Blog published.');
       setForm(emptyForm);
       setSelectedId(null);
+      setShowForm(false);
     } catch (error) {
       setMessage(error.message || 'Unable to save blog.');
     } finally {
@@ -195,6 +201,7 @@ export default function BlogAdminPage() {
 
   const editBlog = (blog) => {
     setSelectedId(blog.id);
+    setShowForm(true);
     setForm({
       title: blog.title || '',
       slug: blog.slug || '',
@@ -216,6 +223,8 @@ export default function BlogAdminPage() {
 
   const deleteBlog = async (blogId) => {
     if (!blogId) return;
+    const confirmed = window.confirm('Delete this blog? This action cannot be undone.');
+    if (!confirmed) return;
     setSaving(true);
     setMessage('');
     try {
@@ -232,6 +241,7 @@ export default function BlogAdminPage() {
       if (selectedId === blogId) {
         setForm(emptyForm);
         setSelectedId(null);
+        setShowForm(false);
       }
     } catch (error) {
       setMessage(error.message || 'Unable to delete.');
@@ -417,22 +427,43 @@ export default function BlogAdminPage() {
                         Craft a story with SEO-ready details and publish instantly.
                       </p>
                     </div>
-                    {selectedId && (
+                    <div className="flex flex-wrap items-center gap-3">
                       <button
                         type="button"
                         onClick={() => {
+                          setShowForm(true);
                           setForm(emptyForm);
                           setSelectedId(null);
                           setMessage('');
                         }}
-                        className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-600"
+                        className="rounded-full border border-black/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black"
                       >
-                        Clear form
+                        Add new blog
                       </button>
-                    )}
+                      {selectedId && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setForm(emptyForm);
+                            setSelectedId(null);
+                            setMessage('');
+                          }}
+                          className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-600"
+                        >
+                          Clear form
+                        </button>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="mt-6 grid gap-6">
+                  {!showForm && !selectedId && (
+                    <div className="mt-6 rounded-2xl border border-dashed border-black/20 bg-[#fefaf5] p-6 text-sm text-gray-600">
+                      Click “Add new blog” to start composing a story.
+                    </div>
+                  )}
+
+                  {(showForm || selectedId) && (
+                    <div className="mt-6 grid gap-6">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
                         <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Title</label>
@@ -575,27 +606,29 @@ export default function BlogAdminPage() {
                       </p>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-4">
-                      <button
-                        type="button"
-                        onClick={saveBlog}
-                        className="rounded-full bg-black px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-cardinal disabled:opacity-70"
-                        disabled={saving}
-                      >
-                        {saving ? 'Saving...' : selectedId ? 'Update story' : 'Publish story'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setForm(emptyForm);
-                          setSelectedId(null);
-                        }}
-                        className="rounded-full border border-black/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black"
-                      >
-                        Reset
-                      </button>
+                      <div className="flex flex-wrap items-center gap-4">
+                        <button
+                          type="button"
+                          onClick={saveBlog}
+                          className="rounded-full bg-black px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-cardinal disabled:opacity-70"
+                          disabled={saving}
+                        >
+                          {saving ? 'Saving...' : selectedId ? 'Update story' : 'Publish story'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setForm(emptyForm);
+                            setSelectedId(null);
+                            setShowForm(false);
+                          }}
+                          className="rounded-full border border-black/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black"
+                        >
+                          Reset
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </section>
               </div>
             )}
