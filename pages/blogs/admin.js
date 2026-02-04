@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -12,18 +13,26 @@ import Footer from '@/components/Footer';
 import { firebaseAuth, firebaseStorage } from '@/lib/firebaseClient';
 import slugify from '@/lib/slugify';
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
 const emptyForm = {
   title: '',
   slug: '',
   excerpt: '',
   content: '',
   coverImage: '',
+  coverImageAlt: '',
+  coverImageCaption: '',
+  coverImageCredit: '',
+  coverImageSource: '',
   authorName: '',
   authorTitle: '',
   tags: '',
   status: 'published',
   seoTitle: '',
   seoDescription: '',
+  seoKeywords: '',
+  canonicalUrl: '',
   publishedAt: ''
 };
 
@@ -37,6 +46,8 @@ const formatTimestamp = (timestamp) => {
   });
 };
 
+const stripHtml = (value = '') => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
 export default function BlogAdminPage() {
   const [authState, setAuthState] = useState({ status: 'loading', user: null, token: '' });
   const [adminState, setAdminState] = useState({ checking: false, isAdmin: false, error: '' });
@@ -48,6 +59,82 @@ export default function BlogAdminPage() {
   const [login, setLogin] = useState({ email: '', password: '', error: '' });
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const editorRef = useRef(null);
+
+  const handleEditorImageUpload = useCallback(() => {
+    if (!authState.user) {
+      setMessage('Sign in to upload images.');
+      return;
+    }
+
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      setUploading(true);
+      setMessage('');
+      try {
+        const storageRef = ref(firebaseStorage, `blogs/${authState.user.uid}/${Date.now()}-${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(snapshot.ref);
+        const altText = window.prompt('Alt text for accessibility (optional):', '') || '';
+        const quill = editorRef.current?.getEditor();
+        if (quill) {
+          const range = quill.getSelection(true) || { index: quill.getLength() };
+          const safeAlt = altText.replace(/"/g, '&quot;');
+          quill.clipboard.dangerouslyPasteHTML(
+            range.index,
+            `<img src="${url}" alt="${safeAlt}" />`,
+            'user'
+          );
+        }
+      } catch (error) {
+        setMessage('Image upload failed.');
+      } finally {
+        setUploading(false);
+      }
+    };
+  }, [authState.user]);
+
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }],
+          ['blockquote', 'link', 'image'],
+          ['clean']
+        ],
+        handlers: {
+          image: handleEditorImageUpload
+        }
+      },
+      clipboard: {
+        matchVisual: false
+      }
+    }),
+    [handleEditorImageUpload]
+  );
+
+  const quillFormats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'list',
+    'bullet',
+    'align',
+    'blockquote',
+    'link',
+    'image'
+  ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
@@ -153,7 +240,7 @@ export default function BlogAdminPage() {
   };
 
   const saveBlog = async () => {
-    if (!form.title || !form.content) {
+    if (!form.title || !stripHtml(form.content)) {
       setMessage('Title and content are required.');
       return;
     }
@@ -214,12 +301,18 @@ export default function BlogAdminPage() {
       excerpt: blog.excerpt || '',
       content: blog.content || '',
       coverImage: blog.coverImage || '',
+      coverImageAlt: blog.coverImageAlt || '',
+      coverImageCaption: blog.coverImageCaption || '',
+      coverImageCredit: blog.coverImageCredit || '',
+      coverImageSource: blog.coverImageSource || '',
       authorName: blog.authorName || '',
       authorTitle: blog.authorTitle || '',
       tags: (blog.tags || []).join(', '),
       status: blog.status || 'draft',
       seoTitle: blog.seoTitle || '',
       seoDescription: blog.seoDescription || '',
+      seoKeywords: blog.seoKeywords || '',
+      canonicalUrl: blog.canonicalUrl || '',
       publishedAt: blog.publishedAt
         ? new Date(blog.publishedAt).toISOString().split('T')[0]
         : ''
@@ -470,7 +563,7 @@ export default function BlogAdminPage() {
 
                   {(showForm || selectedId) && (
                     <div className="mt-6 grid gap-6">
-                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
                         <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Title</label>
                         <input
@@ -548,32 +641,62 @@ export default function BlogAdminPage() {
 
                     <div className="space-y-2">
                       <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Story content</label>
-                      <textarea
-                        value={form.content}
-                        onChange={(event) => updateForm('content', event.target.value)}
-                        rows={8}
-                        className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
-                      />
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-[0.2em] text-gray-500">SEO title</label>
-                        <input
-                          type="text"
-                          value={form.seoTitle}
-                          onChange={(event) => updateForm('seoTitle', event.target.value)}
-                          className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                      <div className="overflow-hidden rounded-2xl border border-black/20 bg-white">
+                        <ReactQuill
+                          ref={editorRef}
+                          theme="snow"
+                          value={form.content}
+                          onChange={(value) => updateForm('content', value)}
+                          modules={quillModules}
+                          formats={quillFormats}
                         />
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-[0.2em] text-gray-500">SEO description</label>
-                        <input
-                          type="text"
-                          value={form.seoDescription}
-                          onChange={(event) => updateForm('seoDescription', event.target.value)}
-                          className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
-                        />
+                      <p className="text-xs text-gray-500">
+                        Paste text to preserve formatting. Use the toolbar for headings, links, and images.
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl border border-black/10 bg-[#fefaf5] p-4">
+                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Metadata</p>
+                      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">SEO title</label>
+                          <input
+                            type="text"
+                            value={form.seoTitle}
+                            onChange={(event) => updateForm('seoTitle', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">SEO description</label>
+                          <input
+                            type="text"
+                            value={form.seoDescription}
+                            onChange={(event) => updateForm('seoDescription', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">SEO keywords</label>
+                          <input
+                            type="text"
+                            value={form.seoKeywords}
+                            onChange={(event) => updateForm('seoKeywords', event.target.value)}
+                            placeholder="education, campus life, events"
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Canonical URL</label>
+                          <input
+                            type="url"
+                            value={form.canonicalUrl}
+                            onChange={(event) => updateForm('canonicalUrl', event.target.value)}
+                            placeholder="https://example.com/blogs/my-story"
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
                       </div>
                     </div>
 
@@ -599,10 +722,52 @@ export default function BlogAdminPage() {
                         {form.coverImage && (
                           <img
                             src={form.coverImage}
-                            alt="Cover preview"
+                            alt={form.coverImageAlt || 'Cover preview'}
                             className="mt-2 h-28 w-full rounded-2xl object-cover"
                           />
                         )}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-black/10 bg-white p-4">
+                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Cover image metadata</p>
+                      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Alt text</label>
+                          <input
+                            type="text"
+                            value={form.coverImageAlt}
+                            onChange={(event) => updateForm('coverImageAlt', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Caption</label>
+                          <input
+                            type="text"
+                            value={form.coverImageCaption}
+                            onChange={(event) => updateForm('coverImageCaption', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Credit</label>
+                          <input
+                            type="text"
+                            value={form.coverImageCredit}
+                            onChange={(event) => updateForm('coverImageCredit', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-[0.2em] text-gray-500">Source URL</label>
+                          <input
+                            type="url"
+                            value={form.coverImageSource}
+                            onChange={(event) => updateForm('coverImageSource', event.target.value)}
+                            className="w-full rounded-2xl border border-black/20 px-4 py-3 text-sm"
+                          />
+                        </div>
                       </div>
                     </div>
 
@@ -612,29 +777,29 @@ export default function BlogAdminPage() {
                       </p>
                     )}
 
-                      <div className="flex flex-wrap items-center gap-4">
-                        <button
-                          type="button"
-                          onClick={saveBlog}
-                          className="rounded-full bg-black px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-cardinal disabled:opacity-70"
-                          disabled={saving}
-                        >
-                          {saving ? 'Saving...' : selectedId ? 'Update story' : 'Publish story'}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setForm(emptyForm);
-                            setSelectedId(null);
-                            setShowForm(false);
-                          }}
-                          className="rounded-full border border-black/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black"
-                        >
-                          Reset
-                        </button>
-                      </div>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={saveBlog}
+                        className="rounded-full bg-black px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-cardinal disabled:opacity-70"
+                        disabled={saving}
+                      >
+                        {saving ? 'Saving...' : selectedId ? 'Update story' : 'Publish story'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setForm(emptyForm);
+                          setSelectedId(null);
+                          setShowForm(false);
+                        }}
+                        className="rounded-full border border-black/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black"
+                      >
+                        Reset
+                      </button>
                     </div>
-                  )}
+                  </div>
+                )}
                 </section>
               </div>
             )}

@@ -4,6 +4,12 @@ import admin from 'firebase-admin';
 
 const COLLECTION = 'blogs';
 
+const getReadingTime = (content = '') => {
+  const text = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!text) return 1;
+  return Math.max(1, Math.round(text.split(' ').length / 200));
+};
+
 const getAdminFromRequest = async (req) => {
   const authHeader = req.headers.authorization || '';
   const token = authHeader.startsWith('Bearer ') ? authHeader.replace('Bearer ', '') : null;
@@ -70,12 +76,18 @@ export default async function handler(req, res) {
         excerpt,
         content,
         coverImage,
+        coverImageAlt,
+        coverImageCaption,
+        coverImageCredit,
+        coverImageSource,
         authorName,
         authorTitle,
         tags = [],
         status = 'draft',
         seoTitle,
         seoDescription,
+        seoKeywords,
+        canonicalUrl,
         publishedAt
       } = req.body;
 
@@ -85,7 +97,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Title and content are required.' });
       }
 
-      const readingTime = Math.max(1, Math.round(content.split(/\s+/).length / 200));
+      const readingTime = getReadingTime(content);
 
       const docRef = await adminDb.collection(COLLECTION).add({
         title,
@@ -93,12 +105,18 @@ export default async function handler(req, res) {
         excerpt: excerpt || '',
         content,
         coverImage: coverImage || '',
+        coverImageAlt: coverImageAlt || '',
+        coverImageCaption: coverImageCaption || '',
+        coverImageCredit: coverImageCredit || '',
+        coverImageSource: coverImageSource || '',
         authorName: authorName || 'Editorial Team',
         authorTitle: authorTitle || 'Elden Heights School',
         tags,
         status,
         seoTitle: seoTitle || title,
         seoDescription: seoDescription || excerpt || '',
+        seoKeywords: seoKeywords || '',
+        canonicalUrl: canonicalUrl || '',
         publishedAt: publishedAt ? admin.firestore.Timestamp.fromDate(new Date(publishedAt)) : null,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),

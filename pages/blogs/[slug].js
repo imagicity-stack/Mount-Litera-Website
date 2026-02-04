@@ -21,6 +21,8 @@ const splitParagraphs = (content = '') =>
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 
+const hasRichText = (content = '') => /<\/?[a-z][\s\S]*>/i.test(content);
+
 export default function BlogDetailPage({ blog }) {
   if (!blog) {
     return (
@@ -45,7 +47,7 @@ export default function BlogDetailPage({ blog }) {
     );
   }
 
-  const canonical = `${SITE_URL}/blogs/${blog.slug}`;
+  const canonical = blog.canonicalUrl || `${SITE_URL}/blogs/${blog.slug}`;
   const title = blog.seoTitle || blog.title;
   const description = blog.seoDescription || blog.excerpt || blog.title;
 
@@ -54,6 +56,7 @@ export default function BlogDetailPage({ blog }) {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
+        {blog.seoKeywords && <meta name="keywords" content={blog.seoKeywords} />}
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonical} />
         <meta property="og:title" content={title} />
@@ -61,10 +64,12 @@ export default function BlogDetailPage({ blog }) {
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={blog.coverImage || `${SITE_URL}/website/header.png`} />
+        {blog.coverImageAlt && <meta property="og:image:alt" content={blog.coverImageAlt} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={blog.coverImage || `${SITE_URL}/website/header.png`} />
+        {blog.coverImageAlt && <meta name="twitter:image:alt" content={blog.coverImageAlt} />}
       </Head>
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
@@ -96,14 +101,43 @@ export default function BlogDetailPage({ blog }) {
           <section className="py-12">
             <div className="max-w-4xl mx-auto px-6 space-y-8">
               {blog.coverImage && (
-                <div className="overflow-hidden rounded-3xl border border-black/10 shadow-xl shadow-cardinal/10">
-                  <img src={blog.coverImage} alt={blog.title} className="w-full object-cover" />
-                </div>
+                <figure className="overflow-hidden rounded-3xl border border-black/10 shadow-xl shadow-cardinal/10">
+                  <img
+                    src={blog.coverImage}
+                    alt={blog.coverImageAlt || blog.title}
+                    className="w-full object-cover"
+                  />
+                  {(blog.coverImageCaption || blog.coverImageCredit || blog.coverImageSource) && (
+                    <figcaption className="border-t border-black/10 bg-white px-4 py-3 text-xs text-gray-600">
+                      <span>{blog.coverImageCaption}</span>
+                      {blog.coverImageCredit && (
+                        <span className="ml-2 text-gray-500">Credit: {blog.coverImageCredit}</span>
+                      )}
+                      {blog.coverImageSource && (
+                        <a
+                          href={blog.coverImageSource}
+                          className="ml-2 text-cardinal underline"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Source
+                        </a>
+                      )}
+                    </figcaption>
+                  )}
+                </figure>
               )}
               <article className="space-y-6 text-gray-700">
-                {splitParagraphs(blog.content).map((paragraph, index) => (
-                  <p key={`blog-${blog.slug}-${index}`}>{paragraph}</p>
-                ))}
+                {hasRichText(blog.content) ? (
+                  <div
+                    className="blog-content"
+                    dangerouslySetInnerHTML={{ __html: blog.content }}
+                  />
+                ) : (
+                  splitParagraphs(blog.content).map((paragraph, index) => (
+                    <p key={`blog-${blog.slug}-${index}`}>{paragraph}</p>
+                  ))
+                )}
               </article>
             </div>
           </section>

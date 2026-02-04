@@ -21,6 +21,8 @@ const splitParagraphs = (content = '') =>
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 
+const hasRichText = (content = '') => /<\/?[a-z][\s\S]*>/i.test(content);
+
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState([]);
   const [expanded, setExpanded] = useState({});
@@ -171,7 +173,7 @@ export default function BlogsPage() {
                         {blog.coverImage ? (
                           <img
                             src={blog.coverImage}
-                            alt={blog.title}
+                            alt={blog.coverImageAlt || blog.title}
                             className="h-full w-full object-cover"
                           />
                         ) : (
@@ -231,9 +233,16 @@ export default function BlogsPage() {
                               className="overflow-hidden"
                             >
                               <div className="mt-4 space-y-3 text-gray-700">
-                                {splitParagraphs(blog.content).map((paragraph, index) => (
-                                  <p key={`${blog.id}-para-${index}`}>{paragraph}</p>
-                                ))}
+                                {hasRichText(blog.content) ? (
+                                  <div
+                                    className="blog-content"
+                                    dangerouslySetInnerHTML={{ __html: blog.content }}
+                                  />
+                                ) : (
+                                  splitParagraphs(blog.content).map((paragraph, index) => (
+                                    <p key={`${blog.id}-para-${index}`}>{paragraph}</p>
+                                  ))
+                                )}
                               </div>
                             </motion.div>
                           )}

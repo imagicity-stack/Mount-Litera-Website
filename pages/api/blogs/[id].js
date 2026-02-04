@@ -3,6 +3,12 @@ import admin from 'firebase-admin';
 
 const COLLECTION = 'blogs';
 
+const getReadingTime = (content = '') => {
+  const text = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!text) return 1;
+  return Math.max(1, Math.round(text.split(' ').length / 200));
+};
+
 const getAdminFromRequest = async (req) => {
   const authHeader = req.headers.authorization || '';
   const token = authHeader.startsWith('Bearer ') ? authHeader.replace('Bearer ', '') : null;
@@ -42,7 +48,7 @@ export default async function handler(req, res) {
       }
 
       if (updates.content) {
-        updates.readingTime = Math.max(1, Math.round(updates.content.split(/\s+/).length / 200));
+        updates.readingTime = getReadingTime(updates.content);
       }
 
       await adminDb.collection(COLLECTION).doc(id).set(updates, { merge: true });
