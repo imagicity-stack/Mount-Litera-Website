@@ -96,3 +96,21 @@ Visit:
 ## Security Notes
 - Only authenticated users with `role = "admin"` in Firestore can create/edit/delete blogs.
 - All CRUD routes use the Firebase Admin SDK for secure validation.
+
+---
+
+## Firebase Storage Rules (Recommended)
+Use Storage rules to allow authenticated admins to upload blog images. Replace the example project ID as needed.
+
+```
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /blogs/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+```
