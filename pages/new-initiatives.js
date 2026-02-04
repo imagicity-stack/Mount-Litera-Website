@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const rideToRiseDetails = {
   overview:
@@ -38,6 +39,12 @@ export default function NewInitiativesPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="New Initiatives"
+            subtitle="Fresh ideas and campus upgrades shaping the next phase of Elden Heights."
+            badge="Initiatives"
+            image="/new-initiatives/banner-spark.jpg"
+          />
           <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4 max-w-5xl">

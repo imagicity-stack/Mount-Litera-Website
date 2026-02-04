@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const mentorPhotos = {
   'R.K. Singh': '/teachers/rk-singh.png',
@@ -119,6 +120,12 @@ export default function CoreMentorsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Core Mentors"
+            subtitle="Meet the educators and guides shaping every learner’s journey."
+            badge="Mentors"
+            image="/core-mentors/banner-legacy.jpg"
+          />
           <section className="relative overflow-hidden bg-ivory py-16">
             <div className="relative max-w-5xl mx-auto px-6 space-y-4 text-center">
               <p className="text-sm uppercase tracking-[0.3em] text-black">Leadership &amp; Faculty</p>

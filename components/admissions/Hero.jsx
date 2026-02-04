@@ -28,6 +28,12 @@ export default function Hero({ onCtaClick }) {
 
   return (
     <section className="relative overflow-hidden bg-white">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/admissions/banner-skyline.jpg')" }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]" aria-hidden="true" />
       <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="space-y-6 text-center md:text-left">
           <p className="inline-flex items-center justify-center md:justify-start px-4 py-1.5 rounded-full bg-cardinal/10 text-black font-semibold text-xs tracking-[0.3em] uppercase">

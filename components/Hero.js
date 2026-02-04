@@ -18,7 +18,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-center bg-no-repeat bg-cover md:bg-fixed"
         style={{
-          backgroundImage: "url('/gate.jpg')"
+          backgroundImage: "url('/home/hero-eclipse.jpg')"
         }}
         aria-hidden="true"
       />

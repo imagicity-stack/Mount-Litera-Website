@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 import {
   PRIORITY_TOKEN_CONTENT_DETAILS,
@@ -41,6 +42,12 @@ export default function PaymentSuccess() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Payment Success"
+            subtitle="Your priority seat is secured. We’re excited to welcome you."
+            badge="Success"
+            image="/payment-success/banner-confirm.jpg"
+          />
           <section className="py-24">
             <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
               <p className="text-xs uppercase tracking-[0.3em] text-black">Thank You</p>

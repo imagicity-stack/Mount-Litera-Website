@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 import { CONTACT_EMAIL } from '@/lib/contactInfo';
 
@@ -11,6 +12,12 @@ export default function DisabilityPolicyPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Disability Policy"
+            subtitle="An inclusive learning commitment for every learner."
+            badge="Policy"
+            image="/policies/disability-policy/banner-policy.jpg"
+          />
           <section className="py-16 bg-[#F5F5F5]">
             <div className="max-w-4xl mx-auto px-6 space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-black">Disability Policy</h1>

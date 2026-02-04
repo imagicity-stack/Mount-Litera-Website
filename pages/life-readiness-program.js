@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const modules = [
   {
@@ -46,6 +47,12 @@ export default function LifeReadinessProgramPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Life Readiness Program"
+            subtitle="Skill-building pathways that prepare learners for leadership and real-world challenges."
+            badge="Life Readiness"
+            image="/life-readiness-program/banner-ascent.jpg"
+          />
           <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4 max-w-5xl">

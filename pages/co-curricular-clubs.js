@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const clubs = [
   {
@@ -42,6 +43,12 @@ export default function CoCurricularClubsPage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Co-Curricular Clubs"
+            subtitle="Spaces for exploration, creativity, and student-led excellence."
+            badge="Clubs"
+            image="/co-curricular-clubs/banner-spectrum.jpg"
+          />
           <section className="section-divider bg-ivory/80">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
               <div className="space-y-4">

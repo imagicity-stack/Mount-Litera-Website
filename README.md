@@ -12,6 +12,41 @@ This update introduces a Firebase-powered blog system with a public `/blogs` pag
 
 ---
 
+## Image Placeholder Map (Non-blog pages)
+Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md` that lists the image names and totals. Example format: `banner -1`, `section -1`, `background -1` (counts by placement type).
+
+### Page image counts by placement
+- Home: banner -1, section -1, card background -4, feature -1, background -1.
+- About: banner -1, section -1.
+- Academics: banner -1, feature -1.
+- Admission: banner -1.
+- Admissions: banner -1.
+- Awards & Recognition: banner -1.
+- Beyond Academics: banner -1.
+- Careers: banner -1.
+- Co-Curricular Clubs: banner -1.
+- Contact: banner -1.
+- Core Mentors: banner -1.
+- Core: banner -1.
+- Disclosures: banner -1.
+- Gallery: banner -1.
+- Life Readiness Program: banner -1.
+- Managing Committee: banner -1.
+- New Initiatives: banner -1.
+- Privacy Policy: banner -1.
+- Terms & Conditions: banner -1.
+- The Elden Council: banner -1.
+- Payment Success: banner -1.
+- Policies:
+  - Admission Policy: banner -1.
+  - Anti-Ragging Message: banner -1.
+  - Code for Self-Discipline: banner -1.
+  - Complaint Procedures: banner -1.
+  - Disability Policy: banner -1.
+  - Parent Child Contact Mechanism: banner -1.
+
+---
+
 ## Firebase Setup
 
 ### 1) Create a Firebase project

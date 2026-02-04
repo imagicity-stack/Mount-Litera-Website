@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const coreSections = [
   {
@@ -64,6 +65,12 @@ export default function CorePage() {
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
         <main className="flex-1">
+          <ImageBanner
+            title="Core Philosophy"
+            subtitle="The pillars that define culture, learning, and leadership at Elden Heights."
+            badge="Core"
+            image="/core/banner-foundation.jpg"
+          />
           <section className="section-divider bg-ivory">
             <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start">
               <div className="space-y-4">
