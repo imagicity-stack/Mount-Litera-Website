@@ -84,7 +84,7 @@ export default function BlogsPage() {
         <Navbar />
         <main className="flex-1">
           <section className="bg-[#f8f4ef] py-16">
-            <div className="max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+            <div className="max-w-5xl mx-auto px-6">
               <div className="space-y-5">
                 <p className="text-sm uppercase tracking-[0.3em] text-cardinal">Blogs</p>
                 <h1 className="text-4xl sm:text-5xl font-semibold text-black">
@@ -108,24 +108,6 @@ export default function BlogsPage() {
                       placeholder="Search posts, tags, authors..."
                       className="w-full rounded-full border border-black/20 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm focus:border-black focus:outline-none"
                     />
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-3xl border border-black/20 bg-white p-8 shadow-xl shadow-cardinal/10">
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-semibold text-black">Editorial highlights</h2>
-                  <p className="text-gray-600">
-                    Discover curated insights, thoughtful reflections, and event recaps shared by our leadership and faculty teams.
-                  </p>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {['Learning Journeys', 'Campus Events', 'Student Voices', 'Achievements'].map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-black/10 bg-[#fefaf5] px-4 py-3 text-sm font-semibold text-gray-800"
-                      >
-                        {item}
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
