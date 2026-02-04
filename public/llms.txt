@@ -1,0 +1,53 @@
+# llms.txt
+Last-Updated: 2026-02-04
+
+## About
+Elden Heights School provides future-ready education for learners from UKG through Class 10 in Hazaribagh, Jharkhand.
+
+## High-Signal Pages
+- https://eldenheights.org/
+- https://eldenheights.org/about
+- https://eldenheights.org/academics
+- https://eldenheights.org/admissions
+- https://eldenheights.org/admission
+- https://eldenheights.org/beyond-academics
+- https://eldenheights.org/life-readiness-program
+- https://eldenheights.org/core
+- https://eldenheights.org/core-mentors
+- https://eldenheights.org/awards-and-recognition
+- https://eldenheights.org/new-initiatives
+- https://eldenheights.org/the-elden-council
+- https://eldenheights.org/managing-committee
+- https://eldenheights.org/co-curricular-clubs
+- https://eldenheights.org/gallery
+- https://eldenheights.org/careers
+- https://eldenheights.org/disclosures
+- https://eldenheights.org/blogs
+
+## Documentation
+None published.
+
+## Policies
+- https://eldenheights.org/privacy-policy
+- https://eldenheights.org/terms-and-conditions
+- https://eldenheights.org/policies/admission-policy
+- https://eldenheights.org/policies/anti-ragging-message
+- https://eldenheights.org/policies/code-for-self-discipline
+- https://eldenheights.org/policies/complaint-procedures
+- https://eldenheights.org/policies/disability-policy
+- https://eldenheights.org/policies/parent-child-contact-mechanism
+
+## Feeds & Indexes
+- https://eldenheights.org/sitemap.xml
+
+## Preferred Canonical Source
+- https://eldenheights.org
+
+## Content to Avoid
+None listed.
+
+## Attribution
+Elden Heights School.
+
+## Contact
+- https://eldenheights.org/contact
