@@ -44,3 +44,78 @@ p, span, input, textarea, label, a, button, li {
   background-color: #000000;
   opacity: 0.85;
 }
+
+.blog-content {
+  color: #1f2937;
+  line-height: 1.8;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  color: #000000;
+  margin: 1.5rem 0 1rem;
+  line-height: 1.25;
+}
+
+.blog-content h1,
+.ql-editor h1 {
+  font-size: 2.25rem;
+}
+
+.blog-content h2,
+.ql-editor h2 {
+  font-size: 1.875rem;
+}
+
+.blog-content h3,
+.ql-editor h3 {
+  font-size: 1.5rem;
+}
+
+.blog-content h4,
+.ql-editor h4 {
+  font-size: 1.25rem;
+}
+
+.blog-content h5,
+.ql-editor h5 {
+  font-size: 1.125rem;
+}
+
+.blog-content h6,
+.ql-editor h6 {
+  font-size: 1rem;
+}
+
+.blog-content p {
+  margin: 0.85rem 0;
+}
+
+.blog-content a {
+  color: #991b1b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin: 1rem 0 1rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.blog-content blockquote {
+  border-left: 3px solid #991b1b;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #4b5563;
+  font-style: italic;
+}
+
+.blog-content img {
+  margin: 1.5rem auto;
+  border-radius: 1rem;
+}
