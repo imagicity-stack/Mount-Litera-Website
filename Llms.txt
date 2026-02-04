@@ -1,4 +1,4 @@
-Mount Litera Website (Next.js)
+Elden Heights School (Next.js)
 
 Overview
 - Next.js site with a Firebase-powered blog system.
