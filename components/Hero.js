@@ -22,6 +22,11 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
+      <img
+        src="/home/hero-eclipse.jpg"
+        alt="Elden Heights School campus in Hazaribagh Jharkhand"
+        className="sr-only"
+      />
       <div
         className="absolute inset-0 bg-[#0d1a2f]/45"
         aria-hidden="true"
@@ -34,8 +39,11 @@ export default function Hero() {
           className="space-y-6"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white drop-shadow-xl">
-            Towards Eternal Glory
+            Best School in Hazaribagh for Academic Excellence and Future Ready Learning
           </h1>
+          <p className="text-lg md:text-xl text-white/90">
+            Elden Heights School is the best school in hazaribagh for families comparing schools in hazaribagh jharkhand, focused on academic excellence and holistic growth through modern, future ready learning.
+          </p>
         </motion.div>
       </div>
     </section>

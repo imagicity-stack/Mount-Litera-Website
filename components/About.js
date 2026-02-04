@@ -6,7 +6,11 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-export default function About({ showLink = true, imagePrefix = 'home' }) {
+export default function About({
+  showLink = true,
+  imagePrefix = 'home',
+  heading = 'Our Future Ahead'
+}) {
   return (
     <section id="about" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
@@ -32,7 +36,7 @@ export default function About({ showLink = true, imagePrefix = 'home' }) {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
               >
-                Our Future Ahead
+                {heading}
               </motion.h2>
               <motion.p
                 className="text-lg text-midnight/80 leading-relaxed"
@@ -68,7 +72,7 @@ export default function About({ showLink = true, imagePrefix = 'home' }) {
                     href="/about"
                     className="inline-flex items-center justify-center rounded-full bg-cardinal px-7 py-3 text-white font-semibold shadow-lg shadow-cardinal/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cardinal/25"
                   >
-                    Read more about us
+                    Why Elden Heights is a Top School in Hazaribagh
                   </Link>
                   <span className="text-sm uppercase tracking-[0.25em] text-black">Towards Eternal Glory</span>
                 </motion.div>
@@ -78,7 +82,13 @@ export default function About({ showLink = true, imagePrefix = 'home' }) {
               <div
                 className="relative h-48 overflow-hidden rounded-2xl border border-black/15 bg-center bg-cover bg-no-repeat shadow-sm"
                 style={{ backgroundImage: `url('/${imagePrefix}/about-vision.jpg')` }}
+                aria-hidden="true"
               >
+                <img
+                  src={`/${imagePrefix}/about-vision.jpg`}
+                  alt="Elden Heights School campus in Hazaribagh Jharkhand"
+                  className="sr-only"
+                />
                 <div className="absolute inset-0 bg-midnight/25 backdrop-blur-[2px]" aria-hidden="true" />
                 <div className="relative z-10 flex h-full items-end p-4 text-white">
                   <span className="rounded-full bg-white/20 px-3 py-1 text-xs uppercase tracking-[0.3em]">Campus Lens</span>

@@ -73,7 +73,7 @@ const AdmissionOpenPopup = () => {
               });
             }}
           >
-            Enroll Now
+            Admissions Open in Hazaribagh
           </Link>
         </div>
       </div>

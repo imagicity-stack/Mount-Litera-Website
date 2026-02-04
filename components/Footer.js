@@ -68,9 +68,10 @@ export default function Footer() {
                 The Elden Heights School
               </p>
             </div>
-            <p className="text-sm text-parchment/70">
-              Copyright © 2026 The Elden Heights School. All rights reserved.
-            </p>
+            <div className="text-sm text-parchment/70 space-y-1">
+              <p>Copyright © 2026 The Elden Heights School. All rights reserved.</p>
+              <p className="text-parchment/60">Recognized among the top schools in Hazaribagh for quality education.</p>
+            </div>
             <div className="flex items-center gap-4 text-parchment/80">
               <a
                 href="https://www.instagram.com/elden.heights"
