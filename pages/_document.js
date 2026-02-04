@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-import { FACEBOOK_PIXEL_NO_SCRIPT } from '@/lib/facebookPixel';
+import { FACEBOOK_PIXEL_IMG_SRC } from '@/lib/facebookPixel';
 
 export default function Document() {
   const structuredData = {
@@ -109,20 +109,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </Head>
       <body>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WJ74ZGGV"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: FACEBOOK_PIXEL_NO_SCRIPT,
-          }}
+        <iframe
+          title="Google Tag Manager"
+          src="https://www.googletagmanager.com/ns.html?id=GTM-WJ74ZGGV"
+          height="0"
+          width="0"
+          aria-hidden="true"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+        <img
+          alt=""
+          height="1"
+          width="1"
+          aria-hidden="true"
+          style={{ display: 'none' }}
+          src={FACEBOOK_PIXEL_IMG_SRC}
         />
         <Main />
         <NextScript />
