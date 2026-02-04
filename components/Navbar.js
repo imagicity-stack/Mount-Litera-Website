@@ -56,6 +56,7 @@ const navItems = [
     ]
   },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Blogs', href: '/blogs' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' }
 ];
