@@ -7,7 +7,8 @@ html {
 }
 
 body {
-  @apply bg-gold text-midnight font-avenir font-medium;
+  @apply text-midnight font-avenir font-medium;
+  background-color: #f3f4f4;
   min-height: 100vh;
 }
 
