@@ -26,6 +26,7 @@ const getAdminFromRequest = async (req) => {
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
+      res.setHeader('Cache-Control', 'no-store, max-age=0');
       const status = req.query.status;
       let query = adminDb.collection(COLLECTION).orderBy('createdAt', 'desc');
 

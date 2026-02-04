@@ -90,7 +90,10 @@ export default function BlogAdminPage() {
     if (!adminState.isAdmin) return;
 
     const loadBlogs = async () => {
-      const res = await fetch('/api/blogs');
+      const res = await fetch('/api/blogs', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
       const data = await res.json();
       setBlogs(data.blogs || []);
     };
@@ -185,7 +188,10 @@ export default function BlogAdminPage() {
         throw new Error(data.message || 'Unable to save.');
       }
 
-      const fresh = await fetch('/api/blogs');
+      const fresh = await fetch('/api/blogs', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
       const data = await fresh.json();
       setBlogs(data.blogs || []);
       setMessage(selectedId ? 'Blog updated.' : 'Blog published.');

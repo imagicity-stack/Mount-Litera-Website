@@ -30,7 +30,10 @@ export default function BlogsPage() {
   useEffect(() => {
     const loadBlogs = async () => {
       try {
-        const res = await fetch('/api/blogs?status=published');
+        const res = await fetch('/api/blogs?status=published', {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
         const data = await res.json();
         setBlogs(data.blogs || []);
         setStatus('ready');
