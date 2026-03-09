@@ -46,7 +46,7 @@ function toDisplayRows(payload) {
   return Object.entries(labels).map(([key, label]) => [label, payload[key] || '—']);
 }
 
-function formatTextEmail(payload, submittedAt) {
+function formatTextEmail(payload, submittedAt, pageSource) {
   const lines = toDisplayRows(payload).map(([label, value]) => `${label}: ${value}`);
 
   return [
@@ -54,11 +54,11 @@ function formatTextEmail(payload, submittedAt) {
     '',
     ...lines,
     `Submission Timestamp: ${submittedAt}`,
-    'Page Source: successmeter'
+    `Page Source: ${pageSource}`
   ].join('\n');
 }
 
-function formatHtmlEmail(payload, submittedAt) {
+function formatHtmlEmail(payload, submittedAt, pageSource) {
   const rows = toDisplayRows(payload)
     .map(
       ([label, value]) => `
@@ -74,7 +74,7 @@ function formatHtmlEmail(payload, submittedAt) {
     <div style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
       <div style="padding:20px 24px;background:linear-gradient(135deg,#fff7ed,#ffe4e6);">
         <h2 style="margin:0;color:#0f172a;font-size:22px;">New Success Meter Submission</h2>
-        <p style="margin:8px 0 0;color:#475569;font-size:14px;">Campaign lead captured from /successmeter.</p>
+        <p style="margin:8px 0 0;color:#475569;font-size:14px;">Campaign lead captured from /${escapeHtml(pageSource)}.</p>
       </div>
       <div style="padding:20px 24px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">${rows}
@@ -84,7 +84,7 @@ function formatHtmlEmail(payload, submittedAt) {
           </tr>
           <tr>
             <td style="padding:10px 12px;border:1px solid #e2e8f0;font-weight:600;color:#1e293b;">Page Source</td>
-            <td style="padding:10px 12px;border:1px solid #e2e8f0;color:#334155;">successmeter</td>
+            <td style="padding:10px 12px;border:1px solid #e2e8f0;color:#334155;">${escapeHtml(pageSource)}</td>
           </tr>
         </table>
       </div>
@@ -109,8 +109,11 @@ export async function POST(request) {
     }
 
     const submittedAt = new Date().toISOString();
-    const text = formatTextEmail(payload, submittedAt);
-    const html = formatHtmlEmail(payload, submittedAt);
+    const pageSource = ['successmetere', 'successmeterh'].includes(payload.pageSource)
+      ? payload.pageSource
+      : 'successmetere';
+    const text = formatTextEmail(payload, submittedAt, pageSource);
+    const html = formatHtmlEmail(payload, submittedAt, pageSource);
 
     await sendEmail({
       from: sender,

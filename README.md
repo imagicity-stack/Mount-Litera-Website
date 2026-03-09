@@ -121,10 +121,10 @@ SUCCESS_METER_TO=contact@eldenheights.org
 > **Note:** When setting `FIREBASE_PRIVATE_KEY` in Vercel, paste the full key and replace line breaks with `\n`.
 
 ### Success Meter campaign flow
-- Hidden campaign page is available at `/successmeter` and is marked `noindex` for search engines.
+- Hidden campaign page is available at `/successmetere` and is marked `noindex` for search engines.
 - Form submissions are posted to `POST /api/successmeter`.
 - Server validates required fields + phone format, then emails the lead to `SUCCESS_METER_TO` (defaults to `contact@eldenheights.org`) from `SMTP_FROM` (defaults to `noreply@eldenheights.org`).
-- Email includes all parent/student fields, quiz answers, timestamp, and source marker (`successmeter`) in both text and HTML formats.
+- Email includes all parent/student fields, quiz answers, timestamp, and source marker (`successmetere` or `successmeterh`) in both text and HTML formats.
 
 ---
 
