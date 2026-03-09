@@ -83,13 +83,32 @@ const analysisSteps = [
 ];
 
 const realityFacts = [
-  'Over 13,000 students die by suicide in India every year. Many of them were not weak. They were simply overwhelmed by expectations.',
-  'More than 70% of Indian students report feeling academic pressure. Yet most conversations at home still begin with: “How many marks did you get?”',
-  '85% of career success depends on communication, problem solving and people skills. Marks contribute only a small part of that equation.',
-  'More than 60% of children today will work in jobs that do not exist yet. But many are still trained only to memorize answers.',
-  'India has one of the most exam driven education systems in the world. Yet employers consistently say graduates lack real world skills.',
-  'Children are not report cards. But we often treat them like one.',
-  'A child asking questions today may become a leader tomorrow. If curiosity survives the pressure.'
+  <>
+    Over <strong>13,000</strong> students die by suicide in India every year. Many of them were not weak.
+    They were simply overwhelmed by expectations.
+  </>,
+  <>
+    More than <strong>70%</strong> of Indian students report feeling academic pressure. Yet most
+    conversations at home still begin with: “How many marks did you get?”
+  </>,
+  <>
+    <strong>85%</strong> of career success depends on communication, problem solving and people skills.
+    Marks contribute only a small part of that equation.
+  </>,
+  <>
+    More than <strong>60%</strong> of children today will work in jobs that do not exist yet. But many are
+    still trained only to memorize answers.
+  </>,
+  <>
+    India has one of the most exam driven education systems in the world. Yet employers consistently
+    say graduates lack real world skills.
+  </>,
+  <>
+    Children are not report cards. But we often treat them like one.
+  </>,
+  <>
+    A child asking questions today may become a leader tomorrow. If curiosity survives the pressure.
+  </>
 ];
 
 export default function SuccessMeterPage() {
@@ -112,7 +131,7 @@ export default function SuccessMeterPage() {
 
     const interval = setInterval(() => {
       setFactIndex((prev) => (prev + 1) % realityFacts.length);
-    }, 1400);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [showFactsScreen]);
@@ -140,77 +159,6 @@ export default function SuccessMeterPage() {
     }
   };
 
-  if (showFactsScreen) {
-    return (
-      <div className="min-h-screen bg-[#c7322f] px-4 py-8 text-white sm:px-6">
-        <main className="mx-auto w-full max-w-2xl">
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="relative overflow-hidden border border-white/15 bg-[#cf3835] px-5 py-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.18)] sm:px-8"
-            style={{ borderRadius: 24 }}
-          >
-            <div className="pointer-events-none absolute -right-16 -top-10 h-64 w-64 bg-white/5" style={{ borderRadius: 999 }} />
-            <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 bg-white/5" style={{ borderRadius: 999 }} />
-
-            <h2 className="relative text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              A child’s future is not written on a report card.
-            </h2>
-            <p className="relative mt-5 text-lg text-rose-100">Not the marks.</p>
-            <p className="relative mt-1 text-lg text-rose-100">Not the comparison.</p>
-            <p className="relative mt-1 text-lg text-rose-100">Not the pressure.</p>
-            <p className="relative mt-2 text-xl font-semibold text-white">The child matters more.</p>
-
-            <div
-              className="relative mt-7 border border-white/15 bg-white/10 p-5 text-center backdrop-blur-[1px] sm:p-6"
-              style={{ borderRadius: 20 }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-rose-100">
-                But here’s the reality about education today
-              </p>
-
-              <div className="mt-4 min-h-[170px] sm:min-h-[140px]">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={factIndex}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -24 }}
-                    transition={{ duration: 0.42 }}
-                    className="text-lg leading-relaxed text-white sm:text-xl"
-                  >
-                    {factIndex + 1}. {realityFacts[factIndex]}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-
-              <div className="mt-5 flex items-center justify-center gap-2">
-                {realityFacts.map((_, index) => (
-                  <span
-                    key={index}
-                    className={`h-2.5 transition-all ${factIndex === index ? 'w-8 bg-white' : 'w-2.5 bg-white/40'}`}
-                    style={{ borderRadius: 999 }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={handleShare}
-              className="relative mt-8 inline-flex w-full items-center justify-center bg-white px-6 py-4 text-lg font-semibold text-[#c7322f] transition hover:bg-rose-50 sm:w-auto sm:min-w-72"
-              style={{ borderRadius: 999 }}
-            >
-              Share this →
-            </button>
-
-            {shareStatus ? <p className="relative mt-3 text-sm text-rose-100">{shareStatus}</p> : null}
-          </motion.section>
-        </main>
-      </div>
-    );
-  }
 
   const progress = useMemo(() => {
     if (resultVisible) {
@@ -390,6 +338,78 @@ export default function SuccessMeterPage() {
   const isQuizStep = currentStep >= 2 && currentStep <= totalInteractiveSteps;
   const currentQuestion = isQuizStep ? quizFields[currentStep - 2] : null;
   const isLastQuestion = currentStep === totalInteractiveSteps;
+
+  if (showFactsScreen) {
+    return (
+      <div className="min-h-screen bg-[#c7322f] px-4 py-8 text-white sm:px-6">
+        <main className="mx-auto w-full max-w-2xl">
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="relative overflow-hidden border border-white/15 bg-[#cf3835] px-5 py-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.18)] sm:px-8"
+            style={{ borderRadius: 24 }}
+          >
+            <div className="pointer-events-none absolute -right-16 -top-10 h-64 w-64 bg-white/5" style={{ borderRadius: 999 }} />
+            <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 bg-white/5" style={{ borderRadius: 999 }} />
+
+            <h2 className="relative text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              A child’s future is not written on a report card.
+            </h2>
+            <p className="relative mt-5 text-lg text-rose-100">Not the marks.</p>
+            <p className="relative mt-1 text-lg text-rose-100">Not the comparison.</p>
+            <p className="relative mt-1 text-lg text-rose-100">Not the pressure.</p>
+            <p className="relative mt-2 text-xl font-semibold text-white">The child matters more.</p>
+
+            <div
+              className="relative mt-7 border border-white/15 bg-white/10 p-5 text-center backdrop-blur-[1px] sm:p-6"
+              style={{ borderRadius: 20 }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-rose-100">
+                But here’s the reality about education today
+              </p>
+
+              <div className="mt-4 min-h-[170px] sm:min-h-[140px]">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={factIndex}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.42 }}
+                    className="text-lg leading-relaxed text-white sm:text-xl"
+                  >
+                    {realityFacts[factIndex]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+
+              <div className="mt-5 flex items-center justify-center gap-2">
+                {realityFacts.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`h-2.5 transition-all ${factIndex === index ? 'w-8 bg-white' : 'w-2.5 bg-white/40'}`}
+                    style={{ borderRadius: 999 }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleShare}
+              className="relative mt-8 inline-flex w-full items-center justify-center bg-white px-6 py-4 text-lg font-semibold text-[#c7322f] transition hover:bg-rose-50 sm:w-auto sm:min-w-72"
+              style={{ borderRadius: 999 }}
+            >
+              Share this →
+            </button>
+
+            {shareStatus ? <p className="relative mt-3 text-sm text-rose-100">{shareStatus}</p> : null}
+          </motion.section>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 px-3 py-6 text-slate-800 sm:px-5 md:py-12">
