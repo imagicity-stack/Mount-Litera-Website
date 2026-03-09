@@ -48,12 +48,18 @@ const quizFields = [
   }
 ];
 
-const requiredFields = [
-  'parentName',
-  'studentName',
-  'phoneNumber',
-  'classOfStudent',
-  ...quizFields.map((field) => field.name)
+const basicFields = [
+  { name: 'parentName', label: 'Parent Name *', type: 'text', required: true },
+  { name: 'studentName', label: 'Student Name *', type: 'text', required: true },
+  { name: 'phoneNumber', label: 'Phone Number *', type: 'tel', required: true },
+  { name: 'emailAddress', label: 'Email Address (optional)', type: 'email', required: false },
+  {
+    name: 'currentSchool',
+    label: 'School currently studying in (optional)',
+    type: 'text',
+    required: false
+  },
+  { name: 'cityLocation', label: 'City / Location (optional)', type: 'text', required: false }
 ];
 
 const initialData = {
@@ -74,18 +80,44 @@ const initialData = {
 const isValidPhone = (phone) => /^\+?[0-9\s()-]{10,15}$/.test(phone.trim());
 const isValidEmail = (email) => /^\S+@\S+\.\S+$/.test(email.trim());
 
+const totalInteractiveSteps = 2 + quizFields.length;
+
 export default function SuccessMeterPage() {
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState({});
+  const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingResult, setIsLoadingResult] = useState(false);
   const [resultVisible, setResultVisible] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
 
-  const completion = useMemo(() => {
-    const completed = requiredFields.filter((field) => formData[field]?.trim()).length;
-    return Math.round((completed / requiredFields.length) * 100);
-  }, [formData]);
+  const progress = useMemo(() => {
+    if (resultVisible) {
+      return 100;
+    }
+
+    if (currentStep === 0) {
+      return 8;
+    }
+
+    return Math.round((currentStep / totalInteractiveSteps) * 100);
+  }, [currentStep, resultVisible]);
+
+  const stepLabel = useMemo(() => {
+    if (resultVisible) {
+      return 'Step 2 of 2';
+    }
+
+    if (currentStep === 0) {
+      return 'Welcome';
+    }
+
+    if (currentStep === 1) {
+      return 'Step 1 of 2';
+    }
+
+    return `Question ${currentStep - 1} of ${quizFields.length}`;
+  }, [currentStep, resultVisible]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -93,17 +125,25 @@ export default function SuccessMeterPage() {
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const validate = () => {
+  const validateBasicDetails = () => {
     const nextErrors = {};
 
-    requiredFields.forEach((field) => {
-      if (!formData[field]?.trim()) {
-        nextErrors[field] = 'This field is required.';
-      }
-    });
+    if (!formData.parentName.trim()) {
+      nextErrors.parentName = 'This field is required.';
+    }
 
-    if (formData.phoneNumber && !isValidPhone(formData.phoneNumber)) {
+    if (!formData.studentName.trim()) {
+      nextErrors.studentName = 'This field is required.';
+    }
+
+    if (!formData.phoneNumber.trim()) {
+      nextErrors.phoneNumber = 'This field is required.';
+    } else if (!isValidPhone(formData.phoneNumber)) {
       nextErrors.phoneNumber = 'Please enter a valid phone number.';
+    }
+
+    if (!formData.classOfStudent.trim()) {
+      nextErrors.classOfStudent = 'Please select class of student.';
     }
 
     if (formData.emailAddress && !isValidEmail(formData.emailAddress)) {
@@ -114,15 +154,66 @@ export default function SuccessMeterPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const validateQuizStep = () => {
+    const quizIndex = currentStep - 2;
+    const question = quizFields[quizIndex];
 
+    if (!question) {
+      return true;
+    }
+
+    if (!formData[question.name]) {
+      setErrors((prev) => ({ ...prev, [question.name]: 'Please choose one option to continue.' }));
+      return false;
+    }
+
+    setErrors((prev) => ({ ...prev, [question.name]: '' }));
+    return true;
+  };
+
+  const handleNext = () => {
+    if (currentStep === 0) {
+      setCurrentStep(1);
+      return;
+    }
+
+    if (currentStep === 1) {
+      if (!validateBasicDetails()) {
+        setStatusMessage({ type: 'error', text: 'Please fill required details correctly.' });
+        return;
+      }
+
+      setStatusMessage({ type: '', text: '' });
+      setCurrentStep(2);
+      return;
+    }
+
+    if (!validateQuizStep()) {
+      return;
+    }
+
+    if (currentStep < totalInteractiveSteps) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (isSubmitting || isLoadingResult) {
+      return;
+    }
+
+    setStatusMessage({ type: '', text: '' });
+    setCurrentStep((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleSubmit = async () => {
     if (isSubmitting) {
       return;
     }
 
-    if (!validate()) {
-      setStatusMessage({ type: 'error', text: 'Please fix the highlighted fields and try again.' });
+    const currentQuestion = quizFields[quizFields.length - 1];
+    if (!formData[currentQuestion.name]) {
+      setErrors((prev) => ({ ...prev, [currentQuestion.name]: 'Please choose one option to continue.' }));
       return;
     }
 
@@ -137,7 +228,7 @@ export default function SuccessMeterPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         }),
-        new Promise((resolve) => setTimeout(resolve, 1900))
+        new Promise((resolve) => setTimeout(resolve, 2000))
       ]);
 
       if (!response.ok) {
@@ -156,191 +247,264 @@ export default function SuccessMeterPage() {
         text: 'Something went wrong while submitting. Please try again in a moment.'
       });
     } finally {
-      setIsLoadingResult(false);
       setIsSubmitting(false);
+      setIsLoadingResult(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 text-slate-800">
-      <main className="mx-auto flex w-full max-w-6xl flex-col px-4 pb-12 pt-10 md:px-6 md:pt-14">
-        <motion.section
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <p className="inline-block border border-amber-200 bg-amber-100/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-amber-800" style={{ borderRadius: 999 }}>
-            Success Meter Campaign
-          </p>
-          <h1 className="mt-5 text-3xl font-semibold leading-tight text-slate-900 md:text-5xl">
-            Will Your Child Be Successful In Life?
-          </h1>
-          <p className="mt-4 text-base text-slate-600 md:text-lg">
-            Take this short Success Meter to reflect on what really shapes a child’s future.
-          </p>
-          <p className="mt-2 text-sm text-slate-500 md:text-base">
-            It only takes a minute, and the reflection may surprise you.
-          </p>
-        </motion.section>
+  const isQuizStep = currentStep >= 2 && currentStep <= totalInteractiveSteps;
+  const currentQuestion = isQuizStep ? quizFields[currentStep - 2] : null;
+  const isLastQuestion = currentStep === totalInteractiveSteps;
 
-        <motion.section
-          initial={{ opacity: 0, y: 34 }}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 px-3 py-6 text-slate-800 sm:px-5 md:py-12">
+      <main className="mx-auto w-full max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-          className="mx-auto mt-8 w-full max-w-4xl border border-white/80 bg-white/90 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] md:mt-10 md:p-9"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="border border-white/80 bg-white/95 p-5 shadow-[0_16px_45px_rgba(15,23,42,0.08)] sm:p-7"
           style={{ borderRadius: 24 }}
         >
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-sm font-medium text-slate-600">Step 1 of 2</p>
-            <p className="text-sm text-slate-500">{completion}% complete</p>
+          <div className="mb-5 flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">success meter</p>
+            <p className="text-xs font-medium text-slate-500">{stepLabel}</p>
           </div>
-          <div className="mt-3 h-2 overflow-hidden bg-slate-100" style={{ borderRadius: 999 }}>
+
+          <div className="h-2 overflow-hidden bg-slate-100" style={{ borderRadius: 999 }}>
             <motion.div
               className="h-full bg-gradient-to-r from-amber-400 to-rose-400"
-              animate={{ width: `${completion}%` }}
+              animate={{ width: `${progress}%` }}
               transition={{ duration: 0.35 }}
             />
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
-            {[
-              ['parentName', 'Parent Name *', 'text'],
-              ['studentName', 'Student Name *', 'text'],
-              ['phoneNumber', 'Phone Number *', 'tel'],
-              ['emailAddress', 'Email Address (optional)', 'email'],
-              ['currentSchool', 'School currently studying in (optional)', 'text'],
-              ['cityLocation', 'City / Location (optional)', 'text']
-            ].map(([name, label, type]) => (
-              <label key={name} className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                {label}
-                <input
-                  type={type}
-                  name={name}
-                  value={formData[name]}
-                  onChange={handleChange}
-                  className="border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
-                  style={{ borderRadius: 14 }}
-                />
-                {errors[name] ? <span className="text-xs text-red-600">{errors[name]}</span> : null}
-              </label>
-            ))}
-
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Class of Student *
-              <select
-                name="classOfStudent"
-                value={formData.classOfStudent}
-                onChange={handleChange}
-                className="border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
-                style={{ borderRadius: 14 }}
-              >
-                {classOptions.map((option) => (
-                  <option value={option} key={option || 'placeholder'}>
-                    {option || 'Select class'}
-                  </option>
-                ))}
-              </select>
-              {errors.classOfStudent ? <span className="text-xs text-red-600">{errors.classOfStudent}</span> : null}
-            </label>
-
-            <div className="md:col-span-2 mt-2 grid gap-4">
-              {quizFields.map((field) => (
-                <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                  {field.label} *
-                  <select
-                    name={field.name}
-                    value={formData[field.name]}
-                    onChange={handleChange}
-                    className="border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
-                    style={{ borderRadius: 14 }}
-                  >
-                    <option value="">Select an option</option>
-                    {field.options.map((option) => (
-                      <option value={option} key={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  {errors[field.name] ? <span className="text-xs text-red-600">{errors[field.name]}</span> : null}
-                </label>
-              ))}
-            </div>
-
-            <div className="md:col-span-2 mt-2">
-              <motion.button
-                whileHover={{ y: -2, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
-                style={{ borderRadius: 14 }}
-              >
-                {isSubmitting ? 'Checking Success Meter...' : 'Check Success Meter'}
-              </motion.button>
-            </div>
-
-            {statusMessage.text ? (
-              <p className={`md:col-span-2 text-sm ${statusMessage.type === 'error' ? 'text-red-600' : 'text-emerald-700'}`}>
-                {statusMessage.text}
-              </p>
-            ) : null}
-          </form>
-
-          <AnimatePresence>
-            {isLoadingResult ? (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
+          <AnimatePresence mode="wait">
+            {!resultVisible ? (
+              <motion.section
+                key={`step-${currentStep}`}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                className="mt-6 border border-amber-100 bg-amber-50/70 p-4 text-sm text-amber-800"
-                style={{ borderRadius: 14 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.28 }}
+                className="mt-6"
               >
-                <div className="flex items-center gap-3">
-                  <motion.span
-                    className="h-5 w-5 border-2 border-amber-400 border-t-transparent"
-                    style={{ borderRadius: 999 }}
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 0.7, ease: 'linear' }}
-                  />
-                  Analyzing your responses...
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-        </motion.section>
+                {currentStep === 0 ? (
+                  <div className="space-y-4 text-center">
+                    <h1 className="text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+                      Welcome to success meter
+                    </h1>
+                    <p className="text-base text-slate-700 sm:text-lg">
+                      check whether your child be successful in life or not
+                    </p>
+                    <p className="text-xs text-slate-500 sm:text-sm">
+                      Our developers have made this super innovative tech to check student's future.
+                    </p>
+                    <motion.button
+                      whileHover={{ y: -2, scale: 1.01 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleNext}
+                      className="mx-auto mt-2 inline-flex min-w-40 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                      style={{ borderRadius: 12 }}
+                    >
+                      Continue
+                    </motion.button>
+                  </div>
+                ) : null}
 
-        <AnimatePresence>
-          {resultVisible ? (
-            <motion.section
-              initial={{ opacity: 0, y: 25, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.55, ease: 'easeOut' }}
-              className="mx-auto mt-7 w-full max-w-4xl border border-rose-100 bg-white p-6 shadow-[0_20px_50px_rgba(244,63,94,0.12)] md:p-8"
-              style={{ borderRadius: 24 }}
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.1em] text-rose-500">Step 2 of 2</p>
-              <h2 className="mt-2 text-3xl font-semibold text-slate-900">Result: Error</h2>
-              <p className="mt-3 text-base text-slate-700">
-                We cannot predict your child’s future through marks, rank, or study hours alone.
-              </p>
-              <p className="mt-4 text-slate-600">
-                Real success is shaped by confidence, curiosity, creativity, communication, leadership, and character.
-                These qualities empower children to adapt, lead, and thrive in life.
-              </p>
-              <p className="mt-5 text-slate-800 font-medium">
-                At The Elden Heights School, we believe children should be prepared for life, not just exams.
-              </p>
-              <a
-                href="/contact"
-                className="mt-6 inline-flex bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
-                style={{ borderRadius: 12 }}
+                {currentStep === 1 ? (
+                  <div>
+                    <h2 className="text-2xl font-semibold text-slate-900">Will Your Child Be Successful In Life?</h2>
+                    <p className="mt-2 text-sm text-slate-600">
+                      Take this short Success Meter to reflect on what really shapes a child’s future.
+                    </p>
+
+                    <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      {basicFields.map((field) => (
+                        <label
+                          key={field.name}
+                          className={`flex flex-col gap-2 text-sm font-medium text-slate-700 ${
+                            field.name === 'currentSchool' || field.name === 'cityLocation' ? 'sm:col-span-2' : ''
+                          }`}
+                        >
+                          {field.label}
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={formData[field.name]}
+                            onChange={handleChange}
+                            className="border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
+                            style={{ borderRadius: 14 }}
+                          />
+                          {errors[field.name] ? <span className="text-xs text-red-600">{errors[field.name]}</span> : null}
+                        </label>
+                      ))}
+
+                      <label className="flex flex-col gap-2 text-sm font-medium text-slate-700 sm:col-span-2">
+                        Class of Student *
+                        <select
+                          name="classOfStudent"
+                          value={formData.classOfStudent}
+                          onChange={handleChange}
+                          className="border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
+                          style={{ borderRadius: 14 }}
+                        >
+                          {classOptions.map((option) => (
+                            <option value={option} key={option || 'placeholder'}>
+                              {option || 'Select class'}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.classOfStudent ? (
+                          <span className="text-xs text-red-600">{errors.classOfStudent}</span>
+                        ) : null}
+                      </label>
+                    </div>
+
+                    <div className="mt-5 flex items-center justify-end">
+                      <motion.button
+                        whileHover={{ y: -2, scale: 1.01 }}
+                        whileTap={{ scale: 0.98 }}
+                        type="button"
+                        onClick={handleNext}
+                        className="inline-flex min-w-28 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                        style={{ borderRadius: 12 }}
+                      >
+                        Next
+                      </motion.button>
+                    </div>
+                  </div>
+                ) : null}
+
+                {isQuizStep && currentQuestion ? (
+                  <div className="text-center">
+                    <h3 className="text-xl font-semibold text-slate-900 sm:text-2xl">{currentQuestion.label}</h3>
+                    <div className="mt-5 grid gap-3 text-left">
+                      {currentQuestion.options.map((option) => {
+                        const selected = formData[currentQuestion.name] === option;
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => {
+                              setFormData((prev) => ({ ...prev, [currentQuestion.name]: option }));
+                              setErrors((prev) => ({ ...prev, [currentQuestion.name]: '' }));
+                            }}
+                            className={`w-full border px-4 py-3 text-sm transition ${
+                              selected
+                                ? 'border-amber-400 bg-amber-50 text-slate-900'
+                                : 'border-slate-200 bg-white text-slate-700 hover:border-amber-300'
+                            }`}
+                            style={{ borderRadius: 12 }}
+                          >
+                            {option}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {errors[currentQuestion.name] ? (
+                      <p className="mt-3 text-xs text-red-600">{errors[currentQuestion.name]}</p>
+                    ) : null}
+
+                    <div className="mt-6 flex items-center justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={handleBack}
+                        className="inline-flex min-w-24 items-center justify-center border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                        style={{ borderRadius: 12 }}
+                      >
+                        Back
+                      </button>
+
+                      {isLastQuestion ? (
+                        <motion.button
+                          whileHover={{ y: -2, scale: 1.01 }}
+                          whileTap={{ scale: 0.98 }}
+                          type="button"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting}
+                          className="inline-flex min-w-44 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+                          style={{ borderRadius: 12 }}
+                        >
+                          {isSubmitting ? 'Checking...' : 'Check Success Meter'}
+                        </motion.button>
+                      ) : (
+                        <motion.button
+                          whileHover={{ y: -2, scale: 1.01 }}
+                          whileTap={{ scale: 0.98 }}
+                          type="button"
+                          onClick={handleNext}
+                          className="inline-flex min-w-28 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                          style={{ borderRadius: 12 }}
+                        >
+                          Next
+                        </motion.button>
+                      )}
+                    </div>
+                  </div>
+                ) : null}
+
+                <AnimatePresence>
+                  {isLoadingResult ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="mt-5 border border-amber-100 bg-amber-50/80 p-3 text-sm text-amber-800"
+                      style={{ borderRadius: 12 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.span
+                          className="h-4 w-4 border-2 border-amber-400 border-t-transparent"
+                          style={{ borderRadius: 999 }}
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 0.75, ease: 'linear', repeat: Infinity }}
+                        />
+                        Analyzing your responses...
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </motion.section>
+            ) : (
+              <motion.section
+                key="result"
+                initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="mt-6 border border-rose-100 bg-white p-5 shadow-[0_16px_40px_rgba(244,63,94,0.12)] sm:p-7"
+                style={{ borderRadius: 18 }}
               >
-                Talk to Our Team
-              </a>
-            </motion.section>
+                <h2 className="text-3xl font-semibold text-slate-900">Result: Error</h2>
+                <p className="mt-3 text-base text-slate-700">
+                  We cannot predict your child’s future through marks, rank, or study hours alone.
+                </p>
+                <p className="mt-4 text-slate-600">
+                  Real success also depends on confidence, curiosity, creativity, communication, leadership, and
+                  character.
+                </p>
+                <p className="mt-5 font-medium text-slate-800">
+                  At The Elden Heights School, we believe children should be prepared for life, not just exams.
+                </p>
+                <a
+                  href="/contact"
+                  className="mt-6 inline-flex bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
+                  style={{ borderRadius: 12 }}
+                >
+                  Talk to Our Team
+                </a>
+              </motion.section>
+            )}
+          </AnimatePresence>
+
+          {statusMessage.text ? (
+            <p className={`mt-4 text-sm ${statusMessage.type === 'error' ? 'text-red-600' : 'text-emerald-700'}`}>
+              {statusMessage.text}
+            </p>
           ) : null}
-        </AnimatePresence>
+        </motion.div>
       </main>
     </div>
   );
