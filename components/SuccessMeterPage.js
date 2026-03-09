@@ -49,17 +49,9 @@ const quizFields = [
 ];
 
 const basicFields = [
-  { name: 'parentName', label: 'Parent Name *', type: 'text', required: true },
+  { name: 'parentName', label: 'Your name (parent) *', type: 'text', required: true },
   { name: 'studentName', label: 'Student Name *', type: 'text', required: true },
-  { name: 'phoneNumber', label: 'Phone Number *', type: 'tel', required: true },
-  { name: 'emailAddress', label: 'Email Address (optional)', type: 'email', required: false },
-  {
-    name: 'currentSchool',
-    label: 'School currently studying in (optional)',
-    type: 'text',
-    required: false
-  },
-  { name: 'cityLocation', label: 'City / Location (optional)', type: 'text', required: false }
+  { name: 'phoneNumber', label: 'Phone Number *', type: 'tel', required: true }
 ];
 
 const initialData = {
@@ -80,7 +72,7 @@ const initialData = {
 const isValidPhone = (phone) => /^\+?[0-9\s()-]{10,15}$/.test(phone.trim());
 const isValidEmail = (email) => /^\S+@\S+\.\S+$/.test(email.trim());
 
-const totalInteractiveSteps = 2 + quizFields.length;
+const totalInteractiveSteps = 1 + quizFields.length;
 
 export default function SuccessMeterPage() {
   const [formData, setFormData] = useState(initialData);
@@ -323,9 +315,7 @@ export default function SuccessMeterPage() {
                       {basicFields.map((field) => (
                         <label
                           key={field.name}
-                          className={`flex flex-col gap-2 text-sm font-medium text-slate-700 ${
-                            field.name === 'currentSchool' || field.name === 'cityLocation' ? 'sm:col-span-2' : ''
-                          }`}
+                          className="flex flex-col gap-2 text-sm font-medium text-slate-700"
                         >
                           {field.label}
                           <input
