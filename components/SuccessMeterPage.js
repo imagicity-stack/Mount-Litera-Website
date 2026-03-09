@@ -233,7 +233,7 @@ export default function SuccessMeterPage() {
 
     const analysisInterval = setInterval(() => {
       setCompletedAnalysisSteps((prev) => (prev < analysisSteps.length ? prev + 1 : prev));
-    }, 380);
+    }, 900);
 
     try {
       const response = await fetch('/api/successmeter', {
@@ -290,7 +290,7 @@ export default function SuccessMeterPage() {
             <motion.div
               className="h-full bg-gradient-to-r from-amber-400 to-rose-400"
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.35 }}
+              transition={{ duration: 0.45 }}
             />
           </div>
 
@@ -519,7 +519,7 @@ export default function SuccessMeterPage() {
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12, duration: 0.35 }}
+                  transition={{ delay: 1.3, duration: 0.45 }}
                   className="mt-3 text-base text-slate-700"
                 >
                   We cannot predict your child’s future through marks, rank, or study hours alone.
@@ -527,7 +527,7 @@ export default function SuccessMeterPage() {
                 <motion.div
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.24, duration: 0.35 }}
+                  transition={{ delay: 2.6, duration: 0.45 }}
                   className="mt-4 border border-amber-100 bg-gradient-to-r from-amber-50 to-rose-50 p-4"
                   style={{ borderRadius: 14 }}
                 >
@@ -539,7 +539,7 @@ export default function SuccessMeterPage() {
                 <motion.p
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35, duration: 0.35 }}
+                  transition={{ delay: 3.9, duration: 0.45 }}
                   className="mt-4 text-slate-600"
                 >
                   Real success also depends on confidence, curiosity, creativity, communication, leadership, and
@@ -549,7 +549,7 @@ export default function SuccessMeterPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45, duration: 0.35 }}
+                  transition={{ delay: 5.2, duration: 0.45 }}
                   className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2"
                 >
                   {[
@@ -574,7 +574,7 @@ export default function SuccessMeterPage() {
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.58, duration: 0.35 }}
+                  transition={{ delay: 6.5, duration: 0.45 }}
                   className="mt-4 text-slate-600"
                 >
                   These life qualities shape resilience, decision-making, and the ability to thrive beyond exams.
@@ -582,7 +582,7 @@ export default function SuccessMeterPage() {
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.35 }}
+                  transition={{ delay: 7.8, duration: 0.45 }}
                   className="mt-5 font-medium text-slate-800"
                 >
                   At The Elden Heights School, we believe children should be prepared for life, not just exams.
@@ -590,7 +590,7 @@ export default function SuccessMeterPage() {
                 <motion.a
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.82, duration: 0.35 }}
+                  transition={{ delay: 9.1, duration: 0.45 }}
                   href="/contact"
                   className="mt-6 inline-flex bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
                   style={{ borderRadius: 12 }}
