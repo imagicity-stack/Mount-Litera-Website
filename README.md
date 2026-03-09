@@ -110,9 +110,21 @@ FIREBASE_PROJECT_ID=
 FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 FIREBASE_STORAGE_BUCKET=
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=noreply@eldenheights.org
+SUCCESS_METER_TO=contact@eldenheights.org
 ```
 
 > **Note:** When setting `FIREBASE_PRIVATE_KEY` in Vercel, paste the full key and replace line breaks with `\n`.
+
+### Success Meter campaign flow
+- Hidden campaign page is available at `/successmeter` and is marked `noindex` for search engines.
+- Form submissions are posted to `POST /api/successmeter`.
+- Server validates required fields + phone format, then emails the lead to `SUCCESS_METER_TO` (defaults to `contact@eldenheights.org`) from `SMTP_FROM` (defaults to `noreply@eldenheights.org`).
+- Email includes all parent/student fields, quiz answers, timestamp, and source marker (`successmeter`) in both text and HTML formats.
 
 ---
 
