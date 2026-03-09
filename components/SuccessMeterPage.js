@@ -471,9 +471,34 @@ export default function SuccessMeterPage() {
                 <p className="mt-3 text-base text-slate-700">
                   We cannot predict your child’s future through marks, rank, or study hours alone.
                 </p>
+                <div className="mt-4 border border-amber-100 bg-gradient-to-r from-amber-50 to-rose-50 p-4" style={{ borderRadius: 14 }}>
+                  <p className="text-sm font-medium text-slate-700">
+                    Because a child is not a report card — a child is a story still being written.
+                  </p>
+                </div>
+
+                <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {[
+                    'Confidence',
+                    'Curiosity',
+                    'Creativity',
+                    'Communication',
+                    'Leadership',
+                    'Character'
+                  ].map((trait) => (
+                    <div
+                      key={trait}
+                      className="flex items-center gap-2 border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700"
+                      style={{ borderRadius: 12 }}
+                    >
+                      <span className="h-2 w-2 bg-rose-400" style={{ borderRadius: 999 }} />
+                      <span>{trait}</span>
+                    </div>
+                  ))}
+                </div>
+
                 <p className="mt-4 text-slate-600">
-                  Real success also depends on confidence, curiosity, creativity, communication, leadership, and
-                  character.
+                  These life qualities shape resilience, decision-making, and the ability to thrive beyond exams.
                 </p>
                 <p className="mt-5 font-medium text-slate-800">
                   At The Elden Heights School, we believe children should be prepared for life, not just exams.
