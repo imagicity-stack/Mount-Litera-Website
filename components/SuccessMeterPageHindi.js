@@ -23,35 +23,35 @@ const classOptions = [
 const quizFields = [
   {
     name: 'examPercentage',
-    label: 'What was your child’s last exam percentage?',
-    options: ['Below 50%', '50% - 65%', '66% - 80%', '81% - 90%', 'Above 90%']
+    label: 'आपके बच्चे का पिछली परीक्षा में प्रतिशत कितना था?',
+    options: ['50% से कम', '50% - 65%', '66% - 80%', '81% - 90%', '90% से ऊपर']
   },
   {
     name: 'studyHours',
-    label: 'How many hours does your child study daily?',
-    options: ['Below 1 hour', '1 - 2 hours', '2 - 4 hours', '4+ hours']
+    label: 'आपका बच्चा रोज कितने घंटे पढ़ता है?',
+    options: ['1 घंटे से कम', '1 - 2 घंटे', '2 - 4 घंटे', '4+ घंटे']
   },
   {
     name: 'tuitionRegularity',
-    label: 'Does your child attend tuition regularly?',
-    options: ['Yes, consistently', 'Sometimes', 'No, not attending']
+    label: 'क्या आपका बच्चा नियमित ट्यूशन जाता है?',
+    options: ['हाँ, नियमित', 'कभी-कभी', 'नहीं जाता']
   },
   {
     name: 'classRank',
-    label: 'Does your child rank among the top students in class?',
-    options: ['Usually top 3', 'Often in top 10', 'Occasionally', 'Not really']
+    label: 'क्या आपका बच्चा कक्षा के टॉप छात्रों में आता है?',
+    options: ['अक्सर टॉप 3 में', 'अक्सर टॉप 10 में', 'कभी-कभी', 'ज्यादातर नहीं']
   },
   {
     name: 'priority',
-    label: 'What matters most to you right now?',
-    options: ['Marks', 'Confidence', 'Discipline', 'Communication', 'Overall growth']
+    label: 'इस समय आपके लिए सबसे ज़्यादा क्या मायने रखता है?',
+    options: ['अंक', 'आत्मविश्वास', 'अनुशासन', 'संचार', 'कुल विकास']
   }
 ];
 
 const basicFields = [
-  { name: 'parentName', label: 'Your name (parent) *', type: 'text', required: true },
-  { name: 'studentName', label: 'Student Name *', type: 'text', required: true },
-  { name: 'phoneNumber', label: 'Phone Number *', type: 'tel', required: true }
+  { name: 'parentName', label: 'आपका नाम (माता/पिता) *', type: 'text', required: true },
+  { name: 'studentName', label: 'बच्चे का नाम *', type: 'text', required: true },
+  { name: 'phoneNumber', label: 'फोन नंबर *', type: 'tel', required: true }
 ];
 
 const initialData = {
@@ -75,43 +75,39 @@ const isValidEmail = (email) => /^\S+@\S+\.\S+$/.test(email.trim());
 const totalInteractiveSteps = 1 + quizFields.length;
 
 const analysisSteps = [
-  'Reviewing your responses',
-  'Checking study and routine patterns',
-  'Comparing growth mindset indicators',
-  'Evaluating confidence and communication signals',
-  'Mapping long-term life readiness markers'
+  'आपके जवाब देखे जा रहे हैं',
+  'पढ़ाई और दिनचर्या का पैटर्न देखा जा रहा है',
+  'विकास सोच के संकेत देखे जा रहे हैं',
+  'आत्मविश्वास और संचार के संकेत देखे जा रहे हैं',
+  'लंबी अवधि की जीवन तैयारी समझी जा रही है'
 ];
 
 const realityFacts = [
   <>
-    Over <strong>13,000</strong> students die by suicide in India every year. Many of them were not weak.
-    They were simply overwhelmed by expectations.
+    भारत में हर साल <strong>13,000</strong> से ज़्यादा छात्र आत्महत्या करते हैं। वे कमजोर नहीं थे, वे बस उम्मीदों के दबाव में टूट गए।
   </>,
   <>
-    More than <strong>70%</strong> of Indian students report feeling academic pressure. Yet most
-    conversations at home still begin with: “How many marks did you get?”
+    भारत में <strong>70%</strong> से अधिक छात्र पढ़ाई का दबाव महसूस करते हैं। फिर भी घर की बात अक्सर यहीं से शुरू होती है: "कितने नंबर आए?"
   </>,
   <>
-    <strong>85%</strong> of career success depends on communication, problem solving and people skills.
-    Marks contribute only a small part of that equation.
+    करियर में सफलता का <strong>85%</strong> हिस्सा संचार, समस्या सुलझाने और व्यवहार कौशल पर निर्भर करता है।
+    इसमें अंक सिर्फ छोटा हिस्सा निभाते हैं।
   </>,
   <>
-    More than <strong>60%</strong> of children today will work in jobs that do not exist yet. But many are
-    still trained only to memorize answers.
+    आज के <strong>60%</strong> से ज़्यादा बच्चे भविष्य में ऐसे काम करेंगे जो अभी मौजूद ही नहीं हैं। फिर भी उन्हें रटने की आदत सिखाई जा रही है।
   </>,
   <>
-    India has one of the most exam driven education systems in the world. Yet employers consistently
-    say graduates lack real world skills.
+    भारत की शिक्षा व्यवस्था परीक्षा-केंद्रित है। फिर भी कंपनियाँ कहती हैं कि बच्चों में वास्तविक जीवन के कौशल की कमी है।
   </>,
   <>
-    Children are not report cards. But we often treat them like one.
+    बच्चे रिपोर्ट कार्ड नहीं होते, लेकिन हम अक्सर उन्हें वैसे ही मान लेते हैं।
   </>,
   <>
-    A child asking questions today may become a leader tomorrow. If curiosity survives the pressure.
+    जो बच्चा आज सवाल पूछता है, वही कल नेता बन सकता है — अगर उसकी जिज्ञासा दबाव में न दबे।
   </>
 ];
 
-export default function SuccessMeterPage() {
+export default function SuccessMeterPageHindi() {
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState({});
   const [currentStep, setCurrentStep] = useState(0);
@@ -137,25 +133,25 @@ export default function SuccessMeterPage() {
   }, [showFactsScreen]);
 
   const handleShare = async () => {
-    const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/successmetere` : '/successmetere';
+    const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/successmeterh` : '/successmeterh';
     const shareData = {
-      title: 'Success Meter | The Elden Heights School',
-      text: "I found this 60-second test for parents. It tries to calculate your child's future success using marks, ranks and study habits. The result is honestly eye opening. Try it once for your child",
+      title: 'सक्सेस मीटर | The Elden Heights School',
+      text: 'मुझे यह 60 सेकंड का पैरेंट टेस्ट मिला।\n\nयह आपके बच्चे के मार्क्स, रैंक और पढ़ाई की आदतों के आधार पर उसके भविष्य की सफलता को समझने की कोशिश करता है।\n\nइसका रिज़ल्ट सच में सोचने पर मजबूर कर देता है।\n\nअपने बच्चे के लिए एक बार जरूर ट्राय करें:',
       url: shareUrl
     };
 
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        setShareStatus('Thanks for sharing.');
+        setShareStatus('शेयर करने के लिए धन्यवाद।');
         return;
       }
 
       await navigator.clipboard.writeText(`${shareData.text}\n\n${shareUrl}`);
-      setShareStatus('Link copied. Share it with other parents.');
+      setShareStatus('लिंक और संदेश कॉपी हो गया। इसे दूसरे माता-पिता के साथ साझा करें।');
     } catch (error) {
       console.error('Share action failed:', error);
-      setShareStatus('Unable to share right now. Please try again.');
+      setShareStatus('अभी शेयर नहीं हो पा रहा है। कृपया दोबारा कोशिश करें।');
     }
   };
 
@@ -178,22 +174,22 @@ export default function SuccessMeterPage() {
 
   const stepLabel = useMemo(() => {
     if (resultVisible) {
-      return 'Step 2 of 2';
+      return 'स्टेप 2 में से 2';
     }
 
     if (isLoadingResult) {
-      return 'Analyzing';
+      return 'विश्लेषण जारी';
     }
 
     if (currentStep === 0) {
-      return 'Welcome';
+      return 'स्वागत';
     }
 
     if (currentStep === 1) {
-      return 'Step 1 of 2';
+      return 'स्टेप 1 में से 2';
     }
 
-    return `Question ${currentStep - 1} of ${quizFields.length}`;
+    return `प्रश्न ${currentStep - 1} / ${quizFields.length}`;
   }, [currentStep, isLoadingResult, resultVisible]);
 
   const handleChange = (event) => {
@@ -206,25 +202,25 @@ export default function SuccessMeterPage() {
     const nextErrors = {};
 
     if (!formData.parentName.trim()) {
-      nextErrors.parentName = 'This field is required.';
+      nextErrors.parentName = 'यह फ़ील्ड जरूरी है।';
     }
 
     if (!formData.studentName.trim()) {
-      nextErrors.studentName = 'This field is required.';
+      nextErrors.studentName = 'यह फ़ील्ड जरूरी है।';
     }
 
     if (!formData.phoneNumber.trim()) {
-      nextErrors.phoneNumber = 'This field is required.';
+      nextErrors.phoneNumber = 'यह फ़ील्ड जरूरी है।';
     } else if (!isValidPhone(formData.phoneNumber)) {
-      nextErrors.phoneNumber = 'Please enter a valid phone number.';
+      nextErrors.phoneNumber = 'कृपया सही फोन नंबर दर्ज करें।';
     }
 
     if (!formData.classOfStudent.trim()) {
-      nextErrors.classOfStudent = 'Please select class of student.';
+      nextErrors.classOfStudent = 'कृपया बच्चे की कक्षा चुनें।';
     }
 
     if (formData.emailAddress && !isValidEmail(formData.emailAddress)) {
-      nextErrors.emailAddress = 'Please enter a valid email address.';
+      nextErrors.emailAddress = 'कृपया सही ईमेल दर्ज करें।';
     }
 
     setErrors(nextErrors);
@@ -240,7 +236,7 @@ export default function SuccessMeterPage() {
     }
 
     if (!formData[question.name]) {
-      setErrors((prev) => ({ ...prev, [question.name]: 'Please choose one option to continue.' }));
+      setErrors((prev) => ({ ...prev, [question.name]: 'आगे बढ़ने के लिए एक विकल्प चुनें।' }));
       return false;
     }
 
@@ -256,7 +252,7 @@ export default function SuccessMeterPage() {
 
     if (currentStep === 1) {
       if (!validateBasicDetails()) {
-        setStatusMessage({ type: 'error', text: 'Please fill required details correctly.' });
+        setStatusMessage({ type: 'error', text: 'कृपया सभी जरूरी जानकारी सही भरें।' });
         return;
       }
 
@@ -290,7 +286,7 @@ export default function SuccessMeterPage() {
 
     const currentQuestion = quizFields[quizFields.length - 1];
     if (!formData[currentQuestion.name]) {
-      setErrors((prev) => ({ ...prev, [currentQuestion.name]: 'Please choose one option to continue.' }));
+      setErrors((prev) => ({ ...prev, [currentQuestion.name]: 'आगे बढ़ने के लिए एक विकल्प चुनें।' }));
       return;
     }
 
@@ -307,7 +303,7 @@ export default function SuccessMeterPage() {
       const response = await fetch('/api/successmeter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, pageSource: 'successmetere' })
+        body: JSON.stringify({ ...formData, pageSource: 'successmeterh' })
       });
 
       await new Promise((resolve) => setTimeout(resolve, 2300));
@@ -319,13 +315,13 @@ export default function SuccessMeterPage() {
       setResultVisible(true);
       setStatusMessage({
         type: 'success',
-        text: 'Submission received. Thank you for taking the Success Meter.'
+        text: 'आपकी जानकारी मिल गई। Success Meter भरने के लिए धन्यवाद।'
       });
     } catch (error) {
       console.error('Success meter submission failed:', error);
       setStatusMessage({
         type: 'error',
-        text: 'Something went wrong while submitting. Please try again in a moment.'
+        text: 'सबमिट करते समय समस्या हुई। कृपया थोड़ी देर में दोबारा कोशिश करें।'
       });
     } finally {
       clearInterval(analysisInterval);
@@ -354,19 +350,19 @@ export default function SuccessMeterPage() {
             <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 bg-white/5" style={{ borderRadius: 999 }} />
 
             <h2 className="relative text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              A child’s future is not written on a report card.
+              बच्चे का भविष्य सिर्फ रिपोर्ट कार्ड से तय नहीं होता।
             </h2>
-            <p className="relative mt-5 text-lg text-rose-100">Not the marks.</p>
-            <p className="relative mt-1 text-lg text-rose-100">Not the comparison.</p>
-            <p className="relative mt-1 text-lg text-rose-100">Not the pressure.</p>
-            <p className="relative mt-2 text-xl font-semibold text-white">The child matters more.</p>
+            <p className="relative mt-5 text-lg text-rose-100">सिर्फ नंबर नहीं।</p>
+            <p className="relative mt-1 text-lg text-rose-100">सिर्फ तुलना नहीं।</p>
+            <p className="relative mt-1 text-lg text-rose-100">सिर्फ दबाव नहीं।</p>
+            <p className="relative mt-2 text-xl font-semibold text-white">सबसे जरूरी बच्चा है।</p>
 
             <div
               className="relative mt-7 border border-white/15 bg-white/10 p-5 text-center backdrop-blur-[1px] sm:p-6"
               style={{ borderRadius: 20 }}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-rose-100">
-                But here’s the reality about education today
+                लेकिन आज की शिक्षा की सच्चाई यह है
               </p>
 
               <div className="mt-4 min-h-[170px] sm:min-h-[140px]">
@@ -401,7 +397,7 @@ export default function SuccessMeterPage() {
               className="relative mt-8 inline-flex w-full items-center justify-center bg-white px-6 py-4 text-lg font-semibold text-[#c7322f] transition hover:bg-rose-50 sm:w-auto sm:min-w-72"
               style={{ borderRadius: 999 }}
             >
-              Share this →
+              इसे शेयर करें →
             </button>
 
             {shareStatus ? <p className="relative mt-3 text-sm text-rose-100">{shareStatus}</p> : null}
@@ -422,7 +418,7 @@ export default function SuccessMeterPage() {
           style={{ borderRadius: 24 }}
         >
           <div className="mb-5 flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">success meter</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">सक्सेस मीटर</p>
             <p className="text-xs font-medium text-slate-500">{stepLabel}</p>
           </div>
 
@@ -451,7 +447,7 @@ export default function SuccessMeterPage() {
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
                   />
-                  <h3 className="mt-5 text-3xl font-semibold text-slate-900">Analyzing your inputs...</h3>
+                  <h3 className="mt-5 text-3xl font-semibold text-slate-900">आपके जवाबों का विश्लेषण हो रहा है...</h3>
                 </div>
 
                 <div className="mt-6 space-y-3">
@@ -487,13 +483,13 @@ export default function SuccessMeterPage() {
                 {currentStep === 0 ? (
                   <div className="space-y-4 text-center">
                     <h1 className="text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-                      Welcome to success meter
+                      सक्सेस मीटर में आपका स्वागत है
                     </h1>
                     <p className="text-base text-slate-700 sm:text-lg">
-                      check whether your child be successful in life or not
+                      जाँचें कि आपका बच्चा जीवन में सफल होगा या नहीं
                     </p>
                     <p className="text-xs text-slate-500 sm:text-sm">
-                      Our developers have made this super innovative tech to check student's future.
+                      हमारी टीम ने बच्चे के भविष्य को जाँचने के लिए यह नया टूल बनाया है।
                     </p>
                     <motion.button
                       whileHover={{ y: -2, scale: 1.01 }}
@@ -502,16 +498,16 @@ export default function SuccessMeterPage() {
                       className="mx-auto mt-2 inline-flex min-w-40 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                       style={{ borderRadius: 12 }}
                     >
-                      Continue
+                      आगे बढ़ें
                     </motion.button>
                   </div>
                 ) : null}
 
                 {currentStep === 1 ? (
                   <div>
-                    <h2 className="text-2xl font-semibold text-slate-900">Will Your Child Be Successful In Life?</h2>
+                    <h2 className="text-2xl font-semibold text-slate-900">क्या आपका बच्चा जीवन में सफल होगा?</h2>
                     <p className="mt-2 text-sm text-slate-600">
-                      Take this short Success Meter to reflect on what really shapes a child’s future.
+                      यह छोटा सक्सेस मीटर आपको सोचने में मदद करेगा कि बच्चे का भविष्य वास्तव में किन बातों से बनता है।
                     </p>
 
                     <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -534,7 +530,7 @@ export default function SuccessMeterPage() {
                       ))}
 
                       <label className="flex flex-col gap-2 text-sm font-medium text-slate-700 sm:col-span-2">
-                        Class of Student *
+                        बच्चे की कक्षा *
                         <select
                           name="classOfStudent"
                           value={formData.classOfStudent}
@@ -544,7 +540,7 @@ export default function SuccessMeterPage() {
                         >
                           {classOptions.map((option) => (
                             <option value={option} key={option || 'placeholder'}>
-                              {option || 'Select class'}
+                              {option || 'कक्षा चुनें'}
                             </option>
                           ))}
                         </select>
@@ -563,7 +559,7 @@ export default function SuccessMeterPage() {
                         className="inline-flex min-w-28 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                         style={{ borderRadius: 12 }}
                       >
-                        Next
+                        अगला
                       </motion.button>
                     </div>
                   </div>
@@ -608,7 +604,7 @@ export default function SuccessMeterPage() {
                         className="inline-flex min-w-24 items-center justify-center border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
                         style={{ borderRadius: 12 }}
                       >
-                        Back
+                        वापस
                       </button>
 
                       {isLastQuestion ? (
@@ -621,7 +617,7 @@ export default function SuccessMeterPage() {
                           className="inline-flex min-w-44 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
                           style={{ borderRadius: 12 }}
                         >
-                          {isSubmitting ? 'Checking...' : 'Check Success Meter'}
+                          {isSubmitting ? 'जांच हो रही है...' : 'सक्सेस मीटर चेक करें'}
                         </motion.button>
                       ) : (
                         <motion.button
@@ -632,7 +628,7 @@ export default function SuccessMeterPage() {
                           className="inline-flex min-w-28 items-center justify-center bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                           style={{ borderRadius: 12 }}
                         >
-                          Next
+                          अगला
                         </motion.button>
                       )}
                     </div>
@@ -654,7 +650,7 @@ export default function SuccessMeterPage() {
                   transition={{ duration: 0.35 }}
                   className="text-3xl font-semibold text-slate-900"
                 >
-                  Result: Error
+                  परिणाम: सोचिए
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -662,7 +658,7 @@ export default function SuccessMeterPage() {
                   transition={{ delay: 1.3, duration: 0.45 }}
                   className="mt-3 text-base text-slate-700"
                 >
-                  We cannot predict your child’s future through marks, rank, or study hours alone.
+                  हम सिर्फ अंक, रैंक या पढ़ाई के घंटों से बच्चे का भविष्य तय नहीं कर सकते।
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, x: -16 }}
@@ -672,7 +668,7 @@ export default function SuccessMeterPage() {
                   style={{ borderRadius: 14 }}
                 >
                   <p className="text-sm font-medium text-slate-700">
-                    Because a child is not a report card — a child is a story still being written.
+                    क्योंकि बच्चा रिपोर्ट कार्ड नहीं है — वह एक कहानी है जो अभी लिखी जा रही है।
                   </p>
                 </motion.div>
 
@@ -682,8 +678,7 @@ export default function SuccessMeterPage() {
                   transition={{ delay: 3.9, duration: 0.45 }}
                   className="mt-4 text-slate-600"
                 >
-                  Real success also depends on confidence, curiosity, creativity, communication, leadership, and
-                  character.
+                  असल सफलता आत्मविश्वास, जिज्ञासा, रचनात्मकता, संचार, नेतृत्व और चरित्र पर भी निर्भर करती है।
                 </motion.p>
 
                 <motion.div
@@ -693,12 +688,12 @@ export default function SuccessMeterPage() {
                   className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2"
                 >
                   {[
-                    'Confidence',
-                    'Curiosity',
-                    'Creativity',
-                    'Communication',
-                    'Leadership',
-                    'Character'
+                    'आत्मविश्वास',
+                    'जिज्ञासा',
+                    'रचनात्मकता',
+                    'संचार',
+                    'नेतृत्व',
+                    'चरित्र'
                   ].map((trait) => (
                     <div
                       key={trait}
@@ -717,7 +712,7 @@ export default function SuccessMeterPage() {
                   transition={{ delay: 6.5, duration: 0.45 }}
                   className="mt-4 text-slate-600"
                 >
-                  These life qualities shape resilience, decision-making, and the ability to thrive beyond exams.
+                  यही गुण बच्चे को मजबूत बनाते हैं और परीक्षा से आगे जीवन में आगे बढ़ना सिखाते हैं।
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
@@ -725,7 +720,7 @@ export default function SuccessMeterPage() {
                   transition={{ delay: 7.8, duration: 0.45 }}
                   className="mt-5 font-medium text-slate-800"
                 >
-                  At The Elden Heights School, we believe children should be prepared for life, not just exams.
+                  The Elden Heights School में हम मानते हैं कि बच्चों को सिर्फ परीक्षा नहीं, जीवन के लिए तैयार करना चाहिए।
                 </motion.p>
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
@@ -740,7 +735,7 @@ export default function SuccessMeterPage() {
                   className="mt-6 inline-flex bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
                   style={{ borderRadius: 12 }}
                 >
-                  Continue
+                  आगे बढ़ें
                 </motion.button>
               </motion.section>
             )}

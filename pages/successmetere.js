@@ -4,7 +4,7 @@ import SuccessMeterPage from '@/components/SuccessMeterPage';
 export default function SuccessMeterRoute() {
   return (
     <>
-      <Seo path="/successmeter" />
+      <Seo path="/successmetere" />
       <SuccessMeterPage />
     </>
   );
