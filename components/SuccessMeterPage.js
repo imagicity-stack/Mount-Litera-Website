@@ -131,7 +131,7 @@ export default function SuccessMeterPage() {
 
     const interval = setInterval(() => {
       setFactIndex((prev) => (prev + 1) % realityFacts.length);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [showFactsScreen]);
