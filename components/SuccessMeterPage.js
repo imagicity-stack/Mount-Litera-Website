@@ -74,12 +74,21 @@ const isValidEmail = (email) => /^\S+@\S+\.\S+$/.test(email.trim());
 
 const totalInteractiveSteps = 1 + quizFields.length;
 
+const analysisSteps = [
+  'Reviewing your responses',
+  'Checking study and routine patterns',
+  'Comparing growth mindset indicators',
+  'Evaluating confidence and communication signals',
+  'Mapping long-term life readiness markers'
+];
+
 export default function SuccessMeterPage() {
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState({});
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingResult, setIsLoadingResult] = useState(false);
+  const [completedAnalysisSteps, setCompletedAnalysisSteps] = useState(0);
   const [resultVisible, setResultVisible] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
 
@@ -88,16 +97,24 @@ export default function SuccessMeterPage() {
       return 100;
     }
 
+    if (isLoadingResult) {
+      return 95;
+    }
+
     if (currentStep === 0) {
       return 8;
     }
 
     return Math.round((currentStep / totalInteractiveSteps) * 100);
-  }, [currentStep, resultVisible]);
+  }, [currentStep, isLoadingResult, resultVisible]);
 
   const stepLabel = useMemo(() => {
     if (resultVisible) {
       return 'Step 2 of 2';
+    }
+
+    if (isLoadingResult) {
+      return 'Analyzing';
     }
 
     if (currentStep === 0) {
@@ -109,7 +126,7 @@ export default function SuccessMeterPage() {
     }
 
     return `Question ${currentStep - 1} of ${quizFields.length}`;
-  }, [currentStep, resultVisible]);
+  }, [currentStep, isLoadingResult, resultVisible]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -212,16 +229,20 @@ export default function SuccessMeterPage() {
     setStatusMessage({ type: '', text: '' });
     setIsSubmitting(true);
     setIsLoadingResult(true);
+    setCompletedAnalysisSteps(0);
+
+    const analysisInterval = setInterval(() => {
+      setCompletedAnalysisSteps((prev) => (prev < analysisSteps.length ? prev + 1 : prev));
+    }, 380);
 
     try {
-      const [response] = await Promise.all([
-        fetch('/api/successmeter', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        }),
-        new Promise((resolve) => setTimeout(resolve, 2000))
-      ]);
+      const response = await fetch('/api/successmeter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 2300));
 
       if (!response.ok) {
         throw new Error('Failed to submit');
@@ -239,6 +260,8 @@ export default function SuccessMeterPage() {
         text: 'Something went wrong while submitting. Please try again in a moment.'
       });
     } finally {
+      clearInterval(analysisInterval);
+      setCompletedAnalysisSteps(analysisSteps.length);
       setIsSubmitting(false);
       setIsLoadingResult(false);
     }
@@ -272,7 +295,47 @@ export default function SuccessMeterPage() {
           </div>
 
           <AnimatePresence mode="wait">
-            {!resultVisible ? (
+            {isLoadingResult ? (
+              <motion.section
+                key="analyzing"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.28 }}
+                className="mt-6"
+              >
+                <div className="text-center">
+                  <motion.div
+                    className="mx-auto h-16 w-16 border-4 border-rose-300 border-t-rose-500"
+                    style={{ borderRadius: 999 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
+                  />
+                  <h3 className="mt-5 text-3xl font-semibold text-slate-900">Analyzing your inputs...</h3>
+                </div>
+
+                <div className="mt-6 space-y-3">
+                  {analysisSteps.map((item, index) => {
+                    const done = completedAnalysisSteps > index;
+
+                    return (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: -16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.08, duration: 0.28 }}
+                        className={`flex items-center gap-3 px-3 py-2 text-sm ${done ? 'text-rose-600' : 'text-slate-400'}`}
+                      >
+                        <span className={`text-xl font-semibold ${done ? 'text-rose-500' : 'text-slate-300'}`}>
+                          {done ? '✓' : '○'}
+                        </span>
+                        <span>{item}...</span>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.section>
+            ) : !resultVisible ? (
               <motion.section
                 key={`step-${currentStep}`}
                 initial={{ opacity: 0, y: 16 }}
@@ -435,28 +498,6 @@ export default function SuccessMeterPage() {
                     </div>
                   </div>
                 ) : null}
-
-                <AnimatePresence>
-                  {isLoadingResult ? (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="mt-5 border border-amber-100 bg-amber-50/80 p-3 text-sm text-amber-800"
-                      style={{ borderRadius: 12 }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <motion.span
-                          className="h-4 w-4 border-2 border-amber-400 border-t-transparent"
-                          style={{ borderRadius: 999 }}
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 0.75, ease: 'linear', repeat: Infinity }}
-                        />
-                        Analyzing your responses...
-                      </div>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
               </motion.section>
             ) : (
               <motion.section
@@ -467,17 +508,50 @@ export default function SuccessMeterPage() {
                 className="mt-6 border border-rose-100 bg-white p-5 shadow-[0_16px_40px_rgba(244,63,94,0.12)] sm:p-7"
                 style={{ borderRadius: 18 }}
               >
-                <h2 className="text-3xl font-semibold text-slate-900">Result: Error</h2>
-                <p className="mt-3 text-base text-slate-700">
+                <motion.h2
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="text-3xl font-semibold text-slate-900"
+                >
+                  Result: Error
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12, duration: 0.35 }}
+                  className="mt-3 text-base text-slate-700"
+                >
                   We cannot predict your child’s future through marks, rank, or study hours alone.
-                </p>
-                <div className="mt-4 border border-amber-100 bg-gradient-to-r from-amber-50 to-rose-50 p-4" style={{ borderRadius: 14 }}>
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.24, duration: 0.35 }}
+                  className="mt-4 border border-amber-100 bg-gradient-to-r from-amber-50 to-rose-50 p-4"
+                  style={{ borderRadius: 14 }}
+                >
                   <p className="text-sm font-medium text-slate-700">
                     Because a child is not a report card — a child is a story still being written.
                   </p>
-                </div>
+                </motion.div>
 
-                <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <motion.p
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35, duration: 0.35 }}
+                  className="mt-4 text-slate-600"
+                >
+                  Real success also depends on confidence, curiosity, creativity, communication, leadership, and
+                  character.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.45, duration: 0.35 }}
+                  className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2"
+                >
                   {[
                     'Confidence',
                     'Curiosity',
@@ -495,21 +569,34 @@ export default function SuccessMeterPage() {
                       <span>{trait}</span>
                     </div>
                   ))}
-                </div>
+                </motion.div>
 
-                <p className="mt-4 text-slate-600">
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.58, duration: 0.35 }}
+                  className="mt-4 text-slate-600"
+                >
                   These life qualities shape resilience, decision-making, and the ability to thrive beyond exams.
-                </p>
-                <p className="mt-5 font-medium text-slate-800">
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.35 }}
+                  className="mt-5 font-medium text-slate-800"
+                >
                   At The Elden Heights School, we believe children should be prepared for life, not just exams.
-                </p>
-                <a
+                </motion.p>
+                <motion.a
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.82, duration: 0.35 }}
                   href="/contact"
                   className="mt-6 inline-flex bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
                   style={{ borderRadius: 12 }}
                 >
                   Talk to Our Team
-                </a>
+                </motion.a>
               </motion.section>
             )}
           </AnimatePresence>
