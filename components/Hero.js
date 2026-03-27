@@ -18,12 +18,12 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-center bg-no-repeat bg-cover md:bg-fixed"
         style={{
-          backgroundImage: "url('/home/hero-eclipse.jpg')"
+          backgroundImage: "url('/main gate new.jpeg')"
         }}
         aria-hidden="true"
       />
       <img
-        src="/home/hero-eclipse.jpg"
+        src="/main gate new.jpeg"
         alt="Elden Heights School campus in Hazaribagh Jharkhand"
         className="sr-only"
       />
