@@ -11,7 +11,6 @@ export default function Footer() {
             <li><Link href="/about">About</Link></li>
             <li><Link href="/academics">Academics</Link></li>
             <li><Link href="/admission">Admission</Link></li>
-            <li><Link href="/admissions">Admissions</Link></li>
             <li><Link href="/awards-and-recognition">Awards and Recognition</Link></li>
             <li><Link href="/beyond-academics">Beyond Academics</Link></li>
             <li><Link href="/co-curricular-clubs">Co-Curricular Clubs</Link></li>
