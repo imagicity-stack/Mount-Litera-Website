@@ -29,13 +29,6 @@ const SEO_CONTENT = {
       'If you are considering admission for Nursery through Class 10, Elden Heights offers a structured pathway that values readiness and student well-being. Families are encouraged to prepare documents early, ask questions, and explore the campus culture. This focus on clarity helps parents make confident decisions and ensures every child starts the academic year with a smooth transition.'
     ]
   },
-  '/admissions': {
-    heading: 'Priority admissions and counselor support',
-    paragraphs: [
-      'Priority admissions at The Elden Heights School allow families to reserve a provisional place while completing the admission process. This approach is helpful for parents in Hazaribagh who want clarity on seats and timelines for the 2026–27 session. A dedicated counselor guides each family, explains required documents, and shares the next steps for interaction and confirmation.',
-      'The admissions team values transparency and emphasizes that a seat is confirmed only after document verification and eligibility checks. Parents can expect timely communication, clear fee guidance, and a supportive experience throughout the journey. This focus on a structured process helps families plan ahead and ensures students feel welcomed and prepared on day one.'
-    ]
-  },
   '/awards-and-recognition': {
     heading: 'Celebrating student and school achievements',
     paragraphs: [

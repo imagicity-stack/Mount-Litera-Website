@@ -277,7 +277,7 @@ export default function AdmissionPage() {
                   priority in class allocations for the 2026–27 session. Secure your child’s place while seats are still open.
                 </p>
                 <Link
-                  href="/admissions"
+                  href="/admission"
                   className="inline-flex items-center justify-center rounded-full bg-cardinal px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-cardinal/90 focus:outline-none focus:ring-2 focus:ring-cardinal/40 focus:ring-offset-2"
                 >
                   Explore Admissions
