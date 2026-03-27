@@ -38,11 +38,11 @@ export default function Hero() {
           variants={containerVariants}
           className="space-y-6"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white drop-shadow-xl">
-            Best School in Hazaribagh for Academic Excellence and Future Ready Learning
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-xl">
+            The Best School in Hazaribagh
           </h1>
-          <p className="text-lg md:text-xl text-white/90">
-            Elden Heights School is the best school in hazaribagh for families comparing schools in hazaribagh jharkhand, focused on academic excellence and holistic growth through modern, future ready learning.
+          <p className="text-base md:text-lg text-white/90">
+            Where academic excellence meets future ready learning
           </p>
         </motion.div>
       </div>
