@@ -155,18 +155,28 @@ p, span, input, textarea, label, a, button, li {
 }
 
 .gold-text {
-  background: linear-gradient(90deg, #B18734 0%, #E8D9B0 50%, #B18734 100%);
-  background-size: 200% 100%;
+  background: linear-gradient(
+    90deg,
+    #8E6A24 0%,
+    #C9A24B 25%,
+    #D8B65A 50%,
+    #C9A24B 75%,
+    #8E6A24 100%
+  );
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: gold-shine 6s linear infinite;
+  animation: gold-shine 8s linear infinite;
+  filter:
+    drop-shadow(0 1px 1px rgba(10, 10, 12, 0.45))
+    drop-shadow(0 0 14px rgba(201, 162, 75, 0.25));
 }
 
 @keyframes gold-shine {
   0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+  100% { background-position: 220% 50%; }
 }
 
 .ink-text {
