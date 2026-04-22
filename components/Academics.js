@@ -72,49 +72,67 @@ const stageImageAlts = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 }
 };
 
 export default function Academics({ showExplore = true }) {
   return (
-    <section id="academics" className="py-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start">
+    <section id="academics" className="relative py-24 md:py-32">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start">
           <motion.div
-            className="space-y-6"
+            className="space-y-7 lg:sticky lg:top-32"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="inline-flex items-center gap-3 rounded-full bg-cardinal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black">
-              Academic Expanse
-            </div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-midnight">Academic Excellence at One of the Leading Private High Schools</h2>
-            <p className="text-base text-midnight/80 leading-relaxed">
-              The Elden Heights School follows a simple, age-appropriate path across four stages. Each step gently strengthens
-              confidence, curiosity, and core skills so children feel ready for what comes next.
+            <span className="eyebrow">Academic Expanse</span>
+            <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[54px]">
+              Excellence at one of the{' '}
+              <span className="italic">
+                <span className="relative">
+                  leading private
+                  <span className="absolute inset-x-0 bottom-0 h-[3px] -translate-y-1 bg-gradient-to-r from-gold via-cardinal to-gold opacity-70" />
+                </span>{' '}
+                high schools.
+              </span>
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-midnight/75 md:text-lg">
+              The Elden Heights School follows a simple, age-appropriate path across four stages.
+              Each step gently strengthens confidence, curiosity, and core skills — so children
+              feel ready for what comes next.
             </p>
-            <ul className="grid gap-3 sm:grid-cols-2 text-sm text-midnight/70">
+
+            <div className="grid gap-3 sm:grid-cols-2">
               {[
                 'Warm, caring classrooms',
-                'Balanced academics and activities',
+                'Balanced academics & activities',
                 'Focus on communication skills',
                 'Early digital awareness'
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 rounded-2xl border border-black/10 bg-white/70 p-3 shadow-sm">
-                  <span className="mt-1 inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-cardinal"></span>
+                <div
+                  key={item}
+                  className="group flex items-center gap-3 rounded-xl border border-midnight/10 bg-white/70 px-4 py-3 text-sm text-midnight/80 backdrop-blur transition-all duration-400 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_20px_40px_-20px_rgba(10,10,12,0.2)]"
+                >
+                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cardinal/90 to-cardinal-700 shadow-cardinal">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5 text-parchment">
+                      <path d="M5 12l4 4 10-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                   <span>{item}</span>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
+
             {showExplore && (
-              <div>
+              <div className="flex flex-wrap items-center gap-5 pt-2">
                 <Link
                   href="/academics"
-                  className="inline-flex items-center gap-2 rounded-full bg-midnight px-7 py-3 text-sm font-semibold uppercase tracking-wide text-parchment transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-midnight/20"
+                  className="btn-primary"
                   onClick={() =>
                     trackFacebookEvent('ViewContent', {
                       component: 'academics_section_cta',
@@ -126,33 +144,62 @@ export default function Academics({ showExplore = true }) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14m-4-4l4 4-4 4" />
                   </svg>
                 </Link>
+                <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-midnight/60">
+                  <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
+                  Four stages · One journey
+                </span>
               </div>
             )}
           </motion.div>
+
           <div className="grid gap-5 sm:grid-cols-2">
             {stageDetails.map((stage, index) => (
-              <motion.div
+              <motion.article
                 key={stage.title}
-                className="group relative overflow-hidden rounded-2xl border border-black/15 bg-white/80 p-6 shadow-lg shadow-cardinal/5"
+                className="group relative overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
               >
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-20 transition duration-300 group-hover:opacity-30"
+                  className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.12] transition-opacity duration-500 group-hover:opacity-[0.2]"
                   style={{ backgroundImage: `url('${stageImages[index]}')` }}
                   aria-hidden="true"
                 >
                   <img src={stageImages[index]} alt={stageImageAlts[index]} className="sr-only" />
                 </div>
-                <div className="relative space-y-3">
-                  <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
-                  <h3 className="text-lg font-semibold text-midnight">{stage.title}</h3>
-                  <p className="text-sm text-midnight/70 leading-relaxed">{stage.homeSummary}</p>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/80 via-white/50 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                <div className="relative flex h-full flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.3em] text-cardinal">
+                      Stage {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="rounded-full border border-midnight/15 bg-white/70 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.25em] text-midnight/70 backdrop-blur">
+                      {stage.grades}
+                    </span>
+                  </div>
+
+                  <h3 className="font-garamond text-2xl font-semibold leading-tight text-midnight md:text-[26px]">
+                    {stage.title}
+                  </h3>
+
+                  <p className="text-sm leading-relaxed text-midnight/75">
+                    {stage.homeSummary}
+                  </p>
+
+                  <div className="mt-auto flex items-center justify-between pt-3">
+                    <span className="h-px flex-1 bg-gradient-to-r from-gold/40 to-transparent" />
+                    <span className="ml-4 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/50 transition-colors group-hover:text-cardinal">
+                      Learn more
+                      <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>
+                    </span>
+                  </div>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
         </div>
