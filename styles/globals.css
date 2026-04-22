@@ -155,23 +155,21 @@ p, span, input, textarea, label, a, button, li {
 }
 
 .gold-text {
+  display: inline-block;
+  padding-inline-end: 0.14em;
   background: linear-gradient(
-    90deg,
-    #8E6A24 0%,
-    #C9A24B 25%,
-    #D8B65A 50%,
-    #C9A24B 75%,
+    180deg,
+    #F0D878 0%,
+    #D8B65A 35%,
+    #C9A24B 60%,
     #8E6A24 100%
   );
-  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: gold-shine 8s linear infinite;
-  filter:
-    drop-shadow(0 1px 1px rgba(10, 10, 12, 0.45))
-    drop-shadow(0 0 14px rgba(201, 162, 75, 0.25));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 @keyframes gold-shine {
