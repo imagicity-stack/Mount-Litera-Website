@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
@@ -43,6 +44,11 @@ const galleryImages = [
   { src: '/gallery/DSC08665.jpg', alt: 'Students celebrating achievements together' }
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 }
+};
+
 export default function GalleryPage() {
   useEffect(() => {
     trackFacebookEvent('ViewContent', {
@@ -55,59 +61,78 @@ export default function GalleryPage() {
   return (
     <>
       <Seo path="/gallery" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Gallery"
             subtitle="A visual tour of campus life, celebrations, and everyday moments."
-            badge="Gallery"
+            eyebrow="Our Story in Frames"
             image="/gallery/banner-showcase.jpg"
           />
-          <section className="bg-gradient-to-b from-cardinal/5 via-white to-white py-16">
-            <div className="max-w-6xl mx-auto px-6">
-              <p className="text-sm uppercase tracking-[0.3em] text-black">Our Story in Frames</p>
-              <h1 className="mt-4 text-3xl md:text-4xl font-bold text-black">Gallery</h1>
-              <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-700">
-                Take a walk through our classrooms, celebrations, and sports fields. Every photograph captures the joy of learning,
-                the spirit of teamwork, and the community that makes The Elden Heights School feel like home.
-              </p>
-              <div className="mt-8 rounded-3xl bg-white/80 p-6 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-cardinal/10 backdrop-blur">
-                <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.25em] text-black">Experience</p>
-                    <h2 className="mt-2 text-2xl font-semibold text-black">Life at The Elden Heights School</h2>
-                    <p className="mt-2 max-w-2xl text-gray-700">
-                      From immersive lessons to spirited performances and athletic triumphs, explore moments that inspire our students
-                      to dream bigger every day.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {galleryImages.map((image, index) => (
-                    <figure
+
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="mb-14 max-w-3xl space-y-5"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Life at Elden Heights</span>
+                <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[54px]">
+                  Classrooms, <span className="italic">celebrations</span>, sport &amp; song.
+                </h2>
+                <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                  Take a walk through our classrooms, celebrations, and sports fields. Every photograph
+                  captures the joy of learning, the spirit of teamwork, and the community that makes
+                  The Elden Heights School feel like home.
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                {galleryImages.map((image, index) => {
+                  const span =
+                    index % 9 === 0
+                      ? 'col-span-2 row-span-2'
+                      : index % 7 === 3
+                        ? 'row-span-2'
+                        : '';
+                  return (
+                    <motion.figure
                       key={image.src}
-                      className={`group relative overflow-hidden rounded-2xl border border-black/10 bg-white/60 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl ${
-                        index % 7 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
-                      }`}
+                      className={`group relative overflow-hidden rounded-[18px] border border-midnight/10 bg-midnight/5 shadow-[0_20px_40px_-30px_rgba(10,10,12,0.3)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-30px_rgba(10,10,12,0.35)] ${span}`}
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.1 }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (index % 8) * 0.04 }}
                     >
-                      <div className="relative h-56 w-full sm:h-64">
+                      <div className={`relative w-full ${span.includes('row-span-2') ? 'h-full min-h-[340px]' : 'h-52 sm:h-60'}`}>
                         <Image
                           src={image.src}
                           alt={image.alt}
                           fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                          className="object-cover transition duration-500 group-hover:scale-105"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          className="object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.07]"
                           priority={index < 4}
                         />
                       </div>
-                      <figcaption className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 text-sm font-medium text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
-                        {image.alt}
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/85 via-midnight/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      <figcaption className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 transition-all duration-500 ease-elite group-hover:translate-y-0 group-hover:opacity-100">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-300">
+                          Moment {String(index + 1).padStart(2, '0')}
+                        </p>
+                        <p className="mt-1 font-garamond text-sm text-parchment md:text-base">
+                          {image.alt}
+                        </p>
                       </figcaption>
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cardinal/10 via-transparent to-cardinal/5 opacity-0 transition group-hover:opacity-100" />
-                    </figure>
-                  ))}
-                </div>
+                    </motion.figure>
+                  );
+                })}
               </div>
             </div>
           </section>

@@ -26,20 +26,20 @@ const hasRichText = (content = '') => /<\/?[a-z][\s\S]*>/i.test(content);
 export default function BlogDetailPage({ blog }) {
   if (!blog) {
     return (
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
-        <main className="flex-1 flex items-center justify-center px-6 py-16">
-          <div className="max-w-xl text-center space-y-4">
-            <h1 className="text-3xl font-semibold text-black">Story not found</h1>
-            <p className="text-gray-600">
-              The blog you are looking for is unavailable. Please return to the blog home.
+        <main className="flex flex-1 items-center justify-center px-6 py-16">
+          <div className="surface-card max-w-xl space-y-4 rounded-[28px] p-12 text-center">
+            <span className="eyebrow justify-center">404</span>
+            <h1 className="font-garamond text-3xl font-semibold text-midnight md:text-4xl">
+              Story not found.
+            </h1>
+            <p className="text-midnight/70">
+              The blog you are looking for is unavailable. Please return to the journal.
             </p>
-            <Link
-              href="/blogs"
-              className="inline-flex rounded-full border border-black/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black"
-            >
-              Back to blogs
-            </Link>
+            <div className="pt-2">
+              <Link href="/blogs" className="btn-primary">Back to Journal</Link>
+            </div>
           </div>
         </main>
         <Footer />
@@ -71,52 +71,71 @@ export default function BlogDetailPage({ blog }) {
         <meta name="twitter:image" content={blog.coverImage || `${SITE_URL}/website/header.png`} />
         {blog.coverImageAlt && <meta name="twitter:image:alt" content={blog.coverImageAlt} />}
       </Head>
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
-          <section className="bg-[#f8f4ef] py-16">
-            <div className="max-w-4xl mx-auto px-6 space-y-6">
+          <section className="relative pt-28 pb-12 md:pt-36 md:pb-16">
+            <div className="mx-auto max-w-4xl px-6">
               <Link
                 href="/blogs"
-                className="text-sm font-semibold uppercase tracking-[0.3em] text-cardinal"
+                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-cardinal transition hover:gap-3"
               >
-                ← Back to Blogs
+                <span>←</span>
+                Back to Journal
               </Link>
-              <h1 className="text-4xl sm:text-5xl font-semibold text-black">{blog.title}</h1>
-              <p className="text-lg text-gray-700">{blog.excerpt}</p>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-                <span className="font-semibold text-black">{blog.authorName || 'Editorial Team'}</span>
-                <span>{blog.authorTitle || 'Elden Heights School'}</span>
-                <span>•</span>
-                <span>{formatDate(blog.publishedAt || blog.createdAt)}</span>
-                {blog.readingTime && (
-                  <>
-                    <span>•</span>
-                    <span>{blog.readingTime} min read</span>
-                  </>
+              <div className="mt-8 space-y-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  {(blog.tags || []).slice(0, 3).map((tag) => (
+                    <span key={tag} className="chip">{tag}</span>
+                  ))}
+                </div>
+                <h1 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[56px]">
+                  {blog.title}
+                </h1>
+                <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                {blog.excerpt && (
+                  <p className="font-garamond text-xl italic leading-relaxed text-midnight/80 md:text-2xl">
+                    {blog.excerpt}
+                  </p>
                 )}
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-midnight/60">
+                  <span className="font-garamond text-sm normal-case tracking-normal text-midnight">
+                    {blog.authorName || 'Editorial Team'}
+                  </span>
+                  <span className="h-3 w-px bg-midnight/25" />
+                  <span>{blog.authorTitle || 'Elden Heights School'}</span>
+                  <span className="h-3 w-px bg-midnight/25" />
+                  <span>{formatDate(blog.publishedAt || blog.createdAt)}</span>
+                  {blog.readingTime && (
+                    <>
+                      <span className="h-3 w-px bg-midnight/25" />
+                      <span>{blog.readingTime} min read</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </section>
-          <section className="py-12">
-            <div className="max-w-4xl mx-auto px-6 space-y-8">
+
+          <section className="relative pb-24 md:pb-32">
+            <div className="mx-auto max-w-4xl px-6 space-y-10">
               {blog.coverImage && (
-                <figure className="overflow-hidden rounded-3xl border border-black/10 shadow-xl shadow-cardinal/10">
+                <figure className="img-zoom relative overflow-hidden rounded-[28px] border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]">
                   <img
                     src={blog.coverImage}
                     alt={blog.coverImageAlt || blog.title}
                     className="w-full object-cover"
                   />
                   {(blog.coverImageCaption || blog.coverImageCredit || blog.coverImageSource) && (
-                    <figcaption className="border-t border-black/10 bg-white px-4 py-3 text-xs text-gray-600">
-                      <span>{blog.coverImageCaption}</span>
+                    <figcaption className="flex flex-wrap items-center gap-3 border-t border-midnight/10 bg-white/90 px-6 py-4 text-xs text-midnight/70 backdrop-blur">
+                      {blog.coverImageCaption && <span>{blog.coverImageCaption}</span>}
                       {blog.coverImageCredit && (
-                        <span className="ml-2 text-gray-500">Credit: {blog.coverImageCredit}</span>
+                        <span className="text-midnight/50">Credit: {blog.coverImageCredit}</span>
                       )}
                       {blog.coverImageSource && (
                         <a
                           href={blog.coverImageSource}
-                          className="ml-2 text-cardinal underline"
+                          className="text-cardinal underline underline-offset-2"
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -127,18 +146,24 @@ export default function BlogDetailPage({ blog }) {
                   )}
                 </figure>
               )}
-              <article className="space-y-6 text-gray-700">
+              <article className="surface-card rounded-[28px] px-6 py-10 sm:px-10 md:px-14 md:py-14">
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
                 {hasRichText(blog.content) ? (
-                  <div
-                    className="blog-content"
-                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                  />
+                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
                 ) : (
-                  splitParagraphs(blog.content).map((paragraph, index) => (
-                    <p key={`blog-${blog.slug}-${index}`}>{paragraph}</p>
-                  ))
+                  <div className="blog-content">
+                    {splitParagraphs(blog.content).map((paragraph, index) => (
+                      <p key={`blog-${blog.slug}-${index}`}>{paragraph}</p>
+                    ))}
+                  </div>
                 )}
               </article>
+              <div className="flex items-center justify-between border-t border-midnight/10 pt-6 text-[11px] font-semibold uppercase tracking-[0.3em] text-midnight/60">
+                <Link href="/blogs" className="transition hover:text-cardinal">
+                  ← All Journal Entries
+                </Link>
+                <span>Elden Heights · Journal</span>
+              </div>
             </div>
           </section>
         </main>
