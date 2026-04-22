@@ -9,25 +9,32 @@ export default function ComplaintProceduresPage() {
   return (
     <>
       <Seo path="/policies/complaint-procedures" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Complaint Procedures"
             subtitle="Clear steps for raising and resolving concerns."
-            badge="Policy"
+            eyebrow="Policy"
             image="/policies/complaint-procedures/banner-policy.jpg"
           />
-          <section className="py-16 bg-[#F5F5F5]">
-            <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-black">Complaint Procedures</h1>
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-4xl px-6">
+              <div className="mb-10">
+                <span className="eyebrow">Policy Document</span>
+                <h1 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl">
+                  Complaint Procedures
+                </h1>
+                <span className="mt-6 block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+              </div>
+              <div className="surface-card space-y-6 rounded-[22px] p-8 text-midnight/85 md:p-12">
               <p>
                 The Elden Heights School values constructive feedback and treats every complaint with confidentiality and seriousness.
                 Our structured procedure ensures that concerns are resolved efficiently while keeping all stakeholders informed.
               </p>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-black">Step-by-Step Resolution</h2>
-                <ol className="list-decimal list-inside space-y-2 text-gray-700">
+                <h2 className="font-garamond text-2xl font-semibold text-midnight">Step-by-Step Resolution</h2>
+                <ol className="space-y-2 text-midnight/80 list-decimal list-inside">
                   <li>
                     Submit the concern via email to{' '}
                     <a href={`mailto:${CONTACT_EMAIL}`} className="text-black underline">
@@ -41,16 +48,16 @@ export default function ComplaintProceduresPage() {
                 </ol>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-black">Escalation Matrix</h2>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <h2 className="font-garamond text-2xl font-semibold text-midnight">Escalation Matrix</h2>
+                <ul className="space-y-2 text-midnight/80 list-disc list-inside">
                   <li>Unresolved issues at the class level escalate to the academic coordinator or vice principal.</li>
                   <li>Matters requiring administrative intervention are reviewed by the principal and school management.</li>
                   <li>For sensitive cases, a special committee including counsellors and parent representatives convenes.</li>
                 </ul>
               </div>
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-black">Commitment to Fairness</h2>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <h2 className="font-garamond text-2xl font-semibold text-midnight">Commitment to Fairness</h2>
+                <ul className="space-y-2 text-midnight/80 list-disc list-inside">
                   <li>All complaints are handled without bias, ensuring privacy and respect for every individual involved.</li>
                   <li>Documentation of actions taken is maintained for accountability and future reference.</li>
                   <li>Feedback from the complainant is collected to confirm satisfaction with the resolution provided.</li>
@@ -60,6 +67,7 @@ export default function ComplaintProceduresPage() {
                 We encourage students, parents, and staff to voice their concerns confidently. Together we build a responsive and
                 transparent school culture.
               </p>
+              </div>
             </div>
           </section>
         </main>

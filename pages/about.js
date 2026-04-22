@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
 import About from '@/components/About';
 import ImageBanner from '@/components/ImageBanner';
 import Seo from '@/components/Seo';
@@ -14,6 +16,24 @@ const policies = [
   { title: 'Complaint Procedures', href: '/policies/complaint-procedures' }
 ];
 
+const leadershipCards = [
+  {
+    href: '/the-elden-council',
+    label: 'The Elden Council',
+    caption: 'Trustees who steward our legacy and long-term vision.'
+  },
+  {
+    href: '/core-mentors',
+    label: 'Core Mentors',
+    caption: 'Teachers and guides shaping every learner&rsquo;s journey.'
+  },
+  {
+    href: '/managing-committee',
+    label: 'Managing Committee',
+    caption: 'Operational leadership ensuring our vision stays bold.'
+  }
+];
+
 const leadershipPhotos = {
   principal: {
     src: '/teachers/principal.png',
@@ -25,208 +45,291 @@ const leadershipPhotos = {
   }
 };
 
+const missionStages = [
+  { title: 'Roots', copy: 'The foundation — where discipline, virtue, and cultural heritage are instilled. The child is grounded like the roots of an ancient tree, drawing strength from values that endure.' },
+  { title: 'Ascent', copy: 'With firm ground, the learner begins to rise. Exploration, resilience, and intellectual awakening. A spirit that questions, seeks, and climbs with dignity toward truth.' },
+  { title: 'Radiance', copy: 'As wisdom matures, the individual begins to illuminate. Talents unfold, leadership emerges. Students radiate creativity, innovation, and excellence.' },
+  { title: 'Eternity', copy: 'The pinnacle — where learning transcends achievement and becomes legacy. The Eldenite embodies purpose, virtue, and vision that echo through generations.' }
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 }
+};
+
+function LeaderNote({ id, title, image, author, paragraphs }) {
+  return (
+    <motion.article
+      id={id}
+      className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14 lg:items-start"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="space-y-5">
+        <div className="flex items-center gap-3">
+          <span className="h-px w-10 bg-gold" />
+          <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-cardinal">
+            {title}
+          </span>
+        </div>
+        <h2 className="font-garamond text-3xl font-semibold leading-[1.1] text-midnight sm:text-4xl md:text-[42px]">
+          A letter to <span className="italic">every parent</span>.
+        </h2>
+        <div className="space-y-5 pt-2 text-base leading-relaxed text-midnight/80 md:text-lg">
+          {paragraphs.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+        <div className="flex items-center gap-3 pt-2">
+          <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
+          <p className="font-garamond text-lg italic text-midnight">— {author}</p>
+        </div>
+      </div>
+      <div className="relative order-first lg:order-last">
+        <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[28px] border border-gold/25 bg-parchment shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 1024px) 340px, 80vw"
+            className="object-cover"
+          />
+          <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-2xl border border-gold/30 bg-midnight/70 px-4 py-3 text-center backdrop-blur">
+            <p className="font-garamond text-sm italic text-parchment">{image.alt.split(',')[0]}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-300">
+              {image.alt.split(',')[1]}
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function AboutPage() {
   return (
     <>
       <Seo path="/about" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="About The Elden Heights"
             subtitle="A visual journey through our ethos, leadership, and the legacy we are building."
-            badge="About"
+            eyebrow="About · Est. Heritage"
             image="/about/banner-aurora.jpg"
           />
-          <About showLink={false} imagePrefix="about" />
-          <section className="py-16 bg-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-6">
-              <div className="text-center space-y-3">
-                <h2 className="text-3xl font-semibold text-black">Leadership &amp; Governance</h2>
-                <p className="text-gray-600 max-w-2xl mx-auto">
-                  Explore the voices and councils that guide The Elden Heights School. Each pillar offers a deeper look at our philosophy, mentors, and stewardship.
+
+          <About showLink={false} imagePrefix="about" heading="The Ethos Behind Elden Heights" />
+
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Leadership &amp; Governance</span>
+                <h2 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[52px]">
+                  Guided by those who believe in <span className="italic">the long view</span>.
+                </h2>
+                <span className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
+                <p className="mt-6 text-base leading-relaxed text-midnight/75 md:text-lg">
+                  Explore the voices and councils that guide The Elden Heights School. Each pillar
+                  offers a deeper look at our philosophy, mentors, and stewardship.
                 </p>
-              </div>
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {[{
-                  href: '/the-elden-council',
-                  label: 'THE ELDEN COUNCIL'
-                }, {
-                  href: '/core-mentors',
-                  label: 'Core mentors'
-                }, {
-                  href: '/managing-committee',
-                  label: 'MANAGING COMMITTEE'
-                }].map((card) => (
-                  <Link
+              </motion.div>
+
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {leadershipCards.map((card, idx) => (
+                  <motion.div
                     key={card.href}
-                    href={card.href}
-                    className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-black/20 bg-ivory text-center text-lg font-semibold uppercase tracking-[0.12em] text-black transition transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: idx * 0.1 }}
                   >
-                    <span className="relative z-10 px-6 text-lg sm:text-xl font-semibold text-black group-hover:text-black">
-                      {card.label}
-                    </span>
-                    <div className="absolute inset-x-4 bottom-4 h-0.5 rounded-full bg-cardinal/20 transition-all duration-300 group-hover:bottom-6 group-hover:h-1 group-hover:bg-cardinal/40" />
-                  </Link>
+                    <Link
+                      href={card.href}
+                      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    >
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+
+                      <div>
+                        <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.35em] text-cardinal">
+                          Pillar {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <h3 className="mt-3 font-garamond text-2xl font-semibold leading-tight text-midnight">
+                          {card.label}
+                        </h3>
+                        <p
+                          className="mt-3 text-sm leading-relaxed text-midnight/70"
+                          dangerouslySetInnerHTML={{ __html: card.caption }}
+                        />
+                      </div>
+                      <div className="mt-8 flex items-center justify-between">
+                        <span className="h-px flex-1 bg-gradient-to-r from-gold/40 to-transparent" />
+                        <span className="ml-4 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/55 transition-colors group-hover:text-cardinal">
+                          Explore
+                          <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </section>
-          <section className="py-20 bg-[#F8F5F3]">
-            <div className="max-w-5xl mx-auto px-6 space-y-12">
-              <div className="grid gap-12 lg:grid-cols-[1fr_320px] items-start">
-                <div className="space-y-6">
-                  <h2 id="principal-note" className="text-3xl font-semibold text-black">Note from the Principal</h2>
-                    <p>
-                      At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.
+
+          <section className="relative py-24 md:py-32">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            <div className="mx-auto max-w-6xl space-y-24 px-6">
+              <LeaderNote
+                id="principal-note"
+                title="Note from the Principal"
+                image={leadershipPhotos.principal}
+                author="R.K. Singh"
+                paragraphs={[
+                  'At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.',
+                  'Our four-stage philosophy — Roots, Ascent, Radiance and Eternity — guides each student through a journey that builds discipline, curiosity, communication and leadership. These are not just words on a brochure. These are practices we apply in classrooms, activities and daily interactions.',
+                  'We combine a heritage-inspired culture with modern teaching methods. Students learn to stay grounded while being prepared for a world that is changing fast. They learn to work hard, make responsible choices and take pride in their growth.',
+                  'My commitment as the Principal is to maintain a school where learning feels purposeful, teachers stay motivated and parents feel assured about their child’s future. This is a shared responsibility and at Elden Heights, we take it seriously.',
+                  'Your child deserves a school that believes in their potential and helps them rise towards it every day. That is the promise of The Elden Heights.'
+                ]}
+              />
+              <LeaderNote
+                id="md-note"
+                title="Note from the Managing Director"
+                image={leadershipPhotos.managingDirector}
+                author="Mr. Shashi Shankar Prasad"
+                paragraphs={[
+                  'The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.',
+                  'Every decision we make — infrastructure, teachers, culture, systems, activities — reflects one thought. Will this help a child grow into a stronger human being? If the answer is no, we don’t do it. Simple.',
+                  'Our four-stage philosophy — Roots, Ascent, Radiance and Eternity — is at the core of everything. It ensures our students begin with strong foundations, rise with discipline, express themselves with confidence and eventually step out as capable young adults who can face a complex world with clarity.',
+                  'We are building a school culture that values effort over shortcuts, character over noise and long-term growth over temporary wins. The goal is not just good results. The goal is responsible, confident and well-rounded individuals.',
+                  'As the director, my responsibility is to ensure that this institution stays true to its purpose, evolves with time and continues to offer an environment where students, teachers and parents feel aligned towards a shared future.',
+                  'The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.'
+                ]}
+              />
+            </div>
+          </section>
+
+          <section id="mission-vision" className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="relative overflow-hidden rounded-[32px] surface-card-dark text-parchment">
+                <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
+                <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+
+                <div className="relative grid gap-12 px-8 py-14 md:grid-cols-[1fr_1.1fr] md:px-14 md:py-20">
+                  <motion.div
+                    className="space-y-6"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <span className="eyebrow eyebrow-dark">Mission &amp; Vision</span>
+                    <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-parchment sm:text-5xl md:text-[52px]">
+                      Towards <span className="gold-text italic">Eternal Glory</span>.
+                    </h2>
+                    <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                    <p className="text-base leading-relaxed text-parchment/80 md:text-lg">
+                      The Elden Heights School stands as a citadel of heritage and aspiration — where
+                      education is not the mere transfer of knowledge but the cultivation of greatness
+                      across generations.
                     </p>
-                    <p>
-                      Our four-stage philosophy Roots, Ascent, Radiance and Eternity guides each student through a journey that builds discipline, curiosity, communication and leadership. These are not just words on a brochure. These are practices we apply in classrooms, activities and daily interactions.
+                    <p className="text-base leading-relaxed text-parchment/75">
+                      Our emblem translates this philosophy into form. The eagle, sovereign and
+                      unyielding, represents the will to soar above the ordinary. The torch, burning
+                      eternal, signifies the undimmed pursuit of truth. The four wings mirror the
+                      cardinal stages of a student&rsquo;s passage — Roots, Ascent, Radiance, and Eternity.
                     </p>
-                    <p>
-                      We combine a heritage-inspired culture with modern teaching methods. Students learn to stay grounded while being prepared for a world that is changing fast. They learn to work hard, make responsible choices and take pride in their growth.
+                    <p className="font-garamond text-lg italic text-parchment/85">
+                      More than an institution — an enduring passage to greatness.
                     </p>
-                    <p>
-                      My commitment as the principal is to maintain a school where learning feels purposeful, teachers stay motivated and parents feel assured about their child’s future. This is a shared responsibility and at Elden Heights, we take it seriously.
-                    </p>
-                    <p>
-                      Your child deserves a school that believes in their potential and helps them rise towards it every day. That is the promise of The Elden Heights.
-                    </p>
-                  <p className="font-semibold text-black">- R.K Singh</p>
-                </div>
-                <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-black/60 bg-white shadow-sm">
-                    <Image
-                      src={leadershipPhotos.principal.src}
-                      alt={leadershipPhotos.principal.alt}
-                      fill
-                      priority
-                      sizes="(min-width: 1024px) 320px, 80vw"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
-                <div className="space-y-6">
-                  <h2 id="md-note" className="text-3xl font-semibold text-black">Note from the MD </h2>
-                    <p>
-                      The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.
-                    </p>
-                    <p>
-                      Every decision we make infrastructure, teachers, culture, systems, activities reflects one thought. Will this help a child grow into a stronger human being? If the answer is no, we don’t do it. Simple.
-                    </p>
-                    <p>
-                      Our four-stage philosophy Roots, Ascent, Radiance and Eternity is at the core of everything. It ensures our students begin with strong foundations, rise with discipline, express themselves with confidence and eventually step out as capable young adults who can face a complex world with clarity.
-                    </p>
-                    <p>
-                      We are building a school culture that values effort over shortcuts, character over noise and long term growth over temporary wins. The goal is not just good results. The goal is responsible, confident and well-rounded individuals.
-                    </p>
-                    <p>
-                      As the director, my responsibility is to ensure that this institution stays true to its purpose, evolves with time and continues to offer an environment where students, teachers and parents feel aligned towards a shared future.
-                    </p>
-                    <p>
-                      The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.
-                    </p>
-                  <p className="font-semibold text-black">- Mr. Shashi Shankar Prasad</p>
-                </div>
-                <div className="w-full max-w-md mx-auto lg:mx-0">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-black/60 bg-white shadow-sm">
-                    <Image
-                      src={leadershipPhotos.managingDirector.src}
-                      alt={leadershipPhotos.managingDirector.alt}
-                      fill
-                      sizes="(min-width: 1024px) 320px, 80vw"
-                      className="object-cover"
-                    />
-                  </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="space-y-4"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                  >
+                    {missionStages.map((stage, idx) => (
+                      <div
+                        key={stage.title}
+                        className="group flex gap-5 rounded-2xl border border-parchment/10 bg-white/5 p-5 backdrop-blur transition-all duration-400 hover:border-gold/40 hover:bg-white/10"
+                      >
+                        <div className="flex-shrink-0 text-center">
+                          <span className="font-garamond text-3xl font-semibold text-gold-300">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                          <div className="mt-1 h-px w-6 bg-gold/40" />
+                        </div>
+                        <div className="flex-1 space-y-2">
+                          <h3 className="font-garamond text-2xl font-semibold leading-tight text-parchment">
+                            {stage.title}
+                          </h3>
+                          <p className="text-sm leading-relaxed text-parchment/70">{stage.copy}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
                 </div>
               </div>
             </div>
           </section>
-          <section className="py-16 bg-[#f3ede7]">
-            <div className="max-w-5xl mx-auto px-6 space-y-8">
-              <div className="text-center space-y-3">
-                <h2 id="mission-vision" className="text-3xl font-semibold text-black">Mission and Vision Statement</h2>
-                <p className="max-w-3xl mx-auto text-gray-700">
-                  Discover the legacy behind The Elden Heights School. Expand the panel below to explore how our emblem, ethos, and four-stage philosophy guide every learner toward eternal glory.
+
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                className="mb-12 flex flex-col items-center text-center"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Principles &amp; Policies</span>
+                <h2 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[52px]">
+                  The values &amp; safeguards that <span className="italic">guide us</span>.
+                </h2>
+                <span className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
+                <p className="mt-6 max-w-2xl text-midnight/75 md:text-lg">
+                  Our policies reflect the values and safeguards that guide The Elden Heights
+                  School — protecting and supporting our students, parents, and staff community.
                 </p>
-              </div>
-              <div className="overflow-hidden rounded-3xl border border-black/20 bg-white shadow-xl shadow-cardinal/10">
-                <details className="group" open>
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-lg font-semibold text-midnight">
-                    <span className="flex items-center gap-3">
-                      <span className="h-10 w-10 rounded-full bg-cardinal/10 text-black grid place-items-center font-semibold">MV</span>
-                      <span className="text-black">Mission &amp; Vision</span>
-                    </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 transform text-black transition duration-300 group-open:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
-                    </svg>
-                  </summary>
-                  <div className="flex flex-col gap-8 border-t border-black/10 bg-white px-6 pb-8 pt-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-start">
-                    <div className="space-y-6 text-gray-700 lg:pr-4">
-                      <div className="space-y-3">
-                        <h3 className="text-2xl font-semibold text-black">Vision</h3>
-                        <p>
-                          The Elden Heights School stands as a citadel of heritage and aspiration, where education is not the mere transfer of knowledge but the cultivation of greatness across generations. The very name Elden Heights embodies our purpose: “Elden” signifying the timeless journey of growing old with wisdom, and “Heights” symbolizing the relentless ascent toward excellence and elevated achievement. Together, the name evokes a legacy of refinement, endurance, and elevation.
-                        </p>
-                        <p>
-                          Our emblem translates this philosophy into form. The eagle, sovereign and unyielding, represents the will to soar above the ordinary. The torch, burning eternal, signifies the undimmed pursuit of truth and enlightenment. The four wings of the eagle mirror the four cardinal stages of a student’s passage: Roots, Ascent, Radiance, and Eternity. These stages, like the wings of flight, empower every learner to rise with balance, strength, and purpose, ever guided by our motto “Towards Eternal Glory.”
-                        </p>
-                        <p>
-                          The Elden Heights is thus more than an institution; it is an enduring passage to greatness, where each generation is prepared to stand tall in wisdom, dignity, and eternal legacy.
-                        </p>
-                      </div>
-                      <div className="space-y-3">
-                        <h3 className="text-2xl font-semibold text-black">Mission</h3>
-                        <p>
-                          The mission of The Elden Heights School is to craft not merely scholars, but legacies. We exist to shape a student’s journey through the four timeless stages of life, each one refining their character and elevating their destiny.
-                        </p>
-                        <p>
-                          <strong className="text-black">Roots:</strong> At the foundation, we instill discipline, virtue, and cultural heritage. Here the child is grounded, like the roots of an ancient tree, drawing strength from values that endure through every age.
-                        </p>
-                        <p>
-                          <strong className="text-black">Ascent:</strong> With a firm foundation, the learner begins to rise. This stage is defined by exploration, resilience, and intellectual awakening. We nurture a spirit that questions, seeks, and climbs with dignity and perseverance toward knowledge and truth.
-                        </p>
-                        <p>
-                          <strong className="text-black">Radiance:</strong> As wisdom matures, the individual begins to illuminate. In this stage, talents unfold and leadership emerges. Students radiate brilliance through creativity, innovation, and excellence, becoming beacons of inspiration within their communities and beyond.
-                        </p>
-                        <p>
-                          <strong className="text-black">Eternity:</strong> The pinnacle stage, where learning transcends achievement and becomes legacy. Here, the Eldenite rises beyond self-interest to embody purpose, virtue, and vision that echo through generations. This is the stage of eternal glory, the fulfillment of The Elden Heights journey.
-                        </p>
-                        <p>
-                          The name Elden Heights is fulfilled in this mission: “Elden” to grow wiser with age, and “Heights” to ascend beyond limitation. The eagle with its four wings embodies these stages, carrying the torch of enlightenment as a symbol of knowledge that never fades. Each student, through this sacred passage, is prepared not merely for success, but for significance, to rise, to lead, and to leave behind a mark that is eternal.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="relative ml-auto flex w-full max-w-xs flex-col items-center justify-start overflow-hidden rounded-2xl border border-dashed border-black/30 bg-ivory p-4 shadow-md shadow-cardinal/10 lg:mt-0">
-                      <div className="h-40 w-full rounded-xl bg-white" />
-                      <p className="mt-3 text-center text-sm font-medium text-black">Reserved space for mission &amp; vision imagery</p>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </div>
-          </section>
-          <section className="py-20 bg-white">
-            <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h2 className="text-3xl font-semibold text-black">Principles and Policies</h2>
-              <p className="text-gray-600">
-                Our policies reflect the values and safeguards that guide The Elden Heights School. Explore each policy to understand
-                how we protect and support our students, parents, and staff community.
-              </p>
+              </motion.div>
+
               <ul className="grid gap-4 sm:grid-cols-2">
-                {policies.map((policy) => (
-                  <li key={policy.href} className="rounded-2xl border border-black/20 bg-cardinal/5 px-5 py-4 transition hover:border-black hover:bg-white">
-                    <Link href={policy.href} className="block text-black font-semibold">
-                      {policy.title}
+                {policies.map((policy, idx) => (
+                  <li key={policy.href}>
+                    <Link
+                      href={policy.href}
+                      className="group flex items-center justify-between gap-4 rounded-2xl border border-midnight/10 bg-white/80 px-6 py-5 backdrop-blur transition-all duration-400 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_20px_40px_-20px_rgba(10,10,12,0.2)]"
+                    >
+                      <div className="flex items-center gap-4">
+                        <span className="font-garamond text-sm font-semibold text-cardinal/70">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-garamond text-lg font-semibold text-midnight">
+                          {policy.title}
+                        </span>
+                      </div>
+                      <span className="text-gold transition-transform duration-400 group-hover:translate-x-1">→</span>
                     </Link>
                   </li>
                 ))}

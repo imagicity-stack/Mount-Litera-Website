@@ -1,6 +1,9 @@
+import { motion } from 'framer-motion';
+
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 import { stageDetails } from '@/components/Academics';
 
 const learningEnhancements = [
@@ -23,253 +26,387 @@ const coScholasticOfferings = [
   'Value-based education and leadership sessions'
 ];
 
-const heroHighlights = [
-  { label: 'Curriculum', value: 'CBSE Aligned' },
-  { label: 'Learning Path', value: 'Foundational to Secondary' },
-  { label: 'Focus', value: 'Confidence, Curiosity, Character' }
+const classroomKitChanges = [
+  'Unit-wise digital companions for every major concept',
+  'Observation-led progress notes shared with families',
+  'Quarterly teacher labs to exchange best practices'
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 }
+};
 
 export default function AcademicsPage() {
   return (
     <>
       <Seo path="/academics" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
-          <section className="relative overflow-hidden bg-cardinal py-24 text-white">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/academics/banner-constellation.jpg')" }}
-              aria-hidden="true"
-            />
-            <div className="absolute inset-0 bg-cardinal/75 backdrop-blur-[2px]" aria-hidden="true" />
-            <div className="relative max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-center">
-              <div className="space-y-6">
-                <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/70">
-                  Academics
-                </span>
-                <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                  Building foundations that inspire futures
-                </h1>
-                <p className="text-lg text-white/80">
-                  At The Elden Heights School, learning is a journey that grows with every child. Our curriculum blends structured
-                  academics with meaningful experiences so students feel ready for life, not just exams.
-                </p>
-                <p className="text-lg text-white/80">
-                  Each stage brings the right balance of curiosity, discipline, and creativity while staying firmly rooted in the
-                  CBSE framework.
-                </p>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {heroHighlights.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-lg backdrop-blur flex flex-col items-center justify-center text-center"
-                  >
-                    <p className="text-xs uppercase tracking-[0.3em] text-white/70">{item.label}</p>
-                    <p className="mt-3 text-lg font-semibold leading-snug">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <ImageBanner
+            title="Academics"
+            subtitle="Foundations that inspire futures — learning that grows with every child."
+            eyebrow="Curriculum · CBSE Aligned"
+            image="/academics/banner-constellation.jpg"
+          />
 
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
-              <div className="space-y-5">
-                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-black">
-                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Next Session 2026-25</span>
-                  <span className="rounded-full bg-cardinal/10 px-4 py-1">Classes LKG – VIII</span>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-black">Learning resources that amplify every classroom</h2>
-                <p className="text-gray-700">
-                  Beginning 2026-25, our classrooms from LKG to Grade VIII receive refreshed content, measurable progress trackin
-                  g, and added teacher support. The aim: deeper engagement, clearer outcomes, and confident learners.
-                </p>
-                <ul className="space-y-3 text-sm text-gray-700">
-                  {learningEnhancements.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-black">
-                  Families will receive orientation support and a refreshed resource hub to make the transition seamless.
-                </p>
-              </div>
-              <div className="mx-auto w-full max-w-sm space-y-6">
-                <div
-                  className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-black/10 bg-cover bg-center shadow-lg"
-                  style={{ backgroundImage: "url('/academics/classroom-kit.jpg')" }}
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
+                <motion.div
+                  className="space-y-6"
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="absolute inset-0 bg-white/30 backdrop-blur-[1px]" aria-hidden="true" />
-                  <div className="relative flex h-full flex-col justify-between p-6 text-black">
-                    <div className="space-y-2">
-                      <p className="text-xs uppercase tracking-[0.3em] text-black">Classroom kit</p>
-                      <h3 className="text-2xl font-semibold leading-tight">Interactive learning hub</h3>
-                      <p className="text-sm text-black">
-                        Lesson visuals, practice sheets, and assessment snapshots are organized in one place so teachers can move
-                        seamlessly between activities.
-                      </p>
-                    </div>
-                    <div className="rounded-2xl bg-cardinal/10 p-4 text-sm text-black">
-                      <p className="font-semibold">What changes in 2026-25?</p>
-                      <ul className="mt-2 space-y-1">
-                        <li className="flex items-start gap-2">
-                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                          <span>Unit-wise digital companions for every major concept</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                          <span>Observation-led progress notes shared with families</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                          <span>Quarterly teacher labs to exchange best practices</span>
-                        </li>
-                      </ul>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="chip">Next Session 2026 – 27</span>
+                    <span className="chip">Classes LKG – VIII</span>
+                  </div>
+                  <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                    Learning resources that <span className="italic">amplify</span> every classroom.
+                  </h2>
+                  <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                  <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                    Beginning 2026 – 27, our classrooms from LKG to Grade VIII receive refreshed
+                    content, measurable progress tracking, and added teacher support — for deeper
+                    engagement, clearer outcomes, and confident learners.
+                  </p>
+                  <ul className="space-y-3">
+                    {learningEnhancements.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-midnight/80">
+                        <span className="mt-[7px] inline-block h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gradient-to-br from-gold to-cardinal shadow-[0_0_0_3px_rgba(201,162,75,0.15)]" />
+                        <span className="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="font-garamond text-lg italic text-midnight/70">
+                    Families receive orientation support and a refreshed resource hub for a seamless transition.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  className="relative"
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                >
+                  <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
+                  <div className="img-zoom relative overflow-hidden rounded-[28px] border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
+                    <div
+                      className="img-layer absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: "url('/academics/classroom-kit.jpg')" }}
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/50 to-midnight/30" />
+                    <div className="relative z-10 flex min-h-[460px] flex-col justify-between p-8 text-parchment">
+                      <div className="space-y-3">
+                        <span className="chip-dark">Classroom Kit</span>
+                        <h3 className="font-garamond text-3xl font-semibold leading-tight">
+                          Interactive learning hub
+                        </h3>
+                        <p className="text-sm leading-relaxed text-parchment/80">
+                          Lesson visuals, practice sheets, and assessment snapshots organised in one place
+                          so teachers move seamlessly between activities.
+                        </p>
+                      </div>
+                      <div className="glass-panel-dark mt-6 rounded-2xl p-5">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-gold-300">
+                          What changes in 2026 – 27
+                        </p>
+                        <ul className="mt-3 space-y-2 text-sm text-parchment/85">
+                          {classroomKitChanges.map((item) => (
+                            <li key={item} className="flex items-start gap-2">
+                              <span className="mt-[7px] h-[5px] w-[5px] flex-shrink-0 rounded-full bg-gold" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </section>
 
-          <section className="py-16 bg-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-10">
-              <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-black">A clear pathway through every grade</h2>
-                <p className="text-gray-600">
-                  Four progressive stages gently guide our learners from playful exploration to focused preparation. Each stage has a
-                  simple promise for children and families.
+          <section className="relative py-24 md:py-32">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="mb-12 max-w-3xl space-y-5"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Learning Pathway</span>
+                <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                  A clear pathway through <span className="italic">every grade</span>.
+                </h2>
+                <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                  Four progressive stages gently guide our learners from playful exploration to
+                  focused preparation. Each stage carries a simple promise for children and families.
                 </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                {stageDetails.map((stage) => (
-                  <div key={stage.title} className="rounded-3xl border border-black/10 bg-[#FDF9F7] p-6 shadow-sm">
-                    <span className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</span>
-                    <h3 className="mt-3 text-xl font-semibold text-black">{stage.title}</h3>
-                    <p className="mt-4 text-sm text-gray-700">{stage.homeSummary}</p>
-                  </div>
+              </motion.div>
+
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {stageDetails.map((stage, index) => (
+                  <motion.div
+                    key={stage.title}
+                    className="group relative overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
+                  >
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.3em] text-cardinal">
+                      Stage {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-3 font-garamond text-xl font-semibold leading-tight text-midnight">
+                      {stage.title}
+                    </h3>
+                    <span className="mt-2 block text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/55">
+                      {stage.grades}
+                    </span>
+                    <p className="mt-4 text-sm leading-relaxed text-midnight/75">
+                      {stage.homeSummary}
+                    </p>
+                  </motion.div>
                 ))}
               </div>
-              <div className="rounded-2xl border-l-4 border-black bg-cardinal/5 px-6 py-4 text-black">
-                <strong>Coming soon:</strong> Senior Secondary Stage with Science, Commerce, and Humanities streams.
+
+              <div className="mt-10 overflow-hidden rounded-[22px] border border-gold/30 bg-gradient-to-r from-gold/10 via-gold/5 to-gold/10 px-6 py-5">
+                <p className="flex items-center gap-3 text-midnight">
+                  <span className="font-garamond text-sm font-semibold uppercase tracking-[0.3em] text-cardinal">
+                    Coming soon
+                  </span>
+                  <span className="h-px flex-1 bg-gradient-to-r from-gold/50 to-transparent" />
+                  <span className="text-sm md:text-base">
+                    Senior Secondary Stage — Science, Commerce, and Humanities streams.
+                  </span>
+                </p>
               </div>
             </div>
           </section>
 
-          <section id="learning-journey" className="py-20 bg-[#F8F5F3]">
-            <div className="max-w-6xl mx-auto px-6 space-y-12">
-              <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-black">The Elden Heights learning journey</h2>
-                <p className="text-gray-700">
-                  Take a closer look at how each stage feels inside our classrooms — from foundational play to secondary guidance and
-                  mentorship.
+          <section id="learning-journey" className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="mb-14 max-w-3xl space-y-5"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Inside the Classroom</span>
+                <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                  The Elden Heights <span className="italic">learning journey</span>.
+                </h2>
+                <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                  Take a closer look at how each stage feels inside our classrooms — from foundational
+                  play to secondary guidance and mentorship.
                 </p>
-              </div>
+              </motion.div>
+
               <div className="relative">
-                <div className="absolute left-4 top-0 bottom-0 hidden w-px bg-cardinal/20 md:block" aria-hidden="true" />
+                <div
+                  className="absolute left-4 top-0 bottom-0 hidden w-px bg-gradient-to-b from-gold/50 via-midnight/15 to-gold/30 md:block"
+                  aria-hidden="true"
+                />
                 <div className="space-y-10">
                   {stageDetails.map((stage, index) => (
-                    <div key={stage.title} className="grid gap-6 md:grid-cols-[120px_minmax(0,1fr)] md:items-start">
-                      <div className="flex items-center gap-3 text-black">
-                        <div className="hidden md:flex h-10 w-10 items-center justify-center rounded-full border border-black/30 bg-white font-semibold">
-                          {index + 1}
+                    <motion.div
+                      key={stage.title}
+                      className="grid gap-6 md:grid-cols-[140px_minmax(0,1fr)] md:items-start"
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="relative hidden h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-gradient-to-br from-parchment to-ivory font-garamond text-sm font-semibold text-midnight shadow-[0_0_0_6px_rgba(201,162,75,0.08)] md:flex">
+                          {String(index + 1).padStart(2, '0')}
                         </div>
                         <div>
-                          <p className="text-xs uppercase tracking-[0.3em] text-black">{stage.grades}</p>
-                          <p className="font-semibold">{stage.title}</p>
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
+                            {stage.grades}
+                          </p>
+                          <p className="font-garamond text-lg font-semibold text-midnight">
+                            {stage.title}
+                          </p>
                         </div>
                       </div>
-                      <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-                        <p className="text-gray-700">{stage.summary}</p>
-                        <div className="mt-5">
-                          <h4 className="text-xs font-semibold uppercase tracking-wide text-black">Key focus areas</h4>
+                      <div className="surface-card rounded-[24px] p-7 md:p-8">
+                        <p className="text-base leading-relaxed text-midnight/80 md:text-lg">
+                          {stage.summary}
+                        </p>
+                        <div className="mt-6">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
+                            Key focus areas
+                          </p>
                           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                             {stage.focus.map((item) => (
-                              <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
-                                <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
+                              <li
+                                key={item}
+                                className="flex items-start gap-3 text-sm text-midnight/80"
+                              >
+                                <span className="mt-[7px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gradient-to-br from-gold to-cardinal shadow-[0_0_0_3px_rgba(201,162,75,0.15)]" />
                                 <span>{item}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
           </section>
 
-          <section id="teaching-support" className="py-20 bg-[#101727] text-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-10">
-              <div className="max-w-3xl space-y-3">
-                <h2 className="text-2xl md:text-3xl font-semibold">Teaching, support, and progress that stay in sync</h2>
-                <p className="text-white/80">
-                  Our academic ecosystem connects classroom experiences, caring educators, and purposeful assessments to make sure
-                  every child keeps moving forward.
-                </p>
+          <section id="teaching-support" className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="relative overflow-hidden rounded-[32px] surface-card-dark text-parchment">
+                <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
+                <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+
+                <div className="relative space-y-12 px-8 py-14 md:px-14 md:py-20">
+                  <motion.div
+                    className="max-w-3xl space-y-5"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <span className="eyebrow eyebrow-dark">Academic Ecosystem</span>
+                    <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-parchment sm:text-5xl md:text-[48px]">
+                      Teaching, support, and progress — <span className="italic">in sync</span>.
+                    </h2>
+                    <p className="text-base leading-relaxed text-parchment/80 md:text-lg">
+                      Our academic ecosystem connects classroom experiences, caring educators, and
+                      purposeful assessments to make sure every child keeps moving forward.
+                    </p>
+                  </motion.div>
+
+                  <div className="grid gap-5 md:grid-cols-3">
+                    {[
+                      {
+                        title: 'Teaching Philosophy',
+                        body: 'Our approach blends traditional discipline with curiosity-driven classrooms so students think, question, and express freely.',
+                        list: philosophyPoints
+                      },
+                      {
+                        title: 'Faculty Excellence',
+                        body: 'Our teachers pair empathy with expertise. Regular workshops and training keep instructional practice sharp and student-centred.'
+                      },
+                      {
+                        title: 'Assessment & Progress',
+                        body: 'Continuous assessments, feedback loops, and parent partnerships help every learner understand where they stand and how to grow.'
+                      }
+                    ].map((card) => (
+                      <div
+                        key={card.title}
+                        className="glass-panel-dark rounded-3xl p-7"
+                      >
+                        <h3 className="font-garamond text-2xl font-semibold text-parchment">
+                          {card.title}
+                        </h3>
+                        <p className="mt-4 text-sm leading-relaxed text-parchment/80">
+                          {card.body}
+                        </p>
+                        {card.list && (
+                          <ul className="mt-5 space-y-2 text-sm text-parchment/75">
+                            {card.list.map((point) => (
+                              <li key={point} className="flex items-start gap-2">
+                                <span className="mt-[7px] h-[5px] w-[5px] flex-shrink-0 rounded-full bg-gold" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="grid gap-6 md:grid-cols-3">
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg">
-                  <h3 className="text-lg font-semibold">Teaching Philosophy</h3>
-                  <p className="mt-3 text-white/80">
-                    Our approach blends traditional discipline with curiosity-driven classrooms so students think, question, and
-                    express freely.
+            </div>
+          </section>
+
+          <section id="beyond-textbooks" className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+                <motion.div
+                  className="space-y-6"
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <span className="eyebrow">Beyond the Textbook</span>
+                  <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                    Life at Elden Heights — <span className="italic">vibrant &amp; alive</span>.
+                  </h2>
+                  <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                  <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                    Life at The Elden Heights School includes vibrant programs that build confidence,
+                    teamwork, and leadership. Students explore talents, collaborate with peers, and
+                    learn to express themselves.
                   </p>
-                  <ul className="mt-5 space-y-2 text-sm text-white/70">
-                    {philosophyPoints.map((point) => (
-                      <li key={point} className="flex items-start gap-2">
-                        <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-white/60"></span>
-                        <span>{point}</span>
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {coScholasticOfferings.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 rounded-xl border border-midnight/10 bg-white/70 px-4 py-3 text-sm text-midnight/80 backdrop-blur transition hover:border-gold/40"
+                      >
+                        <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gradient-to-br from-gold to-cardinal" />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-cardinal/30 p-6 shadow-lg">
-                  <h3 className="text-lg font-semibold">Faculty Excellence</h3>
-                  <p className="mt-3 text-white/80">
-                    Our teachers pair empathy with expertise. Regular workshops and training sessions keep instructional practices
-                    sharp and student-centered.
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg">
-                  <h3 className="text-lg font-semibold">Assessment &amp; Progress</h3>
-                  <p className="mt-3 text-white/80">
-                    Continuous assessments, feedback loops, and parent partnerships help every learner understand where they stand and
-                    how to grow.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
+                </motion.div>
 
-          <section id="beyond-textbooks" className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
-              <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-semibold text-black">Beyond textbooks</h2>
-                <p className="text-gray-700">
-                  Life at The Elden Heights School includes vibrant programs that build confidence, teamwork, and leadership. Students explore
-                  talents, collaborate with peers, and learn to express themselves.
-                </p>
-                <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700">
-                  {coScholasticOfferings.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-cardinal"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-3xl border border-black/10 bg-[#FDF9F7] p-8 shadow-sm">
-                <h3 className="text-xl font-semibold text-black">Academic vision ahead</h3>
-                <p className="mt-4 text-gray-700">
-                  As we evolve into a renewed identity, our academic system is becoming more technology-enabled, data-informed, and
-                  globally aligned — keeping the balance between tradition and innovation alive.
-                </p>
+                <motion.div
+                  className="surface-card relative overflow-hidden rounded-[28px] p-10"
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                >
+                  <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/15 blur-[100px]" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+                  <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.35em] text-cardinal">
+                    Academic Vision
+                  </span>
+                  <h3 className="mt-3 font-garamond text-3xl font-semibold leading-tight text-midnight md:text-[36px]">
+                    The road ahead.
+                  </h3>
+                  <p className="mt-5 text-base leading-relaxed text-midnight/75 md:text-lg">
+                    As we evolve into a renewed identity, our academic system is becoming more
+                    technology-enabled, data-informed, and globally aligned — keeping the balance
+                    between tradition and innovation alive.
+                  </p>
+                  <span className="mt-6 block h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+                  <p className="mt-6 font-garamond text-lg italic text-midnight/80">
+                    &ldquo;Tradition informs us. Innovation carries us.&rdquo;
+                  </p>
+                </motion.div>
               </div>
             </div>
           </section>

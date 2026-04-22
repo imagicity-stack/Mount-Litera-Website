@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ImageBanner from '@/components/ImageBanner';
 
 const formatDate = (value) => {
   if (!value) return 'TBA';
@@ -46,14 +48,10 @@ export default function BlogsPage() {
   useEffect(() => {
     loadBlogs();
     const handleVisibility = () => {
-      if (document.visibilityState === 'visible') {
-        loadBlogs();
-      }
+      if (document.visibilityState === 'visible') loadBlogs();
     };
-
     window.addEventListener('focus', loadBlogs);
     document.addEventListener('visibilitychange', handleVisibility);
-
     return () => {
       window.removeEventListener('focus', loadBlogs);
       document.removeEventListener('visibilitychange', handleVisibility);
@@ -80,78 +78,90 @@ export default function BlogsPage() {
   return (
     <>
       <Seo path="/blogs" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
-          <section className="bg-[#f8f4ef] py-16">
-            <div className="max-w-5xl mx-auto px-6">
-              <div className="space-y-5">
-                <p className="text-sm uppercase tracking-[0.3em] text-cardinal">Blogs</p>
-                <h1 className="text-4xl sm:text-5xl font-semibold text-black">
-                  Stories, updates, and learning journeys from Elden Heights.
-                </h1>
-                <p className="text-lg text-gray-700">
-                  Stay connected with campus highlights, student achievements, and thought leadership from our mentors.
-                </p>
-                <div className="flex flex-wrap items-center gap-4">
+          <ImageBanner
+            title="The Elden Journal"
+            subtitle="Stories, updates, and learning journeys from Elden Heights."
+            eyebrow="Journal"
+            image="/main gate new.jpeg"
+          />
+
+          <section className="relative py-20 md:py-24">
+            <div className="mx-auto max-w-5xl px-6">
+              <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <div className="space-y-4">
+                  <span className="eyebrow">Latest News &amp; Stories</span>
+                  <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                    Campus highlights &amp; <span className="italic">student voices</span>.
+                  </h2>
+                  <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                </div>
+                <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/60">
+                  <span>{filtered.length} Posts</span>
+                  <span className="h-3 w-px bg-midnight/20" />
                   <Link
                     href="/blogs/admin"
-                    className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500 transition hover:text-cardinal"
+                    className="transition hover:text-cardinal"
                   >
                     Admin Login
                   </Link>
-                  <div className="relative flex-1 min-w-[220px]">
-                    <input
-                      type="search"
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder="Search posts, tags, authors..."
-                      className="w-full rounded-full border border-black/20 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm focus:border-black focus:outline-none"
-                    />
-                  </div>
                 </div>
+              </div>
+              <div className="mt-8 flex items-center gap-3 rounded-full border border-midnight/15 bg-white px-5 py-3 shadow-[0_20px_40px_-20px_rgba(10,10,12,0.15)] focus-within:border-gold/60 focus-within:ring-2 focus-within:ring-gold/30">
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-midnight/50">
+                  <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M20 20l-3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search posts, tags, authors…"
+                  className="w-full bg-transparent text-sm text-midnight placeholder-midnight/40 focus:outline-none"
+                />
               </div>
             </div>
           </section>
 
-          <section className="py-16">
-            <div className="max-w-6xl mx-auto px-6 space-y-8">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-3xl font-semibold text-black">Latest news &amp; stories</h2>
-                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500">
-                  {filtered.length} Posts
-                </span>
-              </div>
-
+          <section className="relative pb-24 md:pb-32">
+            <div className="mx-auto max-w-6xl px-6">
               {status === 'loading' && (
-                <div className="rounded-3xl border border-dashed border-black/20 bg-[#f8f4ef] p-10 text-center text-gray-600">
-                  Loading blog updates...
+                <div className="surface-card rounded-[28px] p-12 text-center text-midnight/60">
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-cardinal" />
+                  <span className="ml-3 text-sm uppercase tracking-[0.25em]">Loading journal…</span>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className="rounded-3xl border border-red-200 bg-red-50 p-10 text-center text-red-700">
-                  Unable to load blogs right now. Please try again later.
+                <div className="rounded-[28px] border border-cardinal/25 bg-cardinal/5 p-10 text-center text-cardinal">
+                  Unable to load the journal right now. Please try again later.
                 </div>
               )}
 
               {status === 'ready' && filtered.length === 0 && (
-                <div className="rounded-3xl border border-dashed border-black/20 bg-[#f8f4ef] p-10 text-center text-gray-600">
-                  No blogs matched your search. Try a different keyword or check back soon.
+                <div className="surface-card rounded-[28px] p-12 text-center text-midnight/60">
+                  No entries matched your search. Try a different keyword.
                 </div>
               )}
 
-              <div className="grid gap-8 lg:grid-cols-2">
-                {filtered.map((blog) => {
+              <div className="grid gap-6 lg:grid-cols-2">
+                {filtered.map((blog, idx) => {
                   const isOpen = Boolean(expanded[blog.id]);
                   const publishedAt = blog.publishedAt || blog.createdAt;
                   return (
                     <motion.article
                       key={blog.id}
                       layout
-                      className="rounded-3xl border border-black/10 bg-white shadow-xl shadow-cardinal/5 overflow-hidden"
+                      className="surface-card group relative overflow-hidden rounded-[28px]"
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.1 }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (idx % 4) * 0.06 }}
                     >
-                      <div className="relative h-56 bg-black/5">
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+                      <div className="img-zoom relative h-60 overflow-hidden bg-midnight/5">
                         {blog.coverImage ? (
                           <img
                             src={blog.coverImage}
@@ -159,40 +169,48 @@ export default function BlogsPage() {
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center text-sm uppercase tracking-[0.3em] text-gray-400">
+                          <div className="flex h-full items-center justify-center font-garamond text-parchment/70">
                             Elden Heights
                           </div>
                         )}
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/70 via-midnight/20 to-transparent" />
                         <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-2 px-6 pb-4">
                           {(blog.tags || []).slice(0, 3).map((tag) => (
                             <span
                               key={`${blog.id}-${tag}`}
-                              className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-gray-700"
+                              className="rounded-full border border-white/30 bg-white/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-midnight backdrop-blur"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
                       </div>
-                      <div className="p-6 space-y-4">
-                        <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-gray-500">
+                      <div className="space-y-4 p-8">
+                        <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.28em] text-midnight/55">
                           <span>{formatDate(publishedAt)}</span>
                           {blog.readingTime && <span>{blog.readingTime} min read</span>}
                         </div>
-                        <div className="space-y-2">
-                          <h3 className="text-2xl font-semibold text-black">{blog.title}</h3>
-                          <p className="text-gray-600">{blog.excerpt || 'Read the full story for more details.'}</p>
-                        </div>
-                        <div className="flex items-center justify-between text-sm text-gray-600">
+                        <h3 className="font-garamond text-2xl font-semibold leading-tight text-midnight md:text-[26px]">
+                          {blog.title}
+                        </h3>
+                        <p className="text-midnight/75">
+                          {blog.excerpt || 'Read the full story for more details.'}
+                        </p>
+                        <div className="flex items-center justify-between text-sm text-midnight/70">
                           <div>
-                            <p className="font-semibold text-black">{blog.authorName || 'Editorial Team'}</p>
-                            <p>{blog.authorTitle || 'Elden Heights School'}</p>
+                            <p className="font-garamond text-base font-semibold text-midnight">
+                              {blog.authorName || 'Editorial Team'}
+                            </p>
+                            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-midnight/55">
+                              {blog.authorTitle || 'Elden Heights School'}
+                            </p>
                           </div>
                           <Link
                             href={`/blogs/${blog.slug}`}
-                            className="text-sm font-semibold uppercase tracking-[0.2em] text-cardinal"
+                            className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-cardinal transition hover:gap-3"
                           >
-                            Full Story →
+                            Full Story
+                            <span>→</span>
                           </Link>
                         </div>
                         <button
@@ -200,10 +218,10 @@ export default function BlogsPage() {
                           onClick={() =>
                             setExpanded((prev) => ({ ...prev, [blog.id]: !prev[blog.id] }))
                           }
-                          className="flex w-full items-center justify-between rounded-full border border-black/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:border-black"
+                          className="flex w-full items-center justify-between rounded-full border border-midnight/20 bg-white px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-midnight transition hover:border-gold/60 hover:text-cardinal"
                         >
                           {isOpen ? 'Collapse Story' : 'Expand Story'}
-                          <span aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                          <span aria-hidden="true" className="text-gold">{isOpen ? '−' : '+'}</span>
                         </button>
                         <AnimatePresence>
                           {isOpen && (
@@ -214,7 +232,7 @@ export default function BlogsPage() {
                               transition={{ duration: 0.4 }}
                               className="overflow-hidden"
                             >
-                              <div className="mt-4 space-y-3 text-gray-700">
+                              <div className="mt-4 space-y-3 text-midnight/80">
                                 {hasRichText(blog.content) ? (
                                   <div
                                     className="blog-content"

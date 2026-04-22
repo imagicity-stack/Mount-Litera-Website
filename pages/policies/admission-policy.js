@@ -105,19 +105,27 @@ export default function AdmissionPolicyPage() {
   return (
     <>
       <Seo path="/policies/admission-policy" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Admission Policy"
             subtitle="A visual summary of how admissions are structured at Elden Heights."
-            badge="Policy"
+            eyebrow="Policy"
             image="/policies/admission-policy/banner-policy.jpg"
           />
-          <section className="py-16 bg-[#F8F5F3]">
-            <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-black">Admission Policy</h1>
-              <p className="whitespace-pre-line text-gray-700 leading-relaxed">{policyText}</p>
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-4xl px-6">
+              <div className="mb-10">
+                <span className="eyebrow">Policy Document</span>
+                <h1 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl">
+                  Admission Policy
+                </h1>
+                <span className="mt-6 block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+              </div>
+              <div className="surface-card rounded-[22px] p-8 md:p-12">
+                <p className="whitespace-pre-line leading-relaxed text-midnight/80">{policyText}</p>
+              </div>
             </div>
           </section>
         </main>

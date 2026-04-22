@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -5,96 +7,160 @@ import ImageBanner from '@/components/ImageBanner';
 
 const modules = [
   {
-    title: 'Financial Literacy and ATM Usage',
+    title: 'Financial Literacy & ATM Usage',
     description:
       'Students learn how to use an ATM, understand debit and digital payments, basic banking behaviour, and money responsibility.',
-    outcome: 'Outcome for parents: financially aware, independent children.'
+    outcome: 'Financially aware, independent children.'
   },
   {
-    title: 'Basic Nursing and First Aid',
+    title: 'Basic Nursing & First Aid',
     description: 'Training in basic first aid, handling minor injuries, emergency response, and CPR awareness.',
-    outcome: 'Outcome for parents: safety awareness, calmness during emergencies.'
+    outcome: 'Safety awareness, calmness during emergencies.'
   },
   {
-    title: 'Digital Safety and Online Awareness',
+    title: 'Digital Safety & Online Awareness',
     description: 'Covers password safety, online behaviour, scam awareness, and responsible screen usage.',
-    outcome: 'Outcome for parents: digitally responsible and secure children.'
+    outcome: 'Digitally responsible and secure children.'
   },
   {
-    title: 'Public Behaviour and Personal Safety',
-    description:
-      'Focuses on road safety, emergency response, public etiquette, asking for help, and situational awareness.',
-    outcome: 'Outcome for parents: street smart and confident children.'
+    title: 'Public Behaviour & Personal Safety',
+    description: 'Road safety, emergency response, public etiquette, asking for help, and situational awareness.',
+    outcome: 'Street-smart and confident children.'
   },
   {
-    title: 'Everyday Documentation and Practical Skills',
+    title: 'Everyday Documentation',
     description: 'Students learn to read bills, understand receipts, fill simple forms, and manage basic documentation.',
-    outcome: 'Outcome for parents: practical intelligence and independence.'
+    outcome: 'Practical intelligence and independence.'
   }
 ];
 
 const characteristics = [
   'Mandatory for all students',
-  'Practical and hands on learning',
+  'Practical and hands-on learning',
   'No exams or marks',
-  'Focused on real world independence'
+  'Focused on real-world independence'
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 }
+};
 
 export default function LifeReadinessProgramPage() {
   return (
     <>
       <Seo path="/life-readiness-program" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Life Readiness Program"
             subtitle="Skill-building pathways that prepare learners for leadership and real-world challenges."
-            badge="Life Readiness"
+            eyebrow="Life Readiness"
             image="/life-readiness-program/banner-ascent.jpg"
           />
-          <section className="section-divider bg-ivory/80">
-            <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-6">
-              <div className="space-y-4 max-w-5xl">
-                <p className="text-xs uppercase tracking-[0.35em] text-black">Life Readiness Program</p>
-                <h1 className="text-4xl font-semibold text-black">Preparing Children for the Real World</h1>
-                <p className="text-gray-700 leading-relaxed">
-                  The Life Readiness Program is a foundational and mandatory initiative designed to equip every child with
-                  essential real world skills. These are not optional activities. These are life skills every student must learn
-                  to function independently and responsibly. This program follows an age appropriate, progressive structure,
-                  ensuring students build real competence as they grow.
+
+          <section className="relative py-24 md:py-32">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="max-w-3xl space-y-5"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="eyebrow">Life Readiness Program</span>
+                <h1 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[54px]">
+                  Preparing children for the <span className="italic">real world</span>.
+                </h1>
+                <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
+                <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
+                  A foundational and mandatory initiative designed to equip every child with
+                  essential real-world skills. These are not optional activities — these are life
+                  skills every student must learn to function independently and responsibly, through
+                  an age-appropriate, progressive structure.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </section>
 
-          <section className="py-16 md:py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-12">
-              <div className="space-y-3">
-                <h2 className="text-3xl font-semibold text-black">Core Life Readiness Modules</h2>
-                <p className="text-gray-700 leading-relaxed max-w-4xl">
-                  Practical, hands-on learning that grows with every student so readiness becomes second nature.
+          <section className="relative py-16 md:py-20">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                className="mb-10"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <h2 className="font-garamond text-3xl font-semibold text-midnight md:text-4xl">
+                  Core modules.
+                </h2>
+                <p className="mt-2 max-w-2xl text-midnight/70">
+                  Practical, hands-on learning that grows with every student.
                 </p>
-              </div>
+              </motion.div>
 
               <div className="grid gap-6 md:grid-cols-2">
-                {modules.map((module) => (
-                  <div key={module.title} className="border border-black/15 bg-ivory/70 p-6 space-y-3 shadow-sm">
-                    <h3 className="text-2xl font-semibold text-black">{module.title}</h3>
-                    <p className="text-gray-800 leading-relaxed text-sm">{module.description}</p>
-                    <p className="text-gray-700 text-sm font-semibold">{module.outcome}</p>
-                  </div>
+                {modules.map((mod, idx) => (
+                  <motion.article
+                    key={mod.title}
+                    className="group relative overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: idx * 0.08 }}
+                  >
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                    <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.35em] text-cardinal">
+                      Module {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-3 font-garamond text-2xl font-semibold leading-tight text-midnight">
+                      {mod.title}
+                    </h3>
+                    <span className="mt-4 block h-px w-14 bg-gradient-to-r from-gold to-transparent" />
+                    <p className="mt-4 text-sm leading-relaxed text-midnight/75">{mod.description}</p>
+                    <div className="mt-5 rounded-xl border border-gold/25 bg-gold/8 px-4 py-3">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cardinal">
+                        Outcome
+                      </p>
+                      <p className="mt-1 text-sm font-semibold text-midnight">{mod.outcome}</p>
+                    </div>
+                  </motion.article>
                 ))}
               </div>
 
-              <div className="border border-black/15 bg-ivory/80 p-6 space-y-3 shadow-sm">
-                <h3 className="text-2xl font-semibold text-black">Key Characteristics of Life Readiness Program</h3>
-                <ul className="list-disc pl-5 space-y-2 text-gray-800 text-sm">
-                  {characteristics.map((item) => (
-                    <li key={item}>{item}</li>
+              <motion.div
+                className="mt-12 overflow-hidden rounded-[28px] surface-card-dark p-10 text-parchment md:p-14"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+                <span className="eyebrow eyebrow-dark">Program Characteristics</span>
+                <h3 className="mt-4 font-garamond text-3xl font-semibold leading-tight text-parchment md:text-4xl">
+                  How the program <span className="italic gold-text">works</span>.
+                </h3>
+                <ul className="mt-8 grid gap-4 md:grid-cols-2">
+                  {characteristics.map((item, idx) => (
+                    <li
+                      key={item}
+                      className="glass-panel-dark flex items-center gap-4 rounded-2xl p-5"
+                    >
+                      <span className="font-garamond text-2xl font-semibold text-gold-300">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-sm font-semibold text-parchment md:text-base">{item}</span>
+                    </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             </div>
           </section>
         </main>

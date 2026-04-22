@@ -8,13 +8,13 @@ export default function ContactPage() {
   return (
     <>
       <Seo path="/contact" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
-            title="We’d Love to Hear From You"
+            title="We&rsquo;d Love to Hear From You"
             subtitle="Our team is ready to guide you through admissions, partnerships, and every step of the journey."
-            badge="Contact"
+            eyebrow="Contact"
             image="/contact/banner-hello.jpg"
           />
           <Contact />

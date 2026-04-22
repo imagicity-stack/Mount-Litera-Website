@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -38,9 +40,7 @@ const coreMentors = [
   },
   {
     department: 'Information Technology',
-    mentors: [
-      { name: 'Sushil Sinha', designation: 'IT Head' }
-    ]
+    mentors: [{ name: 'Sushil Sinha', designation: 'IT Head' }]
   },
   {
     department: 'Teaching',
@@ -59,10 +59,7 @@ const coreMentors = [
       { name: 'Ritesh Kumar', designation: 'Science' }
     ]
   },
-  {
-    department: 'Music',
-    mentors: [{ name: 'Sushma Minz', designation: 'Vocalist' }]
-  },
+  { department: 'Music', mentors: [{ name: 'Sushma Minz', designation: 'Vocalist' }] },
   {
     department: 'Sports',
     mentors: [
@@ -70,44 +67,44 @@ const coreMentors = [
       { name: 'C.K. Yadav', designation: 'Overall Sports' }
     ]
   },
-  {
-    department: 'Store Keeper',
-    mentors: [{ name: 'Santosh Kumar', designation: 'Store Keeper' }]
-  }
+  { department: 'Store Keeper', mentors: [{ name: 'Santosh Kumar', designation: 'Store Keeper' }] }
 ];
 
 const getInitials = (name) =>
-  name
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
+  name.split(' ').filter(Boolean).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const MentorCard = ({ name, designation }) => {
   const photoSrc = mentorPhotos[name];
 
   return (
-    <div className="group overflow-hidden rounded-2xl border border-black/20 bg-white shadow-sm transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+    <div className="group overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]">
       {photoSrc ? (
-        <div className="relative aspect-[4/5] w-full bg-cardinal/5">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-midnight/5">
           <Image
             src={photoSrc}
             alt={`${name} - ${designation}`}
             fill
             sizes="(max-width: 768px) 240px, 320px"
-            className="object-cover"
+            className="object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.05]"
           />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         </div>
       ) : (
-        <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-black">
-          {getInitials(name)}
+        <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-midnight via-graphite to-midnight">
+          <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/15 blur-[80px]" />
+          <span className="relative font-garamond text-6xl font-semibold text-parchment">
+            {getInitials(name)}
+          </span>
         </div>
       )}
-      <div className="border-t border-black/15 bg-white px-4 py-3 text-center">
-        <h4 className="text-xl font-bold text-black">{name}</h4>
-        <p className="mt-1 text-sm font-medium text-gray-900">{designation}</p>
+      <div className="space-y-1 border-t border-midnight/10 bg-white/80 px-5 py-4 text-center backdrop-blur">
+        <h4 className="font-garamond text-lg font-semibold leading-tight text-midnight">{name}</h4>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">{designation}</p>
       </div>
     </div>
   );
@@ -117,82 +114,93 @@ export default function CoreMentorsPage() {
   return (
     <>
       <Seo path="/core-mentors" />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Core Mentors"
-            subtitle="Meet the educators and guides shaping every learner’s journey."
-            badge="Mentors"
+            subtitle="Meet the educators and guides shaping every learner&rsquo;s journey."
+            eyebrow="Leadership &amp; Faculty"
             image="/core-mentors/banner-legacy.jpg"
           />
-          <section className="relative overflow-hidden bg-ivory py-16">
-            <div className="relative max-w-5xl mx-auto px-6 space-y-4 text-center">
-              <p className="text-sm uppercase tracking-[0.3em] text-black">Leadership &amp; Faculty</p>
-              <h1 className="text-4xl font-semibold text-black">Core Mentors</h1>
-              <p className="max-w-3xl mx-auto font-medium text-gray-900">
-                The Elden Heights School is guided by dedicated mentors who bring experience, empathy, and excellence to every classroom and activity.
-              </p>
+
+          <section className="relative py-20 md:py-24">
+            <div className="mx-auto max-w-5xl px-6 text-center">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center"
+              >
+                <span className="eyebrow">Experience · Empathy · Excellence</span>
+                <h2 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
+                  Educators who <span className="italic">guide, not just teach</span>.
+                </h2>
+                <span className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
+                <p className="mt-6 max-w-3xl text-base leading-relaxed text-midnight/75 md:text-lg">
+                  The Elden Heights School is guided by dedicated mentors who bring experience,
+                  empathy, and excellence to every classroom and activity.
+                </p>
+              </motion.div>
             </div>
           </section>
 
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6 space-y-12">
-              <div className="hidden space-y-12 md:block">
-                {coreMentors.map((group) => (
-                  <div key={group.department} className="space-y-5">
+          <section className="relative py-10 md:py-16">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="hidden space-y-16 md:block">
+                {coreMentors.map((group, gIdx) => (
+                  <motion.div
+                    key={group.department}
+                    className="space-y-7"
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  >
                     <div className="flex items-center gap-4">
-                      <span className="h-10 w-10 rounded-xl bg-cardinal/10 text-black flex items-center justify-center font-semibold">
-                        {group.department.substring(0, 2).toUpperCase()}
+                      <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.4em] text-cardinal">
+                        {String(gIdx + 1).padStart(2, '0')}
                       </span>
-                      <h2 className="text-2xl font-semibold text-black">{group.department}</h2>
+                      <span className="h-px w-12 bg-gradient-to-r from-gold to-transparent" />
+                      <h2 className="font-garamond text-2xl font-semibold text-midnight md:text-3xl">
+                        {group.department}
+                      </h2>
+                      <span className="h-px flex-1 bg-gradient-to-r from-gold/40 to-transparent" />
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/50">
+                        {group.mentors.length} {group.mentors.length === 1 ? 'Member' : 'Members'}
+                      </span>
                     </div>
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.mentors.map((mentor) => (
                         <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              <div className="md:hidden space-y-10">
+
+              <div className="space-y-12 md:hidden">
                 {coreMentors.map((group) => (
                   <div key={`${group.department}-mobile`} className="space-y-4">
-                    <div className="text-center">
-                      <h3 className="text-xl font-semibold text-black">{group.department}</h3>
+                    <div className="flex items-center gap-3 px-1">
+                      <span className="h-px w-8 bg-gold" />
+                      <h3 className="font-garamond text-xl font-semibold text-midnight">
+                        {group.department}
+                      </h3>
                     </div>
                     <div className="-mx-6 overflow-x-auto px-6">
-                      <div className="flex snap-x snap-mandatory gap-5 pb-2">
-                        {group.mentors.map((mentor) => {
-                          const photoSrc = mentorPhotos[mentor.name];
-
-                          return (
-                            <div
-                              key={`${group.department}-mobile-${mentor.name}`}
-                              className="snap-center w-64 flex-shrink-0 overflow-hidden rounded-3xl border border-black/15 bg-white shadow-md"
-                            >
-                              {photoSrc ? (
-                                <div className="relative aspect-[4/5] w-full bg-cardinal/5">
-                                  <Image
-                                    src={photoSrc}
-                                    alt={`${mentor.name} - ${mentor.designation}`}
-                                    fill
-                                    sizes="(max-width: 768px) 208px, 240px"
-                                    className="object-cover"
-                                  />
-                                </div>
-                              ) : (
-                                <div className="flex aspect-[4/5] w-full items-center justify-center bg-cardinal/5 text-sm font-semibold uppercase tracking-wide text-black">
-                                  {getInitials(mentor.name)}
-                                </div>
-                              )}
-                              <div className="border-t border-black/15 bg-white px-4 py-3 text-center">
-                                <h4 className="text-lg font-bold text-black">{mentor.name}</h4>
-                                <p className="text-sm font-medium text-gray-900">{mentor.designation}</p>
-                              </div>
-                            </div>
-                          );
-                        })}
+                      <div className="flex snap-x snap-mandatory gap-4 pb-2">
+                        {group.mentors.map((mentor) => (
+                          <div
+                            key={`${group.department}-mobile-${mentor.name}`}
+                            className="w-60 flex-shrink-0 snap-center"
+                          >
+                            <MentorCard {...mentor} />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

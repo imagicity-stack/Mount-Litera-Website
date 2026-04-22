@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,25 +9,42 @@ export default function CareersPage() {
   return (
     <>
       <Seo path="/careers" />
-      <div className="min-h-screen bg-[#F8F5F3] text-gray-800 flex flex-col">
+      <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex-1">
           <ImageBanner
             title="Careers at Elden Heights"
             subtitle="Join a team shaping the next generation of confident learners."
-            badge="Careers"
+            eyebrow="Careers"
             image="/careers/banner-compass.jpg"
           />
-          <section className="flex flex-1 items-center justify-center px-6 py-24">
-            <div className="max-w-xl rounded-3xl border border-black/15 bg-white p-10 text-center shadow-lg">
-              <span className="inline-flex items-center rounded-full bg-cardinal/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-black">
-                Careers
-              </span>
-              <h1 className="mt-6 text-3xl font-semibold text-black">We are not hiring right now</h1>
-              <p className="mt-4 text-gray-600">
-                Thank you for your interest in joining The Elden Heights School. While there are no open positions at the moment,
-                we encourage you to check back soon as new opportunities are posted ahead of each academic session.
+          <section className="relative flex flex-1 items-center justify-center px-6 py-24 md:py-32">
+            <div className="surface-card relative max-w-xl overflow-hidden rounded-[28px] p-10 text-center md:p-14">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+              <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/10 blur-[100px]" />
+
+              <span className="eyebrow justify-center">Current Opportunities</span>
+              <h1 className="mt-5 font-garamond text-3xl font-semibold leading-[1.1] text-midnight sm:text-4xl md:text-[40px]">
+                We&rsquo;re not hiring <span className="italic">right now</span>.
+              </h1>
+              <span className="mx-auto mt-6 block h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
+              <p className="mt-6 text-midnight/75">
+                Thank you for your interest in joining The Elden Heights School. While there are no
+                open positions at the moment, new opportunities are typically posted ahead of each
+                academic session.
               </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <Link href="/contact" className="btn-primary">
+                  Get in Touch
+                </Link>
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.25em] text-midnight/70 transition hover:text-cardinal"
+                >
+                  <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
+                  Back to Home
+                </Link>
+              </div>
             </div>
           </section>
         </main>
