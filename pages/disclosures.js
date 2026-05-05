@@ -11,6 +11,8 @@ const disclosures = [
   { title: 'Building Safety Certificate', file: 'building-safety-certificate.pdf' },
   { title: 'DEO Certificate or Self-Certification by School', file: 'deo-certificate.pdf' },
   { title: 'Water, Health & Sanitation Certificates', file: 'water-health-sanitation-certificates.pdf' },
+  { title: 'Fire Certificate', file: 'fire certificate mlzs.pdf' },
+  { title: 'Mount Litera Managing Committee', file: 'mount_litera_zee_school_managing_committee_formal.pdf' },
   { title: 'PTA Members Details', file: 'pta-members.pdf' }
 ];
 
