@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /studentdata
 
 Sitemap: https://eldenheights.org/sitemap.xml
 Host: https://eldenheights.org
