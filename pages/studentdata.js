@@ -28,7 +28,6 @@ export default function StudentDataPage() {
   });
   const [numberOfStudents, setNumberOfStudents] = useState(1);
   const [students, setStudents] = useState([emptyStudent()]);
-  const [submittedPreview, setSubmittedPreview] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState('idle');
   const [submissionMessage, setSubmissionMessage] = useState('');
 
@@ -88,7 +87,6 @@ export default function StudentDataPage() {
 
     setSubmissionStatus('submitting');
     setSubmissionMessage('Submitting student data...');
-    setSubmittedPreview(null);
 
     try {
       const response = await fetch('/api/studentdata', {
@@ -112,16 +110,15 @@ export default function StudentDataPage() {
       }
 
       if (!response.ok || !result.success) {
-        const googleStatus = result.googleStatus ? ` Google status: ${result.googleStatus}.` : '';
-        throw new Error(`${result.error || 'Student data could not be saved.'}${googleStatus}`);
+        throw new Error(result.error || 'Student data could not be saved.');
       }
 
-      setSubmittedPreview(payload);
       setSubmissionStatus('success');
-      setSubmissionMessage('Student data saved successfully to Google Sheets.');
+      setSubmissionMessage('Thank you. Student data submitted successfully.');
     } catch (error) {
+      console.error('Student data submission failed:', error);
       setSubmissionStatus('error');
-      setSubmissionMessage(error.message || 'Unable to submit student data right now.');
+      setSubmissionMessage('Unable to submit student data right now. Please try again later.');
     }
   };
 
@@ -142,16 +139,9 @@ export default function StudentDataPage() {
                 <h1 className="mt-5 font-garamond text-display-lg text-midnight">
                   Student Data Collection
                 </h1>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-midnight/70 md:text-lg">
-                  Use this non-indexed page to collect parent contact details and one or more student records.
-                  Increase the number of students to automatically add another student data entry section.
-                </p>
-                <div className="mt-5 inline-flex rounded-full border border-cardinal/20 bg-cardinal/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cardinal">
-                  Search engines: noindex, nofollow
-                </div>
               </div>
 
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+              <div className="mx-auto max-w-4xl">
                 <form onSubmit={handleSubmit} className="surface-card rounded-3xl p-6 md:p-8">
                   <div className="border-b border-midnight/10 pb-6">
                     <h2 className="font-garamond text-3xl text-midnight">Parent / Guardian Details</h2>
@@ -337,9 +327,9 @@ export default function StudentDataPage() {
 
                   <div className="mt-8 flex flex-col gap-4 rounded-2xl bg-midnight p-5 text-parchment md:flex-row md:items-center md:justify-between">
                     <div>
-                      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gold">Ready to review</p>
+                      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gold">Ready to submit</p>
                       <p className="mt-2 text-sm text-parchment/75">
-                        Submit sends this data to the connected Google Sheet and keeps a local preview for review.
+                        Please check the details before submitting the form.
                       </p>
                     </div>
                     <button
@@ -360,43 +350,7 @@ export default function StudentDataPage() {
                     </div>
                   )}
 
-                  {submittedPreview && (
-                    <div className="mt-8 rounded-2xl border border-gold/30 bg-gold/10 p-5">
-                      <h3 className="font-garamond text-2xl text-midnight">Submission preview</h3>
-                      <p className="mt-2 text-sm leading-6 text-midnight/70">
-                        This is the exact structure sent to Google Sheets.
-                      </p>
-                      <pre className="mt-4 max-h-96 overflow-auto rounded-xl bg-midnight p-4 text-xs leading-6 text-parchment">
-                        {JSON.stringify(submittedPreview, null, 2)}
-                      </pre>
-                    </div>
-                  )}
                 </form>
-
-                <aside className="space-y-6">
-                  <div className="surface-card rounded-3xl p-6">
-                    <h2 className="font-garamond text-2xl text-midnight">Google Sheets connection steps</h2>
-                    <ol className="mt-5 space-y-4 text-sm leading-6 text-midnight/70">
-                      <li><strong className="text-midnight">1.</strong> Create a Google Sheet with columns for timestamp, parent details, and each student field.</li>
-                      <li><strong className="text-midnight">2.</strong> In Google Sheets, open Extensions → Apps Script and create a web app script that accepts POST requests.</li>
-                      <li><strong className="text-midnight">3.</strong> Deploy the script as a Web App and allow access to the account that should receive form submissions.</li>
-                      <li><strong className="text-midnight">4.</strong> The website now submits through <code className="rounded bg-midnight/10 px-1 py-0.5">/api/studentdata</code>, which securely forwards the payload to Apps Script.</li>
-                      <li><strong className="text-midnight">5.</strong> Keep the Apps Script URL in the <code className="rounded bg-midnight/10 px-1 py-0.5">GOOGLE_SHEETS_STUDENTDATA_URL</code> environment variable.</li>
-                      <li><strong className="text-midnight">6.</strong> After changing Apps Script or env variables, redeploy the website and test one sample submission.</li>
-                    </ol>
-                  </div>
-
-                  <div className="rounded-3xl border border-cardinal/15 bg-cardinal/5 p-6">
-                    <h2 className="font-garamond text-2xl text-midnight">Suggested sheet columns</h2>
-                    <p className="mt-3 text-sm leading-6 text-midnight/70">
-                      Timestamp, Father&apos;s Name, Mother&apos;s Name, WhatsApp Mobile, Parent Email, Address,
-                      Student Count, Student Name, Class, House, Student Email, Transport Availed, Medical History.
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-midnight/70">
-                      For multiple students, add one row per student and repeat the parent details in each row.
-                    </p>
-                  </div>
-                </aside>
               </div>
             </div>
           </section>
