@@ -8,6 +8,7 @@ const emptyStudent = () => ({
   name: '',
   className: '',
   house: '',
+  studentEmail: '',
   transportAvailed: '',
   medicalHistory: '',
 });
@@ -24,11 +25,12 @@ export default function StudentDataPage() {
     mobileNumber: '',
     parentEmail: '',
     address: '',
-    studentEmail: '',
   });
   const [numberOfStudents, setNumberOfStudents] = useState(1);
   const [students, setStudents] = useState([emptyStudent()]);
   const [submittedPreview, setSubmittedPreview] = useState(null);
+  const [submissionStatus, setSubmissionStatus] = useState('idle');
+  const [submissionMessage, setSubmissionMessage] = useState('');
 
   const requiredStudentFieldsComplete = useMemo(
     () => students.every((student) => student.name && student.className && student.transportAvailed && student.medicalHistory),
@@ -74,7 +76,7 @@ export default function StudentDataPage() {
     )));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const payload = {
@@ -84,7 +86,30 @@ export default function StudentDataPage() {
       students,
     };
 
+    setSubmissionStatus('submitting');
+    setSubmissionMessage('Submitting student data...');
     setSubmittedPreview(payload);
+
+    try {
+      const response = await fetch('/api/studentdata', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Student data could not be saved.');
+      }
+
+      setSubmissionStatus('success');
+      setSubmissionMessage('Student data saved successfully to Google Sheets.');
+    } catch (error) {
+      setSubmissionStatus('error');
+      setSubmissionMessage(error.message || 'Unable to submit student data right now.');
+    }
   };
 
   return (
@@ -182,18 +207,6 @@ export default function StudentDataPage() {
                         placeholder="Enter complete residential address"
                       />
                     </label>
-
-                    <label className={labelClasses}>
-                      Email ID of student (if any)
-                      <input
-                        type="email"
-                        value={parentData.studentEmail}
-                        onChange={(event) => updateParentData('studentEmail', event.target.value)}
-                        className={parentFieldClasses}
-                        placeholder="student@example.com"
-                      />
-                    </label>
-
                     <label className={labelClasses}>
                       Number of students <span className="text-cardinal">*</span>
                       <input
@@ -268,6 +281,17 @@ export default function StudentDataPage() {
                             </label>
 
                             <label className={labelClasses}>
+                              Student email ID (if any)
+                              <input
+                                type="email"
+                                value={student.studentEmail}
+                                onChange={(event) => updateStudent(index, 'studentEmail', event.target.value)}
+                                className={parentFieldClasses}
+                                placeholder="student@example.com"
+                              />
+                            </label>
+
+                            <label className={labelClasses}>
                               School&apos;s Transport availed (Y/N) <span className="text-cardinal">*</span>
                               <select
                                 required
@@ -302,23 +326,32 @@ export default function StudentDataPage() {
                     <div>
                       <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gold">Ready to review</p>
                       <p className="mt-2 text-sm text-parchment/75">
-                        Submit currently creates an on-page preview. A Google Sheets endpoint can be connected later.
+                        Submit sends this data to the connected Google Sheet and keeps a local preview for review.
                       </p>
                     </div>
                     <button
                       type="submit"
-                      disabled={!requiredStudentFieldsComplete}
+                      disabled={!requiredStudentFieldsComplete || submissionStatus === 'submitting'}
                       className="rounded-full bg-gradient-cardinal px-6 py-3 text-sm font-bold uppercase tracking-[0.22em] text-white shadow-cardinal transition hover:-translate-y-0.5 hover:shadow-elite disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Submit Data
+                      {submissionStatus === 'submitting' ? 'Submitting...' : 'Submit Data'}
                     </button>
                   </div>
+
+                  {submissionMessage && (
+                    <div className={`mt-8 rounded-2xl border p-5 ${submissionStatus === 'error' ? 'border-cardinal/30 bg-cardinal/10' : 'border-gold/30 bg-gold/10'}`}>
+                      <h3 className="font-garamond text-2xl text-midnight">
+                        {submissionStatus === 'error' ? 'Submission failed' : 'Submission status'}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-midnight/70">{submissionMessage}</p>
+                    </div>
+                  )}
 
                   {submittedPreview && (
                     <div className="mt-8 rounded-2xl border border-gold/30 bg-gold/10 p-5">
                       <h3 className="font-garamond text-2xl text-midnight">Submission preview</h3>
                       <p className="mt-2 text-sm leading-6 text-midnight/70">
-                        This is the exact structure that can be sent to Google Sheets later.
+                        This is the exact structure sent to Google Sheets.
                       </p>
                       <pre className="mt-4 max-h-96 overflow-auto rounded-xl bg-midnight p-4 text-xs leading-6 text-parchment">
                         {JSON.stringify(submittedPreview, null, 2)}
@@ -334,9 +367,9 @@ export default function StudentDataPage() {
                       <li><strong className="text-midnight">1.</strong> Create a Google Sheet with columns for timestamp, parent details, and each student field.</li>
                       <li><strong className="text-midnight">2.</strong> In Google Sheets, open Extensions → Apps Script and create a web app script that accepts POST requests.</li>
                       <li><strong className="text-midnight">3.</strong> Deploy the script as a Web App and allow access to the account that should receive form submissions.</li>
-                      <li><strong className="text-midnight">4.</strong> Add a Next.js API route such as <code className="rounded bg-midnight/10 px-1 py-0.5">/api/studentdata</code> to securely forward this form payload to the Apps Script URL.</li>
-                      <li><strong className="text-midnight">5.</strong> Store the Apps Script URL in an environment variable, for example <code className="rounded bg-midnight/10 px-1 py-0.5">GOOGLE_SHEETS_STUDENTDATA_URL</code>.</li>
-                      <li><strong className="text-midnight">6.</strong> Replace the submit preview with a fetch call to the API route, then show a success or error message.</li>
+                      <li><strong className="text-midnight">4.</strong> The website now submits through <code className="rounded bg-midnight/10 px-1 py-0.5">/api/studentdata</code>, which securely forwards the payload to Apps Script.</li>
+                      <li><strong className="text-midnight">5.</strong> Keep the Apps Script URL in the <code className="rounded bg-midnight/10 px-1 py-0.5">GOOGLE_SHEETS_STUDENTDATA_URL</code> environment variable.</li>
+                      <li><strong className="text-midnight">6.</strong> After changing Apps Script or env variables, redeploy the website and test one sample submission.</li>
                     </ol>
                   </div>
 
@@ -344,7 +377,7 @@ export default function StudentDataPage() {
                     <h2 className="font-garamond text-2xl text-midnight">Suggested sheet columns</h2>
                     <p className="mt-3 text-sm leading-6 text-midnight/70">
                       Timestamp, Father&apos;s Name, Mother&apos;s Name, WhatsApp Mobile, Parent Email, Address,
-                      Student Email, Student Count, Student Name, Class, House, Transport Availed, Medical History.
+                      Student Count, Student Name, Class, House, Student Email, Transport Availed, Medical History.
                     </p>
                     <p className="mt-3 text-sm leading-6 text-midnight/70">
                       For multiple students, add one row per student and repeat the parent details in each row.
