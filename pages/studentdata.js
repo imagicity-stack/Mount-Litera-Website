@@ -88,7 +88,7 @@ export default function StudentDataPage() {
 
     setSubmissionStatus('submitting');
     setSubmissionMessage('Submitting student data...');
-    setSubmittedPreview(payload);
+    setSubmittedPreview(null);
 
     try {
       const response = await fetch('/api/studentdata', {
@@ -98,12 +98,25 @@ export default function StudentDataPage() {
         },
         body: JSON.stringify(payload),
       });
-      const result = await response.json();
+      const responseText = await response.text();
+      let result = {};
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Student data could not be saved.');
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        result = {
+          error: response.ok
+            ? 'The server returned an unexpected response.'
+            : `The website server returned ${response.status}. Please check deployment logs.`,
+        };
       }
 
+      if (!response.ok || !result.success) {
+        const googleStatus = result.googleStatus ? ` Google status: ${result.googleStatus}.` : '';
+        throw new Error(`${result.error || 'Student data could not be saved.'}${googleStatus}`);
+      }
+
+      setSubmittedPreview(payload);
       setSubmissionStatus('success');
       setSubmissionMessage('Student data saved successfully to Google Sheets.');
     } catch (error) {
