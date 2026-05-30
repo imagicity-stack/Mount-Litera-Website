@@ -20,9 +20,9 @@ const pillars = [
       'Structured games, fitness, yoga, and inter-house tournaments shape a body that listens to a disciplined mind — and a mind that thrives in a healthy, energetic body.'
   },
   {
-    title: 'Clubs & Expression',
+    title: 'Beyond Academics',
     description:
-      'Interest-led clubs invite every learner to follow curiosity into mastery — from arts and music to debate, wellness, and student leadership.'
+      'Interest-led clubs and the Life Readiness Program invite every learner to follow curiosity into mastery and prepare for the real world beyond the classroom.'
   }
 ];
 
@@ -59,34 +59,6 @@ const sports = [
   }
 ];
 
-const clubs = [
-  {
-    name: 'Leadership & Student Council',
-    description:
-      'Develops leadership, responsibility, and decision-making through assemblies, event planning, house activities, and school initiatives.'
-  },
-  {
-    name: 'Creative Expression',
-    description:
-      'An umbrella platform for art, music, dance, and stage performance — students explore creativity, perform during events, and elevate school aesthetics.'
-  },
-  {
-    name: 'Language & Communication',
-    description:
-      'Strengthens speaking, reading, storytelling, and public communication in English and Hindi through debates, storytelling sessions, and presentations.'
-  },
-  {
-    name: 'Wellness & Yoga',
-    description:
-      'Centres on emotional balance, mindfulness, posture, breathing, and basic yoga practices to maintain calm and focus.'
-  },
-  {
-    name: 'Sports & Fitness',
-    description:
-      'Focuses on physical development, teamwork, and discipline with structured games, fitness routines, and intra-school sports activities.'
-  }
-];
-
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 }
@@ -101,7 +73,7 @@ export default function StudentsLifePage() {
         <main className="flex-1">
           <ImageBanner
             title="Student's Life"
-            subtitle="Houses that build belonging. Sports that build character. Clubs that build voice."
+            subtitle="Houses that build belonging. Sports that build character. A life that goes beyond the classroom."
             eyebrow="Beyond the Classroom"
             image="/beyond-academics/banner-odyssey.jpg"
           />
@@ -131,10 +103,10 @@ export default function StudentsLifePage() {
                     </p>
                     <p>
                       Student&rsquo;s Life at Elden Heights is built around three pillars — Houses,
-                      Sports, and Clubs — each designed to draw out what is uniquely promising in a
-                      learner. Whether on the field, the stage, or the quiet corridors of leadership,
-                      every Eldenite discovers their voice, their team, and their place in a tradition
-                      they will one day pass on.
+                      Sports, and the world Beyond Academics — each designed to draw out what is
+                      uniquely promising in a learner. Whether on the field, the stage, or the quiet
+                      corridors of leadership, every Eldenite discovers their voice, their team, and
+                      their place in a tradition they will one day pass on.
                     </p>
                   </div>
                 </motion.div>
@@ -284,61 +256,6 @@ export default function StudentsLifePage() {
             </div>
           </section>
 
-          <section id="co-curricular-clubs" className="relative bg-gradient-to-b from-parchment/50 via-white to-parchment/50 py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
-              <motion.div
-                className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="max-w-2xl space-y-4">
-                  <span className="eyebrow">Co-Curricular Clubs</span>
-                  <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
-                    Curiosity, <span className="italic">crafted into mastery</span>.
-                  </h2>
-                  <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
-                  <p className="text-base leading-relaxed text-midnight/75">
-                    Co-curricular clubs are interest-led platforms where students follow their passions
-                    deeper — building soft skills, finding their voice, and learning the joy of doing
-                    something simply because they love it.
-                  </p>
-                </div>
-                <Link href="/co-curricular-clubs" className="btn-primary self-start md:self-end">
-                  See Full Club Programme
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </Link>
-              </motion.div>
-
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {clubs.map((club, idx) => (
-                  <motion.article
-                    key={club.name}
-                    className="group relative overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (idx % 3) * 0.08 }}
-                  >
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.35em] text-cardinal">
-                      Club {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    <h3 className="mt-3 font-garamond text-2xl font-semibold leading-tight text-midnight">
-                      {club.name}
-                    </h3>
-                    <span className="mt-4 block h-px w-14 bg-gradient-to-r from-gold to-transparent" />
-                    <p className="mt-4 text-sm leading-relaxed text-midnight/75">{club.description}</p>
-                  </motion.article>
-                ))}
-              </div>
-            </div>
-          </section>
         </main>
         <Footer />
       </div>

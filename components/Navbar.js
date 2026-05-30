@@ -33,7 +33,6 @@ const navItems = [
       { label: "Student's Life", href: '/students-life' },
       { label: 'Houses', href: '/houses' },
       { label: 'Sports', href: '/students-life#sports' },
-      { label: 'Co-Curricular Clubs', href: '/co-curricular-clubs' },
       { label: 'Beyond Academics', href: '/beyond-academics' }
     ]
   },
