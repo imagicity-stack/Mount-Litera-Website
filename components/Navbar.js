@@ -23,8 +23,17 @@ const navItems = [
     subItems: [
       { label: 'Core', href: '/core' },
       { label: 'Awards And Recognition', href: '/awards-and-recognition' },
-      { label: 'BEYOND Academics', href: '/beyond-academics' },
       { label: 'Accreditation', href: '/core#accreditation' }
+    ]
+  },
+  {
+    label: "Student's Life",
+    href: '/students-life',
+    subItems: [
+      { label: "Student's Life", href: '/students-life' },
+      { label: 'Houses', href: '/houses' },
+      { label: 'Sports', href: '/students-life#sports' },
+      { label: 'Beyond Academics', href: '/beyond-academics' }
     ]
   },
   {

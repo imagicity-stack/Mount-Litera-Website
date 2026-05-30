@@ -15,15 +15,6 @@ const coreSections = [
     cta: 'View Awards',
     image: '/website/images/awards%20and%20recognitions.png',
     imageAlt: 'Students receiving awards and recognitions'
-  },
-  {
-    title: 'Beyond Academics',
-    description:
-      'Explore the dual pathways — Co-Curricular Clubs and the Life Readiness Program — that shape confident, well-rounded Eldenites.',
-    href: '/beyond-academics',
-    cta: 'Explore',
-    image: '/website/images/beyond%20academics.png',
-    imageAlt: 'Students participating in beyond academics activities'
   }
 ];
 
@@ -134,7 +125,7 @@ export default function CorePage() {
               >
                 <span className="eyebrow">Core Sections</span>
                 <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
-                  Two chapters, <span className="italic">one ethos</span>.
+                  Honour, <span className="italic">recognition, and legacy</span>.
                 </h2>
                 <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
               </motion.div>

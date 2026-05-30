@@ -87,6 +87,8 @@ export default function Footer() {
           <li><Link href="/beyond-academics">Beyond Academics</Link></li>
           <li><Link href="/co-curricular-clubs">Co-Curricular Clubs</Link></li>
           <li><Link href="/life-readiness-program">Life Readiness Program</Link></li>
+          <li><Link href="/students-life">Student&apos;s Life</Link></li>
+          <li><Link href="/houses">Houses</Link></li>
           <li><Link href="/core">Core</Link></li>
           <li><Link href="/core-mentors">Core Mentors</Link></li>
           <li><Link href="/the-elden-council">The Elden Council</Link></li>
