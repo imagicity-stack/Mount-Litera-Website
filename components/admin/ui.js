@@ -1,23 +1,23 @@
-// Small, theme-consistent building blocks for the dark admin dashboard.
+// Small, theme-consistent building blocks for the light admin dashboard.
 import { forwardRef } from 'react';
 
 export function Field({ label, hint, children, required, className = '' }) {
   return (
     <label className={`block space-y-1.5 ${className}`}>
       {label && (
-        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-parchment/55">
+        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-midnight/50">
           {label}
-          {required && <span className="text-cardinal-300">*</span>}
+          {required && <span className="text-cardinal">*</span>}
         </span>
       )}
       {children}
-      {hint && <span className="block text-[11px] leading-snug text-parchment/40">{hint}</span>}
+      {hint && <span className="block text-[11px] leading-snug text-midnight/40">{hint}</span>}
     </label>
   );
 }
 
 const baseInput =
-  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-parchment placeholder-parchment/30 outline-none transition focus:border-gold/50 focus:bg-white/[0.06] focus:ring-2 focus:ring-gold/20';
+  'w-full rounded-xl border border-midnight/15 bg-white px-4 py-2.5 text-sm text-midnight placeholder-midnight/35 outline-none transition focus:border-gold/60 focus:ring-2 focus:ring-gold/25';
 
 export const Input = forwardRef(function Input({ className = '', ...props }, ref) {
   return <input ref={ref} className={`${baseInput} ${className}`} {...props} />;
@@ -29,10 +29,7 @@ export const TextArea = forwardRef(function TextArea({ className = '', rows = 3,
 
 export function Select({ className = '', children, ...props }) {
   return (
-    <select
-      className={`${baseInput} appearance-none bg-graphite ${className}`}
-      {...props}
-    >
+    <select className={`${baseInput} pr-9 ${className}`} {...props}>
       {children}
     </select>
   );
@@ -43,13 +40,11 @@ export function Toggle({ checked, onChange, label }) {
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className="flex items-center gap-3 text-sm text-parchment/80"
+      className="flex items-center gap-3 text-sm text-midnight/75"
     >
-      <span
-        className={`relative h-6 w-11 rounded-full transition ${checked ? 'bg-gold' : 'bg-white/15'}`}
-      >
+      <span className={`relative h-6 w-11 rounded-full transition ${checked ? 'bg-cardinal' : 'bg-midnight/15'}`}>
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full bg-midnight shadow transition-all ${
+          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${
             checked ? 'left-[22px]' : 'left-0.5'
           }`}
         />
@@ -62,12 +57,11 @@ export function Toggle({ checked, onChange, label }) {
 export function Button({ variant = 'primary', className = '', children, ...props }) {
   const variants = {
     primary:
-      'bg-gradient-to-r from-gold-300 to-gold-500 text-midnight hover:shadow-[0_14px_30px_-12px_rgba(201,162,75,0.7)]',
-    cardinal:
-      'bg-gradient-to-r from-cardinal-400 to-cardinal-600 text-parchment hover:shadow-[0_14px_30px_-12px_rgba(138,10,18,0.7)]',
-    ghost: 'border border-white/15 bg-white/[0.03] text-parchment/85 hover:border-gold/40 hover:text-gold-200',
-    danger: 'border border-cardinal-400/40 bg-cardinal-500/10 text-cardinal-200 hover:bg-cardinal-500/20',
-    subtle: 'text-parchment/60 hover:text-gold-200'
+      'bg-gradient-to-r from-cardinal-500 to-cardinal-700 text-parchment hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-14px_rgba(138,10,18,0.55)]',
+    gold: 'bg-gradient-to-r from-gold-300 to-gold-500 text-midnight hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-14px_rgba(201,162,75,0.6)]',
+    ghost: 'border border-midnight/20 bg-white text-midnight hover:border-midnight/45 hover:-translate-y-0.5',
+    danger: 'border border-cardinal-200 bg-cardinal-50 text-cardinal-600 hover:bg-cardinal-100',
+    subtle: 'text-midnight/55 hover:text-cardinal'
   };
   return (
     <button
@@ -81,21 +75,17 @@ export function Button({ variant = 'primary', className = '', children, ...props
 
 export function Card({ className = '', children }) {
   return (
-    <div
-      className={`rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm ${className}`}
-    >
-      {children}
-    </div>
+    <div className={`rounded-2xl border border-midnight/10 bg-white shadow-elite-sm ${className}`}>{children}</div>
   );
 }
 
 export function Badge({ tone = 'neutral', children }) {
   const tones = {
-    neutral: 'bg-white/10 text-parchment/70',
-    good: 'bg-emerald-500/15 text-emerald-300',
-    ok: 'bg-amber-500/15 text-amber-300',
-    bad: 'bg-cardinal-500/20 text-cardinal-200',
-    gold: 'bg-gold/15 text-gold-200'
+    neutral: 'bg-midnight/[0.06] text-midnight/65',
+    good: 'bg-emerald-100 text-emerald-700',
+    ok: 'bg-amber-100 text-amber-700',
+    bad: 'bg-cardinal-50 text-cardinal-600',
+    gold: 'bg-gold-50 text-gold-700'
   };
   return (
     <span
@@ -107,7 +97,7 @@ export function Badge({ tone = 'neutral', children }) {
 }
 
 const toneColor = (tone) =>
-  tone === 'good' ? '#34d399' : tone === 'ok' ? '#fbbf24' : tone === 'bad' ? '#e5a0a3' : '#C9A24B';
+  tone === 'good' ? '#059669' : tone === 'ok' ? '#d97706' : tone === 'bad' ? '#B92A32' : '#C9A24B';
 
 export function ScoreRing({ score = 0, size = 64, label }) {
   const tone = score >= 80 ? 'good' : score >= 55 ? 'ok' : score >= 30 ? 'ok' : 'bad';
@@ -118,7 +108,7 @@ export function ScoreRing({ score = 0, size = 64, label }) {
   return (
     <div className="flex flex-col items-center gap-1">
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={radius} stroke="rgba(255,255,255,0.1)" strokeWidth="6" fill="none" />
+        <circle cx={size / 2} cy={size / 2} r={radius} stroke="rgba(10,10,12,0.08)" strokeWidth="6" fill="none" />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -136,29 +126,25 @@ export function ScoreRing({ score = 0, size = 64, label }) {
           y="50%"
           dominantBaseline="central"
           textAnchor="middle"
-          className="rotate-90"
-          style={{ transform: 'rotate(90deg)', transformOrigin: 'center', fill: '#FAF7F1', fontSize: '15px', fontWeight: 700 }}
+          style={{ transform: 'rotate(90deg)', transformOrigin: 'center', fill: '#0A0A0C', fontSize: '15px', fontWeight: 700 }}
         >
           {score}
         </text>
       </svg>
-      {label && <span className="text-[10px] uppercase tracking-[0.2em] text-parchment/50">{label}</span>}
+      {label && <span className="text-[10px] uppercase tracking-[0.2em] text-midnight/45">{label}</span>}
     </div>
   );
 }
 
 export function CheckList({ items = [] }) {
-  const dot = (status) => (status === 'good' ? '#34d399' : status === 'ok' ? '#fbbf24' : '#e5a0a3');
+  const dot = (status) => (status === 'good' ? '#059669' : status === 'ok' ? '#d97706' : '#B92A32');
   return (
     <ul className="space-y-2">
       {items.map((item) => (
-        <li key={item.id} className="flex items-start gap-2.5 text-xs text-parchment/70">
-          <span
-            className="mt-1 h-2 w-2 flex-shrink-0 rounded-full"
-            style={{ background: dot(item.status) }}
-          />
+        <li key={item.id} className="flex items-start gap-2.5 text-xs text-midnight/65">
+          <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full" style={{ background: dot(item.status) }} />
           <span>
-            <span className="font-semibold text-parchment/85">{item.label}: </span>
+            <span className="font-semibold text-midnight/85">{item.label}: </span>
             {item.text}
           </span>
         </li>
@@ -169,7 +155,7 @@ export function CheckList({ items = [] }) {
 
 export function Spinner({ label }) {
   return (
-    <span className="inline-flex items-center gap-2 text-parchment/60">
+    <span className="inline-flex items-center gap-2 text-midnight/60">
       <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-gold/30 border-t-gold" />
       {label}
     </span>

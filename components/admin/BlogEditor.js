@@ -10,17 +10,10 @@ import SeoPanel from '@/components/admin/SeoPanel';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-export default function BlogEditor({
-  form,
-  setField,
-  onSave,
-  onClose,
-  onDelete,
-  saving,
-  message,
-  user,
-  getToken
-}) {
+const cardClass = 'rounded-2xl border border-midnight/10 bg-white p-5 shadow-elite-sm';
+const sectionLabel = 'text-xs font-semibold uppercase tracking-[0.2em] text-midnight/45';
+
+export default function BlogEditor({ form, setField, onSave, onClose, onDelete, saving, message, user, getToken }) {
   const editorRef = useRef(null);
   const [uploading, setUploading] = useState(false);
 
@@ -131,18 +124,12 @@ export default function BlogEditor({
   return (
     <div className="space-y-5">
       {/* Editor toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-        <button
-          type="button"
-          onClick={onClose}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-parchment/60 transition hover:text-gold-200"
-        >
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-midnight/10 bg-white px-4 py-3 shadow-elite-sm">
+        <button type="button" onClick={onClose} className="inline-flex items-center gap-2 text-sm font-semibold text-midnight/60 transition hover:text-cardinal">
           ← All posts
         </button>
         <div className="flex flex-wrap items-center gap-2">
-          <Badge tone={form.status === 'published' ? 'good' : form.status === 'scheduled' ? 'ok' : 'neutral'}>
-            {form.status}
-          </Badge>
+          <Badge tone={form.status === 'published' ? 'good' : form.status === 'scheduled' ? 'ok' : 'neutral'}>{form.status}</Badge>
           <Button variant="ghost" onClick={() => onSave('draft', applyAnalysisScores())} disabled={saving}>
             Save draft
           </Button>
@@ -156,33 +143,31 @@ export default function BlogEditor({
         </div>
       </div>
 
-      {message && (
-        <p className="rounded-xl border border-gold/20 bg-gold/[0.06] px-4 py-2.5 text-sm text-gold-100">{message}</p>
-      )}
+      {message && <p className="rounded-xl border border-gold/30 bg-gold-50 px-4 py-2.5 text-sm text-midnight">{message}</p>}
 
       <div className="grid gap-5 lg:grid-cols-[1.7fr_1fr]">
         {/* Main column */}
         <div className="space-y-5">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+          <div className={cardClass}>
             <input
               value={form.title}
               onChange={(e) => updateTitle(e.target.value)}
               placeholder="Add a captivating title…"
-              className="w-full bg-transparent font-garamond text-3xl font-semibold text-parchment placeholder-parchment/25 outline-none"
+              className="w-full bg-transparent font-garamond text-3xl font-semibold text-midnight placeholder-midnight/25 outline-none"
             />
-            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-parchment/45">
-              <span className="text-parchment/40">Permalink:</span>
-              <span className="text-gold-300">/blogs/</span>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-midnight/45">
+              <span className="text-midnight/40">Permalink:</span>
+              <span className="text-cardinal">/blogs/</span>
               <input
                 value={form.slug}
                 onChange={(e) => setField('slug', e.target.value)}
                 placeholder="post-slug"
-                className="flex-1 min-w-[140px] rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-gold-100 outline-none focus:border-gold/40"
+                className="flex-1 min-w-[140px] rounded-md border border-midnight/15 bg-white px-2 py-1 text-cardinal outline-none focus:border-gold/50"
               />
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-1.5">
+          <div className="rounded-2xl border border-midnight/10 bg-white p-1.5 shadow-elite-sm">
             <div className="admin-quill overflow-hidden rounded-xl bg-white">
               <ReactQuill
                 ref={editorRef}
@@ -194,17 +179,12 @@ export default function BlogEditor({
                 placeholder="Tell the story…"
               />
             </div>
-            {uploading && <p className="px-3 py-2 text-xs text-parchment/50">Uploading image…</p>}
+            {uploading && <p className="px-3 py-2 text-xs text-midnight/50">Uploading image…</p>}
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+          <div className={cardClass}>
             <Field label="Excerpt" hint="A short summary shown on listing cards and previews.">
-              <TextArea
-                value={form.excerpt}
-                onChange={(e) => setField('excerpt', e.target.value)}
-                rows={3}
-                placeholder="Two-sentence teaser…"
-              />
+              <TextArea value={form.excerpt} onChange={(e) => setField('excerpt', e.target.value)} rows={3} placeholder="Two-sentence teaser…" />
             </Field>
           </div>
         </div>
@@ -212,8 +192,8 @@ export default function BlogEditor({
         {/* Sidebar */}
         <div className="space-y-5">
           {/* Publish box */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Publish</p>
+          <div className={cardClass}>
+            <p className={`mb-4 ${sectionLabel}`}>Publish</p>
             <div className="space-y-3">
               <Field label="Status">
                 <Select value={form.status} onChange={(e) => setField('status', e.target.value)}>
@@ -224,11 +204,7 @@ export default function BlogEditor({
               </Field>
               {form.status === 'scheduled' && (
                 <Field label="Schedule for" hint="The post goes live automatically at this time.">
-                  <Input
-                    type="datetime-local"
-                    value={form.scheduledAt || ''}
-                    onChange={(e) => setField('scheduledAt', e.target.value)}
-                  />
+                  <Input type="datetime-local" value={form.scheduledAt || ''} onChange={(e) => setField('scheduledAt', e.target.value)} />
                 </Field>
               )}
               <Field label="Publish date">
@@ -236,32 +212,24 @@ export default function BlogEditor({
               </Field>
             </div>
             {form.id && (
-              <button
-                type="button"
-                onClick={onDelete}
-                className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-cardinal-300 transition hover:text-cardinal-200"
-              >
+              <button type="button" onClick={onDelete} className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-cardinal-500 transition hover:text-cardinal-700">
                 Move to trash
               </button>
             )}
           </div>
 
           {/* Cover image */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Featured image</p>
+          <div className={cardClass}>
+            <p className={`mb-4 ${sectionLabel}`}>Featured image</p>
             {form.coverImage ? (
               <div className="space-y-3">
                 <img src={form.coverImage} alt={form.coverImageAlt || ''} className="h-36 w-full rounded-xl object-cover" />
-                <button
-                  type="button"
-                  onClick={() => setField('coverImage', '')}
-                  className="text-xs font-semibold text-cardinal-300 hover:text-cardinal-200"
-                >
+                <button type="button" onClick={() => setField('coverImage', '')} className="text-xs font-semibold text-cardinal-500 hover:text-cardinal-700">
                   Remove image
                 </button>
               </div>
             ) : (
-              <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-white/15 py-8 text-center text-xs text-parchment/50 transition hover:border-gold/40">
+              <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-midnight/20 py-8 text-center text-xs text-midnight/50 transition hover:border-gold/50">
                 <span className="text-2xl">＋</span>
                 Upload featured image
                 <input type="file" accept="image/*" onChange={handleCoverUpload} className="hidden" />
@@ -278,8 +246,8 @@ export default function BlogEditor({
           </div>
 
           {/* Organize */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Organize</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Organize</p>
             <Field label="Focus keyword" hint="The main phrase you want to rank for.">
               <Input value={form.focusKeyword} onChange={(e) => setField('focusKeyword', e.target.value)} placeholder="e.g. best school in Hazaribagh" />
             </Field>
@@ -296,8 +264,8 @@ export default function BlogEditor({
           </div>
 
           {/* SEO meta inputs */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">SEO metadata</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>SEO metadata</p>
             <Field label="SEO title"><Input value={form.seoTitle} onChange={(e) => setField('seoTitle', e.target.value)} /></Field>
             <Field label="Meta description"><TextArea value={form.seoDescription} onChange={(e) => setField('seoDescription', e.target.value)} rows={3} /></Field>
             <Field label="SEO keywords"><Input value={form.seoKeywords} onChange={(e) => setField('seoKeywords', e.target.value)} /></Field>
@@ -305,13 +273,7 @@ export default function BlogEditor({
           </div>
 
           {/* SEO analysis + Gemini */}
-          <SeoPanel
-            form={form}
-            analysis={analysis}
-            onChange={setField}
-            onInsertContent={insertContent}
-            getToken={getToken}
-          />
+          <SeoPanel form={form} analysis={analysis} onChange={setField} onInsertContent={insertContent} getToken={getToken} />
         </div>
       </div>
     </div>
