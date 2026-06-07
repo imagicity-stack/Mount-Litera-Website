@@ -481,6 +481,28 @@ p, span, input, textarea, label, a, button, li {
   box-shadow: 0 30px 60px -30px rgba(10,10,12,0.3);
 }
 
+/* Admin rich-text editor (Quill) */
+.admin-quill .ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #e8e2d6;
+  border-radius: 12px 12px 0 0;
+  background: #faf7f1;
+}
+.admin-quill .ql-container.ql-snow {
+  border: none;
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+}
+.admin-quill .ql-editor {
+  min-height: 340px;
+  color: #1f2937;
+  line-height: 1.8;
+}
+.admin-quill .ql-editor.ql-blank::before {
+  color: #9ca3af;
+  font-style: normal;
+}
+
 /* Reveal on scroll utility (can be hooked with IntersectionObserver) */
 .will-fade-up {
   opacity: 0;
