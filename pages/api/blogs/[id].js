@@ -1,4 +1,6 @@
-import { adminAuth, adminDb } from '@/lib/firebaseAdmin';
+import slugify from '@/lib/slugify';
+import { adminDb } from '@/lib/firebaseAdmin';
+import { requireAdmin } from '@/lib/adminAuth';
 import admin from 'firebase-admin';
 
 const COLLECTION = 'blogs';
@@ -9,25 +11,6 @@ const getReadingTime = (content = '') => {
   return Math.max(1, Math.round(text.split(' ').length / 200));
 };
 
-const getAdminFromRequest = async (req) => {
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.replace('Bearer ', '') : null;
-
-  if (!token) {
-    throw new Error('Missing token.');
-  }
-
-  const decoded = await adminAuth.verifyIdToken(token);
-  const userDoc = await adminDb.collection('users').doc(decoded.uid).get();
-  const role = userDoc.exists ? userDoc.data()?.role : null;
-
-  if (role !== 'admin') {
-    throw new Error('Unauthorized.');
-  }
-
-  return decoded.uid;
-};
-
 export default async function handler(req, res) {
   const { id } = req.query;
 
@@ -36,15 +19,29 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'PUT') {
+    const adminUser = await requireAdmin(req, res);
+    if (!adminUser) return undefined;
+
     try {
-      await getAdminFromRequest(req);
       const updates = {
         ...req.body,
         updatedAt: admin.firestore.FieldValue.serverTimestamp()
       };
 
+      if (updates.slug) {
+        updates.slug = slugify(updates.slug);
+      }
+
       if (updates.publishedAt) {
         updates.publishedAt = admin.firestore.Timestamp.fromDate(new Date(updates.publishedAt));
+      } else if (updates.status === 'published') {
+        updates.publishedAt = admin.firestore.FieldValue.serverTimestamp();
+      }
+
+      if ('scheduledAt' in updates) {
+        updates.scheduledAt = updates.scheduledAt
+          ? admin.firestore.Timestamp.fromDate(new Date(updates.scheduledAt))
+          : null;
       }
 
       if (updates.content) {
@@ -55,18 +52,19 @@ export default async function handler(req, res) {
 
       return res.status(200).json({ message: 'Blog updated.' });
     } catch (error) {
-      return res.status(401).json({ message: error.message || 'Unauthorized.' });
+      return res.status(500).json({ message: error.message || 'Unable to update blog.' });
     }
   }
 
   if (req.method === 'DELETE') {
-    try {
-      await getAdminFromRequest(req);
-      await adminDb.collection(COLLECTION).doc(id).delete();
+    const adminUser = await requireAdmin(req, res);
+    if (!adminUser) return undefined;
 
+    try {
+      await adminDb.collection(COLLECTION).doc(id).delete();
       return res.status(200).json({ message: 'Blog deleted.' });
     } catch (error) {
-      return res.status(401).json({ message: error.message || 'Unauthorized.' });
+      return res.status(500).json({ message: error.message || 'Unable to delete blog.' });
     }
   }
 

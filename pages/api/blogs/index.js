@@ -1,5 +1,6 @@
 import slugify from '@/lib/slugify';
-import { adminAuth, adminDb } from '@/lib/firebaseAdmin';
+import { adminDb } from '@/lib/firebaseAdmin';
+import { requireAdmin } from '@/lib/adminAuth';
 import admin from 'firebase-admin';
 
 const COLLECTION = 'blogs';
@@ -10,23 +11,19 @@ const getReadingTime = (content = '') => {
   return Math.max(1, Math.round(text.split(' ').length / 200));
 };
 
-const getAdminFromRequest = async (req) => {
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.replace('Bearer ', '') : null;
+const toTimestamp = (value) =>
+  value ? admin.firestore.Timestamp.fromDate(new Date(value)) : null;
 
-  if (!token) {
-    throw new Error('Missing token.');
-  }
-
-  const decoded = await adminAuth.verifyIdToken(token);
-  const userDoc = await adminDb.collection('users').doc(decoded.uid).get();
-  const role = userDoc.exists ? userDoc.data()?.role : null;
-
-  if (role !== 'admin') {
-    throw new Error('Unauthorized.');
-  }
-
-  return decoded.uid;
+const serialize = (doc) => {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    ...data,
+    createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null,
+    updatedAt: data.updatedAt ? data.updatedAt.toDate().toISOString() : null,
+    publishedAt: data.publishedAt ? data.publishedAt.toDate().toISOString() : null,
+    scheduledAt: data.scheduledAt ? data.scheduledAt.toDate().toISOString() : null
+  };
 };
 
 export default async function handler(req, res) {
@@ -43,16 +40,17 @@ export default async function handler(req, res) {
       }
 
       const snapshot = await query.get();
-      const blogs = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          ...data,
-          createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null,
-          updatedAt: data.updatedAt ? data.updatedAt.toDate().toISOString() : null,
-          publishedAt: data.publishedAt ? data.publishedAt.toDate().toISOString() : null
-        };
-      });
+      let blogs = snapshot.docs.map(serialize);
+
+      // For the public listing, hide posts scheduled for the future.
+      if (status === 'published') {
+        const now = Date.now();
+        blogs = blogs.filter((b) => {
+          if (!b.scheduledAt) return true;
+          return new Date(b.scheduledAt).getTime() <= now;
+        });
+      }
+
       if (status) {
         blogs.sort((a, b) => {
           const aDate = a.publishedAt || a.createdAt || 0;
@@ -68,8 +66,10 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
+    const adminUser = await requireAdmin(req, res);
+    if (!adminUser) return undefined;
+
     try {
-      await getAdminFromRequest(req);
       const {
         title,
         slug,
@@ -83,12 +83,17 @@ export default async function handler(req, res) {
         authorName,
         authorTitle,
         tags = [],
+        category = '',
         status = 'draft',
         seoTitle,
         seoDescription,
         seoKeywords,
+        focusKeyword = '',
         canonicalUrl,
-        publishedAt
+        publishedAt,
+        scheduledAt,
+        seoScore = null,
+        readabilityScore = null
       } = req.body;
 
       const resolvedSlug = slug ? slugify(slug) : slugify(title || '');
@@ -98,6 +103,8 @@ export default async function handler(req, res) {
       }
 
       const readingTime = getReadingTime(content);
+      const resolvedPublishedAt =
+        status === 'published' && !publishedAt ? new Date().toISOString() : publishedAt;
 
       const docRef = await adminDb.collection(COLLECTION).add({
         title,
@@ -112,20 +119,26 @@ export default async function handler(req, res) {
         authorName: authorName || 'Editorial Team',
         authorTitle: authorTitle || 'Elden Heights School',
         tags,
+        category,
         status,
         seoTitle: seoTitle || title,
         seoDescription: seoDescription || excerpt || '',
         seoKeywords: seoKeywords || '',
+        focusKeyword,
         canonicalUrl: canonicalUrl || '',
-        publishedAt: publishedAt ? admin.firestore.Timestamp.fromDate(new Date(publishedAt)) : null,
+        seoScore,
+        readabilityScore,
+        publishedAt: toTimestamp(resolvedPublishedAt),
+        scheduledAt: toTimestamp(scheduledAt),
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        readingTime
+        readingTime,
+        authorEmail: adminUser.email || ''
       });
 
       return res.status(201).json({ id: docRef.id, slug: resolvedSlug });
     } catch (error) {
-      return res.status(401).json({ message: error.message || 'Unauthorized.' });
+      return res.status(500).json({ message: error.message || 'Unable to save blog.' });
     }
   }
 

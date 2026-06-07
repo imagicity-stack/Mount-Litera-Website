@@ -1,6 +1,4 @@
-import { adminAuth, adminDb } from '@/lib/firebaseAdmin';
-
-const USERS_COLLECTION = 'users';
+import { resolveAdmin } from '@/lib/adminAuth';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -8,21 +6,20 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed.' });
   }
 
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.replace('Bearer ', '') : null;
+  const result = await resolveAdmin(req);
 
-  if (!token) {
-    return res.status(401).json({ message: 'Missing token.' });
+  if (!result.uid) {
+    // No valid token at all.
+    return res.status(result.status).json({ isAdmin: false, message: result.reason });
   }
 
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    const userDoc = await adminDb.collection(USERS_COLLECTION).doc(decoded.uid).get();
-    const role = userDoc.exists ? userDoc.data()?.role : null;
-    const isAdmin = role === 'admin';
-
-    return res.status(200).json({ isAdmin, uid: decoded.uid, role });
-  } catch (error) {
-    return res.status(401).json({ message: 'Invalid token.' });
-  }
+  return res.status(200).json({
+    isAdmin: result.ok,
+    uid: result.uid,
+    email: result.email,
+    name: result.name,
+    picture: result.picture,
+    role: result.role,
+    message: result.ok ? '' : result.reason
+  });
 }

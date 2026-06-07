@@ -1,14 +1,27 @@
-# Mount Litera Website — Blogs & CMS
+# Mount Litera Website — Admin Portal, Blogs & Popups
 
-This update introduces a Firebase-powered blog system with a public `/blogs` page and a secure admin CMS at `/blogs/admin`.
+A Firebase-powered content platform with a public `/blogs` experience and a
+state-of-the-art admin portal at **`/admin`** (Google sign-in).
+
+> The admin previously lived at `/blogs/admin`. That URL now permanently
+> redirects to `/admin`.
 
 ## Features
-- SEO-optimized blog landing and detail pages.
-- Expandable news cards with smooth animations.
-- WordPress-like admin studio for publishing, editing, and deleting posts.
-- Firebase Authentication for admin login.
-- Firebase Storage for blog cover images.
+- **`/admin` portal** with Google authentication and a dark, dashboard-style UI.
+- **WordPress-like blog studio**: rich-text editor, featured images, drafts,
+  scheduling, categories, and tags.
+- **Live SEO analytics** (Yoast-style): focus-keyword checks, readability,
+  keyword density, length checks, and a Google search snippet preview.
+- **Gemini AI SEO assistant**: one-click SEO titles, meta descriptions,
+  excerpts, keyword & title ideas, outlines, and improvement suggestions.
+- **Ultra-advanced popup manager**: build, theme, target, schedule, and
+  A/B-style measure on-site campaigns (impressions, clicks, CTR) — center
+  modals, slide-ins, banners, and fullscreen takeovers.
+- **Enhanced public blog page** with a dedicated mobile feed and an
+  immersive reading modal (reading progress, share, deep-link).
+- Firebase Authentication (Google), Firestore, and Storage.
 - Firebase Admin SDK-backed API routes for secure CRUD operations.
+- All Firebase config is read from **Vercel environment variables**.
 
 ---
 
@@ -52,15 +65,23 @@ Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md`
 ### 1) Create a Firebase project
 1. Go to [Firebase Console](https://console.firebase.google.com/).
 2. Create a new project.
-3. Enable **Authentication → Email/Password**.
+3. Enable **Authentication → Google** (add your production domain + `localhost`
+   to the authorised domains list).
 4. Create a **Firestore Database**.
 5. Create a **Storage** bucket.
 
-### 2) Create an Admin user
-1. Add a user under **Authentication**.
-2. In Firestore, create a collection named **`users`**.
-3. Create a document with the user’s `uid` as the document ID.
-4. Add a field: `role = "admin"`.
+### 2) Authorise admin accounts
+Admin access is granted when **either** condition is met:
+
+**Option A — email allowlist (recommended, simplest):**
+Set `ADMIN_EMAILS` in Vercel to a comma-separated list of authorised Google
+accounts, e.g. `ADMIN_EMAILS=principal@eldenheights.org,admin@eldenheights.org`.
+Anyone who signs in with Google using one of those emails becomes an admin.
+
+**Option B — Firestore role:**
+1. In Firestore, create a collection named **`users`**.
+2. Create a document with the signed-in user’s `uid` as the document ID.
+3. Add a field: `role = "admin"`.
 
 ### 3) Firestore collections & fields
 
@@ -91,8 +112,10 @@ Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md`
 
 ## Environment Variables
 
-### Client (Next.js public)
-Add these to `.env.local` (and Vercel):
+All keys below are configured in **Vercel → Project → Settings → Environment
+Variables** (and optionally `.env.local` for local dev).
+
+### Client (Next.js public — Firebase web config)
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
@@ -102,14 +125,24 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 ```
+> Alternatively, paste the whole web config object as a single JSON variable:
+> `NEXT_PUBLIC_FIREBASE_CONFIG={"apiKey":"…","authDomain":"…", …}`
 
-### Server (Admin SDK)
-Add these to `.env.local` (and Vercel):
+### Server (Admin SDK + integrations)
 ```
 FIREBASE_PROJECT_ID=
 FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 FIREBASE_STORAGE_BUCKET=
+
+# Admin authorisation (comma separated Google emails)
+ADMIN_EMAILS=admin@eldenheights.org
+
+# Gemini SEO assistant
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
+
+# Email (Success Meter etc.)
 SMTP_HOST=
 SMTP_PORT=587
 SMTP_USER=
@@ -117,8 +150,15 @@ SMTP_PASS=
 SMTP_FROM=noreply@eldenheights.org
 SUCCESS_METER_TO=contact@eldenheights.org
 ```
+> Alternatively, paste the full service-account JSON as a single variable:
+> `FIREBASE_SERVICE_ACCOUNT={"type":"service_account","project_id":"…", …}`
 
-> **Note:** When setting `FIREBASE_PRIVATE_KEY` in Vercel, paste the full key and replace line breaks with `\n`.
+> **Note:** When setting `FIREBASE_PRIVATE_KEY` directly, paste the full key and
+> replace line breaks with `\n`.
+
+> **Gemini key:** create one at [Google AI Studio](https://aistudio.google.com/app/apikey).
+> Without it, the editor still works — the AI buttons simply report that the
+> assistant is not configured.
 
 ### Success Meter campaign flow
 - Hidden campaign page is available at `/successmetere` and is marked `noindex` for search engines.
@@ -136,13 +176,24 @@ npm run dev
 
 Visit:
 - **Public blog page:** http://localhost:3000/blogs
-- **Admin CMS:** http://localhost:3000/blogs/admin
+- **Admin portal:** http://localhost:3000/admin
 
 ---
 
+## Popups (`popups` collection)
+Popups are managed entirely from **Admin → Popups** and stored in a `popups`
+Firestore collection. Each document supports layout (modal / slide-in / banner /
+fullscreen), theme, content, CTAs, trigger (delay / scroll / exit / immediate),
+frequency, page targeting, scheduling, priority, and live analytics
+(`impressions`, `clicks`). The public site renders them via the global
+`PopupManager` and records impressions/clicks through `POST /api/popups/track`.
+
 ## Security Notes
-- Only authenticated users with `role = "admin"` in Firestore can create/edit/delete blogs.
-- All CRUD routes use the Firebase Admin SDK for secure validation.
+- Admin access requires a Google sign-in whose email is in `ADMIN_EMAILS`
+  **or** a Firestore `users/{uid}` doc with `role = "admin"`.
+- All blog, popup, and Gemini routes validate the Firebase ID token server-side
+  via the Admin SDK before any write.
+- The `/admin` route is `noindex, nofollow` and is not linked publicly.
 
 ---
 
@@ -155,6 +206,10 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
     match /blogs/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /popups/{userId}/{allPaths=**} {
       allow read: if true;
       allow write: if request.auth != null;
     }
