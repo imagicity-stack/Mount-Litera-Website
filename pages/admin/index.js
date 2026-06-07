@@ -41,7 +41,7 @@ export default function AdminPortal() {
     return (
       <>
         {head}
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-midnight via-graphite to-midnight">
+        <div className="flex min-h-screen items-center justify-center bg-gradient-parchment">
           <Spinner label="Loading portal…" />
         </div>
       </>

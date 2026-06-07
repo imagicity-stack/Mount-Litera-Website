@@ -146,9 +146,7 @@ export default function BlogManager({ user, getToken, onStats }) {
       focusKeyword: form.focusKeyword,
       canonicalUrl: form.canonicalUrl,
       publishedAt:
-        status === 'published' && !form.publishedAt
-          ? new Date().toISOString()
-          : form.publishedAt || null,
+        status === 'published' && !form.publishedAt ? new Date().toISOString() : form.publishedAt || null,
       scheduledAt: status === 'scheduled' ? new Date(form.scheduledAt).toISOString() : null,
       seoScore: scores.seoScore ?? null,
       readabilityScore: scores.readabilityScore ?? null
@@ -249,8 +247,8 @@ export default function BlogManager({ user, getToken, onStats }) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="font-garamond text-2xl font-semibold">Posts</h2>
-          <p className="text-sm text-parchment/55">Create, optimise, and publish stories.</p>
+          <h2 className="font-garamond text-2xl font-semibold text-midnight">Posts</h2>
+          <p className="text-sm text-midnight/55">Create, optimise, and publish stories.</p>
         </div>
         <Button variant="primary" onClick={startNew}>
           <span className="text-base leading-none">＋</span> Add new post
@@ -271,7 +269,7 @@ export default function BlogManager({ user, getToken, onStats }) {
               type="button"
               onClick={() => setFilter(f.id)}
               className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
-                filter === f.id ? 'bg-gold/15 text-gold-100' : 'text-parchment/50 hover:text-parchment'
+                filter === f.id ? 'bg-cardinal/10 text-cardinal' : 'text-midnight/55 hover:text-midnight'
               }`}
             >
               {f.label}
@@ -284,8 +282,8 @@ export default function BlogManager({ user, getToken, onStats }) {
       </div>
 
       {/* List */}
-      <div className="overflow-hidden rounded-2xl border border-white/10">
-        <div className="hidden grid-cols-[1fr_auto_auto_auto_auto] gap-4 border-b border-white/10 bg-white/[0.03] px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-parchment/40 md:grid">
+      <div className="overflow-hidden rounded-2xl border border-midnight/10 bg-white shadow-elite-sm">
+        <div className="hidden grid-cols-[1fr_auto_auto_auto_auto] gap-4 border-b border-midnight/10 bg-[#faf8f3] px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-midnight/45 md:grid">
           <span>Title</span>
           <span>SEO</span>
           <span>Status</span>
@@ -293,20 +291,20 @@ export default function BlogManager({ user, getToken, onStats }) {
           <span>Actions</span>
         </div>
         {loading ? (
-          <div className="px-5 py-10 text-center text-sm text-parchment/50">Loading posts…</div>
+          <div className="px-5 py-10 text-center text-sm text-midnight/50">Loading posts…</div>
         ) : visible.length === 0 ? (
-          <div className="px-5 py-12 text-center text-sm text-parchment/50">
+          <div className="px-5 py-12 text-center text-sm text-midnight/50">
             No posts found. Click “Add new post” to begin.
           </div>
         ) : (
           visible.map((blog) => (
             <div
               key={blog.id}
-              className="grid grid-cols-1 gap-3 border-b border-white/5 px-5 py-4 transition hover:bg-white/[0.02] md:grid-cols-[1fr_auto_auto_auto_auto] md:items-center md:gap-4"
+              className="grid grid-cols-1 gap-3 border-b border-midnight/5 px-5 py-4 transition hover:bg-[#faf8f3] md:grid-cols-[1fr_auto_auto_auto_auto] md:items-center md:gap-4"
             >
               <button type="button" onClick={() => startEdit(blog)} className="text-left">
-                <p className="font-semibold text-parchment line-clamp-1">{blog.title || 'Untitled'}</p>
-                <p className="text-xs text-parchment/45">
+                <p className="font-semibold text-midnight line-clamp-1">{blog.title || 'Untitled'}</p>
+                <p className="text-xs text-midnight/45">
                   {blog.authorName || 'Editorial Team'}
                   {blog.category ? ` · ${blog.category}` : ''}
                 </p>
@@ -315,7 +313,7 @@ export default function BlogManager({ user, getToken, onStats }) {
                 {typeof blog.seoScore === 'number' ? (
                   <Badge tone={blog.seoScore >= 80 ? 'good' : blog.seoScore >= 55 ? 'ok' : 'bad'}>{blog.seoScore}</Badge>
                 ) : (
-                  <span className="text-xs text-parchment/30">—</span>
+                  <span className="text-xs text-midnight/30">—</span>
                 )}
               </div>
               <div>
@@ -323,17 +321,17 @@ export default function BlogManager({ user, getToken, onStats }) {
                   {blog.status}
                 </Badge>
               </div>
-              <span className="text-xs text-parchment/55">
+              <span className="text-xs text-midnight/55">
                 {formatDate(blog.publishedAt || blog.scheduledAt || blog.createdAt)}
               </span>
               <div className="flex items-center gap-3 text-xs">
-                <button type="button" onClick={() => startEdit(blog)} className="font-semibold text-gold-200 hover:text-gold-100">
+                <button type="button" onClick={() => startEdit(blog)} className="font-semibold text-cardinal hover:text-cardinal-700">
                   Edit
                 </button>
-                <a href={`/blogs/${blog.slug}`} target="_blank" rel="noreferrer" className="text-parchment/50 hover:text-parchment">
+                <a href={`/blogs/${blog.slug}`} target="_blank" rel="noreferrer" className="text-midnight/50 hover:text-midnight">
                   View
                 </a>
-                <button type="button" onClick={() => deleteFromList(blog.id)} className="text-cardinal-300 hover:text-cardinal-200">
+                <button type="button" onClick={() => deleteFromList(blog.id)} className="text-cardinal-500 hover:text-cardinal-700">
                   Delete
                 </button>
               </div>

@@ -12,6 +12,9 @@ import {
 } from '@/lib/popupConfig';
 import { Badge, Button, Field, Input, Select, TextArea, Toggle } from '@/components/admin/ui';
 
+const cardClass = 'rounded-2xl border border-midnight/10 bg-white p-5 shadow-elite-sm';
+const sectionLabel = 'text-xs font-semibold uppercase tracking-[0.2em] text-midnight/45';
+
 function PopupPreview({ form }) {
   const theme = resolveTheme(form);
   const layout = form.layout || 'modal';
@@ -33,7 +36,7 @@ function PopupPreview({ form }) {
   );
 
   return (
-    <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[repeating-linear-gradient(45deg,#15161a,#15161a_12px,#101114_12px,#101114_24px)] p-5">
+    <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden rounded-2xl border border-midnight/10 bg-[repeating-linear-gradient(45deg,#ece7dd,#ece7dd_12px,#f4f1ea_12px,#f4f1ea_24px)] p-5">
       {isBanner ? (
         <div className="w-full rounded-xl p-4" style={{ background: theme.bg }}>
           <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
@@ -99,8 +102,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-        <button type="button" onClick={onClose} className="text-sm font-semibold text-parchment/60 transition hover:text-gold-200">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-midnight/10 bg-white px-4 py-3 shadow-elite-sm">
+        <button type="button" onClick={onClose} className="text-sm font-semibold text-midnight/60 transition hover:text-cardinal">
           ← All popups
         </button>
         <div className="flex items-center gap-2">
@@ -111,14 +114,14 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
         </div>
       </div>
 
-      {message && <p className="rounded-xl border border-gold/20 bg-gold/[0.06] px-4 py-2.5 text-sm text-gold-100">{message}</p>}
+      {message && <p className="rounded-xl border border-gold/30 bg-gold-50 px-4 py-2.5 text-sm text-midnight">{message}</p>}
 
       <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
         {/* Form */}
         <div className="space-y-5">
           {/* Identity */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Campaign</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Campaign</p>
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Internal name"><Input value={form.name} onChange={(e) => setField('name', e.target.value)} /></Field>
               <Field label="Status">
@@ -132,8 +135,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {/* Content */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Content</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Content</p>
             <Field label="Eyebrow"><Input value={form.eyebrow} onChange={(e) => setField('eyebrow', e.target.value)} placeholder="Just opened · Classes XI & XII" /></Field>
             <Field label="Title"><Input value={form.title} onChange={(e) => setField('title', e.target.value)} placeholder="Reserve your seat today" /></Field>
             <Field label="Body"><TextArea value={form.body} onChange={(e) => setField('body', e.target.value)} rows={3} /></Field>
@@ -144,7 +147,7 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
                 </Select>
               </Field>
               <Field label="Image">
-                <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-white/15 px-3 py-2.5 text-xs text-parchment/55 hover:border-gold/40">
+                <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-midnight/20 px-3 py-2.5 text-xs text-midnight/55 hover:border-gold/50">
                   {uploading ? 'Uploading…' : form.image ? 'Replace image' : 'Upload image'}
                   <input type="file" accept="image/*" onChange={handleUpload} className="hidden" />
                 </label>
@@ -154,8 +157,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {/* CTAs */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Call to action</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Call to action</p>
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Primary label"><Input value={form.primaryCtaLabel} onChange={(e) => setField('primaryCtaLabel', e.target.value)} /></Field>
               <Field label="Primary URL"><Input value={form.primaryCtaUrl} onChange={(e) => setField('primaryCtaUrl', e.target.value)} placeholder="/admission or https://…" /></Field>
@@ -165,8 +168,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {/* Design */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Design</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Design</p>
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Layout">
                 <Select value={form.layout} onChange={(e) => setField('layout', e.target.value)}>
@@ -181,9 +184,9 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
             </div>
             {form.theme === 'custom' && (
               <div className="grid grid-cols-3 gap-3">
-                <Field label="Background"><input type="color" value={form.bgColor} onChange={(e) => setField('bgColor', e.target.value)} className="h-10 w-full rounded-lg bg-transparent" /></Field>
-                <Field label="Text"><input type="color" value={form.textColor} onChange={(e) => setField('textColor', e.target.value)} className="h-10 w-full rounded-lg bg-transparent" /></Field>
-                <Field label="Accent"><input type="color" value={form.accentColor} onChange={(e) => setField('accentColor', e.target.value)} className="h-10 w-full rounded-lg bg-transparent" /></Field>
+                <Field label="Background"><input type="color" value={form.bgColor} onChange={(e) => setField('bgColor', e.target.value)} className="h-10 w-full rounded-lg border border-midnight/15 bg-white" /></Field>
+                <Field label="Text"><input type="color" value={form.textColor} onChange={(e) => setField('textColor', e.target.value)} className="h-10 w-full rounded-lg border border-midnight/15 bg-white" /></Field>
+                <Field label="Accent"><input type="color" value={form.accentColor} onChange={(e) => setField('accentColor', e.target.value)} className="h-10 w-full rounded-lg border border-midnight/15 bg-white" /></Field>
               </div>
             )}
             <div className="flex flex-wrap gap-5 pt-1">
@@ -193,8 +196,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {/* Behavior */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Behaviour</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Behaviour</p>
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Trigger" hint={POPUP_TRIGGERS.find((t) => t.value === form.trigger)?.hint}>
                 <Select value={form.trigger} onChange={(e) => setField('trigger', e.target.value)}>
@@ -218,8 +221,8 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {/* Targeting & schedule */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Targeting & schedule</p>
+          <div className={`${cardClass} space-y-3`}>
+            <p className={sectionLabel}>Targeting & schedule</p>
             <Field label="Show on">
               <Select value={form.targetType} onChange={(e) => setField('targetType', e.target.value)}>
                 {POPUP_TARGETS.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
@@ -242,7 +245,7 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
           </div>
 
           {form.id && (
-            <button type="button" onClick={onDelete} className="text-xs font-semibold uppercase tracking-[0.2em] text-cardinal-300 hover:text-cardinal-200">
+            <button type="button" onClick={onDelete} className="text-xs font-semibold uppercase tracking-[0.2em] text-cardinal-500 hover:text-cardinal-700">
               Delete popup
             </button>
           )}
@@ -250,7 +253,7 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
 
         {/* Preview */}
         <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/45">Live preview</p>
+          <p className={sectionLabel}>Live preview</p>
           <PopupPreview form={form} />
           {(form.impressions != null || form.clicks != null) && (
             <div className="grid grid-cols-3 gap-2 text-center">
@@ -259,9 +262,9 @@ export default function PopupEditor({ form, setField, onSave, onClose, onDelete,
                 { v: form.clicks || 0, l: 'Clicks' },
                 { v: form.impressions ? `${(((form.clicks || 0) / form.impressions) * 100).toFixed(1)}%` : '0%', l: 'CTR' }
               ].map((s) => (
-                <div key={s.l} className="rounded-xl border border-white/10 bg-white/[0.03] py-2.5">
-                  <p className="text-lg font-semibold text-parchment">{s.v}</p>
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-parchment/45">{s.l}</p>
+                <div key={s.l} className="rounded-xl border border-midnight/10 bg-white py-2.5 shadow-elite-sm">
+                  <p className="text-lg font-semibold text-midnight">{s.v}</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-midnight/45">{s.l}</p>
                 </div>
               ))}
             </div>
