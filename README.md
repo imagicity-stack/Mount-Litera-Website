@@ -145,10 +145,10 @@ GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
 # Email — Microsoft 365 / Outlook (Contact, Admission & Success Meter)
 SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
-SMTP_USER=mailer@yourdomain.com    # a LICENSED mailbox that authenticates (the login)
+SMTP_USER=noreply@yourdomain.com   # a LICENSED mailbox that authenticates (the login)
 SMTP_PASS=                         # its password, or an app password if MFA is on
-SMTP_FROM=noreply@yourdomain.com   # the address recipients see — may be an unlicensed
-                                   # shared mailbox, IF SMTP_USER has "Send As" rights on it
+SMTP_FROM=noreply@yourdomain.com   # the address recipients see (same as SMTP_USER when
+                                   # that mailbox is licensed; only needs to differ via "Send As")
 
 # Where each form's enquiries are delivered (all optional — sensible defaults exist)
 CONTACT_TO=contact@yourdomain.com       # /api/contact
@@ -179,25 +179,19 @@ SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 >    lenient here.
 > 3. **MFA mailboxes can't use the normal password** for SMTP — generate an app
 >    password, or (cleaner) use a dedicated service mailbox with SMTP AUTH enabled.
-> 4. **You cannot authenticate as an unlicensed or shared mailbox.** SMTP AUTH needs a
->    **licensed** mailbox with a real sign-in. Shared mailboxes have their sign-in
->    disabled, and unlicensed user accounts have no working Exchange Online mailbox —
->    neither can be `SMTP_USER`. See the pattern below.
+> 4. **The `SMTP_USER` mailbox must be licensed** (any plan with Exchange Online,
+>    including Office 365 A1 for Faculty). A licensed `noreply@` mailbox authenticates
+>    as itself, so `SMTP_USER` and `SMTP_FROM` are both `noreply@yourdomain.com` — no
+>    service account or *Send As* needed. (Unlicensed or shared mailboxes cannot be
+>    `SMTP_USER`: shared mailboxes have sign-in disabled and unlicensed accounts have no
+>    working mailbox.)
 >
-> **Recommended pattern for Office 365 A1 (unlicensed `contact@` / `noreply@`):**
-> You do **not** need to buy licences for `contact@` and `noreply@`. Receiving mail
-> needs no licence, and sending is done *through* one licensed account:
-> 1. Keep `contact@yourdomain.com` and `noreply@yourdomain.com` as **shared mailboxes**
->    (free, no licence). They can receive form enquiries as-is.
-> 2. Assign **one** A1 licence to a dedicated service account, e.g.
->    `mailer@yourdomain.com` (better than using a teacher's account — sending won't
->    break when a teacher changes their password or leaves).
-> 3. Grant that service account **Send As** on both shared mailboxes
->    (`Add-RecipientPermission noreply@yourdomain.com -Trustee mailer@yourdomain.com -AccessRights SendAs`).
-> 4. Enable Authenticated SMTP on `mailer@yourdomain.com` and set
->    `SMTP_USER=mailer@yourdomain.com`, `SMTP_PASS=<its password/app password>`,
->    `SMTP_FROM=noreply@yourdomain.com`. The auth identity and the From address are
->    intentionally different — the code already supports this.
+> _Optional — only if you'd rather not licence `noreply@`/`contact@`:_ keep them as free
+> **shared mailboxes**, licence a single service account (e.g. `mailer@yourdomain.com`),
+> grant it **Send As** on them
+> (`Add-RecipientPermission noreply@yourdomain.com -Trustee mailer@yourdomain.com -AccessRights SendAs`),
+> then set `SMTP_USER=mailer@yourdomain.com` with `SMTP_FROM=noreply@yourdomain.com`.
+> The code already supports the auth identity and From address differing.
 >
 > **⚠️ Basic-auth SMTP is being retired.** Microsoft is phasing out username/password
 > SMTP AUTH: it keeps working through **December 2026**, after which it is disabled by
