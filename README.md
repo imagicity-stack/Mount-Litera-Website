@@ -142,14 +142,49 @@ ADMIN_EMAILS=admin@eldenheights.org
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
 
-# Email (Success Meter etc.)
-SMTP_HOST=
+# Email — Microsoft 365 / Outlook (Contact, Admission & Success Meter)
+SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
-SMTP_USER=
-SMTP_PASS=
-SMTP_FROM=noreply@eldenheights.org
-SUCCESS_METER_TO=contact@eldenheights.org
+SMTP_USER=noreply@yourdomain.com   # full Microsoft 365 mailbox address
+SMTP_PASS=                         # mailbox password, or an app password if MFA is on
+SMTP_FROM=noreply@yourdomain.com   # must match SMTP_USER (or a mailbox it has "Send As" rights on)
+
+# Where each form's enquiries are delivered (all optional — sensible defaults exist)
+CONTACT_TO=contact@yourdomain.com       # /api/contact
+ADMISSION_TO=admission@yourdomain.com   # /api/admission (parent gets an auto-acknowledgement)
+SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 ```
+
+> **Migrating from Google Workspace to Microsoft 365 / Outlook:** no code change is
+> required — the mailer (`lib/mailer.js`) is provider-agnostic. Only the env vars
+> above change. Point the values at your Microsoft tenant instead of Gmail:
+>
+> | Setting | Google Workspace (old) | Microsoft 365 / Outlook (new) |
+> | --- | --- | --- |
+> | `SMTP_HOST` | `smtp.gmail.com` | `smtp.office365.com` (business/custom domain) — or `smtp-mail.outlook.com` for a personal @outlook.com mailbox |
+> | `SMTP_PORT` | `587` | `587` (STARTTLS — unchanged) |
+> | `SMTP_USER` | Gmail address | full Microsoft 365 mailbox address |
+> | `SMTP_PASS` | Google app password | mailbox password, or a Microsoft **app password** if MFA is enabled |
+>
+> **Microsoft-specific gotchas (these differ from Gmail and cause most failures):**
+> 1. **Enable Authenticated SMTP on the mailbox.** It is off by default in M365.
+>    Admin center → Users → *(mailbox)* → Mail → *Manage email apps* → tick
+>    **Authenticated SMTP**. Or PowerShell:
+>    `Set-CASMailbox -Identity noreply@yourdomain.com -SmtpClientAuthenticationDisabled $false`
+>    (and ensure it isn't blocked tenant-wide via `Set-TransportConfig`).
+> 2. **`SMTP_FROM` must match the authenticated mailbox** (or one it has *Send As* /
+>    *Send on Behalf* permission for). Microsoft rejects mismatches with
+>    `5.7.60 Client does not have permissions to send as this user` — Gmail was more
+>    lenient here.
+> 3. **MFA mailboxes can't use the normal password** for SMTP — generate an app
+>    password, or (cleaner) use a dedicated `noreply@` mailbox with SMTP AUTH enabled.
+>
+> **⚠️ Basic-auth SMTP is being retired.** Microsoft is phasing out username/password
+> SMTP AUTH: it keeps working through **December 2026**, after which it is disabled by
+> default for existing tenants (admins can re-enable for now; final removal to be
+> announced in H2 2027). Before then, plan a move to a modern method — OAuth 2.0
+> (XOAUTH2, which `nodemailer` supports), the Microsoft Graph API, or Azure
+> Communication Services.
 > Alternatively, paste the full service-account JSON as a single variable:
 > `FIREBASE_SERVICE_ACCOUNT={"type":"service_account","project_id":"…", …}`
 
