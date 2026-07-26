@@ -142,13 +142,11 @@ ADMIN_EMAILS=admin@eldenheights.org
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
 
-# Email — Microsoft 365 / Outlook (Contact, Admission & Success Meter)
-SMTP_HOST=smtp.office365.com
-SMTP_PORT=587
-SMTP_USER=noreply@yourdomain.com   # a LICENSED mailbox that authenticates (the login)
-SMTP_PASS=                         # its password, or an app password if MFA is on
-SMTP_FROM=noreply@yourdomain.com   # the address recipients see (same as SMTP_USER when
-                                   # that mailbox is licensed; only needs to differ via "Send As")
+# Email — Microsoft Graph API (recommended: Contact, Admission & Success Meter)
+MS_TENANT_ID=              # Entra "Directory (tenant) ID"
+MS_CLIENT_ID=             # Entra app "Application (client) ID"
+MS_CLIENT_SECRET=          # Entra app client-secret VALUE (not the secret ID)
+MS_SENDER=noreply@yourdomain.com   # mailbox the site sends AS (must be licensed)
 
 # Where each form's enquiries are delivered (all optional — sensible defaults exist)
 CONTACT_TO=contact@yourdomain.com       # /api/contact
@@ -156,49 +154,64 @@ ADMISSION_TO=admission@yourdomain.com   # /api/admission (parent gets an auto-ac
 SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 ```
 
-> **Migrating from Google Workspace to Microsoft 365 / Outlook:** no code change is
-> required — the mailer (`lib/mailer.js`) is provider-agnostic. Only the env vars
-> above change. Point the values at your Microsoft tenant instead of Gmail:
+The mailer (`lib/mailer.js`) uses **Microsoft Graph** when the four `MS_*` vars are
+set, and falls back to SMTP otherwise. Graph is app-only (OAuth client credentials),
+so it needs **no mailbox password**, works with **Security Defaults / MFA left ON**,
+and is unaffected by the December 2026 SMTP basic-auth retirement.
+
+> **One-time Entra (Azure AD) app registration** — do this once in the
+> [Entra admin center](https://entra.microsoft.com) as a Global/Application admin:
+> 1. **Identity → Applications → App registrations → New registration.** Name it
+>    e.g. `Website Mailer`, leave redirect URI blank, **Register**. On the overview
+>    page copy the **Application (client) ID** → `MS_CLIENT_ID` and the
+>    **Directory (tenant) ID** → `MS_TENANT_ID`.
+> 2. **API permissions → Add a permission → Microsoft Graph → Application permissions**
+>    → search **`Mail.Send`** → add it. Then click **Grant admin consent for
+>    &lt;tenant&gt;** (the row must show a green "Granted" tick).
+> 3. **Certificates & secrets → Client secrets → New client secret.** Set an expiry
+>    (e.g. 24 months — note the calendar reminder to rotate it) → **Add**. Copy the
+>    secret **Value** immediately → `MS_CLIENT_SECRET`. *(You can't see it again after
+>    leaving the page; copy the Value, not the Secret ID.)*
+> 4. **Lock the app to just your sender mailbox** so it cannot send as anyone else in
+>    the tenant. In **Exchange Online PowerShell** (`Connect-ExchangeOnline`):
+>    ```powershell
+>    New-DistributionGroup -Name "Website Mailer Senders" -Type Security `
+>      -Members noreply@yourdomain.com
+>    New-ApplicationAccessPolicy -AppId <MS_CLIENT_ID> `
+>      -PolicyScopeGroupId "Website Mailer Senders" `
+>      -AccessRight RestrictAccess `
+>      -Description "Restrict website mailer to the noreply mailbox"
+>    ```
+>    (Without this policy, `Mail.Send` can send as *any* mailbox in the tenant.)
+> 5. Add `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_SENDER` to
+>    **Vercel → Settings → Environment Variables** (Production), then **redeploy**.
 >
-> | Setting | Google Workspace (old) | Microsoft 365 / Outlook (new) |
-> | --- | --- | --- |
-> | `SMTP_HOST` | `smtp.gmail.com` | `smtp.office365.com` (business/custom domain) — or `smtp-mail.outlook.com` for a personal @outlook.com mailbox |
-> | `SMTP_PORT` | `587` | `587` (STARTTLS — unchanged) |
-> | `SMTP_USER` | Gmail address | full Microsoft 365 mailbox address |
-> | `SMTP_PASS` | Google app password | mailbox password, or a Microsoft **app password** if MFA is enabled |
->
-> **Microsoft-specific gotchas (these differ from Gmail and cause most failures):**
-> 1. **Enable Authenticated SMTP on the mailbox.** It is off by default in M365.
->    Admin center → Users → *(mailbox)* → Mail → *Manage email apps* → tick
->    **Authenticated SMTP**. Or PowerShell:
->    `Set-CASMailbox -Identity noreply@yourdomain.com -SmtpClientAuthenticationDisabled $false`
->    (and ensure it isn't blocked tenant-wide via `Set-TransportConfig`).
-> 2. **`SMTP_FROM` must match the authenticated mailbox** (or one it has *Send As* /
->    *Send on Behalf* permission for). Microsoft rejects mismatches with
->    `5.7.60 Client does not have permissions to send as this user` — Gmail was more
->    lenient here.
-> 3. **MFA mailboxes can't use the normal password** for SMTP — generate an app
->    password, or (cleaner) use a dedicated service mailbox with SMTP AUTH enabled.
-> 4. **The `SMTP_USER` mailbox must be licensed** (any plan with Exchange Online,
->    including Office 365 A1 for Faculty). A licensed `noreply@` mailbox authenticates
->    as itself, so `SMTP_USER` and `SMTP_FROM` are both `noreply@yourdomain.com` — no
->    service account or *Send As* needed. (Unlicensed or shared mailboxes cannot be
->    `SMTP_USER`: shared mailboxes have sign-in disabled and unlicensed accounts have no
->    working mailbox.)
->
-> _Optional — only if you'd rather not licence `noreply@`/`contact@`:_ keep them as free
-> **shared mailboxes**, licence a single service account (e.g. `mailer@yourdomain.com`),
-> grant it **Send As** on them
-> (`Add-RecipientPermission noreply@yourdomain.com -Trustee mailer@yourdomain.com -AccessRights SendAs`),
-> then set `SMTP_USER=mailer@yourdomain.com` with `SMTP_FROM=noreply@yourdomain.com`.
-> The code already supports the auth identity and From address differing.
->
-> **⚠️ Basic-auth SMTP is being retired.** Microsoft is phasing out username/password
-> SMTP AUTH: it keeps working through **December 2026**, after which it is disabled by
-> default for existing tenants (admins can re-enable for now; final removal to be
-> announced in H2 2027). Before then, plan a move to a modern method — OAuth 2.0
-> (XOAUTH2, which `nodemailer` supports), the Microsoft Graph API, or Azure
-> Communication Services.
+> **Notes:**
+> - `MS_SENDER` must be a **licensed** mailbox (Office 365 A1 for Faculty is fine) and
+>   must be a member of the Application Access Policy group from step 4.
+> - Policy changes can take a few minutes to propagate across Exchange Online.
+> - Rotate `MS_CLIENT_SECRET` before it expires (a new secret Value + updated env var);
+>   email stops sending the moment the secret expires.
+
+<details>
+<summary><strong>SMTP fallback (legacy — only if you cannot use Graph)</strong></summary>
+
+Set these instead of the `MS_*` vars. Requires **Authenticated SMTP** enabled on the
+mailbox and **Security Defaults turned OFF** (SMTP basic-auth is blocked while Security
+Defaults is on, and retires by default at the end of **December 2026**):
+
+```
+SMTP_HOST=smtp.office365.com
+SMTP_PORT=587                      # STARTTLS
+SMTP_USER=noreply@yourdomain.com   # licensed mailbox that authenticates
+SMTP_PASS=                         # its password, or an app password if MFA is on
+SMTP_FROM=noreply@yourdomain.com   # sender address (match SMTP_USER, or have "Send As")
+```
+
+Enable Authenticated SMTP: `Set-CASMailbox -Identity noreply@yourdomain.com -SmtpClientAuthenticationDisabled $false`
+(and confirm it isn't blocked tenant-wide via `Set-TransportConfig` or Security Defaults).
+</details>
+
 > Alternatively, paste the full service-account JSON as a single variable:
 > `FIREBASE_SERVICE_ACCOUNT={"type":"service_account","project_id":"…", …}`
 

@@ -93,7 +93,8 @@ function formatHtmlEmail(payload, submittedAt, pageSource) {
 }
 
 export async function POST(request) {
-  const sender = process.env.SMTP_FROM || 'noreply@eldenheights.org';
+  const sender =
+    process.env.MS_SENDER || process.env.SMTP_FROM || 'noreply@eldenheights.org';
   const recipient = process.env.SUCCESS_METER_TO || 'contact@eldenheights.org';
 
   try {
