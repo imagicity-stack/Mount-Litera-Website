@@ -145,9 +145,10 @@ GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
 # Email — Microsoft 365 / Outlook (Contact, Admission & Success Meter)
 SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
-SMTP_USER=noreply@yourdomain.com   # full Microsoft 365 mailbox address
-SMTP_PASS=                         # mailbox password, or an app password if MFA is on
-SMTP_FROM=noreply@yourdomain.com   # must match SMTP_USER (or a mailbox it has "Send As" rights on)
+SMTP_USER=noreply@yourdomain.com   # a LICENSED mailbox that authenticates (the login)
+SMTP_PASS=                         # its password, or an app password if MFA is on
+SMTP_FROM=noreply@yourdomain.com   # the address recipients see (same as SMTP_USER when
+                                   # that mailbox is licensed; only needs to differ via "Send As")
 
 # Where each form's enquiries are delivered (all optional — sensible defaults exist)
 CONTACT_TO=contact@yourdomain.com       # /api/contact
@@ -177,7 +178,20 @@ SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 >    `5.7.60 Client does not have permissions to send as this user` — Gmail was more
 >    lenient here.
 > 3. **MFA mailboxes can't use the normal password** for SMTP — generate an app
->    password, or (cleaner) use a dedicated `noreply@` mailbox with SMTP AUTH enabled.
+>    password, or (cleaner) use a dedicated service mailbox with SMTP AUTH enabled.
+> 4. **The `SMTP_USER` mailbox must be licensed** (any plan with Exchange Online,
+>    including Office 365 A1 for Faculty). A licensed `noreply@` mailbox authenticates
+>    as itself, so `SMTP_USER` and `SMTP_FROM` are both `noreply@yourdomain.com` — no
+>    service account or *Send As* needed. (Unlicensed or shared mailboxes cannot be
+>    `SMTP_USER`: shared mailboxes have sign-in disabled and unlicensed accounts have no
+>    working mailbox.)
+>
+> _Optional — only if you'd rather not licence `noreply@`/`contact@`:_ keep them as free
+> **shared mailboxes**, licence a single service account (e.g. `mailer@yourdomain.com`),
+> grant it **Send As** on them
+> (`Add-RecipientPermission noreply@yourdomain.com -Trustee mailer@yourdomain.com -AccessRights SendAs`),
+> then set `SMTP_USER=mailer@yourdomain.com` with `SMTP_FROM=noreply@yourdomain.com`.
+> The code already supports the auth identity and From address differing.
 >
 > **⚠️ Basic-auth SMTP is being retired.** Microsoft is phasing out username/password
 > SMTP AUTH: it keeps working through **December 2026**, after which it is disabled by
