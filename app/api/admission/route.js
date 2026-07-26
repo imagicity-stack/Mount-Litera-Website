@@ -51,9 +51,9 @@ function formatFields(fields) {
 }
 
 export async function POST(request) {
-  const { ADMISSION_TO, SMTP_FROM } = process.env;
+  const { ADMISSION_TO, MS_SENDER, SMTP_FROM } = process.env;
   const recipient = ADMISSION_TO || 'admission@eldenheights.org';
-  const sender = SMTP_FROM || 'noreply@eldenheights.org';
+  const sender = MS_SENDER || SMTP_FROM || 'noreply@eldenheights.org';
 
   try {
     const formData = await parseRequestBody(request);
