@@ -87,10 +87,18 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Admission enquiry email error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process admission enquiry.' },
-      { status: 500 }
-    );
+    console.error('Admission enquiry email error:', {
+      message: error?.message,
+      code: error?.code,
+      responseCode: error?.responseCode,
+      response: error?.response,
+      command: error?.command
+    });
+    const body = { error: 'Failed to process admission enquiry.' };
+    if (process.env.DEBUG_EMAIL === '1') {
+      body.detail = error?.message;
+      body.smtpResponse = error?.response;
+    }
+    return NextResponse.json(body, { status: 500 });
   }
 }

@@ -126,10 +126,18 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Success meter submission error:', error);
-    return NextResponse.json(
-      { error: 'Unable to submit Success Meter form right now.' },
-      { status: 500 }
-    );
+    console.error('Success meter submission error:', {
+      message: error?.message,
+      code: error?.code,
+      responseCode: error?.responseCode,
+      response: error?.response,
+      command: error?.command
+    });
+    const body = { error: 'Unable to submit Success Meter form right now.' };
+    if (process.env.DEBUG_EMAIL === '1') {
+      body.detail = error?.message;
+      body.smtpResponse = error?.response;
+    }
+    return NextResponse.json(body, { status: 500 });
   }
 }
