@@ -145,9 +145,10 @@ GEMINI_MODEL=gemini-2.0-flash   # optional, this is the default
 # Email — Microsoft 365 / Outlook (Contact, Admission & Success Meter)
 SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
-SMTP_USER=noreply@yourdomain.com   # full Microsoft 365 mailbox address
-SMTP_PASS=                         # mailbox password, or an app password if MFA is on
-SMTP_FROM=noreply@yourdomain.com   # must match SMTP_USER (or a mailbox it has "Send As" rights on)
+SMTP_USER=mailer@yourdomain.com    # a LICENSED mailbox that authenticates (the login)
+SMTP_PASS=                         # its password, or an app password if MFA is on
+SMTP_FROM=noreply@yourdomain.com   # the address recipients see — may be an unlicensed
+                                   # shared mailbox, IF SMTP_USER has "Send As" rights on it
 
 # Where each form's enquiries are delivered (all optional — sensible defaults exist)
 CONTACT_TO=contact@yourdomain.com       # /api/contact
@@ -177,7 +178,26 @@ SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 >    `5.7.60 Client does not have permissions to send as this user` — Gmail was more
 >    lenient here.
 > 3. **MFA mailboxes can't use the normal password** for SMTP — generate an app
->    password, or (cleaner) use a dedicated `noreply@` mailbox with SMTP AUTH enabled.
+>    password, or (cleaner) use a dedicated service mailbox with SMTP AUTH enabled.
+> 4. **You cannot authenticate as an unlicensed or shared mailbox.** SMTP AUTH needs a
+>    **licensed** mailbox with a real sign-in. Shared mailboxes have their sign-in
+>    disabled, and unlicensed user accounts have no working Exchange Online mailbox —
+>    neither can be `SMTP_USER`. See the pattern below.
+>
+> **Recommended pattern for Office 365 A1 (unlicensed `contact@` / `noreply@`):**
+> You do **not** need to buy licences for `contact@` and `noreply@`. Receiving mail
+> needs no licence, and sending is done *through* one licensed account:
+> 1. Keep `contact@yourdomain.com` and `noreply@yourdomain.com` as **shared mailboxes**
+>    (free, no licence). They can receive form enquiries as-is.
+> 2. Assign **one** A1 licence to a dedicated service account, e.g.
+>    `mailer@yourdomain.com` (better than using a teacher's account — sending won't
+>    break when a teacher changes their password or leaves).
+> 3. Grant that service account **Send As** on both shared mailboxes
+>    (`Add-RecipientPermission noreply@yourdomain.com -Trustee mailer@yourdomain.com -AccessRights SendAs`).
+> 4. Enable Authenticated SMTP on `mailer@yourdomain.com` and set
+>    `SMTP_USER=mailer@yourdomain.com`, `SMTP_PASS=<its password/app password>`,
+>    `SMTP_FROM=noreply@yourdomain.com`. The auth identity and the From address are
+>    intentionally different — the code already supports this.
 >
 > **⚠️ Basic-auth SMTP is being retired.** Microsoft is phasing out username/password
 > SMTP AUTH: it keeps working through **December 2026**, after which it is disabled by
