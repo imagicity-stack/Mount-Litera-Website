@@ -20,6 +20,7 @@ export default async function handler(req, res) {
     name: result.name,
     picture: result.picture,
     role: result.role,
+    mustChangePassword: result.ok ? result.mustChangePassword : false,
     message: result.ok ? '' : result.reason
   });
 }

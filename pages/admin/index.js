@@ -8,13 +8,27 @@ import AdminShell from '@/components/admin/AdminShell';
 import DashboardOverview from '@/components/admin/DashboardOverview';
 import BlogManager from '@/components/admin/BlogManager';
 import PopupsManager from '@/components/admin/PopupsManager';
+import MediaManager from '@/components/admin/MediaManager';
 import { Spinner } from '@/components/admin/ui';
 
-const SECTIONS = ['dashboard', 'blogs', 'popups'];
+const SECTIONS = ['dashboard', 'media', 'blogs', 'popups'];
 
 export default function AdminPortal() {
   const router = useRouter();
-  const { phase, user, profile, error, signIn, logout, getFreshToken } = useAdminAuth();
+  const {
+    phase,
+    user,
+    profile,
+    error,
+    notice,
+    busy,
+    adminEmail,
+    signIn,
+    changePassword,
+    resetPassword,
+    logout,
+    getFreshToken
+  } = useAdminAuth();
   const [section, setSection] = useState('dashboard');
 
   // Sync section <-> ?tab= query param for shareable deep links.
@@ -41,7 +55,7 @@ export default function AdminPortal() {
     return (
       <>
         {head}
-        <div className="flex min-h-screen items-center justify-center bg-gradient-parchment">
+        <div className="flex min-h-screen items-center justify-center bg-ivory">
           <Spinner label="Loading portal…" />
         </div>
       </>
@@ -52,7 +66,17 @@ export default function AdminPortal() {
     return (
       <>
         {head}
-        <LoginScreen phase={phase} error={error} onSignIn={signIn} />
+        <LoginScreen
+          phase={phase}
+          error={error}
+          notice={notice}
+          busy={busy}
+          adminEmail={adminEmail}
+          onSignIn={signIn}
+          onChangePassword={changePassword}
+          onResetPassword={resetPassword}
+          onLogout={logout}
+        />
       </>
     );
   }
@@ -64,6 +88,7 @@ export default function AdminPortal() {
         {section === 'dashboard' && (
           <DashboardOverview profile={profile} getToken={getFreshToken} onNavigate={changeSection} />
         )}
+        {section === 'media' && <MediaManager user={user} getToken={getFreshToken} />}
         {section === 'blogs' && <BlogManager user={user} getToken={getFreshToken} />}
         {section === 'popups' && <PopupsManager user={user} getToken={getFreshToken} />}
       </AdminShell>

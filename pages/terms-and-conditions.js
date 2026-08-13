@@ -84,7 +84,7 @@ export default function TermsPage() {
 
               <div className="space-y-6">
                 {sections.map((section) => (
-                  <div key={section.heading} className="surface-card rounded-[22px] p-8">
+                  <div key={section.heading} className="surface-card rounded-none p-8">
                     <h2
                       className="font-garamond text-2xl font-semibold text-midnight"
                       dangerouslySetInnerHTML={{ __html: section.heading }}
@@ -112,7 +112,7 @@ export default function TermsPage() {
                   </div>
                 ))}
 
-                <div className="surface-card rounded-[22px] p-8">
+                <div className="surface-card rounded-none p-8">
                   <h2 className="font-garamond text-2xl font-semibold text-midnight">9 · Contact</h2>
                   <span className="mt-3 block h-px w-12 bg-gradient-to-r from-gold to-transparent" />
                   <ul className="mt-4 space-y-3 text-midnight/80">

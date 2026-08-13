@@ -19,7 +19,7 @@ export default function HouseDetailPage({ house }) {
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex flex-1 items-center justify-center px-6 py-16">
-          <div className="surface-card max-w-xl space-y-4 rounded-[28px] p-12 text-center">
+          <div className="surface-card max-w-xl space-y-4 rounded-none p-12 text-center">
             <span className="eyebrow justify-center">404</span>
             <h1 className="font-garamond text-3xl font-semibold text-midnight md:text-4xl">
               House not found.
@@ -63,7 +63,7 @@ export default function HouseDetailPage({ house }) {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="surface-card relative overflow-hidden rounded-[28px] p-10">
+                  <div className="surface-card relative overflow-hidden rounded-none p-10">
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
                     <div className="pointer-events-none absolute -top-24 -right-24 h-60 w-60 rounded-full bg-gold/15 blur-[100px]" />
                     <div className="relative aspect-square w-full">
@@ -163,7 +163,7 @@ export default function HouseDetailPage({ house }) {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <motion.article
-                  className="group overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                  className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -190,7 +190,7 @@ export default function HouseDetailPage({ house }) {
                 </motion.article>
 
                 <motion.article
-                  className="group overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                  className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -251,7 +251,7 @@ export default function HouseDetailPage({ house }) {
                     <Link
                       key={entry.slug}
                       href={`/houses/${entry.slug}`}
-                      className="group flex w-[220px] flex-shrink-0 snap-start flex-col overflow-hidden rounded-[20px] border border-midnight/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)]"
+                      className="group flex w-[220px] flex-shrink-0 snap-start flex-col overflow-hidden rounded-none border border-midnight/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)]"
                     >
                       <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-midnight/5 to-parchment">
                         <Image

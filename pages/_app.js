@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { FACEBOOK_PIXEL_CODE, trackFacebookEvent } from '@/lib/facebookPixel';
+import { SiteMediaProvider } from '@/lib/useSiteMedia';
 import SeoContent from '@/components/SeoContent';
 import PopupManager from '@/components/popups/PopupManager';
 
@@ -47,7 +48,9 @@ export default function MyApp({ Component, pageProps }) {
         }}
       />
       <SeoContent />
-      <Component {...pageProps} />
+      <SiteMediaProvider>
+        <Component {...pageProps} />
+      </SiteMediaProvider>
       <PopupManager />
     </>
   );

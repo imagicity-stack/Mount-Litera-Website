@@ -82,7 +82,7 @@ const MentorCard = ({ name, designation }) => {
   const photoSrc = mentorPhotos[name];
 
   return (
-    <div className="group overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]">
+    <div className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]">
       {photoSrc ? (
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-midnight/5">
           <Image

@@ -7,7 +7,10 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
 > redirects to `/admin`.
 
 ## Features
-- **`/admin` portal** with Google authentication and a dark, dashboard-style UI.
+- **`/admin` portal** with email/password authentication (no federated
+  sign-in) and a forced password change on the first login.
+- **Site Images library**: every managed photograph on the public site,
+  uploadable from the portal with a reference image shown for comparison.
 - **WordPress-like blog studio**: rich-text editor, featured images, drafts,
   scheduling, categories, and tags.
 - **Live SEO analytics** (Yoast-style): focus-keyword checks, readability,
@@ -19,7 +22,7 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
   modals, slide-ins, banners, and fullscreen takeovers.
 - **Enhanced public blog page** with a dedicated mobile feed and an
   immersive reading modal (reading progress, share, deep-link).
-- Firebase Authentication (Google), Firestore, and Storage.
+- Firebase Authentication (email/password), Firestore, and Storage.
 - Firebase Admin SDK-backed API routes for secure CRUD operations.
 - All Firebase config is read from **Vercel environment variables**.
 
@@ -65,8 +68,8 @@ Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md`
 ### 1) Create a Firebase project
 1. Go to [Firebase Console](https://console.firebase.google.com/).
 2. Create a new project.
-3. Enable **Authentication → Google** (add your production domain + `localhost`
-   to the authorised domains list).
+3. Enable **Authentication → Email/Password**. (Google sign-in is *not* used by
+   the portal and does not need to be enabled.)
 4. Create a **Firestore Database**.
 5. Create a **Storage** bucket.
 
@@ -124,6 +127,9 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
+
+# The administrator address shown on the /admin login screen.
+NEXT_PUBLIC_ADMIN_EMAIL=admin@eldenheights.org
 ```
 > Alternatively, paste the whole web config object as a single JSON variable:
 > `NEXT_PUBLIC_FIREBASE_CONFIG={"apiKey":"…","authDomain":"…", …}`
@@ -135,8 +141,13 @@ FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 FIREBASE_STORAGE_BUCKET=
 
-# Admin authorisation (comma separated Google emails)
+# Admin authorisation (comma separated; the first entry is the account that
+# /api/admin/bootstrap provisions)
 ADMIN_EMAILS=admin@eldenheights.org
+
+# One-time bootstrap password for the very first sign-in. Remove after the
+# administrator has set their own password.
+ADMIN_INITIAL_PASSWORD=
 
 # Gemini SEO assistant
 GEMINI_API_KEY=
@@ -251,11 +262,84 @@ frequency, page targeting, scheduling, priority, and live analytics
 `PopupManager` and records impressions/clicks through `POST /api/popups/track`.
 
 ## Security Notes
-- Admin access requires a Google sign-in whose email is in `ADMIN_EMAILS`
-  **or** a Firestore `users/{uid}` doc with `role = "admin"`.
+- Admin access requires an email/password sign-in whose email is in
+  `ADMIN_EMAILS` **or** a Firestore `users/{uid}` doc with `role = "admin"`.
+  The email published in `NEXT_PUBLIC_ADMIN_EMAIL` is a convenience for the
+  login form only — it grants nothing on its own.
+- A newly provisioned account cannot use the portal until it has replaced the
+  password it was issued with; `/api/admin/verify` reports
+  `mustChangePassword` until `users/{uid}.passwordChangedAt` exists.
+- `/api/admin/bootstrap` is idempotent and refuses to modify an existing
+  account, so it cannot be used to reset a live administrator's password.
 - All blog, popup, and Gemini routes validate the Firebase ID token server-side
   via the Admin SDK before any write.
 - The `/admin` route is `noindex, nofollow` and is not linked publicly.
+
+---
+
+## Site Images (admin-managed)
+
+Every photograph on the public site that the school can change lives in the
+**Site Images** tab of the admin portal. Nothing needs a deploy.
+
+### How it works
+
+- **`lib/mediaSlots.js`** is the catalogue. Each entry is a *slot*: a stable
+  key (`home.hero`), the page group it belongs to, the aspect ratio it renders
+  in, the recommended pixel size, and a **reference image** shipped in
+  `/public`.
+- The reference image is what renders until someone uploads a replacement, and
+  it is shown in the portal beside the live image so the editor can see exactly
+  what they are replacing.
+- Uploads go to Firebase Storage under `site-media/{slotKey}/` and the record
+  is written to the Firestore collection **`siteMedia`**, document id = slot key.
+- `GET /api/media` returns the public map and is consumed once per session by
+  `SiteMediaProvider` (in `_app.js`), which caches it in `localStorage` so
+  returning visitors paint the uploaded image on the first frame.
+- `components/media/SiteImage.js` renders a slot. The frame holds its aspect
+  ratio whichever image is showing, so swapping one in never shifts the layout.
+
+### What the editor controls per slot
+
+| Control | Effect |
+| --- | --- |
+| Upload / replace | Sets the live image. Takes effect immediately. |
+| Description | The alt text for screen readers. In the campus mosaic it is also the visible caption, so it can never contradict the picture. |
+| Focus of the crop | Which part of the picture to keep when the frame is narrower than the image (`object-position`). |
+| Reset to reference | Deletes the upload and its stored file, restoring the image shipped with the site. |
+
+### Adding a new managed image
+
+1. Add an entry to `mediaSlots` in `lib/mediaSlots.js` (key, group, label, note,
+   ratio, size, `ref`, `alt`).
+2. Render it: `<SiteImage slot="your.new.key" />`.
+
+It appears in the portal automatically — there is no second place to register
+it. Records whose slot has been removed from the registry are ignored by
+`/api/media`, so deleting a slot is safe.
+
+### Degraded behaviour
+
+If Firebase is unreachable, `/api/media` returns an empty map with `200` rather
+than an error, and every slot falls back to its reference image. A broken
+backend can never blank the site.
+
+---
+
+## Motion
+
+Three shared primitives in `components/motion/`, all of which honour
+`prefers-reduced-motion`:
+
+- **`Reveal`** — fade and rise for text blocks. `index` staggers a group.
+- **`ImageReveal`** — the house transition for photographs: the frame fades up
+  while the image settles back from a slight overscale.
+- **`Parallax`** — scroll-linked drift for full-bleed backdrops. The inner
+  layer is over-tall so the movement never exposes an edge.
+
+`components/home/ScrollStory.js` is the one bespoke piece: a pinned section
+where the learning-journey photographs and captions cross-fade as you scroll.
+Under reduced motion it degrades to three plainly stacked chapters.
 
 ---
 
@@ -272,6 +356,10 @@ service firebase.storage {
       allow write: if request.auth != null;
     }
     match /popups/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /site-media/{slot}/{allPaths=**} {
       allow read: if true;
       allow write: if request.auth != null;
     }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 const NAV = [
   { id: 'dashboard', label: 'Dashboard', icon: 'M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z' },
+  { id: 'media', label: 'Site Images', icon: 'M4 5h16v14H4V5Zm0 10 4.5-4.5 3.5 3.5 3-3L20 15M9 9.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z' },
   { id: 'blogs', label: 'Blogs', icon: 'M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm2 5h8M7 13h8M7 17h5' },
   { id: 'popups', label: 'Popups', icon: 'M4 5h16v11H13l-4 3v-3H4V5Z' }
 ];

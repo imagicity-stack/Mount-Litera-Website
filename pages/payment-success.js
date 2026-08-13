@@ -45,7 +45,7 @@ export default function PaymentSuccess() {
           />
           <section className="relative py-24 md:py-32">
             <div className="mx-auto max-w-3xl px-6">
-              <div className="surface-card relative overflow-hidden rounded-[28px] p-10 text-center md:p-14">
+              <div className="surface-card relative overflow-hidden rounded-none p-10 text-center md:p-14">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
                 <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/15 blur-[100px]" />
 

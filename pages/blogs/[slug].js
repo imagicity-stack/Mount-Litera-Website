@@ -29,7 +29,7 @@ export default function BlogDetailPage({ blog }) {
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
         <main className="flex flex-1 items-center justify-center px-6 py-16">
-          <div className="surface-card max-w-xl space-y-4 rounded-[28px] p-12 text-center">
+          <div className="surface-card max-w-xl space-y-4 rounded-none p-12 text-center">
             <span className="eyebrow justify-center">404</span>
             <h1 className="font-garamond text-3xl font-semibold text-midnight md:text-4xl">
               Story not found.
@@ -120,7 +120,7 @@ export default function BlogDetailPage({ blog }) {
           <section className="relative pb-24 md:pb-32">
             <div className="mx-auto max-w-4xl px-6 space-y-10">
               {blog.coverImage && (
-                <figure className="img-zoom relative overflow-hidden rounded-[28px] border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]">
+                <figure className="img-zoom relative overflow-hidden rounded-none border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]">
                   <img
                     src={blog.coverImage}
                     alt={blog.coverImageAlt || blog.title}
@@ -146,7 +146,7 @@ export default function BlogDetailPage({ blog }) {
                   )}
                 </figure>
               )}
-              <article className="surface-card rounded-[28px] px-6 py-10 sm:px-10 md:px-14 md:py-14">
+              <article className="surface-card rounded-none px-6 py-10 sm:px-10 md:px-14 md:py-14">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
                 {hasRichText(blog.content) ? (
                   <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />

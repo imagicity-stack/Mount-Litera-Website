@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import ArrowLink from '@/components/ArrowLink';
+import SiteImage from '@/components/media/SiteImage';
+import ImageReveal from '@/components/motion/ImageReveal';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 
 export const stageDetails = [
@@ -58,151 +61,120 @@ export const stageDetails = [
   }
 ];
 
-const stageImages = [
-  '/home/academics-foundation.jpg',
-  '/home/academics-prep.jpg',
-  '/home/academics-middle.jpg',
-  '/home/academics-secondary.jpg'
+const stageSlots = [
+  'academics.stage.foundational',
+  'academics.stage.preparatory',
+  'academics.stage.middle',
+  'academics.stage.secondary'
 ];
-const stageImageAlts = [
-  'Students learning at best school in Hazaribagh',
-  'Classroom learning at the best school in Hazaribagh',
-  'School activities at Elden Heights in Hazaribagh Jharkhand',
-  'Elden Heights School campus in Hazaribagh Jharkhand'
+
+const stageAnchors = [
+  '/academics#learning-journey',
+  '/academics#learning-journey',
+  '/academics#learning-journey',
+  '/academics#learning-journey'
+];
+
+const commitments = [
+  'Warm, caring classrooms',
+  'Balanced academics and activities',
+  'Focus on communication skills',
+  'Early digital awareness'
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
 export default function Academics({ showExplore = true }) {
   return (
-    <section id="academics" className="relative py-24 md:py-32">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start">
-          <motion.div
-            className="space-y-7 lg:sticky lg:top-32"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="eyebrow">Academic Expanse</span>
-            <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[54px]">
-              Excellence at one of the{' '}
-              <span className="italic">
-                <span className="relative">
-                  leading private
-                  <span className="absolute inset-x-0 bottom-0 h-[3px] -translate-y-1 bg-gradient-to-r from-gold via-cardinal to-gold opacity-70" />
-                </span>{' '}
-                high schools.
-              </span>
-            </h2>
-            <p className="max-w-xl text-base leading-relaxed text-midnight/75 md:text-lg">
+    <section id="academics" className="band-white">
+      <div className="shell py-20 md:py-28">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="grid gap-8 md:grid-cols-2 md:gap-16"
+        >
+          <h2 className="font-display text-[clamp(2.25rem,4.4vw,3.75rem)] font-medium leading-[1.06] text-ink">
+            Academics
+          </h2>
+          <div className="flex flex-col items-start gap-7">
+            <p className="lede">
               The Elden Heights School follows a simple, age-appropriate path across four stages.
-              Each step gently strengthens confidence, curiosity, and core skills — so children
-              feel ready for what comes next.
+              Each step strengthens confidence, curiosity, and core skills — so children feel ready
+              for what comes next.
             </p>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              {[
-                'Warm, caring classrooms',
-                'Balanced academics & activities',
-                'Focus on communication skills',
-                'Early digital awareness'
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="group flex items-center gap-3 rounded-xl border border-midnight/10 bg-white/70 px-4 py-3 text-sm text-midnight/80 backdrop-blur transition-all duration-400 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_20px_40px_-20px_rgba(10,10,12,0.2)]"
-                >
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cardinal/90 to-cardinal-700 shadow-cardinal">
-                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5 text-parchment">
-                      <path d="M5 12l4 4 10-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-
             {showExplore && (
-              <div className="flex flex-wrap items-center gap-5 pt-2">
-                <Link
-                  href="/academics"
-                  className="btn-primary"
-                  onClick={() =>
-                    trackFacebookEvent('ViewContent', {
-                      component: 'academics_section_cta',
-                    })
-                  }
-                >
-                  Explore Academics
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14m-4-4l4 4-4 4" />
-                  </svg>
-                </Link>
-                <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-midnight/60">
-                  <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
-                  Four stages · One journey
-                </span>
-              </div>
-            )}
-          </motion.div>
-
-          <div className="grid gap-5 sm:grid-cols-2">
-            {stageDetails.map((stage, index) => (
-              <motion.article
-                key={stage.title}
-                className="group relative overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
+              <ArrowLink
+                href="/academics"
+                onClick={() =>
+                  trackFacebookEvent('ViewContent', { component: 'academics_section_cta' })
+                }
               >
-                <div
-                  className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.12] transition-opacity duration-500 group-hover:opacity-[0.2]"
-                  style={{ backgroundImage: `url('${stageImages[index]}')` }}
-                  aria-hidden="true"
-                >
-                  <img src={stageImages[index]} alt={stageImageAlts[index]} className="sr-only" />
-                </div>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/80 via-white/50 to-transparent" />
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                <div className="relative flex h-full flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-garamond text-[11px] font-semibold uppercase tracking-[0.3em] text-cardinal">
-                      Stage {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="rounded-full border border-midnight/15 bg-white/70 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.25em] text-midnight/70 backdrop-blur">
-                      {stage.grades}
-                    </span>
-                  </div>
-
-                  <h3 className="font-garamond text-2xl font-semibold leading-tight text-midnight md:text-[26px]">
-                    {stage.title}
-                  </h3>
-
-                  <p className="text-sm leading-relaxed text-midnight/75">
-                    {stage.homeSummary}
-                  </p>
-
-                  <div className="mt-auto flex items-center justify-between pt-3">
-                    <span className="h-px flex-1 bg-gradient-to-r from-gold/40 to-transparent" />
-                    <span className="ml-4 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-midnight/50 transition-colors group-hover:text-cardinal">
-                      Learn more
-                      <span className="transition-transform duration-400 group-hover:translate-x-1">→</span>
-                    </span>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
+                Explore all of our academics
+              </ArrowLink>
+            )}
           </div>
+        </motion.div>
+
+        <span className="rule-heavy mt-14 md:mt-16" />
+
+        <p className="mt-12 text-[1.05rem] text-ink-soft md:text-lg">
+          The Elden Heights{' '}
+          <Link href="/academics#learning-journey" className="hv-link">
+            learning journey
+          </Link>{' '}
+          is composed of four stages:
+        </p>
+
+        <div className="mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          {stageDetails.map((stage, index) => (
+            <motion.article
+              key={stage.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
+              className="group flex flex-col"
+            >
+              <ImageReveal index={index} stagger={0.09}>
+                <Link href={stageAnchors[index]} className="img-zoom block">
+                  <SiteImage slot={stageSlots[index]} imgClassName="img-layer" />
+                </Link>
+              </ImageReveal>
+
+              <p className="mt-6 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
+                Stage {String(index + 1).padStart(2, '0')} · {stage.grades}
+              </p>
+
+              <h3 className="mt-3">
+                <Link href={stageAnchors[index]} className="hv-link-serif">
+                  {stage.title}
+                </Link>
+              </h3>
+
+              <p className="mt-5 text-[0.95rem] italic leading-relaxed text-ink-soft">
+                {stage.homeSummary}
+              </p>
+            </motion.article>
+          ))}
         </div>
+
+        <ul className="mt-16 grid gap-x-8 border-t border-hairline sm:grid-cols-2 lg:grid-cols-4">
+          {commitments.map((item) => (
+            <li
+              key={item}
+              className="border-b border-hairline py-5 text-[0.95rem] font-bold text-ink lg:border-b-0"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

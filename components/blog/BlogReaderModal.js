@@ -89,7 +89,7 @@ export default function BlogReaderModal({ blog, onClose }) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: '100%', opacity: 0 }}
             transition={{ type: 'spring', damping: 30, stiffness: 280 }}
-            className="relative flex h-[94vh] w-full flex-col overflow-hidden rounded-t-[28px] bg-parchment shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.6)] sm:h-[90vh] sm:max-w-3xl sm:rounded-[28px]"
+            className="relative flex h-[94vh] w-full flex-col overflow-hidden rounded-t-none bg-parchment shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.6)] sm:h-[90vh] sm:max-w-3xl sm:rounded-none"
           >
             {/* Progress bar */}
             <div className="absolute inset-x-0 top-0 z-20 h-1 bg-black/5">
