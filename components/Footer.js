@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const exploreLinks = [
   { label: 'About', href: '/about' },
@@ -63,7 +64,7 @@ const socialLinks = [
           d="M21.6 7.6a2.5 2.5 0 00-1.8-1.8C18.2 5.4 12 5.4 12 5.4s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.6 26.4 26.4 0 002 12a26.4 26.4 0 00.4 4.4 2.5 2.5 0 001.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8A26.4 26.4 0 0022 12a26.4 26.4 0 00-.4-4.4z"
           fill="currentColor"
         />
-        <path d="M10 15.2l5-3.2-5-3.2v6.4z" fill="#0A0A0C" />
+        <path d="M10 15.2l5-3.2-5-3.2v6.4z" fill="#0D0D0D" />
       </svg>
     )
   }
@@ -71,11 +72,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-16 overflow-hidden bg-gradient-to-br from-midnight via-graphite to-midnight text-parchment">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/55 to-transparent" />
-      <div className="pointer-events-none absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full bg-cardinal/20 blur-[140px]" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-[420px] w-[420px] rounded-full bg-gold/10 blur-[140px]" />
-
+    <footer className="band-ink">
       <nav className="sr-only" aria-label="Site navigation">
         <p>Explore Elden Heights School pages</p>
         <ul>
@@ -102,28 +99,25 @@ export default function Footer() {
         </ul>
       </nav>
 
-      <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-10 md:px-10">
-        <div className="grid gap-14 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-gold" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
-                Est. Heritage
-              </span>
-            </div>
-            <p className="font-garamond text-4xl font-semibold leading-tight text-parchment md:text-5xl">
-              The Elden Heights
-              <br />
-              <span className="italic">
-                <span className="gold-text">School</span>
-              </span>
-            </p>
-            <p className="max-w-sm text-sm leading-relaxed text-parchment/70">
+      <div className="shell py-16 md:py-20">
+        <span className="rule-heavy-light" />
+
+        <div className="mt-12 grid gap-12 md:grid-cols-[1.6fr_1fr_1fr_1.1fr] md:gap-10">
+          <div>
+            <Link href="/" aria-label="Go to home page" className="inline-flex">
+              <Image
+                src="/website/header.png"
+                alt="The Elden Heights School logo"
+                width={260}
+                height={120}
+                className="h-[54px] w-auto brightness-0 invert"
+              />
+            </Link>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
               Recognised among the top schools in Hazaribagh — shaping confident, capable, and
-              creative learners since inception, under the patronage of Bhagwati Educational &amp;
-              Charitable Trust.
+              creative learners under the patronage of Bhagwati Educational &amp; Charitable Trust.
             </p>
-            <div className="flex items-center gap-3 pt-2">
+            <div className="mt-7 flex items-center gap-3">
               {socialLinks.map(({ label, href, icon }) => (
                 <a
                   key={label}
@@ -131,7 +125,7 @@ export default function Footer() {
                   aria-label={label}
                   rel="noreferrer"
                   target="_blank"
-                  className="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-parchment/20 bg-white/5 text-parchment transition-all duration-400 ease-elite hover:-translate-y-0.5 hover:border-gold/60 hover:bg-gold/15 hover:text-gold-200"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors duration-300 hover:border-crimson hover:bg-crimson"
                 >
                   {icon}
                 </a>
@@ -139,16 +133,16 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="space-y-5">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
               Explore
             </p>
-            <ul className="space-y-3 text-sm text-parchment/80">
+            <ul className="mt-5 space-y-3">
               {exploreLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="link-underline transition hover:text-gold-200"
+                    className="text-sm font-bold text-white transition-colors hover:text-crimson-300"
                   >
                     {link.label}
                   </Link>
@@ -157,16 +151,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-5">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
               Policies
             </p>
-            <ul className="space-y-3 text-sm text-parchment/80">
+            <ul className="mt-5 space-y-3">
               {policyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="link-underline transition hover:text-gold-200"
+                    className="text-sm font-bold text-white transition-colors hover:text-crimson-300"
                   >
                     {link.label}
                   </Link>
@@ -175,54 +169,50 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-5">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
               Contact
             </p>
-            <ul className="space-y-4 text-sm text-parchment/80">
+            <ul className="mt-5 space-y-5 text-sm">
               <li>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-parchment/50">General</p>
+                <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">General</p>
                 <a
                   href="mailto:contact@eldenhieghts.org"
-                  className="mt-1 block transition hover:text-gold-200"
+                  className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
                 >
                   contact@eldenhieghts.org
                 </a>
               </li>
               <li>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-parchment/50">Admissions</p>
+                <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Admissions</p>
                 <a
                   href="mailto:admission@eldenheights.org"
-                  className="mt-1 block transition hover:text-gold-200"
+                  className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
                 >
                   admission@eldenheights.org
                 </a>
               </li>
               <li>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-parchment/50">Phone</p>
-                <a href="tel:+919431904333" className="mt-1 block transition hover:text-gold-200">
+                <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Phone</p>
+                <a
+                  href="tel:+919431904333"
+                  className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
+                >
                   +91 94319 04333
                 </a>
               </li>
               <li>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-parchment/50">Location</p>
-                <p className="mt-1">Hazaribagh, Jharkhand · India</p>
+                <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Location</p>
+                <p className="mt-1 text-white/75">Hazaribagh, Jharkhand · India</p>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 pt-8">
-          <div className="gold-rule-wide" />
-          <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs md:flex-row">
-            <p className="text-parchment/60">
-              © {new Date().getFullYear()} The Elden Heights School · All rights reserved.
-            </p>
-            <p className="flex items-center gap-3 font-garamond italic text-parchment/70">
-              <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
-              Towards Eternal Glory
-              <span className="h-px w-8 bg-gradient-to-l from-gold to-transparent" />
-            </p>
+        <div className="mt-16 border-t border-white/15 pt-8">
+          <div className="flex flex-col gap-3 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
+            <p>© {new Date().getFullYear()} The Elden Heights School. All rights reserved.</p>
+            <p className="font-display text-sm italic text-white/70">Towards Eternal Glory</p>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function LoginScreen({ phase, error, onSignIn }) {
       <div className="pointer-events-none absolute -left-40 top-20 h-[480px] w-[480px] rounded-full bg-gold/10 blur-[150px]" />
       <div className="pointer-events-none absolute -right-40 bottom-10 h-[480px] w-[480px] rounded-full bg-cardinal/10 blur-[150px]" />
 
-      <div className="relative w-full max-w-md rounded-[28px] border border-midnight/10 bg-white p-10 shadow-elite-xl">
+      <div className="relative w-full max-w-md rounded-none border border-midnight/10 bg-white p-10 shadow-elite-xl">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
         <div className="flex items-center gap-3">
           <span className="flex h-2 w-2">

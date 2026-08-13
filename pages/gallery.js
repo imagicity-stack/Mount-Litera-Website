@@ -104,7 +104,7 @@ export default function GalleryPage() {
                   return (
                     <motion.figure
                       key={image.src}
-                      className={`group relative overflow-hidden rounded-[18px] border border-midnight/10 bg-midnight/5 shadow-[0_20px_40px_-30px_rgba(10,10,12,0.3)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-30px_rgba(10,10,12,0.35)] ${span}`}
+                      className={`group relative overflow-hidden rounded-none border border-midnight/10 bg-midnight/5 shadow-[0_20px_40px_-30px_rgba(10,10,12,0.3)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-30px_rgba(10,10,12,0.35)] ${span}`}
                       variants={fadeUp}
                       initial="hidden"
                       whileInView="visible"

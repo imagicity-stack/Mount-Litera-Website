@@ -214,7 +214,7 @@ export default function AwardsAndRecognitionPage() {
                 </motion.div>
 
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[24px] p-8"
+                  className="surface-card relative overflow-hidden rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -269,7 +269,7 @@ export default function AwardsAndRecognitionPage() {
                 {awards.map((award, idx) => (
                   <motion.article
                     key={award.name}
-                    className="group relative overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    className="group relative overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
@@ -351,7 +351,7 @@ export default function AwardsAndRecognitionPage() {
               </div>
 
               <motion.div
-                className="mt-12 overflow-hidden rounded-[28px] surface-card-dark p-10 text-center text-parchment md:p-14"
+                className="mt-12 overflow-hidden rounded-none surface-card-dark p-10 text-center text-parchment md:p-14"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"

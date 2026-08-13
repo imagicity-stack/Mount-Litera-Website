@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import { HOUSES } from '@/lib/housesData';
@@ -70,6 +72,7 @@ export default function StudentsLifePage() {
       <Seo path="/students-life" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.studentsLife.section} links={sectionNav.studentsLife.links} />
         <main className="flex-1">
           <ImageBanner
             title="Student's Life"
@@ -111,7 +114,7 @@ export default function StudentsLifePage() {
                   </div>
                 </motion.div>
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[24px] p-8"
+                  className="surface-card relative overflow-hidden rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -181,7 +184,7 @@ export default function StudentsLifePage() {
                   >
                     <Link
                       href={`/houses/${house.slug}`}
-                      className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                      className="group flex h-full flex-col overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     >
                       <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-midnight/5 to-parchment">
                         <Image
@@ -234,7 +237,7 @@ export default function StudentsLifePage() {
                 {sports.map((sport, idx) => (
                   <motion.article
                     key={sport.name}
-                    className="group relative overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    className="group relative overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"

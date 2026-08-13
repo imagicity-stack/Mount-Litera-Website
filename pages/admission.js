@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import InquiryForm from '@/components/InquiryForm';
 import ImageBanner from '@/components/ImageBanner';
@@ -71,6 +73,7 @@ export default function AdmissionPage() {
       <Seo path="/admission" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.admission.section} links={sectionNav.admission.links} />
         <main className="flex-1">
           <ImageBanner
             title="Admissions 2026 – 27"
@@ -129,7 +132,7 @@ export default function AdmissionPage() {
                 {whyChoose.map((item, idx) => (
                   <motion.div
                     key={item.title}
-                    className="group relative overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-7 transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)]"
+                    className="group relative overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-7 transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
@@ -174,7 +177,7 @@ export default function AdmissionPage() {
                 {processSteps.map((step, idx) => (
                   <motion.div
                     key={step.step}
-                    className="relative rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-7"
+                    className="relative rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-7"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
@@ -198,7 +201,7 @@ export default function AdmissionPage() {
           <section className="relative py-24 md:py-32">
             <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
               <motion.div
-                className="surface-card rounded-[24px] p-10"
+                className="surface-card rounded-none p-10"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -217,7 +220,7 @@ export default function AdmissionPage() {
               </motion.div>
 
               <motion.div
-                className="surface-card rounded-[24px] p-10"
+                className="surface-card rounded-none p-10"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -243,7 +246,7 @@ export default function AdmissionPage() {
 
           <section className="relative py-10 md:py-14">
             <div className="mx-auto max-w-4xl px-6">
-              <div className="overflow-hidden rounded-[22px] border border-gold/30 bg-gradient-to-r from-gold/10 via-gold/5 to-gold/10 px-6 py-5 md:px-8">
+              <div className="overflow-hidden rounded-none border border-gold/30 bg-gradient-to-r from-gold/10 via-gold/5 to-gold/10 px-6 py-5 md:px-8">
                 <p className="flex flex-col gap-2 text-midnight md:flex-row md:items-center md:gap-4">
                   <span className="font-garamond text-sm font-semibold uppercase tracking-[0.3em] text-cardinal">
                     Important Note
@@ -276,7 +279,7 @@ export default function AdmissionPage() {
               </motion.div>
 
               <div className="space-y-10">
-                <div className="surface-card overflow-hidden rounded-[24px] p-8 md:p-10">
+                <div className="surface-card overflow-hidden rounded-none p-8 md:p-10">
                   <h3 className="font-garamond text-2xl font-semibold text-midnight">
                     1 · Admission &amp; Processing Fee
                   </h3>
@@ -331,7 +334,7 @@ export default function AdmissionPage() {
                   </div>
                 </div>
 
-                <div className="surface-card overflow-hidden rounded-[24px] p-8 md:p-10">
+                <div className="surface-card overflow-hidden rounded-none p-8 md:p-10">
                   <h3 className="font-garamond text-2xl font-semibold text-midnight">2 · KIT Charges</h3>
                   <span className="mt-3 block h-px w-14 bg-gradient-to-r from-gold to-transparent" />
                   <div className="mt-6 grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -348,7 +351,7 @@ export default function AdmissionPage() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
-                  <div className="surface-card rounded-[24px] p-8">
+                  <div className="surface-card rounded-none p-8">
                     <h3 className="font-garamond text-xl font-semibold text-midnight">
                       3a · Monthly Tuition
                     </h3>
@@ -362,7 +365,7 @@ export default function AdmissionPage() {
                       ))}
                     </div>
                   </div>
-                  <div className="surface-card rounded-[24px] p-8">
+                  <div className="surface-card rounded-none p-8">
                     <h3 className="font-garamond text-xl font-semibold text-midnight">
                       3b · Quarterly Tuition
                     </h3>
@@ -378,7 +381,7 @@ export default function AdmissionPage() {
                   </div>
                 </div>
 
-                <div className="surface-card rounded-[24px] p-8 md:p-10">
+                <div className="surface-card rounded-none p-8 md:p-10">
                   <h3 className="font-garamond text-2xl font-semibold text-midnight">
                     4 · Annual Miscellaneous Charges
                   </h3>
@@ -399,7 +402,7 @@ export default function AdmissionPage() {
                   </div>
                 </div>
 
-                <div className="surface-card rounded-[24px] p-8 md:p-10">
+                <div className="surface-card rounded-none p-8 md:p-10">
                   <h3 className="font-garamond text-2xl font-semibold text-midnight">
                     5 · Additional Information
                   </h3>
@@ -419,7 +422,7 @@ export default function AdmissionPage() {
                 </div>
               </div>
 
-              <div className="mt-16 overflow-hidden rounded-[28px] surface-card-dark p-10 text-center text-parchment md:p-14">
+              <div className="mt-16 overflow-hidden rounded-none surface-card-dark p-10 text-center text-parchment md:p-14">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
                 <span className="eyebrow eyebrow-dark justify-center">Priority Booking</span>
                 <h3 className="mt-4 font-garamond text-3xl font-semibold leading-tight text-parchment md:text-4xl">

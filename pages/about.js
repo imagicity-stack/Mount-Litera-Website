@@ -6,6 +6,8 @@ import About from '@/components/About';
 import ImageBanner from '@/components/ImageBanner';
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 
 const policies = [
@@ -89,8 +91,8 @@ function LeaderNote({ id, title, image, author, paragraphs }) {
         </div>
       </div>
       <div className="relative order-first lg:order-last">
-        <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
-        <div className="relative aspect-[3/4] overflow-hidden rounded-[28px] border border-gold/25 bg-parchment shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
+        <div className="absolute -inset-4 -z-10 rounded-none bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
+        <div className="relative aspect-[3/4] overflow-hidden rounded-none border border-gold/25 bg-parchment shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
           <Image
             src={image.src}
             alt={image.alt}
@@ -116,6 +118,7 @@ export default function AboutPage() {
       <Seo path="/about" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.about.section} links={sectionNav.about.links} />
         <main className="flex-1">
           <ImageBanner
             title="About The Elden Heights"
@@ -159,7 +162,7 @@ export default function AboutPage() {
                   >
                     <Link
                       href={card.href}
-                      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[24px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-8 transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     >
                       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                       <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
@@ -225,7 +228,7 @@ export default function AboutPage() {
 
           <section id="mission-vision" className="relative py-24 md:py-32">
             <div className="mx-auto max-w-6xl px-6">
-              <div className="relative overflow-hidden rounded-[32px] surface-card-dark text-parchment">
+              <div className="relative overflow-hidden rounded-none surface-card-dark text-parchment">
                 <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
                 <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />

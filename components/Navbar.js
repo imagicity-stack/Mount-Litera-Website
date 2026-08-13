@@ -71,10 +71,12 @@ const navItems = [
 ];
 
 const quickLinks = [
-  { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Admission Policy', href: '/policies/admission-policy' },
   { label: 'Disclosures', href: '/disclosures' },
-  { label: 'Terms & Conditions', href: '/terms-and-conditions' }
+  { label: 'Houses', href: '/houses' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Contact', href: '/contact' }
 ];
 
 export default function Navbar() {
@@ -88,7 +90,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 24);
     };
 
     window.addEventListener('scroll', onScroll);
@@ -134,342 +136,277 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
+
   const activeItem = navItems.find((item) => item.label === activeMenu);
 
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-500 ease-elite ${
-          menuOpen
-            ? 'bg-midnight/95 text-parchment border-b border-gold/25 backdrop-blur-xl'
-            : scrolled
-              ? 'bg-parchment/85 backdrop-blur-xl shadow-[0_10px_40px_-20px_rgba(10,10,12,0.3)] border-b border-black/10'
-              : 'bg-transparent border-b border-transparent'
+        className={`sticky top-0 z-50 w-full bg-white transition-shadow duration-300 ${
+          scrolled ? 'shadow-[0_1px_0_0_#D5D5D5]' : 'border-b border-hairline'
         }`}
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-        <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-5 py-4 md:px-10 lg:px-14">
-          <Link href="/" aria-label="Go to home page" className="group flex items-center gap-3">
-            <div className="relative">
+        <div className="shell flex items-center justify-between gap-6 py-4">
+          <Link href="/" aria-label="Go to home page" className="flex items-center">
+            <Image
+              src="/website/header.png"
+              alt="The Elden Heights School logo"
+              width={260}
+              height={120}
+              className="h-[46px] w-auto md:h-[56px] lg:h-[62px]"
+              priority
+            />
+          </Link>
+
+          <div className="flex items-center gap-5 md:gap-8">
+            <Link
+              href="/admission"
+              className="hidden text-[0.95rem] font-bold text-crimson underline decoration-2 underline-offset-[5px] transition-colors hover:text-ink sm:inline-flex"
+            >
+              Apply Now
+            </Link>
+
+            <button
+              type="button"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
+              className="group inline-flex items-center gap-3 text-[0.95rem] font-bold text-ink transition-colors hover:text-crimson"
+            >
+              <span>Menu</span>
+              <span className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full bg-ink transition-colors duration-300 group-hover:bg-crimson">
+                <span className="block h-[1.5px] w-4 bg-white" />
+                <span className="block h-[1.5px] w-4 bg-white" />
+                <span className="block h-[1.5px] w-4 bg-white" />
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div
+        className={`fixed inset-0 z-[60] transition-opacity duration-500 ease-elite ${
+          menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="relative flex h-full flex-col overflow-hidden bg-obsidian text-white">
+          <div className="shell flex items-center justify-between py-4">
+            <Link href="/" aria-label="Go to home page" className="flex items-center">
               <Image
                 src="/website/header.png"
                 alt="The Elden Heights School logo"
                 width={260}
                 height={120}
-                className="h-[54px] w-auto md:h-[64px] lg:h-[72px] transition-transform duration-500 ease-elite group-hover:scale-[1.02]"
+                className="h-[46px] w-auto brightness-0 invert md:h-[56px]"
                 priority
               />
-            </div>
-          </Link>
-
-          <div className="hidden items-center gap-8 lg:flex">
-            <div className="flex flex-col items-end">
-              <span className={`text-[10px] font-semibold uppercase tracking-[0.4em] transition-colors ${
-                menuOpen ? 'text-gold/70' : scrolled ? 'text-midnight/60' : 'text-midnight/70'
-              }`}>
-                Since a Heritage of Excellence
+            </Link>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+              className="group inline-flex items-center gap-3 text-[0.95rem] font-bold text-white"
+            >
+              <span>Close</span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink transition-colors duration-300 group-hover:bg-crimson group-hover:text-white">
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
               </span>
-              <span className={`font-garamond text-sm italic transition-colors ${
-                menuOpen ? 'text-parchment' : 'text-midnight/90'
-              }`}>
-                Towards Eternal Glory
-              </span>
-            </div>
-            <div className={`h-10 w-px transition-colors ${
-              menuOpen ? 'bg-gold/30' : 'bg-midnight/15'
-            }`} />
+            </button>
           </div>
 
-          <button
-            type="button"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-            className={`group relative inline-flex items-center gap-3 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.28em] transition-all duration-500 ease-elite ${
-              menuOpen
-                ? 'border border-gold/50 bg-transparent text-parchment'
-                : 'border border-midnight/25 bg-parchment/70 text-midnight backdrop-blur hover:border-midnight hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-12px_rgba(10,10,12,0.3)]'
-            }`}
-          >
-            <span className="flex flex-col items-center justify-center gap-[5px]">
-              <span
-                className={`block h-[1.5px] w-5 transition-all duration-400 ease-elite ${
-                  menuOpen
-                    ? 'translate-y-[3.5px] rotate-45 bg-gold'
-                    : 'bg-midnight group-hover:bg-cardinal'
-                }`}
-              />
-              <span
-                className={`block h-[1.5px] w-5 transition-all duration-400 ease-elite ${
-                  menuOpen
-                    ? '-translate-y-[3.5px] -rotate-45 bg-gold'
-                    : 'bg-midnight w-3 group-hover:w-5 group-hover:bg-cardinal'
-                }`}
-              />
-            </span>
-            <span>{menuOpen ? 'Close' : 'Menu'}</span>
-          </button>
-        </div>
-      </header>
+          <div className="flex flex-1 flex-col overflow-y-auto md:flex-row md:items-stretch md:gap-16 md:overflow-hidden">
+            <div className="w-full px-6 pb-12 pt-6 md:w-[52%] md:pl-12 md:pr-0 lg:pl-[4.5rem]">
+              <div className="hidden flex-col gap-1 md:flex">
+                {navItems.map((item, idx) => {
+                  const isActive = activeMenu === item.label;
+                  const hasSubItems = Boolean(item.subItems?.length);
 
-      <div
-        className={`fixed inset-0 z-[60] transform transition-all duration-700 ease-elite will-change-transform ${
-          menuOpen
-            ? 'pointer-events-auto translate-y-0 opacity-100'
-            : 'pointer-events-none -translate-y-6 opacity-0'
-        }`}
-        style={{ transitionProperty: 'transform, opacity' }}
-      >
-        <div className="relative h-full overflow-hidden bg-gradient-to-br from-midnight via-graphite to-midnight text-parchment">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.09]"
-            aria-hidden="true"
-            style={{
-              backgroundImage: "url('/main gate new.jpeg')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-          <div className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full bg-gold/10 blur-[140px]" />
-          <div className="pointer-events-none absolute -right-40 bottom-10 h-[520px] w-[520px] rounded-full bg-cardinal/20 blur-[140px]" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+                  const baseClass =
+                    'group block text-left font-display text-[2.4rem] font-medium leading-[1.22] tracking-tight transition-all duration-500 ease-elite lg:text-[3.1rem]';
+                  const motionClass = menuOpen
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0';
 
-          <div className="relative flex h-full flex-col">
-            <div className="flex items-center justify-between px-6 py-5 md:px-10 lg:px-14">
-              <Link href="/" aria-label="Go to home page" className="flex items-center">
-                <Image
-                  src="/website/header.png"
-                  alt="The Elden Heights School logo"
-                  width={220}
-                  height={100}
-                  className="h-[48px] w-auto md:h-[58px]"
-                  priority
-                />
-              </Link>
-              <button
-                type="button"
-                aria-label="Close menu"
-                onClick={() => setMenuOpen(false)}
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-parchment transition hover:text-gold-300"
-              >
-                Close
-              </button>
-            </div>
-
-            <div className="flex flex-1 flex-col overflow-y-auto md:flex-row md:items-stretch md:justify-between md:gap-16 md:overflow-hidden">
-              <div className="flex w-full flex-col justify-between px-6 pb-10 md:w-[48%] md:px-14 md:pt-6">
-                <div className="hidden flex-col gap-1 md:flex">
-                  <span className={`text-[10px] font-semibold uppercase tracking-[0.45em] text-gold-300 transition-all duration-700 ${
-                    menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                  }`}>
-                    Navigate
-                  </span>
-                  <span className={`mt-3 h-px w-14 bg-gradient-to-r from-gold to-transparent transition-all duration-700 delay-100 ${
-                    menuOpen ? 'opacity-100' : 'opacity-0'
-                  }`} />
-                </div>
-                <div className="hidden flex-col gap-3 md:mt-6 md:flex">
-                  {navItems.map((item, idx) => {
-                    const isActive = activeMenu === item.label;
-                    const hasSubItems = Boolean(item.subItems?.length);
-
-                    if (hasSubItems) {
-                      return (
-                        <button
-                          key={item.label}
-                          type="button"
-                          onMouseEnter={() => setActiveMenu(item.label)}
-                          onFocus={() => setActiveMenu(item.label)}
-                          onClick={() => setActiveMenu(item.label)}
-                          className={`group flex items-baseline gap-4 text-left font-garamond text-4xl font-semibold leading-[1.05] tracking-tight transition-all duration-500 ease-elite md:text-[54px] ${
-                            isActive
-                              ? 'text-parchment'
-                              : 'text-parchment/45 hover:text-parchment'
-                          } ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
-                          style={{ transitionDelay: `${120 + idx * 60}ms` }}
-                        >
-                          <span className={`font-avenir text-[11px] font-semibold tracking-[0.32em] transition-colors ${
-                            isActive ? 'text-gold' : 'text-parchment/30'
-                          }`}>
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          <span className="relative">
-                            {item.label}
-                            <span className={`absolute -bottom-1 left-0 h-[1px] bg-gold transition-all duration-500 ease-elite ${
+                  if (hasSubItems) {
+                    return (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onMouseEnter={() => setActiveMenu(item.label)}
+                        onFocus={() => setActiveMenu(item.label)}
+                        onClick={() => setActiveMenu(item.label)}
+                        className={`${baseClass} ${motionClass} ${
+                          isActive ? 'text-white' : 'text-white/55 hover:text-white'
+                        }`}
+                        style={{ transitionDelay: `${100 + idx * 45}ms` }}
+                      >
+                        <span className="relative inline-block">
+                          {item.label}
+                          <span
+                            className={`absolute -bottom-1 left-0 h-[2px] bg-white transition-all duration-500 ease-elite ${
                               isActive ? 'w-full' : 'w-0'
-                            }`} />
-                          </span>
-                        </button>
-                      );
-                    }
+                            }`}
+                          />
+                        </span>
+                      </button>
+                    );
+                  }
 
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      onMouseEnter={() => setActiveMenu('')}
+                      className={`${baseClass} ${motionClass} text-white/55 hover:text-white`}
+                      style={{ transitionDelay: `${100 + idx * 45}ms` }}
+                    >
+                      <span className="relative inline-block">
+                        {item.label}
+                        <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-white transition-all duration-500 ease-elite group-hover:w-full" />
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="md:hidden">
+                {navItems.map((item) => {
+                  const hasSubItems = Boolean(item.subItems?.length);
+
+                  if (!hasSubItems) {
                     return (
                       <Link
-                        key={item.href}
+                        key={`${item.label}-mobile-link`}
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        onMouseEnter={() => setActiveMenu('')}
-                        className={`group flex items-baseline gap-4 font-garamond text-4xl font-semibold leading-[1.05] tracking-tight text-parchment/60 transition-all duration-500 ease-elite md:text-[54px] hover:text-parchment ${
-                          menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                        }`}
-                        style={{ transitionDelay: `${120 + idx * 60}ms` }}
+                        className="flex items-center justify-between border-b border-white/15 py-4 font-display text-2xl font-medium text-white"
                       >
-                        <span className="font-avenir text-[11px] font-semibold tracking-[0.32em] text-parchment/30 group-hover:text-gold">
-                          {String(idx + 1).padStart(2, '0')}
-                        </span>
-                        <span className="relative">
-                          {item.label}
-                          <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-gold transition-all duration-500 ease-elite group-hover:w-full" />
-                        </span>
+                        {item.label}
+                        <span aria-hidden="true" className="text-white/60">→</span>
                       </Link>
                     );
-                  })}
-                </div>
+                  }
 
-                <div className="space-y-2 md:hidden">
-                  {navItems.map((item, idx) => {
-                    const hasSubItems = Boolean(item.subItems?.length);
-
-                    if (!hasSubItems) {
-                      return (
-                        <Link
-                          key={`${item.label}-mobile-link`}
-                          href={item.href}
-                          onClick={() => setMenuOpen(false)}
-                          className="flex items-center justify-between border-b border-parchment/10 py-4 font-garamond text-xl font-semibold text-parchment transition hover:text-gold-300"
-                        >
-                          <span className="flex items-baseline gap-3">
-                            <span className="text-[10px] font-avenir font-semibold tracking-[0.3em] text-gold-400">
-                              {String(idx + 1).padStart(2, '0')}
-                            </span>
-                            {item.label}
-                          </span>
-                          <span aria-hidden="true" className="text-gold-300">→</span>
-                        </Link>
-                      );
-                    }
-
-                    const isOpen = mobileOpenMenu === item.label;
-                    return (
-                      <div
-                        key={`${item.label}-mobile`}
-                        className="border-b border-parchment/10"
+                  const isOpen = mobileOpenMenu === item.label;
+                  return (
+                    <div key={`${item.label}-mobile`} className="border-b border-white/15">
+                      <button
+                        type="button"
+                        onClick={() => setMobileOpenMenu(isOpen ? '' : item.label)}
+                        className="flex w-full items-center justify-between py-4 font-display text-2xl font-medium text-white"
                       >
-                        <button
-                          type="button"
-                          onClick={() => setMobileOpenMenu(isOpen ? '' : item.label)}
-                          className="flex w-full items-center justify-between py-4 font-garamond text-xl font-semibold text-parchment transition hover:text-gold-300"
+                        {item.label}
+                        <span
+                          className={`text-white/60 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                          aria-hidden="true"
                         >
-                          <span className="flex items-baseline gap-3">
-                            <span className="text-[10px] font-avenir font-semibold tracking-[0.3em] text-gold-400">
-                              {String(idx + 1).padStart(2, '0')}
-                            </span>
-                            {item.label}
-                          </span>
-                          <span
-                            className={`text-gold-300 transition-transform duration-400 ease-elite ${isOpen ? 'rotate-180' : ''}`}
-                            aria-hidden="true"
-                          >
-                            ▾
-                          </span>
-                        </button>
-                        <div
-                          className={`grid overflow-hidden transition-all duration-500 ease-elite ${
-                            isOpen ? 'grid-rows-[1fr] pb-4 opacity-100' : 'grid-rows-[0fr] opacity-0'
-                          }`}
-                        >
-                          <div className="min-h-0 space-y-2 pl-8">
-                            {item.subItems.map((subItem) => (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                onClick={() => setMenuOpen(false)}
-                                className="block text-sm text-parchment/75 transition hover:text-gold-200"
-                              >
-                                {subItem.label}
-                              </Link>
-                            ))}
-                          </div>
+                          ▾
+                        </span>
+                      </button>
+                      <div
+                        className={`grid overflow-hidden transition-all duration-500 ease-elite ${
+                          isOpen ? 'grid-rows-[1fr] pb-5 opacity-100' : 'grid-rows-[0fr] opacity-0'
+                        }`}
+                      >
+                        <div className="min-h-0 space-y-3">
+                          {item.subItems.map((subItem) => (
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              onClick={() => setMenuOpen(false)}
+                              className="block text-[0.95rem] font-semibold text-white/75 transition hover:text-white"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ))}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="hidden md:flex md:w-[48%] md:items-center md:pr-14">
-                <div className="relative w-full">
-                  <div className="pointer-events-none absolute -left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent" />
-                  {activeItem?.subItems && (
-                    <div key={activeItem.label} className="space-y-8 animate-fade-up">
-                      <div className="flex items-center gap-4">
-                        <span className="h-px w-10 bg-gold" />
-                        <h3 className="text-[10px] font-semibold uppercase tracking-[0.45em] text-gold-300">
-                          {activeItem.label} — Overview
-                        </h3>
-                      </div>
-                      <div className="space-y-5">
-                        {activeItem.subItems.map((subItem, subIdx) => (
-                          <Link
-                            key={subItem.href}
-                            href={subItem.href}
-                            onClick={() => setMenuOpen(false)}
-                            className="group flex items-center justify-between gap-6 border-b border-parchment/10 pb-4 transition-all hover:border-gold/40"
-                            style={{ animationDelay: `${subIdx * 80}ms` }}
-                          >
-                            <span className="font-garamond text-2xl font-semibold text-parchment/85 transition-colors group-hover:text-parchment">
-                              {subItem.label}
-                            </span>
-                            <span className="translate-x-0 text-gold-300 transition-all duration-500 ease-elite group-hover:translate-x-1.5 group-hover:text-gold">
-                              →
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="glass-panel-dark mt-8 rounded-2xl p-6">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
-                          Admissions 2026 – 27
-                        </p>
-                        <p className="mt-3 font-garamond text-xl text-parchment">
-                          Limited seats remain for families seeking heritage-inspired, future-ready education.
-                        </p>
-                        <Link
-                          href="/admission"
-                          onClick={() => setMenuOpen(false)}
-                          className="link-underline mt-4 inline-flex text-sm font-semibold uppercase tracking-[0.25em] text-gold-300 hover:text-gold-200"
-                        >
-                          Begin Inquiry →
-                        </Link>
-                      </div>
                     </div>
-                  )}
-                </div>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="relative border-t border-parchment/10 px-6 py-6 md:px-14">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.28em] text-parchment/60 md:text-xs">
-                  {quickLinks.map((link) => (
+            <div className="hidden md:flex md:w-[48%] md:items-start md:pr-12 md:pt-6 lg:pr-[4.5rem]">
+              {activeItem?.subItems && (
+                <div key={activeItem.label} className="w-full animate-fade-up">
+                  <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
+                    {activeItem.label}
+                  </p>
+                  <span className="mt-4 block h-[3px] w-full bg-white" />
+                  <div className="mt-6 flex flex-col">
+                    {activeItem.subItems.map((subItem) => (
+                      <Link
+                        key={subItem.href}
+                        href={subItem.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center justify-between gap-6 border-b border-white/15 py-4 transition-colors hover:border-white/50"
+                      >
+                        <span className="text-[1.05rem] font-semibold text-white/85 transition-colors group-hover:text-white">
+                          {subItem.label}
+                        </span>
+                        <span className="text-white/50 transition-all duration-400 ease-elite group-hover:translate-x-1 group-hover:text-white">
+                          →
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="mt-10 border border-white/20 p-6">
+                    <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/60">
+                      Admissions 2026 – 27
+                    </p>
+                    <p className="mt-3 font-display text-2xl leading-snug text-white">
+                      Limited seats remain for the coming session.
+                    </p>
                     <Link
-                      key={link.label}
-                      href={link.href}
-                      className="transition hover:text-gold-200"
+                      href="/admission"
                       onClick={() => setMenuOpen(false)}
+                      className="arrow-cta arrow-cta--light mt-5"
                     >
-                      {link.label}
+                      <span className="arrow-cta__dot">
+                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden="true">
+                          <path d="M5 12h13m-5-5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      Begin your inquiry
                     </Link>
-                  ))}
+                  </div>
                 </div>
-                <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.3em] text-parchment/60">
-                  <span>Hazaribagh, Jharkhand</span>
-                  <span className="h-3 w-px bg-parchment/20" />
-                  <a href="tel:+919431904333" className="transition hover:text-gold-200">
-                    +91 94319 04333
-                  </a>
-                </div>
-              </div>
+              )}
+            </div>
+          </div>
+
+          <div className="border-t border-white/15">
+            <div className="shell flex flex-wrap items-center gap-x-7 gap-y-3 py-5">
+              <span className="flex items-center gap-2 text-[0.8rem] font-normal text-white/60">
+                Quick Links
+                <span aria-hidden="true">›</span>
+              </span>
+              {quickLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-[0.85rem] font-bold text-white transition-colors hover:text-crimson-300"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

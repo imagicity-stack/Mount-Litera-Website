@@ -145,20 +145,20 @@ export default function BlogsPage() {
           <section className="relative pb-24 pt-10 md:pb-32">
             <div className="mx-auto max-w-6xl px-6">
               {status === 'loading' && (
-                <div className="surface-card rounded-[28px] p-12 text-center text-midnight/60">
+                <div className="surface-card rounded-none p-12 text-center text-midnight/60">
                   <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-cardinal" />
                   <span className="ml-3 text-sm uppercase tracking-[0.25em]">Loading journal…</span>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className="rounded-[28px] border border-cardinal/25 bg-cardinal/5 p-10 text-center text-cardinal">
+                <div className="rounded-none border border-cardinal/25 bg-cardinal/5 p-10 text-center text-cardinal">
                   Unable to load the journal right now. Please try again later.
                 </div>
               )}
 
               {status === 'ready' && filtered.length === 0 && (
-                <div className="surface-card rounded-[28px] p-12 text-center text-midnight/60">
+                <div className="surface-card rounded-none p-12 text-center text-midnight/60">
                   No entries matched your search. Try a different keyword.
                 </div>
               )}
@@ -173,7 +173,7 @@ export default function BlogsPage() {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="surface-card group relative grid w-full overflow-hidden rounded-[28px] text-left md:grid-cols-[1.15fr_1fr]"
+                    className="surface-card group relative grid w-full overflow-hidden rounded-none text-left md:grid-cols-[1.15fr_1fr]"
                   >
                     <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
                     <div className="img-zoom relative h-56 overflow-hidden bg-midnight/5 md:h-full md:min-h-[340px]">
@@ -246,7 +246,7 @@ export default function BlogsPage() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true, amount: 0.1 }}
                           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (idx % 3) * 0.06 }}
-                          className="surface-card group relative flex flex-col overflow-hidden rounded-[24px] text-left hover-lift"
+                          className="surface-card group relative flex flex-col overflow-hidden rounded-none text-left hover-lift"
                         >
                           <div className="img-zoom relative h-48 overflow-hidden bg-midnight/5">
                             {blog.coverImage ? (

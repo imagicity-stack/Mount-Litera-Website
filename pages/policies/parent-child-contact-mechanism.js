@@ -27,7 +27,7 @@ export default function ParentChildContactPage() {
                 </h1>
                 <span className="mt-6 block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
               </div>
-              <div className="surface-card space-y-6 rounded-[22px] p-8 text-midnight/85 md:p-12">
+              <div className="surface-card space-y-6 rounded-none p-8 text-midnight/85 md:p-12">
               <p>
                 We believe that education thrives when parents, students, and teachers collaborate. The Elden Heights School maintains
                 transparent, timely, and multi-channel communication so that every family stays informed and involved in their

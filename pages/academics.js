@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import { stageDetails } from '@/components/Academics';
@@ -43,6 +45,7 @@ export default function AcademicsPage() {
       <Seo path="/academics" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.academics.section} links={sectionNav.academics.links} />
         <main className="flex-1">
           <ImageBanner
             title="Academics"
@@ -96,8 +99,8 @@ export default function AcademicsPage() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 >
-                  <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
-                  <div className="img-zoom relative overflow-hidden rounded-[28px] border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
+                  <div className="absolute -inset-4 -z-10 rounded-none bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
+                  <div className="img-zoom relative overflow-hidden rounded-none border border-midnight/10 shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
                     <div
                       className="img-layer absolute inset-0 bg-cover bg-center"
                       style={{ backgroundImage: "url('/academics/classroom-kit.jpg')" }}
@@ -161,7 +164,7 @@ export default function AcademicsPage() {
                 {stageDetails.map((stage, index) => (
                   <motion.div
                     key={stage.title}
-                    className="group relative overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
+                    className="group relative overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
@@ -185,7 +188,7 @@ export default function AcademicsPage() {
                 ))}
               </div>
 
-              <div className="mt-10 overflow-hidden rounded-[22px] border border-gold/30 bg-gradient-to-r from-gold/10 via-gold/5 to-gold/10 px-6 py-5">
+              <div className="mt-10 overflow-hidden rounded-none border border-gold/30 bg-gradient-to-r from-gold/10 via-gold/5 to-gold/10 px-6 py-5">
                 <p className="flex items-center gap-3 text-midnight">
                   <span className="font-garamond text-sm font-semibold uppercase tracking-[0.3em] text-cardinal">
                     Coming soon
@@ -249,7 +252,7 @@ export default function AcademicsPage() {
                           </p>
                         </div>
                       </div>
-                      <div className="surface-card rounded-[24px] p-7 md:p-8">
+                      <div className="surface-card rounded-none p-7 md:p-8">
                         <p className="text-base leading-relaxed text-midnight/80 md:text-lg">
                           {stage.summary}
                         </p>
@@ -279,7 +282,7 @@ export default function AcademicsPage() {
 
           <section id="teaching-support" className="relative py-24 md:py-32">
             <div className="mx-auto max-w-6xl px-6">
-              <div className="relative overflow-hidden rounded-[32px] surface-card-dark text-parchment">
+              <div className="relative overflow-hidden rounded-none surface-card-dark text-parchment">
                 <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
                 <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
@@ -382,7 +385,7 @@ export default function AcademicsPage() {
                 </motion.div>
 
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[28px] p-10"
+                  className="surface-card relative overflow-hidden rounded-none p-10"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"

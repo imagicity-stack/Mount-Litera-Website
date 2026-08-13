@@ -25,7 +25,7 @@ export default function SelfDisciplinePolicyPage() {
                 </h1>
                 <span className="mt-6 block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
               </div>
-              <div className="surface-card space-y-6 rounded-[22px] p-8 text-midnight/85 md:p-12">
+              <div className="surface-card space-y-6 rounded-none p-8 text-midnight/85 md:p-12">
               <p>
                 The Elden Heights School nurtures responsible citizens who demonstrate respect, integrity, and resilience. Our Code for
                 Self-Discipline empowers students to lead themselves, contribute positively to school life, and uphold the

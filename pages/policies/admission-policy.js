@@ -123,7 +123,7 @@ export default function AdmissionPolicyPage() {
                 </h1>
                 <span className="mt-6 block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
               </div>
-              <div className="surface-card rounded-[22px] p-8 md:p-12">
+              <div className="surface-card rounded-none p-8 md:p-12">
                 <p className="whitespace-pre-line leading-relaxed text-midnight/80">{policyText}</p>
               </div>
             </div>

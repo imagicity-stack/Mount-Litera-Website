@@ -68,7 +68,7 @@ export default function BeyondAcademicsPage() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[24px] p-8"
+                  className="surface-card relative overflow-hidden rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -95,7 +95,7 @@ export default function BeyondAcademicsPage() {
                 {pathways.map((pathway, idx) => (
                   <motion.article
                     key={pathway.title}
-                    className="surface-card group relative flex flex-col overflow-hidden rounded-[28px] p-10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    className="surface-card group relative flex flex-col overflow-hidden rounded-none p-10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"

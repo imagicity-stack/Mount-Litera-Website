@@ -120,7 +120,7 @@ export default function InquiryForm() {
 
         <motion.form
           onSubmit={handleSubmit}
-          className="surface-card relative overflow-hidden rounded-[28px] p-8 md:p-12"
+          className="surface-card relative overflow-hidden rounded-none p-8 md:p-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"

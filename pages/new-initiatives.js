@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 
@@ -45,6 +47,7 @@ export default function NewInitiativesPage() {
       <Seo path="/new-initiatives" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.newInitiatives.section} links={sectionNav.newInitiatives.links} />
         <main className="flex-1">
           <ImageBanner
             title="New Initiatives"
@@ -96,7 +99,7 @@ export default function NewInitiativesPage() {
 
               <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[24px] p-8 md:p-10"
+                  className="surface-card relative overflow-hidden rounded-none p-8 md:p-10"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -123,7 +126,7 @@ export default function NewInitiativesPage() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 >
-                  <div className="surface-card rounded-[18px] p-6">
+                  <div className="surface-card rounded-none p-6">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
                       Foundation Partner
                     </p>
@@ -131,7 +134,7 @@ export default function NewInitiativesPage() {
                       Edenwoods Eduhub Foundation
                     </p>
                   </div>
-                  <div className="surface-card rounded-[18px] p-6">
+                  <div className="surface-card rounded-none p-6">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
                       Who Can Be Considered
                     </p>
@@ -145,7 +148,7 @@ export default function NewInitiativesPage() {
                     </ul>
                     <p className="mt-3 text-xs italic text-midnight/60">{rideToRiseDetails.eligibilityNote}</p>
                   </div>
-                  <div className="surface-card rounded-[18px] p-6">
+                  <div className="surface-card rounded-none p-6">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
                       Program Conditions
                     </p>
@@ -164,7 +167,7 @@ export default function NewInitiativesPage() {
 
               <div className="mt-8 grid gap-6 md:grid-cols-2">
                 <motion.div
-                  className="surface-card rounded-[24px] p-8"
+                  className="surface-card rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -185,7 +188,7 @@ export default function NewInitiativesPage() {
                   </ul>
                 </motion.div>
                 <motion.div
-                  className="surface-card rounded-[24px] p-8"
+                  className="surface-card rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -200,7 +203,7 @@ export default function NewInitiativesPage() {
                 </motion.div>
               </div>
 
-              <div className="relative mt-10 overflow-hidden rounded-[28px] surface-card-dark p-10 text-center text-parchment md:p-14">
+              <div className="relative mt-10 overflow-hidden rounded-none surface-card-dark p-10 text-center text-parchment md:p-14">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
                 <p className="font-garamond text-2xl italic text-gold-200 md:text-3xl">
                   {rideToRiseDetails.finalLine}

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
+import SubNav from '@/components/SubNav';
+import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 
@@ -62,6 +64,7 @@ export default function CorePage() {
       <Seo path="/core" />
       <div className="flex min-h-screen flex-col text-midnight">
         <Navbar />
+        <SubNav section={sectionNav.core.section} links={sectionNav.core.links} />
         <main className="flex-1">
           <ImageBanner
             title="Core Philosophy"
@@ -92,7 +95,7 @@ export default function CorePage() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className="surface-card relative overflow-hidden rounded-[24px] p-8"
+                  className="surface-card relative overflow-hidden rounded-none p-8"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -134,7 +137,7 @@ export default function CorePage() {
                 {coreSections.map((section, idx) => (
                   <motion.article
                     key={section.title}
-                    className="surface-card group relative overflow-hidden rounded-[28px]"
+                    className="surface-card group relative overflow-hidden rounded-none"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
@@ -211,7 +214,7 @@ export default function CorePage() {
                   {accreditationItems.map((item, idx) => (
                     <motion.div
                       key={item.title}
-                      className="group flex min-w-[280px] snap-start flex-col gap-3 rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)] md:min-w-[320px]"
+                      className="group flex min-w-[280px] snap-start flex-col gap-3 rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_30px_60px_-30px_rgba(10,10,12,0.3)] md:min-w-[320px]"
                       variants={fadeUp}
                       initial="hidden"
                       whileInView="visible"

@@ -1,142 +1,81 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import ArrowLink from '@/components/ArrowLink';
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
 const highlights = [
-  { title: 'Curated Mentorship', note: 'One-on-one academic & life counsel' },
-  { title: 'Culture of Excellence', note: 'Heritage, ethics, and achievement' },
-  { title: 'Future-Ready Classrooms', note: 'Digital, collaborative, hands-on' }
+  { title: 'Curated mentorship', note: 'One-to-one academic and life counsel' },
+  { title: 'Culture of excellence', note: 'Heritage, ethics, and achievement' },
+  { title: 'Future-ready classrooms', note: 'Digital, collaborative, hands-on' }
 ];
 
 export default function Admission() {
   return (
-    <section id="admission" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="relative overflow-hidden rounded-[32px] surface-card-dark text-parchment">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
-            style={{ backgroundImage: "url('/home/admission-archway.jpg')" }}
-            aria-hidden="true"
-          />
-          <img
-            src="/home/admission-archway.jpg"
-            alt="Elden Heights School campus in Hazaribagh Jharkhand"
-            className="sr-only"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-midnight/95 via-midnight/80 to-graphite/80" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
-          <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+    <section id="admission" className="band-ink">
+      <div className="shell py-20 md:py-28">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="grid gap-10 md:grid-cols-2 md:gap-16"
+        >
+          <h2 className="font-display text-[clamp(2.25rem,4.4vw,3.75rem)] font-medium leading-[1.06] text-white">
+            Admissions 2026 – 27
+          </h2>
 
-          <div className="relative grid items-center gap-10 px-8 py-14 md:grid-cols-[1.25fr_1fr] md:gap-16 md:px-14 md:py-20">
-            <motion.div
-              className="space-y-6"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="eyebrow eyebrow-dark">Admissions 2026 – 27</span>
+          <div className="flex flex-col items-start gap-8">
+            <p className="text-base leading-relaxed text-white/80 md:text-lg">
+              We are inviting new learners to join this journey. Read{' '}
+              <Link href="/admission#why-choose-elden-heights" className="hv-link hv-link-light">
+                why families choose Elden Heights
+              </Link>
+              , review the{' '}
+              <Link href="/admission#fee-structure" className="hv-link hv-link-light">
+                fee structure
+              </Link>
+              , and send us an{' '}
+              <Link href="/admission#admission-inquiry" className="hv-link hv-link-light">
+                admission inquiry
+              </Link>
+              .
+            </p>
 
-              <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-parchment sm:text-5xl md:text-[54px]">
-                Admissions open at the{' '}
-                <span className="italic">
-                  <span className="gold-text">best school</span>
-                </span>{' '}
-                in Hazaribagh.
-              </h2>
+            <ArrowLink href="/admission" tone="light">
+              Apply for admission
+            </ArrowLink>
+          </div>
+        </motion.div>
 
-              <p className="max-w-xl text-base leading-relaxed text-parchment/80 md:text-lg">
-                We&rsquo;re inviting new learners to join this journey of transformation — a bold,
-                modern learning experience designed for the next generation, rooted in a legacy of excellence.
-              </p>
+        <span className="rule-heavy-light mt-14 md:mt-16" />
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                {highlights.map(({ title, note }) => (
-                  <div
-                    key={title}
-                    className="group rounded-xl border border-parchment/10 bg-white/5 p-4 backdrop-blur transition-all duration-400 hover:border-gold/40 hover:bg-white/10"
-                  >
-                    <p className="font-garamond text-base font-semibold text-parchment">{title}</p>
-                    <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-parchment/55">
-                      {note}
-                    </p>
-                  </div>
-                ))}
-              </div>
+        <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-3">
+          {highlights.map(({ title, note }) => (
+            <div key={title}>
+              <p className="font-display text-2xl font-medium text-white">{title}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/65">{note}</p>
+            </div>
+          ))}
+        </div>
 
-              <div className="flex flex-wrap items-center gap-5 pt-3">
-                <Link href="/admission" className="btn-gold">
-                  Apply for Admissions
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14m-4-4l4 4-4 4" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/admission#fee-structure"
-                  className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.25em] text-parchment/80 transition hover:text-gold-200"
-                >
-                  <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
-                  Fee Structure
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="relative"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            >
-              <div className="glass-panel-dark relative overflow-hidden rounded-3xl p-8 text-center md:p-10">
-                <div className="pointer-events-none absolute inset-x-6 top-6 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                <div className="pointer-events-none absolute inset-x-6 bottom-6 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-
-                <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-300">
-                  Exclusive Entry
-                </p>
-
-                <div className="mt-5 flex items-center justify-center gap-3">
-                  <span className="h-px w-6 bg-gold/60" />
-                  <span className="font-garamond text-xl italic text-parchment/90">est.</span>
-                  <span className="h-px w-6 bg-gold/60" />
-                </div>
-
-                <p className="mt-4 font-garamond text-3xl font-semibold leading-tight text-parchment md:text-[34px]">
-                  The Elden Heights School
-                </p>
-
-                <p className="mt-5 text-sm leading-relaxed text-parchment/75">
-                  Limited seats crafted for families seeking an elite, heritage-inspired education
-                  in a campus that blends tradition with tomorrow.
-                </p>
-
-                <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-gold/20 bg-gold/10">
-                  {[
-                    ['Limited', 'Seats'],
-                    ['CBSE', 'Affiliated']
-                  ].map(([v, l]) => (
-                    <div
-                      key={l}
-                      className="flex flex-col items-center gap-1 bg-midnight/80 px-4 py-4 backdrop-blur"
-                    >
-                      <span className="font-garamond text-lg font-semibold text-parchment">{v}</span>
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-parchment/60">
-                        {l}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+        <div className="mt-14 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 md:mt-16">
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
+              Seats
+            </p>
+            <p className="mt-2 font-display text-3xl font-normal text-white">Limited</p>
+          </div>
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/55">
+              Curriculum
+            </p>
+            <p className="mt-2 font-display text-3xl font-normal text-white">CBSE affiliated</p>
           </div>
         </div>
       </div>

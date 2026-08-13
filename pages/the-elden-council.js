@@ -65,7 +65,7 @@ export default function TheEldenCouncilPage() {
                 {council.map((member, idx) => (
                   <motion.article
                     key={member.name}
-                    className="group overflow-hidden rounded-[22px] border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
+                    className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"

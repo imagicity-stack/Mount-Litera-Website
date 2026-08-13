@@ -94,7 +94,7 @@ export default function PrivacyPolicyPage() {
 
               <div className="space-y-6">
                 {sections.map((section) => (
-                  <div key={section.heading} className="surface-card rounded-[22px] p-8">
+                  <div key={section.heading} className="surface-card rounded-none p-8">
                     <h2 className="font-garamond text-2xl font-semibold text-midnight">
                       {section.heading}
                     </h2>
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                 ))}
 
-                <div className="surface-card rounded-[22px] p-8">
+                <div className="surface-card rounded-none p-8">
                   <h2 className="font-garamond text-2xl font-semibold text-midnight">9 · Contact Us</h2>
                   <span className="mt-3 block h-px w-12 bg-gradient-to-r from-gold to-transparent" />
                   <p className="mt-4 text-midnight/80">

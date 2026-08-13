@@ -390,7 +390,7 @@ function PopupView({ popup, onClose, onCta, closing }) {
             exit={{ y: 24, scale: 0.96, opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className={`relative overflow-hidden shadow-2xl ${
-              isFullscreen ? 'h-full w-full max-w-3xl rounded-[28px]' : 'w-full max-w-lg rounded-[28px]'
+              isFullscreen ? 'h-full w-full max-w-3xl rounded-none' : 'w-full max-w-lg rounded-none'
             }`}
             style={{ background: theme.bg, border: `1px solid ${theme.accent}40` }}
           >
