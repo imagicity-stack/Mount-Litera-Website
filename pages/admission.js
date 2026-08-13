@@ -52,7 +52,7 @@ export default function AdmissionPage() {
             title="Admissions 2026 – 27"
             subtitle="Explore the next chapter of learning with a campus designed for confidence and curiosity."
             eyebrow="Admissions Open"
-            image="/admission/banner-horizon.jpg"
+            slot="admission.banner"
           />
 
           <section className="relative py-24 md:py-32">

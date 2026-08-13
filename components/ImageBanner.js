@@ -1,17 +1,34 @@
+import SiteImage from '@/components/media/SiteImage';
+import Parallax from '@/components/motion/Parallax';
+
+/**
+ * The header of an interior page: a photograph with the page title set over it.
+ *
+ * Pass `slot` for pages whose banner the school can change from the admin
+ * portal; `image` remains for pages still served straight from /public.
+ */
 export default function ImageBanner({
   title,
   subtitle,
   image,
+  slot,
   eyebrow,
   heightClass = 'min-h-[46vh] md:min-h-[58vh]'
 }) {
   return (
     <section className={`relative isolate overflow-hidden bg-obsidian text-white ${heightClass}`}>
-      <div
-        className="absolute inset-0 animate-slow-pan bg-cover bg-center"
-        style={{ backgroundImage: `url('${image}')` }}
-        aria-hidden="true"
-      />
+      <Parallax className="absolute inset-0" distance={45} overscan={12}>
+        {slot ? (
+          <SiteImage slot={slot} fill priority />
+        ) : (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${image}')` }}
+            aria-hidden="true"
+          />
+        )}
+      </Parallax>
+
       <div
         className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/80 to-obsidian/45"
         aria-hidden="true"

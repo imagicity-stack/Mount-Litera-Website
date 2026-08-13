@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 
 import ArrowLink from '@/components/ArrowLink';
+import SiteImage from '@/components/media/SiteImage';
+import Parallax from '@/components/motion/Parallax';
+import Reveal from '@/components/motion/Reveal';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -16,25 +19,27 @@ const facts = [
 ];
 
 export default function Hero() {
+  const reduce = useReducedMotion();
+
   return (
     <>
       <section id="hero" className="relative isolate overflow-hidden bg-obsidian text-white">
-        <div
-          className="absolute inset-0 animate-slow-pan bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/main gate new.jpeg')" }}
-          aria-hidden="true"
-        />
-        <img
-          src="/main gate new.jpeg"
-          alt="Elden Heights School campus in Hazaribagh Jharkhand"
-          className="sr-only"
-        />
+        <Parallax className="absolute inset-0" distance={50} overscan={10}>
+          <SiteImage
+            slot="home.hero"
+            fill
+            priority
+            imgClassName={reduce ? '' : 'animate-slow-pan'}
+            sizes="100vw"
+          />
+        </Parallax>
+
         <div
           className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/85 to-obsidian/45"
           aria-hidden="true"
         />
 
-        <div className="shell relative flex min-h-[78vh] flex-col justify-end pb-16 pt-28 md:min-h-[84vh] md:pb-20 md:pt-40">
+        <div className="shell relative flex min-h-[78vh] flex-col justify-end pb-16 pt-28 md:min-h-[86vh] md:pb-20 md:pt-40">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -87,14 +92,14 @@ export default function Hero() {
         <div className="shell py-14 md:py-16">
           <span className="rule-heavy" />
           <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
-            {facts.map(({ figure, label, caption }) => (
-              <div key={label}>
+            {facts.map(({ figure, label, caption }, index) => (
+              <Reveal key={label} index={index} y={18} duration={0.7}>
                 <dt className="stat-figure">{figure}</dt>
                 <dd>
                   <p className="stat-label">{label}</p>
                   <p className="mt-1 text-sm text-ink-muted">{caption}</p>
                 </dd>
-              </div>
+              </Reveal>
             ))}
           </dl>
         </div>

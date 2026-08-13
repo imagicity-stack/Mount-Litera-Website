@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 
 import ArrowLink from '@/components/ArrowLink';
+import SiteImage from '@/components/media/SiteImage';
+import ImageReveal from '@/components/motion/ImageReveal';
+import Reveal from '@/components/motion/Reveal';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -21,7 +24,7 @@ const pillars = [
 
 export default function About({
   showLink = true,
-  imagePrefix = 'home',
+  imageSlot = 'home.about.portrait',
   heading = 'Our Future Ahead'
 }) {
   return (
@@ -52,25 +55,9 @@ export default function About({
         <span className="rule-heavy mt-14 md:mt-16" />
 
         <div className="mt-14 grid gap-12 md:mt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="img-zoom relative h-[300px] overflow-hidden md:h-[440px]"
-          >
-            <div
-              className="img-layer absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('/${imagePrefix}/about-vision.jpg')` }}
-              aria-hidden="true"
-            />
-            <img
-              src={`/${imagePrefix}/about-vision.jpg`}
-              alt="Elden Heights School campus in Hazaribagh Jharkhand"
-              className="sr-only"
-            />
-          </motion.div>
+          <ImageReveal>
+            <SiteImage slot={imageSlot} />
+          </ImageReveal>
 
           <motion.div
             variants={fadeUp}

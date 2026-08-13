@@ -127,7 +127,7 @@ export default function AboutPage() {
             image="/about/banner-aurora.jpg"
           />
 
-          <About showLink={false} imagePrefix="about" heading="The Ethos Behind Elden Heights" />
+          <About showLink={false} imageSlot="about.vision" heading="The Ethos Behind Elden Heights" />
 
           <section className="relative py-24 md:py-32">
             <div className="mx-auto max-w-6xl px-6">

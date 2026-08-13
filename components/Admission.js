@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import ArrowLink from '@/components/ArrowLink';
+import SiteImage from '@/components/media/SiteImage';
+import Parallax from '@/components/motion/Parallax';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -16,8 +18,13 @@ const highlights = [
 
 export default function Admission() {
   return (
-    <section id="admission" className="band-ink">
-      <div className="shell py-20 md:py-28">
+    <section id="admission" className="relative isolate band-ink">
+      <Parallax className="absolute inset-0" distance={40}>
+        <SiteImage slot="home.admission.band" fill imgClassName="opacity-30" />
+      </Parallax>
+      <div className="absolute inset-0 bg-obsidian/75" aria-hidden="true" />
+
+      <div className="shell relative py-20 md:py-28">
         <motion.div
           variants={fadeUp}
           initial="hidden"

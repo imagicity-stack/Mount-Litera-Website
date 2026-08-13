@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import ArrowLink from '@/components/ArrowLink';
+import SiteImage from '@/components/media/SiteImage';
+import ImageReveal from '@/components/motion/ImageReveal';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
 
 export const stageDetails = [
@@ -59,18 +61,11 @@ export const stageDetails = [
   }
 ];
 
-const stageImages = [
-  '/home/academics-foundation.jpg',
-  '/home/academics-prep.jpg',
-  '/home/academics-middle.jpg',
-  '/home/academics-secondary.jpg'
-];
-
-const stageImageAlts = [
-  'Students learning at best school in Hazaribagh',
-  'Classroom learning at the best school in Hazaribagh',
-  'School activities at Elden Heights in Hazaribagh Jharkhand',
-  'Elden Heights School campus in Hazaribagh Jharkhand'
+const stageSlots = [
+  'academics.stage.foundational',
+  'academics.stage.preparatory',
+  'academics.stage.middle',
+  'academics.stage.secondary'
 ];
 
 const stageAnchors = [
@@ -147,14 +142,11 @@ export default function Academics({ showExplore = true }) {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
               className="group flex flex-col"
             >
-              <Link href={stageAnchors[index]} className="img-zoom relative block h-44 overflow-hidden bg-stone">
-                <div
-                  className="img-layer absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url('${stageImages[index]}')` }}
-                  aria-hidden="true"
-                />
-                <img src={stageImages[index]} alt={stageImageAlts[index]} className="sr-only" />
-              </Link>
+              <ImageReveal index={index} stagger={0.09}>
+                <Link href={stageAnchors[index]} className="img-zoom block">
+                  <SiteImage slot={stageSlots[index]} imgClassName="img-layer" />
+                </Link>
+              </ImageReveal>
 
               <p className="mt-6 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
                 Stage {String(index + 1).padStart(2, '0')} · {stage.grades}

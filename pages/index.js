@@ -9,6 +9,12 @@ import Admission from '@/components/Admission';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ArrowLink from '@/components/ArrowLink';
+import CampusMosaic from '@/components/home/CampusMosaic';
+import ScrollStory from '@/components/home/ScrollStory';
+import OurPeople from '@/components/home/OurPeople';
+import BelongingBand from '@/components/home/BelongingBand';
+import Reveal from '@/components/motion/Reveal';
+import ImageReveal from '@/components/motion/ImageReveal';
 
 export default function Home() {
   const [latestBlog, setLatestBlog] = useState(null);
@@ -62,8 +68,12 @@ export default function Home() {
         <main>
           <Hero />
           <About heading="Why We Are Among the Top Schools in Hazaribagh" />
+          <CampusMosaic />
+          <ScrollStory />
           <Academics />
+          <OurPeople />
           <Admission />
+          <BelongingBand />
 
           <section className="band-grey">
             <div className="shell py-20 md:py-28">
@@ -91,7 +101,7 @@ export default function Home() {
 
                 {!isLoadingBlog && latestBlog && (
                   <article className="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-                    <div className="img-zoom relative h-[280px] overflow-hidden bg-stone md:h-[400px]">
+                    <ImageReveal className="relative h-[280px] bg-stone md:h-[400px]">
                       {latestBlog.coverImage ? (
                         <img
                           src={latestBlog.coverImage}
@@ -103,9 +113,9 @@ export default function Home() {
                           Cover image coming soon
                         </div>
                       )}
-                    </div>
+                    </ImageReveal>
 
-                    <div className="flex flex-col justify-center">
+                    <Reveal delay={0.1} className="flex flex-col justify-center">
                       <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-crimson">
                         Latest journal entry
                       </p>
@@ -137,7 +147,7 @@ export default function Home() {
                       <div className="mt-9">
                         <ArrowLink href={`/blogs/${latestBlog.slug}`}>Read the story</ArrowLink>
                       </div>
-                    </div>
+                    </Reveal>
                   </article>
                 )}
 
@@ -150,19 +160,19 @@ export default function Home() {
 
           <Contact />
 
-          <section className="band-white">
+          <section className="band-grey">
             <div className="shell py-20 md:py-28">
               <div className="grid gap-8 md:grid-cols-2 md:gap-16">
-                <div>
+                <Reveal>
                   <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
                     Hazaribagh · Jharkhand
                   </p>
                   <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.06] text-ink">
                     Among the most sought-after schools in Hazaribagh
                   </h2>
-                </div>
+                </Reveal>
 
-                <div className="space-y-5">
+                <Reveal delay={0.08} className="space-y-5">
                   <p className="text-[1.02rem] leading-relaxed text-ink-soft">
                     Hazaribagh education is evolving as families seek learning that blends strong
                     academics with character and confidence. For parents looking for quality
@@ -179,7 +189,7 @@ export default function Home() {
                   <p className="font-display text-xl italic text-ink">
                     We invite you to visit and experience the culture.
                   </p>
-                </div>
+                </Reveal>
               </div>
             </div>
           </section>
