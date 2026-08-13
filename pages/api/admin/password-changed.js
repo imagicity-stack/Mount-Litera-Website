@@ -10,6 +10,10 @@ import { requireAdmin, USERS_COLLECTION_NAME } from '@/lib/adminAuth';
  *
  * The rotation itself happens client-side against Firebase Auth; this only
  * marks that it happened, and only for the caller's own account.
+ *
+ * Deliberately does not write `role`. That field is now the sole thing that
+ * grants portal access, and it is set by hand in the Firebase console — no
+ * application code should ever be a path to acquiring it.
  */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -27,7 +31,6 @@ export default async function handler(req, res) {
       .set(
         {
           email: adminUser.email || '',
-          role: 'admin',
           passwordChangedAt: admin.firestore.FieldValue.serverTimestamp()
         },
         { merge: true }
