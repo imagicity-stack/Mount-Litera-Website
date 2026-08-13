@@ -46,12 +46,12 @@ export default function LoginScreen({
   error,
   notice,
   busy,
-  adminEmail,
   onSignIn,
   onChangePassword,
   onResetPassword,
   onLogout
 }) {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [nextPassword, setNextPassword] = useState('');
@@ -165,7 +165,7 @@ export default function LoginScreen({
   if (mode === 'reset') {
     const submitReset = async (event) => {
       event.preventDefault();
-      await onResetPassword(adminEmail);
+      await onResetPassword(email);
     };
 
     return (
@@ -174,7 +174,7 @@ export default function LoginScreen({
           Reset your password
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-midnight/70">
-          We will email a reset link to the administrator address on file.
+          Enter the administrator address and we will email a reset link.
         </p>
 
         <form onSubmit={submitReset} className="mt-8 space-y-5">
@@ -185,8 +185,11 @@ export default function LoginScreen({
             <input
               id="reset-email"
               type="email"
-              value={adminEmail}
-              readOnly
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="username"
+              placeholder="you@eldenheights.org"
               className={fieldClass}
             />
           </div>
@@ -217,11 +220,7 @@ export default function LoginScreen({
   const submitSignIn = async (event) => {
     event.preventDefault();
     setLocalError('');
-    if (!adminEmail) {
-      setLocalError('No administrator address is configured for this deployment.');
-      return;
-    }
-    await onSignIn(adminEmail, password);
+    await onSignIn(email, password);
     setPassword('');
   };
 
@@ -243,16 +242,13 @@ export default function LoginScreen({
           <input
             id="admin-email"
             type="email"
-            value={adminEmail}
-            readOnly
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
             autoComplete="username"
+            placeholder="you@eldenheights.org"
             className={fieldClass}
           />
-          {!adminEmail && (
-            <span className="block text-xs text-crimson">
-              NEXT_PUBLIC_ADMIN_EMAIL is not set for this deployment.
-            </span>
-          )}
         </div>
 
         <div className="space-y-2">
@@ -272,7 +268,7 @@ export default function LoginScreen({
 
         <button
           type="submit"
-          disabled={busy || verifying || !adminEmail}
+          disabled={busy || verifying}
           className="btn-primary w-full disabled:opacity-60"
         >
           {busy ? 'Signing in…' : 'Sign in'}

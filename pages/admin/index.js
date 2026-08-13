@@ -22,7 +22,6 @@ export default function AdminPortal() {
     error,
     notice,
     busy,
-    adminEmail,
     signIn,
     changePassword,
     resetPassword,
@@ -71,7 +70,6 @@ export default function AdminPortal() {
           error={error}
           notice={notice}
           busy={busy}
-          adminEmail={adminEmail}
           onSignIn={signIn}
           onChangePassword={changePassword}
           onResetPassword={resetPassword}

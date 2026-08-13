@@ -21,6 +21,8 @@ service cloud.firestore {
     //   popups     → /api/popups, /api/popups/[id], /api/popups/track
     //   siteMedia  → /api/media, /api/media/[slot]
     //   users      → /api/admin/verify, /api/admin/password-changed
+    //                  (the `role: "admin"` field that grants portal access is
+    //                   created by hand in the console, which bypasses rules)
     //   admissions → /api/admissions/submit
     match /{document=**} {
       allow read, write: if false;

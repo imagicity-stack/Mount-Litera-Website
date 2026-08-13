@@ -7,8 +7,9 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
 > redirects to `/admin`.
 
 ## Features
-- **`/admin` portal** with email/password authentication (no federated
-  sign-in) and a forced password change on the first login.
+- **`/admin` portal** with Firebase email/password authentication (no federated
+  sign-in, no env-var credentials) and a forced password change on first login.
+  Access is granted solely by a Firestore `users/{uid}` doc with `role: admin`.
 - **Site Images library**: every managed photograph on the public site,
   uploadable from the portal with a reference image shown for comparison.
 - **WordPress-like blog studio**: rich-text editor, featured images, drafts,
@@ -69,25 +70,47 @@ Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md`
 1. Go to [Firebase Console](https://console.firebase.google.com/).
 2. Create a new project.
 3. Enable **Authentication → Sign-in method → Email/Password**. This is a
-   manual console step — security rules cannot switch a provider on, and
-   `/api/admin/bootstrap` will happily create the account without it, so the
-   failure shows up later as a refused sign-in. (Google sign-in is *not* used
-   by the portal and does not need to be enabled.)
+   manual console step — security rules cannot switch a provider on. (Google
+   sign-in is *not* used by the portal and does not need to be enabled.)
 4. Create a **Firestore Database**.
 5. Create a **Storage** bucket.
 
-### 2) Authorise admin accounts
-Admin access is granted when **either** condition is met:
+### 2) Create the administrator account
+Identity lives entirely in **Firebase Authentication**; authorisation lives in
+**Firestore**. There is no environment allowlist, no provisioning endpoint, and
+no self-service registration — the account is created by hand, once.
 
-**Option A — email allowlist (recommended, simplest):**
-Set `ADMIN_EMAILS` in Vercel to a comma-separated list of authorised Google
-accounts, e.g. `ADMIN_EMAILS=principal@eldenheights.org,admin@eldenheights.org`.
-Anyone who signs in with Google using one of those emails becomes an admin.
+**Step 1 — create the sign-in.**
+Firebase Console → **Authentication → Users → Add user**. Enter the email
+address and a temporary password.
 
-**Option B — Firestore role:**
-1. In Firestore, create a collection named **`users`**.
-2. Create a document with the signed-in user’s `uid` as the document ID.
-3. Add a field: `role = "admin"`.
+**Step 2 — grant the role.** *(Without this the account can sign in but the
+portal will refuse it.)*
+Firebase Console → **Firestore Database** → collection **`users`** → add a
+document whose **document ID is that user's UID** (copy it from the Users tab):
+
+| Field | Type | Value |
+| --- | --- | --- |
+| `role` | string | `admin` |
+
+**Step 3 — first sign-in.**
+Go to `/admin` and sign in with the temporary password. The portal immediately
+requires a new password and will not let you past that screen until you set
+one. Once set it records `users/{uid}.passwordChangedAt` and the prompt never
+returns.
+
+Forgotten passwords use the **Forgotten your password?** link on the login
+screen, which sends a Firebase reset email.
+
+**Revoking access** — delete the `users/{uid}` document (or change `role`), then
+clear the Storage claim, which survives in already-issued tokens:
+
+```js
+await admin.auth().setCustomUserClaims(uid, { admin: false });
+await admin.auth().revokeRefreshTokens(uid);
+```
+
+Deleting the Firebase Auth user revokes everything outright.
 
 ### 3) Firestore collections & fields
 
@@ -130,9 +153,6 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
-
-# The administrator address shown on the /admin login screen.
-NEXT_PUBLIC_ADMIN_EMAIL=admin@eldenheights.org
 ```
 > Alternatively, paste the whole web config object as a single JSON variable:
 > `NEXT_PUBLIC_FIREBASE_CONFIG={"apiKey":"…","authDomain":"…", …}`
@@ -144,13 +164,9 @@ FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 FIREBASE_STORAGE_BUCKET=
 
-# Admin authorisation (comma separated; the first entry is the account that
-# /api/admin/bootstrap provisions)
-ADMIN_EMAILS=admin@eldenheights.org
-
-# One-time bootstrap password for the very first sign-in. Remove after the
-# administrator has set their own password.
-ADMIN_INITIAL_PASSWORD=
+# Admin access is NOT configured here — it comes from a Firestore
+# users/{uid} document with role = "admin". See "Create the administrator
+# account" above.
 
 # Gemini SEO assistant
 GEMINI_API_KEY=
@@ -265,15 +281,17 @@ frequency, page targeting, scheduling, priority, and live analytics
 `PopupManager` and records impressions/clicks through `POST /api/popups/track`.
 
 ## Security Notes
-- Admin access requires an email/password sign-in whose email is in
-  `ADMIN_EMAILS` **or** a Firestore `users/{uid}` doc with `role = "admin"`.
-  The email published in `NEXT_PUBLIC_ADMIN_EMAIL` is a convenience for the
-  login form only — it grants nothing on its own.
-- A newly provisioned account cannot use the portal until it has replaced the
-  password it was issued with; `/api/admin/verify` reports
-  `mustChangePassword` until `users/{uid}.passwordChangedAt` exists.
-- `/api/admin/bootstrap` is idempotent and refuses to modify an existing
-  account, so it cannot be used to reset a live administrator's password.
+- **Signing in is not the same as being let in.** Firebase Authentication
+  proves who you are; a Firestore `users/{uid}` document with `role = "admin"`
+  decides whether the portal opens. An account without that document is
+  rejected with 403 on every route.
+- The role document is created by hand in the Firebase console. No application
+  code writes `role`, so there is no code path to granting yourself access —
+  including `/api/admin/password-changed`, which only stamps a timestamp.
+- A new account cannot use the portal until it replaces the password it was
+  issued with; `/api/admin/verify` reports `mustChangePassword` until
+  `users/{uid}.passwordChangedAt` exists.
+- A Firestore outage denies access rather than granting it.
 - Firestore denies all direct client access; Storage writes require the `admin`
   custom claim. See **Security Rules** below — the rules ship in the repo as
   `firestore.rules` and `storage.rules`.
@@ -401,18 +419,17 @@ allow write: if request.auth.token.admin == true
 **Why a claim and not `request.auth != null`.** Any authenticated account would
 satisfy `auth != null` — including any account the project ever gains for an
 unrelated reason. The claim is granted in exactly one place, `/api/admin/verify`,
-immediately after the `ADMIN_EMAILS` allowlist has been checked, so upload
-permission and portal access can never drift apart.
+immediately after the Firestore `role` has been checked, so upload permission
+and portal access can never drift apart.
 
 The claim is minted into the ID token, so it only reaches the browser after a
 refresh. `verify` returns `claimRefreshed: true` the first time it grants the
 claim and the portal immediately pulls a fresh token, so the first upload of a
-session is not rejected. `/api/admin/bootstrap` sets the claim at account
-creation for the same reason.
+session is not rejected.
 
-**Revoking access.** Removing an address from `ADMIN_EMAILS` stops portal
-access at once, but the `admin` claim already minted into that account's token
-survives until it is cleared:
+**Revoking access.** Deleting the `users/{uid}` document stops portal access at
+once, but the `admin` claim already minted into that account's token survives
+until it is cleared:
 
 ```bash
 # Node, with the Admin SDK credentials loaded
