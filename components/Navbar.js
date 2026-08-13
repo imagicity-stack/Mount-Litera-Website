@@ -61,7 +61,7 @@ const navItems = [
       { label: 'Admission', href: '/admission' },
       { label: 'Why Choose The Elden Heights School', href: '/admission#why-choose-elden-heights' },
       { label: 'Admission Inquiry Form', href: '/admission#admission-inquiry' },
-      { label: 'Fee Structure', href: '/admission#fee-structure' }
+      { label: 'Admission Policy', href: '/policies/admission-policy' }
     ]
   },
   { label: 'Gallery', href: '/gallery' },

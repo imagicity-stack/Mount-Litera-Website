@@ -37,8 +37,8 @@ export default function Admission() {
                 why families choose Elden Heights
               </Link>
               , review the{' '}
-              <Link href="/admission#fee-structure" className="hv-link hv-link-light">
-                fee structure
+              <Link href="/policies/admission-policy" className="hv-link hv-link-light">
+                admission policy
               </Link>
               , and send us an{' '}
               <Link href="/admission#admission-inquiry" className="hv-link hv-link-light">
