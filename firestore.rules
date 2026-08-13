@@ -1,0 +1,29 @@
+rules_version = '2';
+
+// Firestore access policy for The Elden Heights School.
+//
+// The browser never talks to Firestore directly. Every read and write goes
+// through a Next.js API route that authenticates the caller and then uses the
+// Firebase Admin SDK — and the Admin SDK bypasses these rules entirely.
+//
+// So the correct policy for the client is: nothing. Denying everything here
+// costs the application no functionality and removes the whole surface of
+// "someone signed in and queried the database from the console".
+//
+// If a future feature genuinely needs direct client reads, add a narrow
+// allow-read rule for that one collection rather than loosening the default.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Collections in use — all served by API routes:
+    //   blogs      → /api/blogs, /api/blogs/[id]
+    //   popups     → /api/popups, /api/popups/[id], /api/popups/track
+    //   siteMedia  → /api/media, /api/media/[slot]
+    //   users      → /api/admin/verify, /api/admin/password-changed
+    //   admissions → /api/admissions/submit
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

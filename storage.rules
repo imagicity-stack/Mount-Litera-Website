@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Storage access policy for The Elden Heights School.
+//
+// Unlike Firestore, Storage *is* written from the browser: the admin portal
+// uploads directly from the editor so large files never pass through a
+// serverless function. Reads must stay public because the uploaded URLs are
+// rendered in <img> tags for anonymous visitors.
+//
+// Writes require the `admin` custom claim, which /api/admin/verify grants to
+// an account that passes the ADMIN_EMAILS allowlist (or carries the Firestore
+// `role: "admin"`). A merely-authenticated account is not enough — that check
+// would pass for any user the project ever gains.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Images only, and small enough that a mis-selected file cannot fill the
+    // bucket. The portal enforces 8 MB client-side; this is the backstop.
+    function isReasonableImage() {
+      return request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    // Managed site images — one folder per slot key from lib/mediaSlots.js.
+    match /site-media/{slot}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isReasonableImage();
+      allow delete: if isAdmin();
+    }
+
+    // Blog cover images and in-article uploads.
+    match /blogs/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isReasonableImage();
+      allow delete: if isAdmin();
+    }
+
+    // Popup artwork.
+    match /popups/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isReasonableImage();
+      allow delete: if isAdmin();
+    }
+
+    // Anything outside the paths above is not part of the application.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

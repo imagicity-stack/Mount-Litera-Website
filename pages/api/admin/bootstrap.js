@@ -50,12 +50,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    await adminAuth.createUser({
+    const created = await adminAuth.createUser({
       email,
       password: initialPassword,
       emailVerified: false,
       disabled: false
     });
+
+    // Storage rules require this claim; setting it now means the first token
+    // the account is ever issued can already upload.
+    await adminAuth.setCustomUserClaims(created.uid, { admin: true });
 
     return res.status(201).json({
       created: true,

@@ -271,6 +271,9 @@ frequency, page targeting, scheduling, priority, and live analytics
   `mustChangePassword` until `users/{uid}.passwordChangedAt` exists.
 - `/api/admin/bootstrap` is idempotent and refuses to modify an existing
   account, so it cannot be used to reset a live administrator's password.
+- Firestore denies all direct client access; Storage writes require the `admin`
+  custom claim. See **Security Rules** below — the rules ship in the repo as
+  `firestore.rules` and `storage.rules`.
 - All blog, popup, and Gemini routes validate the Firebase ID token server-side
   via the Admin SDK before any write.
 - The `/admin` route is `noindex, nofollow` and is not linked publicly.
@@ -343,26 +346,73 @@ Under reduced motion it degrades to three plainly stacked chapters.
 
 ---
 
-## Firebase Storage Rules (Recommended)
-Use Storage rules to allow authenticated admins to upload blog images. Replace the example project ID as needed.
+## Security Rules
+
+The rules live in the repository and are the source of truth — do not edit them
+in the Firebase console, or the next deploy will overwrite your changes.
+
+| File | Covers |
+| --- | --- |
+| `firestore.rules` | Firestore — denies all direct client access |
+| `storage.rules` | Storage — public read, admin-only write |
+| `firebase.json` | Points the CLI at both files |
+
+### Deploying them
+
+```bash
+npm i -g firebase-tools
+firebase login
+firebase use --add            # select the project, once per machine
+firebase deploy --only firestore:rules,storage
+```
+
+Hosting is Vercel; the Firebase CLI is used only to publish these rules.
+
+### Firestore — closed by default
+
+The browser never queries Firestore. Every read and write goes through a
+Next.js API route that checks the caller and then uses the Admin SDK, which
+bypasses security rules altogether. The client policy is therefore `allow read,
+write: if false`, which costs the application nothing and removes the entire
+"signed-in user queries the database directly" surface.
+
+If a future feature needs direct client reads, add a narrow rule for that one
+collection rather than loosening the default.
+
+### Storage — public read, admin-only write
+
+Storage *is* written from the browser: the portal uploads straight from the
+editor so large files never pass through a serverless function. Reads are
+public because the resulting URLs are rendered in `<img>` tags for anonymous
+visitors.
+
+Writes require a custom claim, `admin: true`, and are limited to images under
+10 MB:
 
 ```
-rules_version = '2';
+allow write: if request.auth.token.admin == true
+  && request.resource.size < 10 * 1024 * 1024
+  && request.resource.contentType.matches('image/.*');
+```
 
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /blogs/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-    match /popups/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-    match /site-media/{slot}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-  }
-}
+**Why a claim and not `request.auth != null`.** Any authenticated account would
+satisfy `auth != null` — including any account the project ever gains for an
+unrelated reason. The claim is granted in exactly one place, `/api/admin/verify`,
+immediately after the `ADMIN_EMAILS` allowlist has been checked, so upload
+permission and portal access can never drift apart.
+
+The claim is minted into the ID token, so it only reaches the browser after a
+refresh. `verify` returns `claimRefreshed: true` the first time it grants the
+claim and the portal immediately pulls a fresh token, so the first upload of a
+session is not rejected. `/api/admin/bootstrap` sets the claim at account
+creation for the same reason.
+
+**Revoking access.** Removing an address from `ADMIN_EMAILS` stops portal
+access at once, but the `admin` claim already minted into that account's token
+survives until it is cleared:
+
+```bash
+# Node, with the Admin SDK credentials loaded
+await admin.auth().setCustomUserClaims(uid, { admin: false });
+await admin.auth().revokeRefreshTokens(uid);
 ```
