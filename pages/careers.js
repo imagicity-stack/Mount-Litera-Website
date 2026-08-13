@@ -4,6 +4,8 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 export default function CareersPage() {
   return (
@@ -16,9 +18,26 @@ export default function CareersPage() {
             title="Careers at Elden Heights"
             subtitle="Join a team shaping the next generation of confident learners."
             eyebrow="Careers"
-            image="/careers/banner-compass.jpg"
+            slot="careers.banner"
           />
-          <section className="relative flex flex-1 items-center justify-center px-6 py-24 md:py-32">
+
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="careers.feature"
+                eyebrow="Working here"
+                title="A school that backs its teachers"
+                points={[
+                'Small classes and genuine planning time.',
+                'Ongoing training, not a single induction week.',
+                'A campus that keeps being invested in.'
+                ]}
+              >
+                <p>Mentors here are given time to plan, freedom to teach their own way, and a leadership team that sits in on lessons to help rather than to grade.</p>
+              </SplitFeature>
+            </div>
+          </section>
+          <section className="relative flex flex-1 items-center justify-center px-6 py-20 md:py-28">
             <div className="surface-card relative max-w-xl overflow-hidden rounded-none p-10 text-center md:p-14">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
               <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/10 blur-[100px]" />
@@ -47,6 +66,15 @@ export default function CareersPage() {
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="careers.banner"
+            eyebrow="Join us"
+            title="If this sounds like the school you want to teach in, write to us"
+            body="We read every application."
+            link="/contact"
+            linkLabel="Get in touch"
+          />
         </main>
         <Footer />
       </div>

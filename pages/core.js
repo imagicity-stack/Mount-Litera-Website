@@ -7,6 +7,8 @@ import SubNav from '@/components/SubNav';
 import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 const coreSections = [
   {
@@ -70,11 +72,28 @@ export default function CorePage() {
             title="Core Philosophy"
             subtitle="The pillars that define culture, learning, and leadership at Elden Heights."
             eyebrow="Core"
-            image="/core/banner-foundation.jpg"
+            slot="core.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="core.feature"
+                eyebrow="Our core"
+                title="Values that survive contact with a real school day"
+                points={[
+                'Discipline taught as self-discipline, not compliance.',
+                'Achievement measured alongside well-being.',
+                'Every child known personally by at least one mentor.'
+                ]}
+              >
+                <p>A philosophy only counts if it changes what happens in a classroom at eleven on a Tuesday. Ours is written to be acted on, not framed on a wall.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-start">
                 <motion.div
                   className="space-y-5"
@@ -117,7 +136,7 @@ export default function CorePage() {
           </section>
 
           <section className="relative py-20 md:py-24">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -186,8 +205,8 @@ export default function CorePage() {
             </div>
           </section>
 
-          <section id="accreditation" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section id="accreditation" className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
                 variants={fadeUp}
@@ -238,6 +257,15 @@ export default function CorePage() {
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="core.awards"
+            eyebrow="Recognition"
+            title="Held to a standard, and measured against it"
+            body="See the awards and accreditations the school holds."
+            link="/awards-and-recognition"
+            linkLabel="Awards and recognition"
+          />
         </main>
         <Footer />
       </div>

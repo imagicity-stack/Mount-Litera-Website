@@ -53,9 +53,16 @@ export default function SiteImage({
 
   const frameStyle = fill ? undefined : { aspectRatio: ratio || resolved.ratio };
 
+  // Only claim `relative` when the caller has not positioned the frame. Both
+  // classes together let Tailwind's source order win, and `.relative` is
+  // written after `.absolute` — which collapses the frame and hides the image.
+  const positioned = /(^|\s)(absolute|fixed|sticky|relative)(\s|$)/.test(className);
+
   return (
     <div
-      className={`relative overflow-hidden bg-stone ${fill ? 'h-full w-full' : ''} ${className}`}
+      className={`${positioned ? '' : 'relative'} overflow-hidden bg-stone ${
+        fill ? 'h-full w-full' : ''
+      } ${className}`.trim()}
       style={frameStyle}
     >
       <img

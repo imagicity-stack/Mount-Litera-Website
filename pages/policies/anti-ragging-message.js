@@ -18,7 +18,7 @@ export default function AntiRaggingPolicyPage() {
             eyebrow="Policy"
             image="/policies/anti-ragging-message/banner-policy.jpg"
           />
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto max-w-4xl px-6">
               <div className="mb-10">
                 <span className="eyebrow">Policy Document</span>

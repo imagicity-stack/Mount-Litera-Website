@@ -121,11 +121,11 @@ export default function CoreMentorsPage() {
             title="Core Mentors"
             subtitle="Meet the educators and guides shaping every learner&rsquo;s journey."
             eyebrow="Leadership &amp; Faculty"
-            image="/core-mentors/banner-legacy.jpg"
+            slot="people.mentors"
           />
 
           <section className="relative py-20 md:py-24">
-            <div className="mx-auto max-w-5xl px-6 text-center">
+            <div className="shell max-w-5xl text-center">
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
@@ -148,7 +148,7 @@ export default function CoreMentorsPage() {
           </section>
 
           <section className="relative py-10 md:py-16">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <div className="hidden space-y-16 md:block">
                 {coreMentors.map((group, gIdx) => (
                   <motion.div

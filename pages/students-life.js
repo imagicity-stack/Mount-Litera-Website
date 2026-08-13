@@ -8,6 +8,8 @@ import SubNav from '@/components/SubNav';
 import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 import { HOUSES } from '@/lib/housesData';
 
 const pillars = [
@@ -78,11 +80,28 @@ export default function StudentsLifePage() {
             title="Student's Life"
             subtitle="Houses that build belonging. Sports that build character. A life that goes beyond the classroom."
             eyebrow="Beyond the Classroom"
-            image="/beyond-academics/banner-odyssey.jpg"
+            slot="students.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="students.houses"
+                eyebrow="Houses"
+                title="Eight houses, one shared legacy"
+                points={[
+                'Siblings are placed in the same house.',
+                'House prefects are elected by students.',
+                'Inter-house events run through the whole year.'
+                ]}
+              >
+                <p>Every Eldenite belongs to a house from their first day — chosen so siblings and family traditions stay woven through generations. Houses compete, but more importantly they give every child a smaller group to belong to.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-start">
                 <motion.div
                   className="space-y-5"
@@ -141,8 +160,8 @@ export default function StudentsLifePage() {
             </div>
           </section>
 
-          <section id="houses" className="relative bg-gradient-to-b from-parchment/50 via-white to-parchment/50 py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section id="houses" className="relative bg-gradient-to-b from-parchment/50 via-white to-parchment/50 py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
                 variants={fadeUp}
@@ -210,8 +229,8 @@ export default function StudentsLifePage() {
             </div>
           </section>
 
-          <section id="sports" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section id="sports" className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -259,6 +278,15 @@ export default function StudentsLifePage() {
             </div>
           </section>
 
+
+          <FeatureBand
+            slot="students.sports"
+            eyebrow="Sport"
+            title="Character is built on the field as much as in the classroom"
+            body="Explore the houses and what each one stands for."
+            link="/houses"
+            linkLabel="Meet the eight houses"
+          />
         </main>
         <Footer />
       </div>

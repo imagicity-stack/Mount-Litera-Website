@@ -76,7 +76,7 @@ export default function PrivacyPolicyPage() {
             eyebrow="Privacy"
             image="/privacy-policy/banner-trust.jpg"
           />
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto max-w-4xl px-6">
               <div className="mb-12">
                 <span className="eyebrow">Effective · November 2025</span>

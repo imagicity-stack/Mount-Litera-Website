@@ -5,6 +5,8 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 const pathways = [
   {
@@ -41,11 +43,28 @@ export default function BeyondAcademicsPage() {
             title="Beyond Academics"
             subtitle="A gallery of clubs, leadership, and character-building experiences."
             eyebrow="Beyond"
-            image="/beyond-academics/banner-odyssey.jpg"
+            slot="beyond.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="beyond.feature"
+                eyebrow="Beyond the classroom"
+                title="Where character is actually built"
+                points={[
+                'Interest-based clubs running through the school year.',
+                'A progressive, compulsory life-skills programme.',
+                'Leadership roles that rotate, so more children get a turn.'
+                ]}
+              >
+                <p>Clubs and life-skills sessions are not extras bolted onto the timetable. They are where a quiet child first speaks in front of an audience, and where a confident one learns to listen.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 md:grid-cols-[1.1fr_0.9fr] md:items-start">
                 <motion.div
                   className="space-y-5"
@@ -90,7 +109,7 @@ export default function BeyondAcademicsPage() {
           </section>
 
           <section className="relative py-10 md:py-16">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <div className="grid gap-6 md:grid-cols-2">
                 {pathways.map((pathway, idx) => (
                   <motion.article
@@ -131,6 +150,15 @@ export default function BeyondAcademicsPage() {
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="students.strip.1"
+            eyebrow="Student life"
+            title="Every child finds their thing here"
+            body="Come and see a normal school day for yourself."
+            link="/contact"
+            linkLabel="Arrange a visit"
+          />
         </main>
         <Footer />
       </div>

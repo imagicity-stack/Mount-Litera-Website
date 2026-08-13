@@ -49,11 +49,11 @@ export default function HouseDetailPage({ house }) {
             title={`${house.name} House`}
             subtitle={`${house.animal} · ${house.tagline}`}
             eyebrow="House of Elden Heights"
-            image="/beyond-academics/banner-odyssey.jpg"
+            slot="houses.feature"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-center">
                 <motion.div
                   className="relative mx-auto w-full max-w-md"
@@ -144,8 +144,8 @@ export default function HouseDetailPage({ house }) {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-5xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell max-w-5xl">
               <motion.div
                 className="mb-12 text-center"
                 variants={fadeUp}
@@ -222,7 +222,7 @@ export default function HouseDetailPage({ house }) {
           </section>
 
           <section className="relative bg-gradient-to-b from-parchment/40 via-white to-parchment/40 py-20 md:py-24">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
                 variants={fadeUp}

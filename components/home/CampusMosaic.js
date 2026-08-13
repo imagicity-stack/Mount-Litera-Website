@@ -16,7 +16,7 @@ function Frame({ slot, index, className = '' }) {
   return (
     <figure className={className}>
       <ImageReveal index={index}>
-        <SiteImage slot={slot} alt="" />
+        <SiteImage slot={slot} alt="" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
       </ImageReveal>
       <figcaption className="mt-3 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
         {alt}

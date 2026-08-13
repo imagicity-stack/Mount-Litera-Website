@@ -16,9 +16,9 @@ export default function ManagingCommitteePage() {
             title="Managing Committee"
             subtitle="The leaders ensuring our vision stays bold, transparent, and future-ready."
             eyebrow="Stewardship"
-            image="/managing-committee/banner-lead.jpg"
+            slot="people.committee"
           />
-          <section className="relative flex flex-1 items-center justify-center px-6 py-24 md:py-32">
+          <section className="relative flex flex-1 items-center justify-center px-6 py-20 md:py-28">
             <div className="surface-card relative max-w-xl overflow-hidden rounded-none p-10 text-center md:p-14">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
               <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/10 blur-[100px]" />

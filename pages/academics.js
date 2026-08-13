@@ -6,6 +6,8 @@ import SubNav from '@/components/SubNav';
 import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 import { stageDetails } from '@/components/Academics';
 
 const learningEnhancements = [
@@ -51,11 +53,11 @@ export default function AcademicsPage() {
             title="Academics"
             subtitle="Foundations that inspire futures — learning that grows with every child."
             eyebrow="Curriculum · CBSE Aligned"
-            image="/academics/banner-constellation.jpg"
+            slot="academics.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
                 <motion.div
                   className="space-y-6"
@@ -138,9 +140,9 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-12 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -202,8 +204,8 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section id="learning-journey" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section id="learning-journey" className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -280,8 +282,30 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section id="teaching-support" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="academics.classroom"
+                eyebrow="Teaching and support"
+                title="One teacher, and a class small enough to know"
+                flip
+                points={[
+                  'Progress tracked per child, not per class average.',
+                  'Extra support arranged before a gap becomes a problem.',
+                  'Parents told early — not at the end of term.'
+                ]}
+              >
+                <p>
+                  The thing that decides whether a child does well is rarely the syllabus. It is
+                  whether somebody noticed, in week three, that they had stopped putting their hand
+                  up. Our mentors carry small enough groups to notice.
+                </p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section id="teaching-support" className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="relative overflow-hidden rounded-none surface-card-dark text-parchment">
                 <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
                 <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
@@ -350,8 +374,15 @@ export default function AcademicsPage() {
             </div>
           </section>
 
-          <section id="beyond-textbooks" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <FeatureBand
+            slot="academics.wide"
+            eyebrow="Beyond the syllabus"
+            title="Learning that does not stop at the last page of the textbook"
+            body="Projects, labs, debates, and fieldwork run alongside the CBSE course, not instead of it."
+          />
+
+          <section id="beyond-textbooks" className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
                 <motion.div
                   className="space-y-6"

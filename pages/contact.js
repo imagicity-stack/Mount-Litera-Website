@@ -15,7 +15,7 @@ export default function ContactPage() {
             title="We&rsquo;d Love to Hear From You"
             subtitle="Our team is ready to guide you through admissions, partnerships, and every step of the journey."
             eyebrow="Contact"
-            image="/contact/banner-hello.jpg"
+            slot="contact.banner"
           />
           <Contact />
         </main>
