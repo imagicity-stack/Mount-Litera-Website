@@ -68,8 +68,11 @@ Each page now has a dedicated placeholder manifest in `/public/<page>/<page>.md`
 ### 1) Create a Firebase project
 1. Go to [Firebase Console](https://console.firebase.google.com/).
 2. Create a new project.
-3. Enable **Authentication → Email/Password**. (Google sign-in is *not* used by
-   the portal and does not need to be enabled.)
+3. Enable **Authentication → Sign-in method → Email/Password**. This is a
+   manual console step — security rules cannot switch a provider on, and
+   `/api/admin/bootstrap` will happily create the account without it, so the
+   failure shows up later as a refused sign-in. (Google sign-in is *not* used
+   by the portal and does not need to be enabled.)
 4. Create a **Firestore Database**.
 5. Create a **Storage** bucket.
 
