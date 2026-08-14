@@ -5,6 +5,8 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import PhotoStrip from '@/components/sections/PhotoStrip';
 
 const awards = [
   {
@@ -187,11 +189,11 @@ export default function AwardsAndRecognitionPage() {
             title="Awards &amp; Recognition"
             subtitle="Celebrate the accolades that honour character, leadership, and academic excellence."
             eyebrow="Honours"
-            image="/awards-and-recognition/banner-laurel.jpg"
+            slot="core.awards"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-start">
                 <motion.div
                   className="space-y-5"
@@ -243,8 +245,34 @@ export default function AwardsAndRecognitionPage() {
             </div>
           </section>
 
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="awards.strip.1"
+                eyebrow="Recognition"
+                title="Awards are the evidence, not the aim"
+                points={[
+                  'Recognition across academics, sport, and the arts.',
+                  'House and individual honours awarded every term.',
+                  'Accreditation reviewed against published standards.'
+                ]}
+              >
+                <p>
+                  We do not chase prizes. But when independent bodies and neighbouring schools
+                  keep arriving at the same conclusion about our students, it is worth showing
+                  parents the record.
+                </p>
+              </SplitFeature>
+
+              <PhotoStrip
+                className="mt-16"
+                slots={['awards.strip.2', 'awards.strip.3', 'core.feature']}
+              />
+            </div>
+          </section>
+
           <section id="awards" className="relative py-20 md:py-24">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}

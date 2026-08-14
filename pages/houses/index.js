@@ -24,11 +24,11 @@ export default function HousesPage() {
             title="The Eight Houses"
             subtitle="Tribes of belonging, leadership, and friendly rivalry — drawn from the animal kingdom."
             eyebrow="Houses"
-            image="/beyond-academics/banner-odyssey.jpg"
+            slot="houses.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mx-auto mb-16 max-w-3xl text-center"
                 variants={fadeUp}

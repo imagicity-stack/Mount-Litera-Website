@@ -9,6 +9,8 @@ import Footer from '@/components/Footer';
 import InquiryForm from '@/components/InquiryForm';
 import ImageBanner from '@/components/ImageBanner';
 import ArrowLink from '@/components/ArrowLink';
+import SectionHeader from '@/components/sections/SectionHeader';
+import PhotoStrip from '@/components/sections/PhotoStrip';
 
 const whyChoose = [
   { title: 'Future-Ready Curriculum', body: 'A blend of strong academics and practical learning experiences.' },
@@ -55,7 +57,7 @@ export default function AdmissionPage() {
             slot="admission.banner"
           />
 
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto max-w-4xl px-6 text-center">
               <motion.div
                 variants={fadeUp}
@@ -81,8 +83,8 @@ export default function AdmissionPage() {
             </div>
           </section>
 
-          <section id="why-choose-elden-heights" className="relative scroll-mt-24 py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section id="why-choose-elden-heights" className="relative scroll-mt-24 py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -129,8 +131,8 @@ export default function AdmissionPage() {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -171,7 +173,7 @@ export default function AdmissionPage() {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
               <motion.div
                 className="surface-card rounded-none p-10"
@@ -258,6 +260,22 @@ export default function AdmissionPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SectionHeader
+                eyebrow="Come and see"
+                title="What your child's day would actually look like"
+                lede="Photographs do only so much. Book a visit and walk the campus on an ordinary school day — that is when you learn the most about a school."
+                link="/contact"
+                linkLabel="Arrange a campus visit"
+              />
+              <PhotoStrip
+                className="mt-14"
+                slots={['admission.campus.1', 'admission.campus.2', 'admission.campus.3']}
+              />
             </div>
           </section>
 

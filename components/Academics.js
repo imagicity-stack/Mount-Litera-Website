@@ -144,7 +144,7 @@ export default function Academics({ showExplore = true }) {
             >
               <ImageReveal index={index} stagger={0.09}>
                 <Link href={stageAnchors[index]} className="img-zoom block">
-                  <SiteImage slot={stageSlots[index]} imgClassName="img-layer" />
+                  <SiteImage slot={stageSlots[index]} imgClassName="img-layer" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                 </Link>
               </ImageReveal>
 

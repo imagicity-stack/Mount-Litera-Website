@@ -30,7 +30,7 @@ export default function DisclosuresPage() {
             eyebrow="Disclosures"
             image="/disclosures/banner-transparency.jpg"
           />
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto max-w-4xl px-6">
               <div className="mb-12 text-center">
                 <span className="eyebrow justify-center">Transparency</span>

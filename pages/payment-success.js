@@ -43,7 +43,7 @@ export default function PaymentSuccess() {
             eyebrow="Success"
             image="/payment-success/banner-confirm.jpg"
           />
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="mx-auto max-w-3xl px-6">
               <div className="surface-card relative overflow-hidden rounded-none p-10 text-center md:p-14">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />

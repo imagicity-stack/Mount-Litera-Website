@@ -6,6 +6,8 @@ import SubNav from '@/components/SubNav';
 import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 const rideToRiseDetails = {
   overview:
@@ -53,11 +55,28 @@ export default function NewInitiativesPage() {
             title="New Initiatives"
             subtitle="Fresh ideas and campus upgrades shaping the next phase of Elden Heights."
             eyebrow="Initiatives"
-            image="/new-initiatives/banner-spark.jpg"
+            slot="initiatives.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="initiatives.feature"
+                eyebrow="What is changing"
+                title="A campus that keeps moving forward"
+                points={[
+                'Facilities upgraded on a published schedule.',
+                'Programmes piloted with one year group before rolling out.',
+                'Parent feedback reviewed each term.'
+                ]}
+              >
+                <p>New facilities, new programmes, and new ways of teaching arrive here every year — and each one is chosen because it answers something parents or students actually asked for.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -80,7 +99,7 @@ export default function NewInitiativesPage() {
           </section>
 
           <section id="ride-to-rise" className="relative py-16 md:py-24">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-10 space-y-3"
                 variants={fadeUp}
@@ -211,6 +230,15 @@ export default function NewInitiativesPage() {
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="about.mission"
+            eyebrow="New Initiatives"
+            title="The next chapter is already being built"
+            body="See where the school is heading."
+            link="/core"
+            linkLabel="Our core philosophy"
+          />
         </main>
         <Footer />
       </div>

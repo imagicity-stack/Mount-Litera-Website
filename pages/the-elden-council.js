@@ -4,6 +4,7 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
 
 const council = [
   { name: 'Anit Ankur', title: 'Settlor', initials: 'AA' },
@@ -28,11 +29,11 @@ export default function TheEldenCouncilPage() {
             title="The Elden Council"
             subtitle="Guiding voices that shape strategy, culture, and stewardship."
             eyebrow="Governance"
-            image="/the-elden-council/banner-council.jpg"
+            slot="people.council"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-5xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell max-w-5xl">
               <motion.div
                 className="mx-auto mb-16 max-w-3xl text-center"
                 variants={fadeUp}
@@ -94,6 +95,27 @@ export default function TheEldenCouncilPage() {
                   </motion.article>
                 ))}
               </div>
+            </div>
+          </section>
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="people.council.feature"
+                eyebrow="Stewardship"
+                title="Trustees who think in decades"
+                flip
+                points={[
+                  'Long-term custody of the school\u2019s purpose and finances.',
+                  'Appointments and major investment decisions.',
+                  'Accountable to families, not to shareholders.'
+                ]}
+              >
+                <p>
+                  The Council exists to protect what a school is for when short-term pressures push
+                  the other way. Its members are not involved in daily teaching — that is
+                  deliberate, and it is what lets them take the long view.
+                </p>
+              </SplitFeature>
             </div>
           </section>
         </main>

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 import SiteImage from '@/components/media/SiteImage';
+import { useIsSmallScreen } from '@/lib/useMediaQuery';
 
 const chapters = [
   {
@@ -38,6 +39,7 @@ const chapters = [
 export default function ScrollStory() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
+  const isSmall = useIsSmallScreen();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -65,7 +67,11 @@ export default function ScrollStory() {
   const copyOpacities = [copy0, copy1, copy2];
   const progresses = [progress0, progress1, progress2];
 
-  if (reduce) {
+  // Phones get the plain stacked version. Pinning costs three viewport heights
+  // of scrolling to read three short paragraphs, which is a poor trade on a
+  // small screen, and cross-fading full-bleed images every frame is the most
+  // expensive thing on the page.
+  if (reduce || isSmall) {
     return (
       <section className="band-ink">
         <div className="shell space-y-16 py-20 md:py-28">
@@ -90,8 +96,8 @@ export default function ScrollStory() {
   }
 
   return (
-    <section ref={ref} className="relative bg-obsidian" style={{ height: '320vh' }}>
-      <div className="sticky top-0 h-screen overflow-hidden">
+    <section ref={ref} className="relative bg-obsidian" style={{ height: '300vh' }}>
+      <div className="sticky top-0 h-screen overflow-hidden" style={{ height: '100svh' }}>
         {chapters.map((chapter, i) => (
           <motion.div
             key={`img-${chapter.slot}`}

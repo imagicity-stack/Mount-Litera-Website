@@ -39,7 +39,7 @@ export default function OurPeople() {
         {/* Feature ---------------------------------------------------------- */}
         <div className="mt-14 grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
           <ImageReveal>
-            <SiteImage slot="home.faces.feature" imgClassName="object-top" />
+            <SiteImage slot="home.faces.feature" imgClassName="object-top" sizes="(max-width: 1024px) 100vw, 50vw" />
           </ImageReveal>
 
           <Reveal delay={0.1} className="flex flex-col items-start">
@@ -65,7 +65,7 @@ export default function OurPeople() {
           {mentors.map((mentor, index) => (
             <figure key={mentor.slot}>
               <ImageReveal index={index}>
-                <SiteImage slot={mentor.slot} imgClassName="object-top" />
+                <SiteImage slot={mentor.slot} imgClassName="object-top" sizes="(max-width: 640px) 100vw, 33vw" />
               </ImageReveal>
               <figcaption className="mt-5">
                 <Link href="/core-mentors" className="hv-link-serif !text-xl">

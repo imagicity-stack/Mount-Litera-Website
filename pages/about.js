@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import About from '@/components/About';
@@ -9,6 +8,11 @@ import Navbar from '@/components/Navbar';
 import SubNav from '@/components/SubNav';
 import { sectionNav } from '@/lib/sectionNav';
 import Footer from '@/components/Footer';
+import SectionHeader from '@/components/sections/SectionHeader';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
+import SiteImage from '@/components/media/SiteImage';
+import ImageReveal from '@/components/motion/ImageReveal';
 
 const policies = [
   { title: 'Disability Policy', href: '/policies/disability-policy' },
@@ -37,13 +41,11 @@ const leadershipCards = [
 ];
 
 const leadershipPhotos = {
-  principal: {
-    src: '/teachers/principal.png',
-    alt: 'R.K. Singh, Principal'
-  },
+  principal: { slot: 'about.principal', name: 'R.K. Singh', role: 'Principal' },
   managingDirector: {
-    src: '/teachers/shashi-shankar-prasad.jpg',
-    alt: 'Mr. Shashi Shankar Prasad, Managing Director'
+    slot: 'about.director',
+    name: 'Mr. Shashi Shankar Prasad',
+    role: 'Managing Director'
   }
 };
 
@@ -90,23 +92,14 @@ function LeaderNote({ id, title, image, author, paragraphs }) {
           <p className="font-garamond text-lg italic text-midnight">— {author}</p>
         </div>
       </div>
-      <div className="relative order-first lg:order-last">
-        <div className="absolute -inset-4 -z-10 rounded-none bg-gradient-to-br from-gold/20 via-transparent to-cardinal/15 blur-2xl" />
-        <div className="relative aspect-[3/4] overflow-hidden rounded-none border border-gold/25 bg-parchment shadow-[0_40px_80px_-40px_rgba(10,10,12,0.4)]">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1024px) 340px, 80vw"
-            className="object-cover"
-          />
-          <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-2xl border border-gold/30 bg-midnight/70 px-4 py-3 text-center backdrop-blur">
-            <p className="font-garamond text-sm italic text-parchment">{image.alt.split(',')[0]}</p>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-300">
-              {image.alt.split(',')[1]}
-            </p>
-          </div>
-        </div>
+      <div className="order-first lg:order-last">
+        <ImageReveal>
+          <SiteImage slot={image.slot} sizes="(min-width: 1024px) 340px, 80vw" />
+        </ImageReveal>
+        <p className="mt-4 font-display text-lg text-midnight">{image.name}</p>
+        <p className="mt-1 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
+          {image.role}
+        </p>
       </div>
     </motion.article>
   );
@@ -124,33 +117,39 @@ export default function AboutPage() {
             title="About The Elden Heights"
             subtitle="A visual journey through our ethos, leadership, and the legacy we are building."
             eyebrow="About · Est. Heritage"
-            image="/about/banner-aurora.jpg"
+            slot="about.banner"
           />
 
           <About showLink={false} imageSlot="about.vision" heading="The Ethos Behind Elden Heights" />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
-              <motion.div
-                className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center"
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <span className="eyebrow">Leadership &amp; Governance</span>
-                <h2 className="mt-5 font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[52px]">
-                  Guided by those who believe in <span className="italic">the long view</span>.
-                </h2>
-                <span className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
-                <p className="mt-6 text-base leading-relaxed text-midnight/75 md:text-lg">
-                  Explore the voices and councils that guide The Elden Heights School. Each pillar
-                  offers a deeper look at our philosophy, mentors, and stewardship.
-                </p>
-              </motion.div>
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
+              <SectionHeader
+                eyebrow="Leadership & Governance"
+                title="Guided by those who believe in the long view"
+                lede="Explore the voices and councils that guide The Elden Heights School. Each pillar offers a deeper look at our philosophy, mentors, and stewardship."
+              />
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <SplitFeature
+                slot="about.leadership"
+                eyebrow="How the school is led"
+                title="Four groups, one standard"
+                className="mt-14 md:mt-16"
+                points={[
+                  'The Elden Council — trustees who steward the long-term vision.',
+                  'The Principal — accountable for daily academic life.',
+                  'Core Mentors — the teachers who know every child by name.',
+                  'The Managing Committee — operations, safety, and infrastructure.'
+                ]}
+              >
+                <p>
+                  Governance here is deliberately close to the classroom. The people who set the
+                  standards are the same people parents meet at the gate, and every one of the four
+                  groups below answers for a specific part of your child&rsquo;s experience.
+                </p>
+              </SplitFeature>
+
+              <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {leadershipCards.map((card, idx) => (
                   <motion.div
                     key={card.href}
@@ -193,7 +192,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
+          <section className="relative py-20 md:py-28">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
             <div className="mx-auto max-w-6xl space-y-24 px-6">
               <LeaderNote
@@ -226,8 +225,15 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section id="mission-vision" className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <FeatureBand
+            slot="about.mission"
+            eyebrow="Mission & Vision"
+            title="Roots deep enough to hold. Wings wide enough to soar."
+            body="Four stages carry a child from their first day here to their last — and the promise behind each one is the same."
+          />
+
+          <section id="mission-vision" className="relative py-20 md:py-28">
+            <div className="shell">
               <div className="relative overflow-hidden rounded-none surface-card-dark text-parchment">
                 <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cardinal/25 blur-[120px]" />
                 <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-gold/15 blur-[120px]" />
@@ -296,8 +302,8 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-5xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell max-w-5xl">
               <motion.div
                 className="mb-12 flex flex-col items-center text-center"
                 variants={fadeUp}

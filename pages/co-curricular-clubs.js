@@ -4,6 +4,8 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 const clubs = [
   {
@@ -54,11 +56,28 @@ export default function CoCurricularClubsPage() {
             title="Co-Curricular Clubs"
             subtitle="Spaces for exploration, creativity, and student-led excellence."
             eyebrow="Clubs"
-            image="/co-curricular-clubs/banner-spectrum.jpg"
+            slot="clubs.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="clubs.feature"
+                eyebrow="How clubs work"
+                title="Small groups, real responsibility"
+                points={[
+                'Weekly sessions built into the timetable.',
+                'Every club performs or presents at least once a term.',
+                'Mentors stay with the same group across the year.'
+                ]}
+              >
+                <p>Each club is run with a mentor rather than a supervisor. Students plan their own sessions, present their own work, and carry the result — which is where the confidence comes from.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -82,7 +101,7 @@ export default function CoCurricularClubsPage() {
           </section>
 
           <section className="relative py-16 md:py-20">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-10"
                 variants={fadeUp}
@@ -131,6 +150,15 @@ export default function CoCurricularClubsPage() {
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="students.strip.2"
+            eyebrow="Co-curricular"
+            title="Confidence is a skill. It can be taught."
+            body="See the full picture of student life at Elden Heights."
+            link="/students-life"
+            linkLabel="Explore student's life"
+          />
         </main>
         <Footer />
       </div>

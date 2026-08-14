@@ -68,11 +68,11 @@ export default function GalleryPage() {
             title="Gallery"
             subtitle="A visual tour of campus life, celebrations, and everyday moments."
             eyebrow="Our Story in Frames"
-            image="/gallery/banner-showcase.jpg"
+            slot="gallery.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="mb-14 max-w-3xl space-y-5"
                 variants={fadeUp}

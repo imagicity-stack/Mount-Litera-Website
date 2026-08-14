@@ -4,6 +4,8 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SplitFeature from '@/components/sections/SplitFeature';
+import FeatureBand from '@/components/sections/FeatureBand';
 
 const modules = [
   {
@@ -57,11 +59,28 @@ export default function LifeReadinessProgramPage() {
             title="Life Readiness Program"
             subtitle="Skill-building pathways that prepare learners for leadership and real-world challenges."
             eyebrow="Life Readiness"
-            image="/life-readiness-program/banner-ascent.jpg"
+            slot="liferead.banner"
           />
 
-          <section className="relative py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SplitFeature
+                slot="liferead.feature"
+                eyebrow="Life Readiness"
+                title="The lessons a report card never shows"
+                points={[
+                'Compulsory for every child, not an optional extra.',
+                'Progressive — the same skill returns at a harder level.',
+                'Assessed by demonstration, not by written test.'
+                ]}
+              >
+                <p>Handling money, speaking to a stranger, cooking a meal, reading a timetable, staying calm under pressure. Practical competence, taught deliberately and revisited every year.</p>
+              </SplitFeature>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-28">
+            <div className="shell">
               <motion.div
                 className="max-w-3xl space-y-5"
                 variants={fadeUp}
@@ -86,7 +105,7 @@ export default function LifeReadinessProgramPage() {
           </section>
 
           <section className="relative py-16 md:py-20">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <motion.div
                 className="mb-10"
                 variants={fadeUp}
@@ -163,6 +182,15 @@ export default function LifeReadinessProgramPage() {
               </motion.div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="students.strip.3"
+            eyebrow="Ready for what comes next"
+            title="We would rather they be capable than merely certified"
+            body="Read how the programme fits into the wider curriculum."
+            link="/academics"
+            linkLabel="See our academics"
+          />
         </main>
         <Footer />
       </div>

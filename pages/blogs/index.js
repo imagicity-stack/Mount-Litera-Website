@@ -92,7 +92,7 @@ export default function BlogsPage() {
 
           {/* Controls */}
           <section className="relative pt-14 md:pt-20">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="space-y-3">
                   <span className="eyebrow">Latest News &amp; Stories</span>
@@ -143,7 +143,7 @@ export default function BlogsPage() {
 
           {/* States */}
           <section className="relative pb-24 pt-10 md:pb-32">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="shell">
               {status === 'loading' && (
                 <div className="surface-card rounded-none p-12 text-center text-midnight/60">
                   <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-cardinal" />

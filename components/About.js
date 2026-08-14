@@ -56,7 +56,7 @@ export default function About({
 
         <div className="mt-14 grid gap-12 md:mt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <ImageReveal>
-            <SiteImage slot={imageSlot} />
+            <SiteImage slot={imageSlot} sizes="(max-width: 1024px) 100vw, 50vw" />
           </ImageReveal>
 
           <motion.div
