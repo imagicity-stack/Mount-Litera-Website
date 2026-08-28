@@ -5,13 +5,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
-
-const council = [
-  { name: 'Anit Ankur', title: 'Settlor', initials: 'AA' },
-  { name: 'Shashi Shankar Prasad', title: 'Managing Trustee', initials: 'SP' },
-  { name: 'Vinita Ankur', title: 'Trustee', initials: 'VA' },
-  { name: 'Vandana Prasad', title: 'Trustee', initials: 'VP' }
-];
+import PersonCard from '@/components/people/PersonCard';
+import usePeople from '@/lib/usePeople';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -19,6 +14,8 @@ const fadeUp = {
 };
 
 export default function TheEldenCouncilPage() {
+  const { people } = usePeople('council');
+
   return (
     <>
       <Seo path="/the-elden-council" />
@@ -62,37 +59,9 @@ export default function TheEldenCouncilPage() {
                 </div>
               </motion.div>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {council.map((member, idx) => (
-                  <motion.article
-                    key={member.name}
-                    className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]"
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: idx * 0.08 }}
-                  >
-                    <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-midnight via-graphite to-midnight">
-                      <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/15 blur-[80px]" />
-                      <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-cardinal/20 blur-[80px]" />
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                      <span className="relative font-garamond text-7xl font-semibold text-parchment">
-                        {member.initials}
-                      </span>
-                      <span className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-[9px] font-semibold uppercase tracking-[0.35em] text-parchment/40">
-                        Portrait &nbsp;·&nbsp; Forthcoming
-                      </span>
-                    </div>
-                    <div className="space-y-2 border-t border-midnight/10 bg-white/80 px-5 py-5 text-center backdrop-blur">
-                      <p className="font-garamond text-xl font-semibold leading-tight text-midnight">
-                        {member.name}
-                      </p>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">
-                        {member.title}
-                      </p>
-                    </div>
-                  </motion.article>
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                {people.map((member, idx) => (
+                  <PersonCard key={member.id} person={member} index={idx} ratio="4/5" />
                 ))}
               </div>
             </div>

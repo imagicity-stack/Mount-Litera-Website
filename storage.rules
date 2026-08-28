@@ -33,6 +33,13 @@ service firebase.storage {
       allow delete: if isAdmin();
     }
 
+    // Portraits for the people directory — one folder per group.
+    match /people/{group}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isReasonableImage();
+      allow delete: if isAdmin();
+    }
+
     // Blog cover images and in-article uploads.
     match /blogs/{userId}/{fileName} {
       allow read: if true;

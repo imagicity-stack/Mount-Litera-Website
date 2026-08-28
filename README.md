@@ -12,6 +12,8 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
   Access is granted solely by a Firestore `users/{uid}` doc with `role: admin`.
 - **Site Images library**: every managed photograph on the public site,
   uploadable from the portal with a reference image shown for comparison.
+- **People directory**: add, edit, reorder, hide, and remove the Elden Council,
+  Core Mentors, and Managing Committee, with portraits in Firebase Storage.
 - **WordPress-like blog studio**: rich-text editor, featured images, drafts,
   scheduling, categories, and tags.
 - **Live SEO analytics** (Yoast-style): focus-keyword checks, readability,
@@ -347,6 +349,52 @@ it. Records whose slot has been removed from the registry are ignored by
 If Firebase is unreachable, `/api/media` returns an empty map with `200` rather
 than an error, and every slot falls back to its reference image. A broken
 backend can never blank the site.
+
+---
+
+## People (admin-managed)
+
+The **People** tab of the portal manages everyone the site lists publicly:
+the Elden Council, Core Mentors, and the Managing Committee. Adding someone
+publishes them to their page immediately — no deploy.
+
+### How it works
+
+- **`lib/peopleGroups.js`** defines the three groups, whether they use
+  departments, and — importantly — the roster the site shipped with.
+- Records live in the Firestore collection **`people`**; portraits go to
+  Firebase Storage under **`people/{group}/`**.
+- `GET /api/people` returns published entries. `?all=1` includes hidden ones
+  and requires admin. `POST /api/people`, `PUT|DELETE /api/people/{id}` are
+  admin-only.
+
+### The seed roster, and the one thing to know about it
+
+Each group falls back to its built-in roster **whenever the directory holds no
+entries for that group**. That is what keeps a page from coming up empty
+before anyone has touched the backend, and what makes a Firestore outage
+degrade to the previous list rather than to nothing.
+
+The consequence: **the moment you add one person to a group, the built-in list
+stops being used for that group.** Add one mentor and the page shows one
+mentor. The portal warns about this and offers a one-click **Import the
+built-in list** button that copies the shipped roster into the directory so
+you can edit it person by person. Use that first.
+
+### Per person
+
+| Field | Notes |
+| --- | --- |
+| Name | Required. |
+| Title / Designation / Role | Label varies by group (Trustee, Mathematics, …). |
+| Department | Core Mentors only. Pick an existing one or type a new one — new departments appear on the page automatically, after the known ones. |
+| Photo | Optional, under 5 MB. Without one the card shows the person's initials on ink, which is a deliberate style rather than a broken image. |
+| Short note | Optional. |
+| Order | Set with the ↑ ↓ buttons; the whole group is renumbered so ordering stays dense. |
+| Hidden | Keeps the record but removes them from the public page. |
+
+Removing a person also deletes their portrait from the bucket, as does
+replacing a photo, so old files do not accumulate.
 
 ---
 
