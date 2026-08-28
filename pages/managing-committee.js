@@ -4,8 +4,15 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SectionHeader from '@/components/sections/SectionHeader';
+import FeatureBand from '@/components/sections/FeatureBand';
+import PersonCard from '@/components/people/PersonCard';
+import Reveal from '@/components/motion/Reveal';
+import usePeople from '@/lib/usePeople';
 
 export default function ManagingCommitteePage() {
+  const { people, ready } = usePeople('committee');
+
   return (
     <>
       <Seo path="/managing-committee" />
@@ -18,28 +25,54 @@ export default function ManagingCommitteePage() {
             eyebrow="Stewardship"
             slot="people.committee"
           />
-          <section className="relative flex flex-1 items-center justify-center px-6 py-20 md:py-28">
-            <div className="surface-card relative max-w-xl overflow-hidden rounded-none p-10 text-center md:p-14">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-              <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/10 blur-[100px]" />
 
-              <span className="eyebrow justify-center">Announcement</span>
-              <h1 className="mt-5 font-garamond text-3xl font-semibold leading-[1.1] text-midnight sm:text-4xl md:text-[40px]">
-                Details <span className="italic">coming soon</span>.
-              </h1>
-              <span className="mx-auto mt-6 block h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
-              <p className="mt-6 text-midnight/75">
-                Information about the committee safeguarding our mission and excellence will be
-                published here as our governance structure takes shape.
-              </p>
-              <div className="mt-8">
-                <Link href="/the-elden-council" className="btn-primary">
-                  Meet the Council
-                  <span>→</span>
-                </Link>
+          <section className="band-white">
+            <div className="shell py-20 md:py-28">
+              <SectionHeader
+                eyebrow="Governance"
+                title="Who runs the school day to day"
+                lede="The Managing Committee carries operations: safety, infrastructure, staffing, and the practical decisions that shape an ordinary school day."
+              />
+
+              <div className="mt-14">
+                {people.length > 0 ? (
+                  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    {people.map((member, idx) => (
+                      <PersonCard key={member.id} person={member} index={idx} ratio="4/5" />
+                    ))}
+                  </div>
+                ) : (
+                  // The committee is published from the admin portal. Until
+                  // somebody is added there, say so plainly rather than
+                  // rendering an empty grid.
+                  ready && (
+                    <Reveal className="border-l-[3px] border-crimson bg-ivory p-8 md:p-10">
+                      <p className="font-display text-2xl font-medium text-ink md:text-3xl">
+                        Details coming soon
+                      </p>
+                      <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">
+                        Information about the committee safeguarding our mission will be published
+                        here as our governance structure takes shape. In the meantime, the Elden
+                        Council sets the school&rsquo;s direction.
+                      </p>
+                      <Link href="/the-elden-council" className="hv-link mt-6 inline-block">
+                        Meet the Elden Council
+                      </Link>
+                    </Reveal>
+                  )
+                )}
               </div>
             </div>
           </section>
+
+          <FeatureBand
+            slot="people.council.feature"
+            eyebrow="Accountability"
+            title="Every part of the school answers for something specific"
+            body="Read how governance is structured, and who is responsible for what."
+            link="/about"
+            linkLabel="How the school is led"
+          />
         </main>
         <Footer />
       </div>

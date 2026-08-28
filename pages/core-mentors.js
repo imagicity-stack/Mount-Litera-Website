@@ -1,116 +1,22 @@
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
-
-const mentorPhotos = {
-  'R.K. Singh': '/teachers/rk-singh.png',
-  'Prarthana Mishra': '/teachers/prarthana-mishra.png',
-  'Piyush Sinha': '/teachers/piyush-sinha.png',
-  'MD Hadis': '/teachers/md-hadis.jpg',
-  'Shama Perween': '/teachers/shama-perween.png',
-  'Nitesh Kumar': '/teachers/nitesh-kumar.png',
-  'Sameeksha Sinha': '/teachers/sameeksha-sinha.png',
-  'Sangeeta Agarwal': '/teachers/sangeeta-agarwal.png',
-  'Smita Sinha': '/teachers/smita-sinha.png',
-  'Pratiksha Prasoon': '/teachers/pratiksha-prasoon.png',
-  'Saba Naaz': '/teachers/saba-naaz.png',
-  'Nitika Gupta': '/teachers/nitika gupta.png',
-  'Manila Awadhya': '/teachers/manila-awadhya.png',
-  'Seema Bakshi': '/teachers/seema-bakshi.png',
-  'Kailash Devi': '/teachers/kailash-devi.png',
-  'Ritesh Kumar': '/teachers/ritesh kumar.png',
-  'Sushma Minz': '/teachers/sushma minz.png',
-  'Sagar Kumar': '/teachers/sagar-kumar.png',
-  'C.K. Yadav': '/teachers/ck-yadav.png'
-};
-
-const coreMentors = [
-  {
-    department: 'Administration',
-    mentors: [
-      { name: 'R.K. Singh', designation: 'Principal' },
-      { name: 'Prarthana Mishra', designation: 'Relationship Manager' },
-      { name: 'Piyush Sinha', designation: 'Accounting Manager' },
-      { name: 'MD Hadis', designation: 'Transport & Admin Manager' }
-    ]
-  },
-  {
-    department: 'Information Technology',
-    mentors: [{ name: 'Sushil Sinha', designation: 'IT Head' }]
-  },
-  {
-    department: 'Teaching',
-    mentors: [
-      { name: 'Shama Perween', designation: 'Maths' },
-      { name: 'Nitesh Kumar', designation: 'Maths' },
-      { name: 'Sameeksha Sinha', designation: 'Social Studies' },
-      { name: 'Sangeeta Agarwal', designation: 'English' },
-      { name: 'Smita Sinha', designation: 'Maths' },
-      { name: 'Pratiksha Prasoon', designation: 'Hindi' },
-      { name: 'Saba Naaz', designation: 'Multiple Subjects' },
-      { name: 'Nitika Gupta', designation: 'Multiple Subjects' },
-      { name: 'Manila Awadhya', designation: 'Multiple Subjects' },
-      { name: 'Seema Bakshi', designation: 'Multiple Subjects' },
-      { name: 'Kailash Devi', designation: 'Hindi' },
-      { name: 'Ritesh Kumar', designation: 'Science' }
-    ]
-  },
-  { department: 'Music', mentors: [{ name: 'Sushma Minz', designation: 'Vocalist' }] },
-  {
-    department: 'Sports',
-    mentors: [
-      { name: 'Sagar Kumar', designation: 'Yoga & Karate' },
-      { name: 'C.K. Yadav', designation: 'Overall Sports' }
-    ]
-  },
-  { department: 'Store Keeper', mentors: [{ name: 'Santosh Kumar', designation: 'Store Keeper' }] }
-];
-
-const getInitials = (name) =>
-  name.split(' ').filter(Boolean).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+import PersonCard from '@/components/people/PersonCard';
+import usePeople from '@/lib/usePeople';
+import { byDepartment } from '@/lib/peopleGroups';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
-const MentorCard = ({ name, designation }) => {
-  const photoSrc = mentorPhotos[name];
-
-  return (
-    <div className="group overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.3)]">
-      {photoSrc ? (
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-midnight/5">
-          <Image
-            src={photoSrc}
-            alt={`${name} - ${designation}`}
-            fill
-            sizes="(max-width: 768px) 240px, 320px"
-            className="object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.05]"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        </div>
-      ) : (
-        <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-midnight via-graphite to-midnight">
-          <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/15 blur-[80px]" />
-          <span className="relative font-garamond text-6xl font-semibold text-parchment">
-            {getInitials(name)}
-          </span>
-        </div>
-      )}
-      <div className="space-y-1 border-t border-midnight/10 bg-white/80 px-5 py-4 text-center backdrop-blur">
-        <h4 className="font-garamond text-lg font-semibold leading-tight text-midnight">{name}</h4>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cardinal">{designation}</p>
-      </div>
-    </div>
-  );
-};
-
 export default function CoreMentorsPage() {
+  const { people } = usePeople('mentors');
+  const departments = byDepartment('mentors', people);
+
   return (
     <>
       <Seo path="/core-mentors" />
@@ -150,7 +56,7 @@ export default function CoreMentorsPage() {
           <section className="relative py-10 md:py-16">
             <div className="shell">
               <div className="hidden space-y-16 md:block">
-                {coreMentors.map((group, gIdx) => (
+                {departments.map((group, gIdx) => (
                   <motion.div
                     key={group.department}
                     className="space-y-7"
@@ -174,8 +80,8 @@ export default function CoreMentorsPage() {
                       </span>
                     </div>
                     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {group.mentors.map((mentor) => (
-                        <MentorCard key={`${group.department}-${mentor.name}`} {...mentor} />
+                      {group.mentors.map((mentor, mIdx) => (
+                        <PersonCard key={mentor.id} person={mentor} index={mIdx} ratio="4/5" />
                       ))}
                     </div>
                   </motion.div>
@@ -183,7 +89,7 @@ export default function CoreMentorsPage() {
               </div>
 
               <div className="space-y-12 md:hidden">
-                {coreMentors.map((group) => (
+                {departments.map((group) => (
                   <div key={`${group.department}-mobile`} className="space-y-4">
                     <div className="flex items-center gap-3 px-1">
                       <span className="h-px w-8 bg-gold" />
@@ -194,11 +100,8 @@ export default function CoreMentorsPage() {
                     <div className="-mx-6 overflow-x-auto px-6">
                       <div className="flex snap-x snap-mandatory gap-4 pb-2">
                         {group.mentors.map((mentor) => (
-                          <div
-                            key={`${group.department}-mobile-${mentor.name}`}
-                            className="w-60 flex-shrink-0 snap-center"
-                          >
-                            <MentorCard {...mentor} />
+                          <div key={mentor.id} className="w-60 flex-shrink-0 snap-center">
+                            <PersonCard person={mentor} ratio="4/5" />
                           </div>
                         ))}
                       </div>
