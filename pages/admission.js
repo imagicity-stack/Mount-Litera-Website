@@ -11,29 +11,13 @@ import ImageBanner from '@/components/ImageBanner';
 import ArrowLink from '@/components/ArrowLink';
 import SectionHeader from '@/components/sections/SectionHeader';
 import PhotoStrip from '@/components/sections/PhotoStrip';
+import useContent from '@/lib/useContent';
 
-const whyChoose = [
-  { title: 'Future-Ready Curriculum', body: 'A blend of strong academics and practical learning experiences.' },
-  { title: 'Experienced Faculty', body: 'Dedicated educators who mentor — not just teach.' },
-  { title: 'Modern Learning Environment', body: 'Digitally-equipped classrooms, safe campus, and evolving infrastructure.' },
-  { title: 'Holistic Growth', body: 'Equal focus on academics, sports, arts, and values.' },
-  { title: 'Personalized Guidance', body: 'Every student&rsquo;s journey is tracked, mentored, and celebrated.' }
-];
 
-const processSteps = [
-  { step: '01', title: 'Inquiry', body: 'Fill out the Admission Inquiry Form below.' },
-  { step: '02', title: 'Counsel', body: 'Our counselor schedules a campus visit and interaction.' },
-  { step: '03', title: 'Register', body: 'Submit required documents and complete the registration at the school office.' },
-  { step: '04', title: 'Welcome', body: 'Receive confirmation and orientation details for the upcoming session.' }
-];
 
-const documents = [
-  'Birth Certificate (original and photocopy)',
-  'Previous Report Card (where applicable)',
-  'Transfer Certificate (for higher grades)',
-  'Two recent passport-size photographs',
-  'Parent&rsquo;s ID Proof (Aadhaar or equivalent)'
-];
+
+
+
 
 
 
@@ -43,6 +27,10 @@ const fadeUp = {
 };
 
 export default function AdmissionPage() {
+  const { items: whyChoose } = useContent('whyChoose');
+  const { items: documents } = useContent('admissionDocuments');
+  const { items: processSteps } = useContent('admissionSteps');
+
   return (
     <>
       <Seo path="/admission" />
@@ -209,9 +197,9 @@ export default function AdmissionPage() {
                 <span className="mt-5 block h-px w-16 bg-gradient-to-r from-gold to-transparent" />
                 <ul className="mt-6 space-y-3">
                   {documents.map((doc) => (
-                    <li key={doc} className="flex items-start gap-3 text-sm text-midnight/80">
+                    <li key={doc.id} className="flex items-start gap-3 text-sm text-midnight/80">
                       <span className="mt-[7px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gradient-to-br from-gold to-cardinal shadow-[0_0_0_3px_rgba(201,162,75,0.15)]" />
-                      <span dangerouslySetInnerHTML={{ __html: doc }} />
+                      <span dangerouslySetInnerHTML={{ __html: doc.title }} />
                     </li>
                   ))}
                 </ul>

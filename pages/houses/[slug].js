@@ -6,6 +6,7 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import useContent from '@/lib/useContent';
 import { HOUSES, getHouseBySlug } from '@/lib/housesData';
 
 const fadeUp = {
@@ -14,6 +15,19 @@ const fadeUp = {
 };
 
 export default function HouseDetailPage({ house }) {
+  // Prefects and house masters change every year and are edited in the portal;
+  // the house's identity — name, crest, colours, story — stays in the site.
+  const { items: roster } = useContent('houses');
+  const override = roster.find((r) => r.key === house.slug) || {};
+  const prefect = {
+    name: override.prefectName || house.prefect.name,
+    image: override.prefectPhoto || house.prefect.image
+  };
+  const houseMaster = {
+    name: override.houseMasterName || house.houseMaster.name,
+    image: override.houseMasterPhoto || house.houseMaster.image
+  };
+
   if (!house) {
     return (
       <div className="flex min-h-screen flex-col text-midnight">
@@ -172,8 +186,8 @@ export default function HouseDetailPage({ house }) {
                 >
                   <div className="relative aspect-[4/5] w-full overflow-hidden bg-midnight/5">
                     <Image
-                      src={house.prefect.image}
-                      alt={`${house.prefect.name}, House Prefect of ${house.name}`}
+                      src={prefect.image}
+                      alt={`${prefect.name}, House Prefect of ${house.name}`}
                       fill
                       sizes="(max-width: 768px) 90vw, 400px"
                       className="object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.05]"
@@ -184,7 +198,7 @@ export default function HouseDetailPage({ house }) {
                       House Prefect
                     </p>
                     <p className="font-garamond text-2xl font-semibold leading-tight text-midnight">
-                      {house.prefect.name}
+                      {prefect.name}
                     </p>
                   </div>
                 </motion.article>
@@ -213,7 +227,7 @@ export default function HouseDetailPage({ house }) {
                       House Master
                     </p>
                     <p className="font-garamond text-2xl font-semibold leading-tight text-midnight">
-                      {house.houseMaster.name}
+                      {houseMaster.name}
                     </p>
                   </div>
                 </motion.article>

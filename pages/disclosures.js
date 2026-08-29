@@ -2,22 +2,18 @@ import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import useContent from '@/lib/useContent';
 
-const disclosures = [
-  { title: 'Annual Academic Calendar', file: 'annual-academic-calendar.pdf' },
-  { title: 'Affiliation / Upgradation / Extension of Affiliation Letter', file: 'affiliation-letter.pdf' },
-  { title: 'Society / Trust / Company Registration Certificate', file: 'society-trust-registration-certificate.pdf' },
-  { title: 'No Objection Certificate (NOC) from State Government / UT', file: 'noc-state-government.pdf' },
-  { title: 'Building Safety Certificate', file: 'building-safety-certificate.pdf' },
-  { title: 'DEO Certificate or Self-Certification by School', file: 'deo-certificate.pdf' },
-  { title: 'Water, Health & Sanitation Certificates', file: 'water-health-sanitation-certificates.pdf' },
-  { title: 'Fire Certificate', file: 'fire certificate mlzs.pdf' },
-  { title: 'Mount Litera Managing Committee', file: 'mount_litera_zee_school_managing_committee_formal.pdf' },
-  { title: 'Self Declaration', file: 'Mandatory Disclosure Details _ SARAS 7.0.pdf' },
-  { title: 'PTA Members Details', file: 'pta-members.pdf' }
-];
 
 export default function DisclosuresPage() {
+  const { items: disclosures } = useContent('disclosures');
+
+  // Seeded rows carry a bare filename from /public; uploaded ones carry a full
+  // Storage URL. Accept both so replacing one document does not require
+  // replacing them all.
+  const hrefFor = (file) =>
+    /^https?:\/\//.test(file) ? file : `/documents/mandatory-disclosures/${file}`;
+
   return (
     <>
       <Seo path="/disclosures" />
@@ -47,8 +43,8 @@ export default function DisclosuresPage() {
               <div className="grid gap-3">
                 {disclosures.map((item, idx) => (
                   <a
-                    key={item.file}
-                    href={`/documents/mandatory-disclosures/${item.file}`}
+                    key={item.id}
+                    href={hrefFor(item.file)}
                     download
                     className="group flex items-center justify-between gap-4 rounded-2xl border border-midnight/10 bg-white/80 px-6 py-5 backdrop-blur transition-all duration-400 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_20px_40px_-20px_rgba(10,10,12,0.2)]"
                   >

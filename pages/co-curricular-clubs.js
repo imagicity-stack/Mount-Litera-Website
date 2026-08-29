@@ -6,39 +6,9 @@ import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
+import useContent from '@/lib/useContent';
 
-const clubs = [
-  {
-    name: 'Leadership & Student Council',
-    description:
-      'Develops leadership, responsibility, and decision making through assemblies, event planning, house activities, and school initiatives.',
-    outcome: 'Confident speakers, responsible leaders, strong character.'
-  },
-  {
-    name: 'Sports & Fitness',
-    description:
-      'Focuses on physical development, teamwork, and discipline with structured games, fitness routines, and intra-school sports activities.',
-    outcome: 'Active lifestyle, teamwork, physical fitness, positive energy.'
-  },
-  {
-    name: 'Creative Expression',
-    description:
-      'Umbrella platform for art, music, dance, and stage performance. Students explore creativity, perform during events, and elevate school aesthetics.',
-    outcome: 'Confidence, self-expression, stage presence.'
-  },
-  {
-    name: 'Language & Communication',
-    description:
-      'Strengthens speaking, reading, storytelling, and public communication in English and Hindi through debates, storytelling sessions, and presentations.',
-    outcome: 'Improved communication, clarity of thought, confidence in expression.'
-  },
-  {
-    name: 'Wellness & Yoga',
-    description:
-      'Centres on emotional balance, mindfulness, posture, breathing, and basic yoga practices to maintain calm and focus.',
-    outcome: 'Emotional stability, improved focus, healthy habits.'
-  }
-];
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -46,6 +16,8 @@ const fadeUp = {
 };
 
 export default function CoCurricularClubsPage() {
+  const { items: clubs } = useContent('clubs');
+
   return (
     <>
       <Seo path="/co-curricular-clubs" />

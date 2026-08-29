@@ -1,15 +1,10 @@
-const testimonials = [
-  {
-    quote: 'Smooth admission process and very supportive staff.',
-    author: 'Parent of Grade 3 Student'
-  },
-  {
-    quote: 'Safe environment and strong academics. Highly recommended.',
-    author: 'Parent of Grade 6 Student'
-  }
-];
+import useContent from '@/lib/useContent';
+
+
 
 export default function Testimonials() {
+  const { items: testimonials } = useContent('testimonials');
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-5xl mx-auto px-6">
@@ -20,7 +15,7 @@ export default function Testimonials() {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial) => (
             <div
-              key={testimonial.author}
+              key={testimonial.id}
               className="rounded-3xl border border-gray-100 bg-[#F8F5F3] p-8 shadow-inner"
             >
               <p className="text-lg text-gray-700">“{testimonial.quote}”</p>

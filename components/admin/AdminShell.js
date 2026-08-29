@@ -4,9 +4,11 @@ import Link from 'next/link';
 const NAV = [
   { id: 'dashboard', label: 'Dashboard', icon: 'M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z' },
   { id: 'media', label: 'Site Images', icon: 'M4 5h16v14H4V5Zm0 10 4.5-4.5 3.5 3.5 3-3L20 15M9 9.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z' },
+  { id: 'content', label: 'Content', icon: 'M5 4h14v16H5V4Zm3 4h8M8 12h8M8 16h5' },
   { id: 'people', label: 'People', icon: 'M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M12 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm9 12v-1a4 4 0 0 0-3-3.9M16.5 3.6a3.5 3.5 0 0 1 0 6.8' },
   { id: 'blogs', label: 'Blogs', icon: 'M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm2 5h8M7 13h8M7 17h5' },
-  { id: 'popups', label: 'Popups', icon: 'M4 5h16v11H13l-4 3v-3H4V5Z' }
+  { id: 'popups', label: 'Popups', icon: 'M4 5h16v11H13l-4 3v-3H4V5Z' },
+  { id: 'settings', label: 'School Details', icon: 'M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm8-3.5a8 8 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a8 8 0 0 0-2-1.2L15 3H9l-.5 2.6a8 8 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a8 8 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a8 8 0 0 0 2 1.2L9 21h6l.5-2.6a8 8 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.06-.4.1-.8.1-1.2Z' }
 ];
 
 export default function AdminShell({ section, onSection, profile, onLogout, children }) {

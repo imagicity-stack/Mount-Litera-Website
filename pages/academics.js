@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
-import { stageDetails } from '@/components/Academics';
+import useContent from '@/lib/useContent';
 
 const learningEnhancements = [
   'Immersive digital lessons that keep every child excited to learn',
@@ -42,6 +42,8 @@ const fadeUp = {
 };
 
 export default function AcademicsPage() {
+  const { items: stageDetails } = useContent('academicStages');
+
   return (
     <>
       <Seo path="/academics" />
@@ -165,7 +167,7 @@ export default function AcademicsPage() {
               <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 {stageDetails.map((stage, index) => (
                   <motion.div
-                    key={stage.title}
+                    key={stage.id}
                     className="group relative overflow-hidden rounded-none border border-midnight/10 bg-gradient-to-br from-white to-parchment p-6 shadow-[0_30px_60px_-40px_rgba(10,10,12,0.25)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(10,10,12,0.35)]"
                     variants={fadeUp}
                     initial="hidden"
@@ -233,7 +235,7 @@ export default function AcademicsPage() {
                 <div className="space-y-10">
                   {stageDetails.map((stage, index) => (
                     <motion.div
-                      key={stage.title}
+                      key={stage.id}
                       className="grid gap-6 md:grid-cols-[140px_minmax(0,1fr)] md:items-start"
                       variants={fadeUp}
                       initial="hidden"

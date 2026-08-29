@@ -1,13 +1,19 @@
-import Link from 'next/link';
 
 import Seo from '@/components/Seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
+import SectionHeader from '@/components/sections/SectionHeader';
+import Reveal from '@/components/motion/Reveal';
+import useContent from '@/lib/useContent';
+import useSiteSettings from '@/lib/useSiteSettings';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
 
 export default function CareersPage() {
+  const { items: vacancies } = useContent('vacancies');
+  const settings = useSiteSettings();
+
   return (
     <>
       <Seo path="/careers" />
@@ -37,33 +43,63 @@ export default function CareersPage() {
               </SplitFeature>
             </div>
           </section>
-          <section className="relative flex flex-1 items-center justify-center px-6 py-20 md:py-28">
-            <div className="surface-card relative max-w-xl overflow-hidden rounded-none p-10 text-center md:p-14">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-              <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gold/10 blur-[100px]" />
+          <section id="vacancies" className="band-grey">
+            <div className="shell py-20 md:py-28">
+              <SectionHeader
+                eyebrow="Current opportunities"
+                title={vacancies.length ? 'Open positions' : 'No open positions right now'}
+                lede={
+                  vacancies.length
+                    ? 'Send your application to the address listed with the role. We read every one.'
+                    : 'New opportunities are typically posted ahead of each academic session. If you teach and this sounds like your kind of school, write to us anyway.'
+                }
+                link={vacancies.length ? undefined : '/contact'}
+                linkLabel="Get in touch"
+              />
 
-              <span className="eyebrow justify-center">Current Opportunities</span>
-              <h1 className="mt-5 font-garamond text-3xl font-semibold leading-[1.1] text-midnight sm:text-4xl md:text-[40px]">
-                We&rsquo;re not hiring <span className="italic">right now</span>.
-              </h1>
-              <span className="mx-auto mt-6 block h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
-              <p className="mt-6 text-midnight/75">
-                Thank you for your interest in joining The Elden Heights School. While there are no
-                open positions at the moment, new opportunities are typically posted ahead of each
-                academic session.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                <Link href="/contact" className="btn-primary">
-                  Get in Touch
-                </Link>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.25em] text-midnight/70 transition hover:text-cardinal"
-                >
-                  <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
-                  Back to Home
-                </Link>
-              </div>
+              {vacancies.length > 0 && (
+                <div className="mt-14 divide-y divide-hairline border-y border-hairline">
+                  {vacancies.map((role, idx) => (
+                    <Reveal key={role.id} index={idx} className="py-8">
+                      <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
+                        <div>
+                          <h3 className="font-display text-2xl font-medium text-ink md:text-3xl">
+                            {role.role}
+                          </h3>
+                          {role.type && (
+                            <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-crimson">
+                              {role.type}
+                            </p>
+                          )}
+                          {role.summary && (
+                            <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">
+                              {role.summary}
+                            </p>
+                          )}
+                          {role.requirements?.length > 0 && (
+                            <ul className="mt-5 space-y-2">
+                              {role.requirements.map((item) => (
+                                <li key={item} className="text-[0.95rem] text-ink-soft">
+                                  — {item}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+
+                        <a
+                          href={`mailto:${role.applyEmail || settings.emailCareers}?subject=${encodeURIComponent(
+                            `Application: ${role.role}`
+                          )}`}
+                          className="btn-primary whitespace-nowrap"
+                        >
+                          Apply for this role
+                        </a>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 

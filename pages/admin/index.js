@@ -10,9 +10,11 @@ import BlogManager from '@/components/admin/BlogManager';
 import PopupsManager from '@/components/admin/PopupsManager';
 import MediaManager from '@/components/admin/MediaManager';
 import PeopleManager from '@/components/admin/PeopleManager';
+import ContentManager from '@/components/admin/ContentManager';
+import SettingsManager from '@/components/admin/SettingsManager';
 import { Spinner } from '@/components/admin/ui';
 
-const SECTIONS = ['dashboard', 'media', 'people', 'blogs', 'popups'];
+const SECTIONS = ['dashboard', 'media', 'content', 'people', 'blogs', 'popups', 'settings'];
 
 export default function AdminPortal() {
   const router = useRouter();
@@ -88,9 +90,11 @@ export default function AdminPortal() {
           <DashboardOverview profile={profile} getToken={getFreshToken} onNavigate={changeSection} />
         )}
         {section === 'media' && <MediaManager user={user} getToken={getFreshToken} />}
+        {section === 'content' && <ContentManager getToken={getFreshToken} />}
         {section === 'people' && <PeopleManager getToken={getFreshToken} />}
         {section === 'blogs' && <BlogManager user={user} getToken={getFreshToken} />}
         {section === 'popups' && <PopupsManager user={user} getToken={getFreshToken} />}
+        {section === 'settings' && <SettingsManager getToken={getFreshToken} />}
       </AdminShell>
     </>
   );

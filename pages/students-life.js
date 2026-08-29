@@ -11,57 +11,11 @@ import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
 import { HOUSES } from '@/lib/housesData';
+import useContent from '@/lib/useContent';
 
-const pillars = [
-  {
-    title: 'Houses & Belonging',
-    description:
-      'Eight houses inspired by the animal kingdom give every Eldenite a tribe — a place to lead, support, compete with grace, and discover who they are beyond the classroom.'
-  },
-  {
-    title: 'Sports & Wellness',
-    description:
-      'Structured games, fitness, yoga, and inter-house tournaments shape a body that listens to a disciplined mind — and a mind that thrives in a healthy, energetic body.'
-  },
-  {
-    title: 'Beyond Academics',
-    description:
-      'Interest-led clubs and the Life Readiness Program invite every learner to follow curiosity into mastery and prepare for the real world beyond the classroom.'
-  }
-];
 
-const sports = [
-  {
-    name: 'Athletics & Track',
-    description:
-      'Sprints, relays, long-distance, and field events that build stamina, technique, and the unforgettable adrenaline of inter-house meets.'
-  },
-  {
-    name: 'Football & Cricket',
-    description:
-      'Structured coaching, age-appropriate practice cycles, and competitive house leagues that teach teamwork, strategy, and sportsmanship.'
-  },
-  {
-    name: 'Basketball & Volleyball',
-    description:
-      'Court games that develop quick decision-making, spatial awareness, vertical strength, and the joy of synchronised teamwork.'
-  },
-  {
-    name: 'Badminton & Table Tennis',
-    description:
-      'Indoor disciplines that sharpen reflexes, hand-eye coordination, and one-on-one focus through ladder tournaments and clubs.'
-  },
-  {
-    name: 'Yoga & Karate',
-    description:
-      'Breath, posture, mindful movement, and the disciplined art of self-defence — practices that calm the mind as they strengthen the body.'
-  },
-  {
-    name: 'Chess & Mind Sports',
-    description:
-      'Strategic thinking, patience, and pattern recognition cultivated through chess, carrom, and brain-game tournaments throughout the year.'
-  }
-];
+
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -69,6 +23,9 @@ const fadeUp = {
 };
 
 export default function StudentsLifePage() {
+  const { items: pillars } = useContent('studentPillars');
+  const { items: sports } = useContent('sports');
+
   return (
     <>
       <Seo path="/students-life" />

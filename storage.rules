@@ -40,6 +40,20 @@ service firebase.storage {
       allow delete: if isAdmin();
     }
 
+    // Uploads for the editable content collections (gallery photographs,
+    // disclosure PDFs). Documents are allowed here as well as images.
+    function isReasonableUpload() {
+      return request.resource.size < 20 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf');
+    }
+
+    match /content/{collection}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isReasonableUpload();
+      allow delete: if isAdmin();
+    }
+
     // Blog cover images and in-article uploads.
     match /blogs/{userId}/{fileName} {
       allow read: if true;

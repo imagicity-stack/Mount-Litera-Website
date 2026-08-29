@@ -4,29 +4,25 @@ import ArrowLink from '@/components/ArrowLink';
 import SiteImage from '@/components/media/SiteImage';
 import ImageReveal from '@/components/motion/ImageReveal';
 import Reveal from '@/components/motion/Reveal';
+import useContent from '@/lib/useContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
-const stats = [
-  { figure: '99%', label: 'Parent trust', caption: 'Reported year on year' },
-  { figure: 'Top 10', label: 'Regional rank', caption: 'Among CBSE schools' },
-  { figure: '4', label: 'Learning stages', caption: 'Roots to Eternity' }
-];
 
-const pillars = [
-  'Heritage-inspired campus experiences blended with modern pedagogy.',
-  'Guided pathways through Roots, Ascent, Radiance, and Eternity.',
-  'Dedicated mentorship and personalised attention at every stage.'
-];
+
+
 
 export default function About({
   showLink = true,
   imageSlot = 'home.about.portrait',
   heading = 'Our Future Ahead'
 }) {
+  const { items: stats } = useContent('ethosStats');
+  const { items: pillars } = useContent('ethosPillars');
+
   return (
     <section id="about" className="band-grey">
       <div className="shell py-20 md:py-28">
@@ -78,15 +74,15 @@ export default function About({
 
             <ul className="mt-9 divide-y divide-hairline border-y border-hairline">
               {pillars.map((line) => (
-                <li key={line} className="py-4 text-[0.98rem] leading-relaxed text-ink-soft">
-                  {line}
+                <li key={line.id} className="py-4 text-[0.98rem] leading-relaxed text-ink-soft">
+                  {line.title}
                 </li>
               ))}
             </ul>
 
             <dl className="mt-10 grid grid-cols-3 gap-6">
-              {stats.map(({ figure, label, caption }) => (
-                <div key={label}>
+              {stats.map(({ id, figure, label, caption }) => (
+                <div key={id}>
                   <dt className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-ink">
                     {figure}
                   </dt>

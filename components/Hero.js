@@ -5,21 +5,18 @@ import ArrowLink from '@/components/ArrowLink';
 import SiteImage from '@/components/media/SiteImage';
 import Parallax from '@/components/motion/Parallax';
 import Reveal from '@/components/motion/Reveal';
+import useContent from '@/lib/useContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
 
-const facts = [
-  { figure: '1999', label: 'Year established', caption: 'A quarter century of teaching' },
-  { figure: 'CBSE', label: 'Affiliated curriculum', caption: 'Recognised board syllabus' },
-  { figure: 'UKG–X', label: 'Grades taught', caption: 'One continuous journey' },
-  { figure: 'Top 10', label: 'Regional standing', caption: 'Among schools in Hazaribagh' }
-];
+
 
 export default function Hero() {
   const reduce = useReducedMotion();
+  const { items: facts } = useContent('keyFacts');
 
   return (
     <>
@@ -92,8 +89,8 @@ export default function Hero() {
         <div className="shell py-14 md:py-16">
           <span className="rule-heavy" />
           <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
-            {facts.map(({ figure, label, caption }, index) => (
-              <Reveal key={label} index={index} y={18} duration={0.7}>
+            {facts.map(({ id, figure, label, caption }, index) => (
+              <Reveal key={id} index={index} y={18} duration={0.7}>
                 <dt className="stat-figure">{figure}</dt>
                 <dd>
                   <p className="stat-label">{label}</p>

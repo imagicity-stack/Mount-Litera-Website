@@ -5,61 +5,7 @@ import ArrowLink from '@/components/ArrowLink';
 import SiteImage from '@/components/media/SiteImage';
 import ImageReveal from '@/components/motion/ImageReveal';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
-
-export const stageDetails = [
-  {
-    title: 'Foundational Stage',
-    grades: 'Nursery – Grade II',
-    homeSummary: 'Play-integrated discovery builds curiosity, language, and confidence in every young learner.',
-    summary:
-      'The early years of learning focus on developing curiosity and a love for discovery. Students are introduced to language, numbers, and environmental awareness through activity-based, play-integrated methods. The classroom becomes a space for imagination, storytelling, and exploration, where every question is valued and every answer is celebrated.',
-    focus: [
-      'Literacy and numeracy skills',
-      'Sensory and experiential learning',
-      'Art, rhythm, and movement',
-      'Building social and emotional understanding'
-    ]
-  },
-  {
-    title: 'Preparatory Stage',
-    grades: 'Grade III – Grade V',
-    homeSummary: 'Concept-based lessons encourage independent thought, teamwork, and fearless self-expression.',
-    summary:
-      'This is where the spark of learning becomes structured knowledge. Students are guided through concept-based learning that strengthens their understanding of core subjects. Teachers encourage independent thought, teamwork, and communication skills through interactive lessons and small projects.',
-    focus: [
-      'Concept-based understanding across subjects',
-      'Introduction to scientific and digital tools',
-      'Creative writing and expression',
-      'Early exposure to life skills and values'
-    ]
-  },
-  {
-    title: 'Middle Stage',
-    grades: 'Grade VI – Grade VIII',
-    homeSummary: 'Learners transition to self-driven exploration, connecting theory with real-world challenges.',
-    summary:
-      'The middle school years shape analytical thinking. Students transition from guided learning to self-driven exploration. They dive deeper into subjects like Mathematics, Science, Social Studies, and Languages while participating in project-based learning that connects theory with real-life situations.',
-    focus: [
-      'Critical and analytical thinking',
-      'STEM-oriented learning modules',
-      'Collaborative and research-based projects',
-      'Digital literacy and innovation challenges'
-    ]
-  },
-  {
-    title: 'Secondary Stage',
-    grades: 'Grade IX – Grade X',
-    homeSummary: 'Focused mentorship balances board preparation with leadership, ethics, and personal growth.',
-    summary:
-      'This is the phase where knowledge meets direction. Students begin focused preparation for board examinations while engaging in leadership roles, debates, and community-based projects. The emphasis remains on balanced development — academic achievement with personal growth and ethical responsibility.',
-    focus: [
-      'Structured CBSE board preparation',
-      'Advanced conceptual clarity and practice',
-      'Skill-based subjects and electives',
-      'Mentorship and counseling for career readiness'
-    ]
-  }
-];
+import useContent from '@/lib/useContent';
 
 const stageSlots = [
   'academics.stage.foundational',
@@ -88,6 +34,8 @@ const fadeUp = {
 };
 
 export default function Academics({ showExplore = true }) {
+  const { items: stageDetails } = useContent('academicStages');
+
   return (
     <section id="academics" className="band-white">
       <div className="shell py-20 md:py-28">
@@ -134,7 +82,7 @@ export default function Academics({ showExplore = true }) {
         <div className="mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {stageDetails.map((stage, index) => (
             <motion.article
-              key={stage.title}
+              key={stage.id}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
@@ -144,7 +92,7 @@ export default function Academics({ showExplore = true }) {
             >
               <ImageReveal index={index} stagger={0.09}>
                 <Link href={stageAnchors[index]} className="img-zoom block">
-                  <SiteImage slot={stageSlots[index]} imgClassName="img-layer" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+                  <SiteImage slot={stageSlots[index] || stageSlots[stageSlots.length - 1]} imgClassName="img-layer" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                 </Link>
               </ImageReveal>
 
