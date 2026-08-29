@@ -413,15 +413,38 @@ declares its fields and the rows the site shipped with; the API route, the form,
 the validation and the row list are all generated from that schema, so a new
 managed list is a schema entry rather than a new feature.
 
-| Collection | What it controls | Uploads |
-| --- | --- | --- |
-| Gallery | The photographs on `/gallery` | Images |
-| Mandatory Disclosures | The CBSE documents on `/disclosures` | PDFs |
-| Awards & Recognition | The awards on `/awards-and-recognition` | — |
-| Careers & Vacancies | Open roles on `/careers` | — |
-| House Roster | Prefect and house master per house | Images |
+There are twenty collections, grouped in the portal by the part of the site they
+feed:
 
-Field types: `text`, `textarea`, `image`, `file`, `list`.
+| Group | Collection | What it controls | Uploads |
+| --- | --- | --- | --- |
+| Media | Gallery | The photographs on `/gallery` | Images |
+| Compliance | Mandatory Disclosures | The CBSE documents on `/disclosures` | PDFs |
+| Recognition | Awards & Recognition | The awards on `/awards-and-recognition` | — |
+| Careers | Careers & Vacancies | Open roles on `/careers` | — |
+| Homepage | Key facts | The four figures under the hero | — |
+| Homepage | Ethos statistics | The three figures beside the ethos quote | — |
+| Homepage | Ethos pillars | The list beneath that quote | — |
+| Academics | Learning stages | The four stages, on the homepage and `/academics` | — |
+| Admission | Why choose us | The reasons on `/admission` | — |
+| Admission | Admission process | The numbered steps a family goes through | — |
+| Admission | Documents required | The checklist of papers to bring | — |
+| Student life | Co-curricular clubs | The clubs on `/co-curricular-clubs` | — |
+| Student life | Student life pillars | The pillars on `/students-life` | — |
+| Student life | Sports | The sports listed on that page | — |
+| Student life | Life Readiness modules | The modules on `/life-readiness-program` | — |
+| Student life | House Roster | Prefect and house master per house | Images |
+| About | Mission stages | Roots, Ascent, Radiance, Eternity | — |
+| About | Leadership letters | The Principal's and MD's notes | — |
+| Core | Accreditation & standards | The affiliations and standards on `/core` | — |
+| Marketing | Testimonials | Parent and student quotes | — |
+
+Field types: `text`, `textarea`, `image`, `file`, `list`, `url`.
+
+Most collections carry no uploads on purpose. The photographs that sit beside
+clubs, sports, stages and houses are **media slots**, not fields — the same
+picture is reused across several pages, so it belongs in one slot rather than
+copied into each row. Text and pictures are edited on different tabs.
 
 Records live in Firestore under `content/{collection}/items`; uploads go to
 Storage under `content/{collection}/`. Replacing a file or deleting a record
@@ -431,18 +454,28 @@ removes the old upload from the bucket.
 school is not currently hiring; add one and it becomes a list of open roles,
 each with its own apply-by-email button.
 
-**House Roster is a *keyed* collection.** The eight houses are part of the
-site's structure — their names, crests, colours and stories generate the
-`/houses/[slug]` routes — so entries cannot be added or removed, only filled
-in. Only the parts that change every year are editable: prefect and house
-master, name and photograph. A blank field keeps whatever the site ships with.
+### Keyed collections
+
+Two collections have a fixed set of rows that can be edited but not added to or
+deleted — the row set is part of the site's structure, so the form is a list of
+named entries rather than an add/remove list.
+
+- **House Roster.** The eight houses generate the `/houses/[slug]` routes from
+  their names, crests, colours and stories. Only what changes every year is
+  editable: prefect and house master, name and photograph.
+- **Leadership letters.** Two letters, from the Principal and the Managing
+  Director. Each paragraph is its own line, so the letter can be rewritten
+  without touching the layout.
+
+In both, a blank field keeps whatever the site ships with.
 
 ### Seed fallback
 
 As with the people directory, every collection falls back to its built-in rows
 while it is empty, and the first row added replaces that list **for that
-collection**. The portal warns and offers a one-click import of the built-in
-rows. The keyed House Roster is exempt — it merges field by field instead.
+collection** — the homepage key facts can be rewritten without disturbing the
+clubs. The portal warns and offers a one-click import of the built-in rows.
+Keyed collections are exempt: they merge field by field instead.
 
 ### School Details
 

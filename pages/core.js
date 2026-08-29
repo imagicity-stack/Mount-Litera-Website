@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
+import useContent from '@/lib/useContent';
 
 const coreSections = [
   {
@@ -22,38 +23,7 @@ const coreSections = [
   }
 ];
 
-const accreditationItems = [
-  {
-    title: 'Bhagwati Educational & Charitable Trust',
-    detail: 'Registered Trust Stewardship',
-    description:
-      'The Elden Heights operates under the Bhagwati Educational & Charitable Trust, ensuring transparent governance and responsible oversight.'
-  },
-  {
-    title: 'CBSE-Aligned Academic Framework',
-    detail: 'Affiliation Readiness',
-    description:
-      'Curriculum, safety, and operational protocols are structured to meet CBSE norms with ongoing audits to maintain compliance.'
-  },
-  {
-    title: 'Safety & Child Protection Compliance',
-    detail: 'Annual Policy Review',
-    description:
-      'Safeguarding standards are reviewed each year across transport, campus security, and classroom practices to uphold student well-being.'
-  },
-  {
-    title: 'Operational Excellence Standards',
-    detail: 'Process Documentation',
-    description:
-      'ISO-ready documentation practices guide academic, administrative, and facility workflows for consistent quality delivery.'
-  },
-  {
-    title: 'Sports & Co-Curricular Recognition',
-    detail: 'District & Intra-School Certifications',
-    description:
-      'Teams participate in certified events with documented coaching plans, fair-play pledges, and safety protocols.'
-  }
-];
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -61,6 +31,8 @@ const fadeUp = {
 };
 
 export default function CorePage() {
+  const { items: accreditationItems } = useContent('accreditation');
+
   return (
     <>
       <Seo path="/core" />

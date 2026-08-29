@@ -8,6 +8,7 @@ import {
   emptyRecord,
   seedFor,
   keysFor,
+  groupedCollections,
   CONTENT_STORAGE_PREFIX
 } from '@/lib/contentCollections';
 import { Button, Field, Input, TextArea } from '@/components/admin/ui';
@@ -308,25 +309,36 @@ export default function ContentManager({ getToken }) {
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-midnight/65">
           Lists the school keeps up to date itself. Changes go live immediately.
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {contentCollections.map((c) => (
-            <button
-              key={c.key}
-              type="button"
-              onClick={() => {
-                setKey(c.key);
-                setDraft(null);
-                setStatus('');
-                setError('');
-              }}
-              className={`border px-4 py-2 text-sm font-semibold transition ${
-                c.key === key
-                  ? 'border-cardinal bg-cardinal/10 text-cardinal'
-                  : 'border-midnight/20 text-midnight/65 hover:border-midnight/45'
-              }`}
-            >
-              {c.label}
-            </button>
+        {/* Twenty collections is too many for a flat row, so they are grouped
+            by the part of the site they belong to. */}
+        <div className="mt-5 space-y-4">
+          {groupedCollections().map(({ group, collections }) => (
+            <div key={group}>
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-midnight/40">
+                {group}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {collections.map((c) => (
+                  <button
+                    key={c.key}
+                    type="button"
+                    onClick={() => {
+                      setKey(c.key);
+                      setDraft(null);
+                      setStatus('');
+                      setError('');
+                    }}
+                    className={`border px-3.5 py-1.5 text-[0.8rem] font-semibold transition ${
+                      c.key === key
+                        ? 'border-cardinal bg-cardinal/10 text-cardinal'
+                        : 'border-midnight/20 text-midnight/65 hover:border-midnight/45'
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
         <p className="mt-4 text-sm text-midnight/60">{collection.blurb}</p>

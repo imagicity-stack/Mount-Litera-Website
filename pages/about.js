@@ -13,6 +13,7 @@ import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
 import SiteImage from '@/components/media/SiteImage';
 import ImageReveal from '@/components/motion/ImageReveal';
+import useContent from '@/lib/useContent';
 
 const policies = [
   { title: 'Disability Policy', href: '/policies/disability-policy' },
@@ -49,12 +50,7 @@ const leadershipPhotos = {
   }
 };
 
-const missionStages = [
-  { title: 'Roots', copy: 'The foundation — where discipline, virtue, and cultural heritage are instilled. The child is grounded like the roots of an ancient tree, drawing strength from values that endure.' },
-  { title: 'Ascent', copy: 'With firm ground, the learner begins to rise. Exploration, resilience, and intellectual awakening. A spirit that questions, seeks, and climbs with dignity toward truth.' },
-  { title: 'Radiance', copy: 'As wisdom matures, the individual begins to illuminate. Talents unfold, leadership emerges. Students radiate creativity, innovation, and excellence.' },
-  { title: 'Eternity', copy: 'The pinnacle — where learning transcends achievement and becomes legacy. The Eldenite embodies purpose, virtue, and vision that echo through generations.' }
-];
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -106,6 +102,9 @@ function LeaderNote({ id, title, image, author, paragraphs }) {
 }
 
 export default function AboutPage() {
+  const { items: missionStages } = useContent('missionStages');
+  const { items: leadershipNotes } = useContent('leadershipNotes');
+
   return (
     <>
       <Seo path="/about" />
@@ -195,33 +194,20 @@ export default function AboutPage() {
           <section className="relative py-20 md:py-28">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
             <div className="mx-auto max-w-6xl space-y-24 px-6">
-              <LeaderNote
-                id="principal-note"
-                title="Note from the Principal"
-                image={leadershipPhotos.principal}
-                author="R.K. Singh"
-                paragraphs={[
-                  'At The Elden Heights, our vision is straightforward. Every child who walks into this campus should discover who they are and what they can become. We focus on strong academics, clear values and a learning environment that pushes students to think, question and grow with confidence.',
-                  'Our four-stage philosophy — Roots, Ascent, Radiance and Eternity — guides each student through a journey that builds discipline, curiosity, communication and leadership. These are not just words on a brochure. These are practices we apply in classrooms, activities and daily interactions.',
-                  'We combine a heritage-inspired culture with modern teaching methods. Students learn to stay grounded while being prepared for a world that is changing fast. They learn to work hard, make responsible choices and take pride in their growth.',
-                  'My commitment as the Principal is to maintain a school where learning feels purposeful, teachers stay motivated and parents feel assured about their child’s future. This is a shared responsibility and at Elden Heights, we take it seriously.',
-                  'Your child deserves a school that believes in their potential and helps them rise towards it every day. That is the promise of The Elden Heights.'
-                ]}
-              />
-              <LeaderNote
-                id="md-note"
-                title="Note from the Managing Director"
-                image={leadershipPhotos.managingDirector}
-                author="Mr. Shashi Shankar Prasad"
-                paragraphs={[
-                  'The Elden Heights was built with one clear intention. To create a school that doesn’t just teach students, but shapes their entire life trajectory. We are not here to copy the standard school model. We are here to raise the benchmark for what education should feel like in our city and beyond.',
-                  'Every decision we make — infrastructure, teachers, culture, systems, activities — reflects one thought. Will this help a child grow into a stronger human being? If the answer is no, we don’t do it. Simple.',
-                  'Our four-stage philosophy — Roots, Ascent, Radiance and Eternity — is at the core of everything. It ensures our students begin with strong foundations, rise with discipline, express themselves with confidence and eventually step out as capable young adults who can face a complex world with clarity.',
-                  'We are building a school culture that values effort over shortcuts, character over noise and long-term growth over temporary wins. The goal is not just good results. The goal is responsible, confident and well-rounded individuals.',
-                  'As the director, my responsibility is to ensure that this institution stays true to its purpose, evolves with time and continues to offer an environment where students, teachers and parents feel aligned towards a shared future.',
-                  'The Elden Heights is not just a school. It is a journey of becoming. And we are committed to walking that journey with every child who joins us.'
-                ]}
-              />
+              {leadershipNotes.map((note) => (
+                <LeaderNote
+                  key={note.key}
+                  id={note.key}
+                  title={note.heading}
+                  image={
+                    note.key === 'md-note'
+                      ? leadershipPhotos.managingDirector
+                      : leadershipPhotos.principal
+                  }
+                  author={note.author}
+                  paragraphs={note.paragraphs}
+                />
+              ))}
             </div>
           </section>
 

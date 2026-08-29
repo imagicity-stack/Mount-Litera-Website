@@ -6,35 +6,9 @@ import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import FeatureBand from '@/components/sections/FeatureBand';
+import useContent from '@/lib/useContent';
 
-const modules = [
-  {
-    title: 'Financial Literacy & ATM Usage',
-    description:
-      'Students learn how to use an ATM, understand debit and digital payments, basic banking behaviour, and money responsibility.',
-    outcome: 'Financially aware, independent children.'
-  },
-  {
-    title: 'Basic Nursing & First Aid',
-    description: 'Training in basic first aid, handling minor injuries, emergency response, and CPR awareness.',
-    outcome: 'Safety awareness, calmness during emergencies.'
-  },
-  {
-    title: 'Digital Safety & Online Awareness',
-    description: 'Covers password safety, online behaviour, scam awareness, and responsible screen usage.',
-    outcome: 'Digitally responsible and secure children.'
-  },
-  {
-    title: 'Public Behaviour & Personal Safety',
-    description: 'Road safety, emergency response, public etiquette, asking for help, and situational awareness.',
-    outcome: 'Street-smart and confident children.'
-  },
-  {
-    title: 'Everyday Documentation',
-    description: 'Students learn to read bills, understand receipts, fill simple forms, and manage basic documentation.',
-    outcome: 'Practical intelligence and independence.'
-  }
-];
+
 
 const characteristics = [
   'Mandatory for all students',
@@ -49,6 +23,8 @@ const fadeUp = {
 };
 
 export default function LifeReadinessProgramPage() {
+  const { items: modules } = useContent('lifeReadiness');
+
   return (
     <>
       <Seo path="/life-readiness-program" />
