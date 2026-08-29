@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import Seo from '@/components/Seo';
@@ -7,42 +6,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
+import useContent from '@/lib/useContent';
 
-const galleryImages = [
-  { src: '/gallery/DSC00293.jpg', alt: 'Students collaborating in a bright classroom' },
-  { src: '/gallery/DSC00296.jpg', alt: 'Teacher guiding a student during a lesson' },
-  { src: '/gallery/DSC00297.jpg', alt: 'Classmates working together on an assignment' },
-  { src: '/gallery/DSC00306.jpg', alt: 'Learning materials arranged for an activity' },
-  { src: '/gallery/DSC01117.jpg', alt: 'Students smiling during a campus event' },
-  { src: '/gallery/DSC01120.jpg', alt: 'Group discussion taking place indoors' },
-  { src: '/gallery/DSC01122.jpg', alt: 'Students participating in hands-on learning' },
-  { src: '/gallery/DSC01123.jpg', alt: 'Teacher engaging students with visual aids' },
-  { src: '/gallery/DSC01125.jpg', alt: 'Students presenting their classroom work' },
-  { src: '/gallery/DSC01126.jpg', alt: 'Focused learner taking careful notes' },
-  { src: '/gallery/DSC01129.jpg', alt: 'Students interacting during a group task' },
-  { src: '/gallery/DSC01131.jpg', alt: 'Teacher providing personalized feedback' },
-  { src: '/gallery/DSC04871.jpg', alt: 'Students celebrating with colorful decorations' },
-  { src: '/gallery/DSC04883.jpg', alt: 'Artistic display created by students' },
-  { src: '/gallery/DSC04884.jpg', alt: 'Students preparing props for a performance' },
-  { src: '/gallery/DSC04889.jpg', alt: 'Energetic performance on the school stage' },
-  { src: '/gallery/DSC04891.jpg', alt: 'Students lined up for a school program' },
-  { src: '/gallery/DSC04899.jpg', alt: 'Performers sharing a moment backstage' },
-  { src: '/gallery/DSC04904.jpg', alt: 'Students rehearsing in coordinated outfits' },
-  { src: '/gallery/DSC04907.jpg', alt: 'Cheerful students applauding on stage' },
-  { src: '/gallery/DSC04910.jpg', alt: 'Stage lighting highlighting the performance' },
-  { src: '/gallery/DSC04924.jpg', alt: 'Students performing a choreographed dance' },
-  { src: '/gallery/DSC04931.jpg', alt: 'Friends sharing a smile after the show' },
-  { src: '/gallery/DSC04932.jpg', alt: 'Students showcasing a traditional performance' },
-  { src: '/gallery/DSC04937.jpg', alt: 'Colorful costumes during a cultural program' },
-  { src: '/gallery/DSC04952.jpg', alt: 'Students taking a bow after the performance' },
-  { src: '/gallery/DSC05617.jpg', alt: 'Students playing sports on the field' },
-  { src: '/gallery/DSC05620.jpg', alt: 'Athletes sprinting during track practice' },
-  { src: '/gallery/DSC05621.jpg', alt: 'Team huddle before a sports match' },
-  { src: '/gallery/DSC05626.jpg', alt: 'Outdoor activities on the school grounds' },
-  { src: '/gallery/DSC05628.jpg', alt: 'Students enjoying a friendly competition' },
-  { src: '/gallery/DSC05639.jpg', alt: 'Coach encouraging students during drills' },
-  { src: '/gallery/DSC08665.jpg', alt: 'Students celebrating achievements together' }
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -50,6 +15,8 @@ const fadeUp = {
 };
 
 export default function GalleryPage() {
+  const { items: galleryImages } = useContent('gallery');
+
   useEffect(() => {
     trackFacebookEvent('ViewContent', {
       page_path: '/gallery',
@@ -103,7 +70,7 @@ export default function GalleryPage() {
                         : '';
                   return (
                     <motion.figure
-                      key={image.src}
+                      key={image.id}
                       className={`group relative overflow-hidden rounded-none border border-midnight/10 bg-midnight/5 shadow-[0_20px_40px_-30px_rgba(10,10,12,0.3)] transition-all duration-500 ease-elite hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_40px_80px_-30px_rgba(10,10,12,0.35)] ${span}`}
                       variants={fadeUp}
                       initial="hidden"
@@ -112,13 +79,17 @@ export default function GalleryPage() {
                       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (index % 8) * 0.04 }}
                     >
                       <div className={`relative w-full ${span.includes('row-span-2') ? 'h-full min-h-[340px]' : 'h-52 sm:h-60'}`}>
-                        <Image
-                          src={image.src}
+                        {/* A plain <img>: uploaded photographs are served from the
+                            Firebase Storage domain, which next/image would need an
+                            explicit remote-host allowlist for. */}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={image.image}
                           alt={image.alt}
-                          fill
+                          loading={index < 4 ? 'eager' : 'lazy'}
+                          decoding="async"
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                          className="object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.07]"
-                          priority={index < 4}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-elite group-hover:scale-[1.07]"
                         />
                       </div>
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/85 via-midnight/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

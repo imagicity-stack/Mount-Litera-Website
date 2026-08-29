@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import useSiteSettings from '@/lib/useSiteSettings';
+import { telHref } from '@/lib/siteSettings';
+
 const exploreLinks = [
   { label: 'About', href: '/about' },
   { label: 'Academics', href: '/academics' },
@@ -22,7 +25,7 @@ const policyLinks = [
 const socialLinks = [
   {
     label: 'Instagram',
-    href: 'https://www.instagram.com/elden.heights',
+    key: 'instagram',
     icon: (
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
         <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" />
@@ -33,7 +36,7 @@ const socialLinks = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/eldenheights/',
+    key: 'linkedin',
     icon: (
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
         <path
@@ -45,7 +48,7 @@ const socialLinks = [
   },
   {
     label: 'Facebook',
-    href: 'https://www.facebook.com/theeldenheights',
+    key: 'facebook',
     icon: (
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
         <path
@@ -57,7 +60,7 @@ const socialLinks = [
   },
   {
     label: 'YouTube',
-    href: 'https://www.youtube.com/@theeldenheights',
+    key: 'youtube',
     icon: (
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
         <path
@@ -71,6 +74,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const settings = useSiteSettings();
+
   return (
     <footer className="band-ink">
       <nav className="sr-only" aria-label="Site navigation">
@@ -115,13 +120,13 @@ export default function Footer() {
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
               Recognised among the top schools in Hazaribagh — shaping confident, capable, and
-              creative learners under the patronage of Bhagwati Educational &amp; Charitable Trust.
+              creative learners under the patronage of {settings.trust}.
             </p>
             <div className="mt-7 flex items-center gap-3">
-              {socialLinks.map(({ label, href, icon }) => (
+              {socialLinks.filter(({ key }) => settings[key]).map(({ label, key, icon }) => (
                 <a
                   key={label}
-                  href={href}
+                  href={settings[key]}
                   aria-label={label}
                   rel="noreferrer"
                   target="_blank"
@@ -177,33 +182,33 @@ export default function Footer() {
               <li>
                 <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">General</p>
                 <a
-                  href="mailto:contact@eldenhieghts.org"
+                  href={`mailto:${settings.emailGeneral}`}
                   className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
                 >
-                  contact@eldenhieghts.org
+                  {settings.emailGeneral}
                 </a>
               </li>
               <li>
                 <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Admissions</p>
                 <a
-                  href="mailto:admission@eldenheights.org"
+                  href={`mailto:${settings.emailAdmissions}`}
                   className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
                 >
-                  admission@eldenheights.org
+                  {settings.emailAdmissions}
                 </a>
               </li>
               <li>
                 <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Phone</p>
                 <a
-                  href="tel:+919431904333"
+                  href={telHref(settings.phone)}
                   className="mt-1 block font-bold text-white transition-colors hover:text-crimson-300"
                 >
-                  +91 94319 04333
+                  {settings.phone}
                 </a>
               </li>
               <li>
                 <p className="text-[0.7rem] uppercase tracking-[0.12em] text-white/45">Location</p>
-                <p className="mt-1 text-white/75">Hazaribagh, Jharkhand · India</p>
+                <p className="mt-1 text-white/75">{settings.region}</p>
               </li>
             </ul>
           </div>
@@ -211,8 +216,8 @@ export default function Footer() {
 
         <div className="mt-16 border-t border-white/15 pt-8">
           <div className="flex flex-col gap-3 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
-            <p>© {new Date().getFullYear()} The Elden Heights School. All rights reserved.</p>
-            <p className="font-display text-sm italic text-white/70">Towards Eternal Glory</p>
+            <p>© {new Date().getFullYear()} {settings.schoolName}. All rights reserved.</p>
+            <p className="font-display text-sm italic text-white/70">{settings.tagline}</p>
           </div>
         </div>
       </div>

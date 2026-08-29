@@ -14,6 +14,10 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
   uploadable from the portal with a reference image shown for comparison.
 - **People directory**: add, edit, reorder, hide, and remove the Elden Council,
   Core Mentors, and Managing Committee, with portraits in Firebase Storage.
+- **Content collections**: gallery, mandatory disclosures, awards, vacancies and
+  the house roster — all schema-driven, with image and PDF uploads.
+- **School details**: one place for phone, address, emails and social links,
+  read by every page that shows them.
 - **WordPress-like blog studio**: rich-text editor, featured images, drafts,
   scheduling, categories, and tags.
 - **Live SEO analytics** (Yoast-style): focus-keyword checks, readability,
@@ -395,6 +399,61 @@ you can edit it person by person. Use that first.
 
 Removing a person also deletes their portrait from the bucket, as does
 replacing a photo, so old files do not accumulate.
+
+---
+
+## Content & School Details (admin-managed)
+
+Two more portal tabs, added after an audit of what was still hardcoded.
+
+### Content
+
+One screen driven entirely by **`lib/contentCollections.js`**. Each collection
+declares its fields and the rows the site shipped with; the API route, the form,
+the validation and the row list are all generated from that schema, so a new
+managed list is a schema entry rather than a new feature.
+
+| Collection | What it controls | Uploads |
+| --- | --- | --- |
+| Gallery | The photographs on `/gallery` | Images |
+| Mandatory Disclosures | The CBSE documents on `/disclosures` | PDFs |
+| Awards & Recognition | The awards on `/awards-and-recognition` | — |
+| Careers & Vacancies | Open roles on `/careers` | — |
+| House Roster | Prefect and house master per house | Images |
+
+Field types: `text`, `textarea`, `image`, `file`, `list`.
+
+Records live in Firestore under `content/{collection}/items`; uploads go to
+Storage under `content/{collection}/`. Replacing a file or deleting a record
+removes the old upload from the bucket.
+
+**Vacancies** are worth calling out: with none listed the careers page says the
+school is not currently hiring; add one and it becomes a list of open roles,
+each with its own apply-by-email button.
+
+**House Roster is a *keyed* collection.** The eight houses are part of the
+site's structure — their names, crests, colours and stories generate the
+`/houses/[slug]` routes — so entries cannot be added or removed, only filled
+in. Only the parts that change every year are editable: prefect and house
+master, name and photograph. A blank field keeps whatever the site ships with.
+
+### Seed fallback
+
+As with the people directory, every collection falls back to its built-in rows
+while it is empty, and the first row added replaces that list **for that
+collection**. The portal warns and offers a one-click import of the built-in
+rows. The keyed House Roster is exempt — it merges field by field instead.
+
+### School Details
+
+`lib/siteSettings.js` holds the school's phone, WhatsApp, address, the general
+/ admissions / careers email addresses, and the social links. The portal writes
+overrides to `settings/site` in Firestore and every page reads them through
+`useSiteSettings`.
+
+These were previously copied into five files, which is how the general email
+came to be misspelled in the footer (`eldenhieghts.org`) while the rest of the
+site had it right. There is now one place to change them.
 
 ---
 

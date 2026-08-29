@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { CONTACT_EMAIL } from '@/lib/contactInfo';
 import { trackFacebookEvent } from '@/lib/facebookPixel';
+import useSiteSettings from '@/lib/useSiteSettings';
+import { telHref, whatsappHref } from '@/lib/siteSettings';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -10,6 +11,7 @@ const fadeUp = {
 };
 
 export default function Contact() {
+  const settings = useSiteSettings();
   const [contactData, setContactData] = useState({
     name: '',
     email: '',
@@ -96,8 +98,8 @@ export default function Contact() {
                 Address
               </p>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-ink">
-                Katghara, Opp. BSF Firing Range, Silwar,
-                <br /> Hazaribagh, Jharkhand
+                {settings.addressLine1},
+                <br /> {settings.addressLine2}
               </p>
             </div>
 
@@ -105,15 +107,15 @@ export default function Contact() {
               <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
                 Phone
               </p>
-              <a href="tel:+919431904333" className="hv-link mt-3 inline-block text-[1.05rem]">
-                +91 94319 04333
+              <a href={telHref(settings.phone)} className="hv-link mt-3 inline-block text-[1.05rem]">
+                {settings.phone}
               </a>
               <div className="mt-5 flex flex-wrap gap-4">
-                <a href="tel:+919431904333" className="btn-primary">
+                <a href={telHref(settings.phone)} className="btn-primary">
                   Call now
                 </a>
                 <a
-                  href="https://wa.me/919431904333"
+                  href={whatsappHref(settings.whatsapp)}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-ghost"
@@ -130,8 +132,11 @@ export default function Contact() {
               <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-muted">
                 Email
               </p>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="hv-link mt-3 inline-block text-[1.05rem]">
-                {CONTACT_EMAIL}
+              <a
+                href={`mailto:${settings.emailGeneral}`}
+                className="hv-link mt-3 inline-block text-[1.05rem]"
+              >
+                {settings.emailGeneral}
               </a>
             </div>
           </motion.div>

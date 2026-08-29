@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import { FACEBOOK_PIXEL_CODE, trackFacebookEvent } from '@/lib/facebookPixel';
 import { SiteMediaProvider } from '@/lib/useSiteMedia';
+import { SiteSettingsProvider } from '@/lib/useSiteSettings';
 import SeoContent from '@/components/SeoContent';
 import PopupManager from '@/components/popups/PopupManager';
 
@@ -48,9 +49,11 @@ export default function MyApp({ Component, pageProps }) {
         }}
       />
       <SeoContent />
-      <SiteMediaProvider>
-        <Component {...pageProps} />
-      </SiteMediaProvider>
+      <SiteSettingsProvider>
+        <SiteMediaProvider>
+          <Component {...pageProps} />
+        </SiteMediaProvider>
+      </SiteSettingsProvider>
       <PopupManager />
     </>
   );
