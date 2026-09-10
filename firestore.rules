@@ -24,6 +24,24 @@ service cloud.firestore {
     //                  (the `role: "admin"` field that grants portal access is
     //                   created by hand in the console, which bypasses rules)
     //   admissions → /api/admissions/submit
+    //
+    // The Parent Room collections are the reason this default matters most.
+    // They hold parents' contact details, what a parent has said about their
+    // child, and counsellors' private notes about a minor. Nothing in the
+    // browser reads or writes them:
+    //
+    //   parent_room_bookings  → /api/parent-room/hold, /confirm,
+    //                             /booking/[id] (narrow view, token-gated),
+    //                             /api/admin/parent-room/* (admin only)
+    //   parent_room_slots     → /api/parent-room/availability (times only,
+    //                             never who booked them),
+    //                             /api/admin/parent-room/slots
+    //   parent_room_settings  → /api/parent-room/availability (public subset),
+    //                             /api/admin/parent-room/settings
+    //
+    // A signed-in parent has no more access to these than a stranger does,
+    // which is correct: authentication in this application confers admin
+    // access and nothing else.
     match /{document=**} {
       allow read, write: if false;
     }

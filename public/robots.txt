@@ -2,6 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /studentdata
+# The Parent Room is a campaign landing page: publicly reachable through its
+# direct URL, but not intended for search discovery.
+Disallow: /parent-room
 
 Sitemap: https://eldenheights.org/sitemap.xml
 Host: https://eldenheights.org
