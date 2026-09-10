@@ -79,6 +79,8 @@ export default function ConfigPanel({ mode, request, settings, onSaved }) {
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const [reminding, setReminding] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [check, setCheck] = useState(null);
 
   useEffect(() => {
     setValues(settings || defaultParentRoomSettings);
@@ -131,6 +133,21 @@ export default function ConfigPanel({ mode, request, settings, onSaved }) {
       setError(err.message || 'Could not send the reminders.');
     } finally {
       setReminding(false);
+    }
+  }, [request]);
+
+  /** Ask the gateway itself what is wrong, rather than guessing from a 502. */
+  const runPaymentCheck = useCallback(async () => {
+    setChecking(true);
+    setCheck(null);
+    setError('');
+    try {
+      const data = await request('/api/admin/parent-room/payment-check', { method: 'POST' });
+      setCheck(data);
+    } catch (err) {
+      setError(err.message || 'Could not run the payment check.');
+    } finally {
+      setChecking(false);
     }
   }, [request]);
 
@@ -326,6 +343,60 @@ export default function ConfigPanel({ mode, request, settings, onSaved }) {
           <code>RAZORPAY_KEY_SECRET</code> in the environment. Without them the booking flow falls
           back to offline on its own rather than failing at checkout.
         </p>
+
+        {/* If the pay button ever fails, this is the first place to look: it
+            raises a real ₹1 order so the gateway itself says what is wrong. */}
+        <div className="mt-4 border-t border-midnight/10 pt-4">
+          <Button variant="ghost" onClick={runPaymentCheck} disabled={checking}>
+            {checking ? 'Checking with Razorpay…' : 'Test the payment connection'}
+          </Button>
+
+          {check && (
+            <div className="mt-4 space-y-3 text-xs">
+              <dl className="grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
+                {[
+                  ['Key ID', check.config.keyIdPresent ? `${check.config.keyIdPrefix} (${check.config.mode})` : 'not set'],
+                  ['Key secret', check.config.keySecretPresent ? `${check.config.keySecretLength} characters` : 'not set'],
+                  ['Collecting', check.settings.paymentMode === 'razorpay' ? 'online' : 'offline'],
+                  ['Fee', `₹${check.settings.participationFee}`]
+                ].map(([label, value]) => (
+                  <div key={label} className="flex justify-between gap-3 border-b border-midnight/[0.07] py-1.5">
+                    <dt className="text-midnight/45">{label}</dt>
+                    <dd className="font-semibold text-midnight">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {check.problems.length > 0 && (
+                <ul className="space-y-1.5 border border-amber-300 bg-amber-50 p-3 text-amber-800">
+                  {check.problems.map((problem) => (
+                    <li key={problem}>• {problem}</li>
+                  ))}
+                </ul>
+              )}
+
+              {check.probe && (
+                <p
+                  className={`border p-3 font-semibold ${
+                    check.probe.ok
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                      : 'border-cardinal/30 bg-cardinal/5 text-cardinal'
+                  }`}
+                >
+                  {check.probe.message}
+                  {check.probe.code ? ` (${check.probe.code})` : ''}
+                </p>
+              )}
+
+              {check.problems.length === 0 && check.probe?.ok && (
+                <p className="text-midnight/50">
+                  Nothing to fix. The ₹1 test order is never charged — it simply proves the
+                  credentials are accepted.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </Card>
 
       <Card className="p-5">

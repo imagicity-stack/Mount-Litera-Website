@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import Razorpay from '../order/razorpay';
+import { cleanKey } from '@/lib/razorpayClient';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
@@ -14,23 +14,24 @@ export async function POST(request) {
       );
     }
 
-    if (!process.env.RAZORPAY_KEY_SECRET) {
+    // Trimmed: a secret pasted into the hosting dashboard with a trailing
+    // newline signs a different HMAC than Razorpay used, so a genuine payment
+    // would be rejected here as an invalid signature.
+    const secret = cleanKey(process.env.RAZORPAY_KEY_SECRET);
+
+    if (!secret) {
       return NextResponse.json(
         { error: 'Payment gateway is not configured. Please contact the school team.' },
         { status: 500 }
       );
     }
 
-    // Initialising Razorpay satisfies compliance with SDK expectations if utilities are needed later.
-    // eslint-disable-next-line no-new
-    new Razorpay({ key_id: process.env.RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_KEY_SECRET });
-
     const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .createHmac('sha256', secret)
       .update(`${orderId}|${paymentId}`)
       .digest('hex');
 
-    if (expectedSignature !== signature) {
+    if (expectedSignature !== String(signature).trim()) {
       return NextResponse.json({ success: false, error: 'Invalid payment signature received.' }, { status: 400 });
     }
 

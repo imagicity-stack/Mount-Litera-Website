@@ -77,7 +77,17 @@ export default async function handler(req, res) {
       notes: { bookingId: booking.bookingId, module: 'parent_room' }
     });
 
-    await attachOrder(booking.bookingId, order.id);
+    // Recording the order id is bookkeeping that tightens the binding between
+    // booking and payment; the order itself already exists at the gateway.
+    // Failing the request here would send the parent back to a pay button for
+    // an order that was raised, so this is logged and stepped over — confirm
+    // still verifies the signature against the order id it is given.
+    try {
+      await attachOrder(booking.bookingId, order.id);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Parent Room order id not recorded:', booking.bookingId, error?.message);
+    }
 
     return res.status(200).json({
       orderId: order.id,
@@ -86,11 +96,31 @@ export default async function handler(req, res) {
       keyId: checkoutKeyId()
     });
   } catch (error) {
+    // The gateway's own words, logged in full. A bare "Bad Gateway" told
+    // nobody anything the first time this failed in production.
     // eslint-disable-next-line no-console
-    console.error('Parent Room order failed:', error?.message);
+    console.error('Parent Room order failed:', {
+      bookingId: booking.bookingId,
+      amount,
+      message: error?.message,
+      status: error?.status,
+      code: error?.code,
+      reason: error?.reason,
+      details: error?.details
+    });
+
+    // Razorpay's descriptions are written to be shown ("amount must be at
+    // least 100", "authentication failed") and carry no secret, so passing one
+    // through turns an unactionable error into an actionable one. Anything
+    // unrecognised falls back to the neutral line.
+    const gatewayMessage =
+      error?.name === 'RazorpayError' && error.message ? error.message : '';
+
     return res.status(502).json({
-      message: 'We could not start the payment. Please try again.',
-      code: 'gateway_error'
+      message: gatewayMessage
+        ? `The payment gateway refused the request: ${gatewayMessage}`
+        : 'We could not start the payment. Please try again.',
+      code: error?.code || 'gateway_error'
     });
   }
 }

@@ -591,6 +591,25 @@ If the gateway keys are absent the flow falls back to offline on its own rather
 than failing at checkout. Nothing anywhere presents an unpaid session as paid.
 A fee of `0` confirms as `waived` with no payment step at all.
 
+**If the pay button fails**, open **Parent Room → Settings → Test the payment
+connection**. It reports the shape of the credentials — present, trimmed, test
+or live, secret length, and whether the publishable key matches — never their
+value, then raises a real ₹1 order so Razorpay itself says what is wrong. The
+₹1 order is never charged; creating one only proves the credentials are
+accepted.
+
+Credentials are **trimmed everywhere** (`cleanKey` in `lib/razorpayClient.js`).
+A key pasted into a hosting dashboard routinely picks up a trailing newline, and
+untrimmed that breaks two things at once: order creation is rejected with a 401
+that looks like a wrong key, and — far worse — the HMAC would be computed with a
+different secret than Razorpay signed with, so a **real payment would fail
+verification and never confirm**. The same trim was applied to the pre-existing
+admission verify route, which had the same latent fault.
+
+The client lives in `lib/razorpayClient.js` and is shared by both routers. It
+previously sat inside an App Router route folder and was imported across from
+`pages/api`, which is fragile under per-route dependency tracing.
+
 ### Availability
 
 Everything is configured in the portal; no time is hardcoded. Weekdays, start
