@@ -11,10 +11,20 @@ import PopupsManager from '@/components/admin/PopupsManager';
 import MediaManager from '@/components/admin/MediaManager';
 import PeopleManager from '@/components/admin/PeopleManager';
 import ContentManager from '@/components/admin/ContentManager';
+import ParentRoomManager from '@/components/admin/parentRoom/ParentRoomManager';
 import SettingsManager from '@/components/admin/SettingsManager';
 import { Spinner } from '@/components/admin/ui';
 
-const SECTIONS = ['dashboard', 'media', 'content', 'people', 'blogs', 'popups', 'settings'];
+const SECTIONS = [
+  'dashboard',
+  'media',
+  'content',
+  'people',
+  'parent-room',
+  'blogs',
+  'popups',
+  'settings'
+];
 
 export default function AdminPortal() {
   const router = useRouter();
@@ -92,6 +102,14 @@ export default function AdminPortal() {
         {section === 'media' && <MediaManager user={user} getToken={getFreshToken} />}
         {section === 'content' && <ContentManager getToken={getFreshToken} />}
         {section === 'people' && <PeopleManager getToken={getFreshToken} />}
+        {section === 'parent-room' && (
+          <ParentRoomManager
+            getToken={getFreshToken}
+            focusBookingId={
+              typeof router.query.booking === 'string' ? router.query.booking : ''
+            }
+          />
+        )}
         {section === 'blogs' && <BlogManager user={user} getToken={getFreshToken} />}
         {section === 'popups' && <PopupsManager user={user} getToken={getFreshToken} />}
         {section === 'settings' && <SettingsManager getToken={getFreshToken} />}

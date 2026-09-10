@@ -69,7 +69,13 @@ export default function PopupManager() {
   const timersRef = useRef([]);
 
   const path = router.asPath || '/';
-  const isAdminPath = path.startsWith('/admin') || path.startsWith('/blogs/admin');
+  // The Parent Room is a single-purpose campaign page: a parent arriving from
+  // an advertisement should reach a confirmed booking without an admission
+  // popup landing on top of the form.
+  const isQuietPath =
+    path.startsWith('/admin') ||
+    path.startsWith('/blogs/admin') ||
+    path.startsWith('/parent-room');
 
   // Load active popups once on mount.
   useEffect(() => {
@@ -86,7 +92,7 @@ export default function PopupManager() {
   }, []);
 
   const eligible = useMemo(() => {
-    if (isAdminPath) return null;
+    if (isQuietPath) return null;
     const now = new Date();
     return (
       popups
@@ -95,7 +101,7 @@ export default function PopupManager() {
         .filter((p) => canShow(p))
         .sort((a, b) => (b.priority || 0) - (a.priority || 0))[0] || null
     );
-  }, [popups, path, isAdminPath]);
+  }, [popups, path, isQuietPath]);
 
   const clearTimers = useCallback(() => {
     timersRef.current.forEach((t) => clearTimeout(t));

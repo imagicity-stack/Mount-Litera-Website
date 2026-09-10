@@ -72,7 +72,10 @@ export default function SiteImage({
         sizes={sizes}
         loading={priority ? 'eager' : 'lazy'}
         decoding={priority ? 'sync' : 'async'}
-        fetchPriority={priority ? 'high' : undefined}
+        // Lowercase: React 18 does not recognise the camelCase spelling on a
+        // DOM element, warns, and drops the attribute — so the priority hint
+        // was never reaching the browser.
+        fetchpriority={priority ? 'high' : undefined}
         onLoad={() => setLoaded(true)}
         onError={() => setLoaded(true)}
         style={{ objectPosition: `${resolved.focalX}% ${resolved.focalY}%` }}

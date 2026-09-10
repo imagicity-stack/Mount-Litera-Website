@@ -18,6 +18,9 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
   the house roster — all schema-driven, with image and PDF uploads.
 - **School details**: one place for phone, address, emails and social links,
   read by every page that shows them.
+- **The Parent Room**: a private parent guidance initiative at `/parent-room` —
+  a native Calendly-style booking flow with atomic slot reservation,
+  server-verified payment, campaign attribution, and its own portal section.
 - **WordPress-like blog studio**: rich-text editor, featured images, drafts,
   scheduling, categories, and tags.
 - **Live SEO analytics** (Yoast-style): focus-keyword checks, readability,
@@ -188,6 +191,16 @@ MS_SENDER=noreply@yourdomain.com   # mailbox the site sends AS (must be licensed
 CONTACT_TO=contact@yourdomain.com       # /api/contact
 ADMISSION_TO=admission@yourdomain.com   # /api/admission (parent gets an auto-acknowledgement)
 SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
+PARENT_ROOM_TO=contact@yourdomain.com   # /parent-room bookings (falls back to ADMISSION_TO,
+                                        # then CONTACT_TO — nothing new to configure to go live)
+
+# Payments — already used by the admission priority token, reused by The Parent Room
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=                    # never sent to the browser; signs and verifies
+NEXT_PUBLIC_RAZORPAY_KEY_ID=            # optional; defaults to RAZORPAY_KEY_ID
+
+# Optional: lets a scheduled job send Parent Room reminders unattended
+CRON_SECRET=
 ```
 
 The mailer (`lib/mailer.js`) uses **Microsoft Graph** when the four `MS_*` vars are
@@ -487,6 +500,191 @@ overrides to `settings/site` in Firestore and every page reads them through
 These were previously copied into five files, which is how the general email
 came to be misspelled in the footer (`eldenhieghts.org`) while the rest of the
 site had it right. There is now one place to change them.
+
+---
+
+## The Parent Room
+
+A private parent guidance initiative: a parent books a paid 30-minute one-to-one
+video session and says beforehand what they want to talk about. It is a module
+inside this site — same Firebase project, same admin sign-in, same mailer, same
+Razorpay integration, same design language — not a second application.
+
+### Route
+
+`/parent-room`, and only that. It is a **campaign landing page**: reached from
+Instagram, Facebook and WhatsApp advertisements, and kept out of search results
+three ways — `noindex, nofollow` from the `Seo` component (`lib/seoData.js`), an
+explicit `<meta>` in the page itself, and `Disallow: /parent-room` in
+`robots.txt`. It is absent from `public/sitemap.xml`.
+
+Not indexed is **not** private: anyone holding the link can open the page, which
+is exactly what an advertisement needs. Nothing behind it is public — see
+Security below.
+
+One page serves every creative. `?variant=screen-time` (or the ad's own
+`utm_content`) swaps the supporting line under the headline; the headline, the
+offer and the flow never change. Variants live in `lib/parentRoomCopy.js`.
+
+### The files
+
+| Layer | Where |
+| --- | --- |
+| Domain — settings, statuses, options, validation | `lib/parentRoom.js` |
+| Time and slot arithmetic (IST) | `lib/parentRoomTime.js` |
+| Firestore access, transactions | `lib/parentRoomStore.js` |
+| Payment service layer | `lib/parentRoomPayments.js` |
+| Email templates and dispatch | `lib/parentRoomEmails.js` |
+| Page copy, hero variants, FAQ | `lib/parentRoomCopy.js` |
+| Funnel events | `lib/parentRoomAnalytics.js` |
+| Landing page and booking wizard | `pages/parent-room.js`, `components/parent-room/` |
+| Portal section | `components/admin/parentRoom/` |
+
+Validation lives in the domain layer alone, so the browser and the server apply
+exactly the same rules — the browser's copy is a courtesy to the person filling
+the form, never a control.
+
+### Booking, and why it cannot double-book
+
+A slot's document id is **derived** from its date and start minute —
+`2026-09-15T1000`. That is the whole trick: two parents pressing 10:00 at the
+same moment contend for one document, so the guard is a single-document atomic
+read-modify-write inside a Firestore transaction rather than a race between two
+queries. Exactly one wins; the other is told the slot has gone and sent back to
+the calendar.
+
+1. `POST /api/parent-room/hold` — revalidates every answer, checks the slot is
+   one the configuration actually offers, then reserves it and opens the booking
+   as `pending`. Returns a **reservation token**; Firestore stores only its
+   SHA-256 hash. Knowing a booking id — which ends up in an email, a URL and the
+   admin table — is not enough to complete, read or alter somebody's session.
+2. `POST /api/parent-room/order` — raises a Razorpay order. The amount comes
+   from the saved settings; a price posted by the browser is ignored.
+3. `POST /api/parent-room/confirm` — recomputes the HMAC signature from the
+   order id, payment id and secret. **That is the only thing that marks a
+   booking paid.** Confirming twice returns the same booking and sends no second
+   email.
+
+A slot is held only while the parent pays, for `reservationHoldMinutes`. The
+wizard shows the countdown. A hold that lapses is treated as free by the
+calendar immediately and reclaimed inside the next transaction, so an abandoned
+checkout needs no sweeper to release its time; the stale `pending` row is
+retired the next time an admin opens the bookings table.
+
+Statuses: slots are `available` / `temporarily_reserved` / `booked` / `blocked`;
+bookings are `pending` / `confirmed` / `rescheduled` / `completed` / `cancelled`
+/ `no_show` / `expired`; payments are `pending` / `paid` / `failed` / `refunded`
+/ `waived`.
+
+### Payment, honestly
+
+Reuses the Razorpay client the admission priority token already uses
+(`app/api/razorpay/order/razorpay.js`) — one integration, not two. Settings
+carry a `paymentMode`:
+
+- **Online** — real checkout, server-verified.
+- **Offline** — the booking still confirms and still holds its slot, but is
+  recorded as payment **pending**, and both emails say the school will be in
+  touch about the fee.
+
+If the gateway keys are absent the flow falls back to offline on its own rather
+than failing at checkout. Nothing anywhere presents an unpaid session as paid.
+A fee of `0` confirms as `waived` with no payment step at all.
+
+### Availability
+
+Everything is configured in the portal; no time is hardcoded. Weekdays, start
+and end of day, session length, buffer, maximum sessions per day, minimum notice,
+how far ahead parents may book, blocked dates, extra open dates, per-slot
+blocking, and an open/closed switch. `mergeParentRoomSettings` clamps every
+value again on the server, so a day that ends before it starts falls back to the
+shipped window instead of taking the calendar down.
+
+All times are Asia/Kolkata. India observes no daylight saving, so a fixed +05:30
+offset converts exactly, all year, with no timezone library — and the server and
+the browser agree wherever either is running.
+
+### The portal
+
+**Parent Room** in the existing dashboard, with six views: Overview, Bookings,
+Calendar, Availability, Completed Sessions, Settings. Overview's figures are
+computed from the same rows the table renders, so a card and a row can never
+disagree; revenue counts only what was actually collected.
+
+Admins can confirm, reschedule (atomic on both slots), cancel (which frees the
+time), mark completed or no-show, set the payment status, add a per-booking
+meeting link, resend the confirmation, block individual times, and keep
+**internal notes**. Cancelling and marking a no-show ask for confirmation first.
+
+There is deliberately no single public meeting link — each booking gets its own.
+
+### Email
+
+Uses the existing transport (`lib/mailer.js`: Microsoft Graph, SMTP fallback)
+and the existing sender. The school's copy goes to `PARENT_ROOM_TO`, falling
+back to `ADMISSION_TO` and then `CONTACT_TO`, so there is nothing new to
+configure to go live.
+
+Six templates: admin notification (with a **View booking** button deep-linking
+into the portal), parent confirmation, rescheduled, cancelled, meeting-link
+updated, and reminder. Each is claimed in a transaction before it is sent, so a
+retried server action mails a parent once rather than twice; a send that fails
+releases its claim for the portal's resend button. Everything a parent typed is
+HTML-escaped — what arrives in the school's inbox is text, not markup.
+
+**Reminders** are ready but not scheduled. This site has no scheduler, so rather
+than a client-side timer that only fires while someone has the tab open, there
+is an idempotent endpoint that works out for itself what is due:
+
+```
+POST /api/parent-room/reminders     # Authorization: Bearer $CRON_SECRET, or an admin token
+```
+
+Press **Send due reminders now** in Settings, or add a `crons` entry to
+`vercel.json` pointing at it — no other change is needed. Calling it twice is
+harmless.
+
+### Tracking
+
+The Meta Pixel already in `_app.js`; no second script and no new vendor.
+`parent_room_view`, `_book_clicked`, `_form_started`, `_concern_selected`,
+`_slot_selected`, `_checkout_started` and `_booking_completed` go out as custom
+events, and the steps that map onto a standard event also fire `ViewContent`,
+`Lead`, `InitiateCheckout`, `Schedule` and `Purchase`. `Purchase` fires only
+when a fee was actually taken, so offline sessions do not inflate revenue
+reporting.
+
+UTM parameters and `fbclid` are captured on arrival and kept for the visit —
+first touch wins, so a parent who opens the privacy policy and comes back is not
+recorded as Direct. The channel is shown in the bookings table and broken down
+under Conversion by campaign.
+
+### Security
+
+Parents' contact details, what a parent has said about their child, and
+counsellors' notes about a minor all live here, so:
+
+- `firestore.rules` denies the browser everything. Every read and write goes
+  through an API route using the Admin SDK.
+- The admin routes use the same `requireAdmin` guard as the rest of the portal.
+  There is no public read path and no degraded fallback on them.
+- Public availability returns times only — never who booked one.
+- A parent's own confirmation needs the reservation token and returns a narrow
+  view: no concern text, no notes, no attribution. A wrong token and a
+  non-existent booking give the same answer, so the endpoint cannot be used to
+  discover which booking ids exist.
+- "Cannot reach the database" is never reported as "no such booking" to someone
+  who may have just been charged.
+- Internal notes appear in no email and in no response a parent can reach.
+
+### Neha Jain's photograph
+
+The portrait slot (`parentRoom.counsellor.portrait`, under **Site Images → The
+Parent Room**) ships **empty**. There is no approved photograph of her in this
+repository, and on a page whose whole proposition is trust, a stock face would
+be the one thing that undoes it. Until a real photograph is uploaded the page
+shows her initials. Upload one in the portal and it appears everywhere with no
+code change.
 
 ---
 
