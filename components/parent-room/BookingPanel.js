@@ -74,6 +74,37 @@ const emptyDraft = {
   marketingConsent: false
 };
 
+/**
+ * Read a response without ever throwing on its body.
+ *
+ * Our own routes answer with JSON, but a failure that happens *above* the route
+ * — a crashed or timed-out serverless function, a gateway in front of it —
+ * answers with an HTML error page. `res.json()` throws on that, and the throw
+ * used to be caught as a generic network problem, which hid the one piece of
+ * information worth having. Whatever comes back, the caller gets something it
+ * can show.
+ */
+const readBody = async (res) => {
+  const text = await res.text().catch(() => '');
+  try {
+    return { data: text ? JSON.parse(text) : {}, raw: text, isJson: true };
+  } catch (error) {
+    return { data: {}, raw: text, isJson: false };
+  }
+};
+
+/** A message for a failure that produced no usable JSON of its own. */
+const httpFailureMessage = (res, raw) => {
+  const detail = String(raw || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 140);
+  return `The payment could not be started (error ${res.status}${
+    detail ? `: ${detail}` : ''
+  }). Your time is still held — please try again, or contact the school.`;
+};
+
 /** Load the gateway's widget once, on demand. */
 const loadCheckout = () =>
   new Promise((resolve, reject) => {
@@ -333,7 +364,7 @@ export default function BookingPanel({ campaign, settings: seedSettings }) {
           landingPath: typeof window !== 'undefined' ? window.location.pathname + window.location.search : ''
         })
       });
-      const data = await res.json();
+      const { data, raw, isJson } = await readBody(res);
 
       if (!res.ok) {
         if (res.status === 409) {
@@ -342,7 +373,12 @@ export default function BookingPanel({ campaign, settings: seedSettings }) {
           setErrors(data.errors);
           setNotice(data.message || 'Some details still need attention.');
         } else {
-          setNotice(data.message || 'We could not hold that time. Please try again.');
+          setNotice(
+            (isJson && data.message) ||
+              `We could not hold that time (error ${res.status}). Please try again.`
+          );
+          // eslint-disable-next-line no-console
+          console.error('Parent Room hold failed', res.status, raw.slice(0, 500));
         }
         return;
       }
@@ -376,7 +412,7 @@ export default function BookingPanel({ campaign, settings: seedSettings }) {
             ...paymentPayload
           })
         });
-        const data = await res.json();
+        const { data, raw, isJson } = await readBody(res);
 
         if (!res.ok) {
           if (res.status === 409) {
@@ -384,7 +420,15 @@ export default function BookingPanel({ campaign, settings: seedSettings }) {
               data.message || 'That time was taken while you were paying. Please choose another.'
             );
           } else {
-            setNotice(data.message || 'We could not confirm the booking.');
+            // By this point the parent may already have been charged, so a
+            // vague apology is the wrong thing to show. Give them the booking
+            // reference and tell them to quote it.
+            setNotice(
+              (isJson && data.message) ||
+                `We could not confirm the booking (error ${res.status}). If you have been charged, contact the school quoting ${hold.bookingId} — your payment is safe and the session will be confirmed manually.`
+            );
+            // eslint-disable-next-line no-console
+            console.error('Parent Room confirm failed', res.status, raw.slice(0, 500));
           }
           return;
         }
@@ -427,14 +471,28 @@ export default function BookingPanel({ campaign, settings: seedSettings }) {
           reservationToken: hold.reservationToken
         })
       });
-      const order = await res.json();
+      const { data: order, raw, isJson } = await readBody(res);
 
       if (!res.ok) {
         if (order.code === 'hold_expired') {
           releaseAndReturnToCalendar('Your hold on that time has expired. Please pick a time again.');
         } else {
-          setNotice(order.message || 'We could not start the payment. Please try again.');
+          // A response without JSON never came from the route itself, so there
+          // is no friendly message to show — say what actually happened rather
+          // than "please try again" over and over.
+          setNotice(
+            (isJson && order.message) || httpFailureMessage(res, raw)
+          );
+          // eslint-disable-next-line no-console
+          console.error('Parent Room order failed', res.status, raw.slice(0, 500));
         }
+        return;
+      }
+
+      if (!order.orderId || !order.keyId) {
+        setNotice('The payment could not be started. Please contact the school.');
+        // eslint-disable-next-line no-console
+        console.error('Parent Room order response incomplete', order);
         return;
       }
 
