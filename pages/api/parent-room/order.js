@@ -16,6 +16,14 @@ import {
 import { BOOKING_STATUS, isValidBookingId } from '@/lib/parentRoom';
 import { checkoutKeyId, createOrder, paymentsConfigured, toPaise } from '@/lib/parentRoomPayments';
 
+/**
+ * Give the function room for a Firestore read plus a gateway round-trip on a
+ * cold start. The default (10s on Vercel) can be tight for that chain, and
+ * running out of it produces a platform error page rather than a reason the
+ * parent can act on. Ignored outside Vercel.
+ */
+export const config = { maxDuration: 30 };
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -64,8 +72,15 @@ export default async function handler(req, res) {
     });
   }
 
-  const settings = await loadSettings();
-  const amount = Number(booking.amount ?? settings.participationFee);
+  // The fee was fixed on the booking when the slot was held, so the settings
+  // document is only a fallback for a record written before that field existed.
+  // Skipping it keeps one Firestore round-trip out of the checkout path, which
+  // is the part of the flow a parent is watching a spinner through.
+  let amount = Number(booking.amount);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    const settings = await loadSettings().catch(() => null);
+    amount = Number(settings?.participationFee);
+  }
   if (!Number.isFinite(amount) || amount <= 0) {
     return res.status(400).json({ message: 'No payment is due for this booking.' });
   }
@@ -102,11 +117,15 @@ export default async function handler(req, res) {
     console.error('Parent Room order failed:', {
       bookingId: booking.bookingId,
       amount,
+      name: error?.name,
       message: error?.message,
       status: error?.status,
       code: error?.code,
       reason: error?.reason,
-      details: error?.details
+      details: error?.details,
+      // A stack here means the function threw for a reason that is not the
+      // gateway refusing — a missing module, a bad env, a runtime fault.
+      stack: error?.name === 'RazorpayError' ? undefined : error?.stack
     });
 
     // Razorpay's descriptions are written to be shown ("amount must be at
