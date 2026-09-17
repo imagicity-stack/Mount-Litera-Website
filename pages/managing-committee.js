@@ -9,9 +9,10 @@ import FeatureBand from '@/components/sections/FeatureBand';
 import PersonCard from '@/components/people/PersonCard';
 import Reveal from '@/components/motion/Reveal';
 import usePeople from '@/lib/usePeople';
+import { peoplePageProps } from '@/lib/peopleServer';
 
-export default function ManagingCommitteePage() {
-  const { people, ready } = usePeople('committee');
+export default function ManagingCommitteePage({ initialPeople }) {
+  const { people, ready } = usePeople('committee', initialPeople);
 
   return (
     <>
@@ -79,3 +80,7 @@ export default function ManagingCommitteePage() {
     </>
   );
 }
+
+// Renders the current roster into the HTML so the page never shows the
+// shipped names first and swaps them after hydration.
+export const getStaticProps = peoplePageProps('committee');
