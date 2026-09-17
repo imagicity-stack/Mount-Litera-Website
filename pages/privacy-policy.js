@@ -144,7 +144,7 @@ export default function PrivacyPolicyPage() {
                         Address
                       </span>
                       <span>
-                        The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand.
+                        The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand – 825301.
                       </span>
                     </li>
                   </ul>

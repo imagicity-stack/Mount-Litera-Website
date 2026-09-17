@@ -77,10 +77,19 @@ export default function PopupManager() {
     path.startsWith('/blogs/admin') ||
     path.startsWith('/parent-room');
 
+  // `?previewPopup=<id>` shows one popup immediately whatever its status,
+  // schedule, targeting or frequency. It is how the portal's "Preview on site"
+  // link lets an editor check a draft without publishing it to everyone.
+  const previewId =
+    typeof router.query.previewPopup === 'string' ? router.query.previewPopup : '';
+
   // Load active popups once on mount.
   useEffect(() => {
     let mounted = true;
-    fetch('/api/popups', { cache: 'no-store' })
+    const url = previewId
+      ? `/api/popups?preview=${encodeURIComponent(previewId)}`
+      : '/api/popups';
+    fetch(url, { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : { popups: [] }))
       .then((data) => {
         if (mounted) setPopups(data.popups || []);
@@ -89,9 +98,14 @@ export default function PopupManager() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [previewId]);
 
   const eligible = useMemo(() => {
+    // Preview deliberately skips every gate, so an editor sees the popup even
+    // when they have already dismissed it or it is not live yet.
+    if (previewId) {
+      return popups.find((p) => p.id === previewId) || null;
+    }
     if (isQuietPath) return null;
     const now = new Date();
     return (
@@ -101,27 +115,34 @@ export default function PopupManager() {
         .filter((p) => canShow(p))
         .sort((a, b) => (b.priority || 0) - (a.priority || 0))[0] || null
     );
-  }, [popups, path, isQuietPath]);
+  }, [popups, path, isQuietPath, previewId]);
 
   const clearTimers = useCallback(() => {
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
   }, []);
 
-  const reveal = useCallback((popup) => {
-    setActive(popup);
-    setClosing(false);
-    markShown(popup);
-    if (!trackedRef.current.has(`${popup.id}-imp`)) {
-      trackedRef.current.add(`${popup.id}-imp`);
-      fetch('/api/popups/track', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: popup.id, event: 'impression' })
-      }).catch(() => {});
-      trackFacebookEvent('ViewContent', { component: 'popup', popup_id: popup.id });
-    }
-  }, []);
+  const reveal = useCallback(
+    (popup) => {
+      setActive(popup);
+      setClosing(false);
+      // A preview must leave no trace: it does not use up a once-per-session
+      // or once-ever allowance on the editor's own browser, and it does not
+      // count as an impression in the campaign's figures.
+      if (previewId) return;
+      markShown(popup);
+      if (!trackedRef.current.has(`${popup.id}-imp`)) {
+        trackedRef.current.add(`${popup.id}-imp`);
+        fetch('/api/popups/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: popup.id, event: 'impression' })
+        }).catch(() => {});
+        trackFacebookEvent('ViewContent', { component: 'popup', popup_id: popup.id });
+      }
+    },
+    [previewId]
+  );
 
   // Wire up the trigger for the eligible popup whenever path / eligibility changes.
   useEffect(() => {

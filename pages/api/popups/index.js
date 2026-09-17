@@ -36,11 +36,32 @@ export default async function handler(req, res) {
       }
 
       // Public view — only active popups (path/frequency handled client-side).
+      // A single popup can be requested by id for previewing, including one
+      // that is still a draft. Firestore ids are 20 random characters, so this
+      // is only reachable by someone who already has the id from the portal.
+      const previewId = typeof req.query.preview === 'string' ? req.query.preview : '';
+      if (previewId) {
+        const doc = await adminDb.collection(COLLECTION).doc(previewId).get();
+        return res
+          .status(200)
+          .json({ popups: doc.exists ? [serialize(doc)] : [], preview: true });
+      }
+
       const snapshot = await adminDb.collection(COLLECTION).where('status', '==', 'active').get();
       const popups = snapshot.docs.map(serialize).sort((a, b) => (b.priority || 0) - (a.priority || 0));
       return res.status(200).json({ popups });
     } catch (error) {
-      return res.status(500).json({ message: 'Failed to load popups.' });
+      // The admin view must fail loudly — an admin needs to know the list they
+      // are looking at is not the truth.
+      if (req.query.all === '1') {
+        return res.status(500).json({ message: 'Failed to load popups.' });
+      }
+      // The public view degrades to "no popups", like every other public read
+      // on this site. A 500 here put an error in the console of every page and
+      // made a Firestore hiccup indistinguishable from having none configured.
+      // eslint-disable-next-line no-console
+      console.error('Public popups read failed:', error?.message);
+      return res.status(200).json({ popups: [], degraded: true });
     }
   }
 

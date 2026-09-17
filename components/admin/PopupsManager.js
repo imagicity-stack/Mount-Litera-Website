@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Badge, Button, Input } from '@/components/admin/ui';
-import { defaultPopup, POPUP_LAYOUTS } from '@/lib/popupConfig';
+import { defaultPopup, popupBlockers, POPUP_LAYOUTS } from '@/lib/popupConfig';
 import PopupEditor from '@/components/admin/PopupEditor';
 
 const layoutLabel = (value) => POPUP_LAYOUTS.find((l) => l.value === value)?.label || value;
@@ -182,6 +182,40 @@ export default function PopupsManager({ user, getToken, onStats }) {
                   <Badge>P{popup.priority || 1}</Badge>
                 </div>
 
+                {/* "I made a popup and nothing happened" is nearly always one
+                    of these — most often that a new popup is born a draft. */}
+                {(() => {
+                  const { blockers, caveats } = popupBlockers(popup);
+                  return (
+                    <>
+                      {blockers.length > 0 && (
+                        <div className="mt-3 border border-cardinal/30 bg-cardinal/[0.04] p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cardinal">
+                            Not showing on the site
+                          </p>
+                          <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-cardinal/90">
+                            {blockers.map((reason) => (
+                              <li key={reason}>• {reason}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {blockers.length === 0 && (
+                        <p className="mt-3 text-[11px] font-semibold text-emerald-700">
+                          ✓ Live on the site now.
+                        </p>
+                      )}
+                      {caveats.length > 0 && (
+                        <ul className="mt-2 space-y-1 text-[11px] leading-snug text-midnight/45">
+                          {caveats.map((note) => (
+                            <li key={note}>• {note}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  );
+                })()}
+
                 <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                   <div className="rounded-lg bg-[#faf8f3] py-2">
                     <p className="text-sm font-semibold text-midnight">{popup.impressions || 0}</p>
@@ -201,6 +235,16 @@ export default function PopupsManager({ user, getToken, onStats }) {
                   <button type="button" onClick={() => startEdit(popup)} className="font-semibold text-cardinal hover:text-cardinal-700">
                     Edit
                   </button>
+                  {/* Opens the site with this popup forced on, whatever its
+                      status or how often it has already been seen. */}
+                  <a
+                    href={`/?previewPopup=${encodeURIComponent(popup.id)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-midnight/55 hover:text-midnight"
+                  >
+                    Preview
+                  </a>
                   <button type="button" onClick={() => toggleStatus(popup)} className="text-midnight/55 hover:text-midnight">
                     {popup.status === 'active' ? 'Pause' : 'Activate'}
                   </button>
