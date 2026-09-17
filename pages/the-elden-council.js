@@ -7,14 +7,15 @@ import ImageBanner from '@/components/ImageBanner';
 import SplitFeature from '@/components/sections/SplitFeature';
 import PersonCard from '@/components/people/PersonCard';
 import usePeople from '@/lib/usePeople';
+import { peoplePageProps } from '@/lib/peopleServer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 }
 };
 
-export default function TheEldenCouncilPage() {
-  const { people } = usePeople('council');
+export default function TheEldenCouncilPage({ initialPeople }) {
+  const { people } = usePeople('council', initialPeople);
 
   return (
     <>
@@ -93,3 +94,7 @@ export default function TheEldenCouncilPage() {
     </>
   );
 }
+
+// Renders the current roster into the HTML so the page never shows the
+// shipped names first and swaps them after hydration.
+export const getStaticProps = peoplePageProps('council');

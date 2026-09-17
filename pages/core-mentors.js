@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import ImageBanner from '@/components/ImageBanner';
 import PersonCard from '@/components/people/PersonCard';
 import usePeople from '@/lib/usePeople';
+import { peoplePageProps } from '@/lib/peopleServer';
 import { byDepartment } from '@/lib/peopleGroups';
 
 const fadeUp = {
@@ -13,8 +14,8 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-export default function CoreMentorsPage() {
-  const { people } = usePeople('mentors');
+export default function CoreMentorsPage({ initialPeople }) {
+  const { people } = usePeople('mentors', initialPeople);
   const departments = byDepartment('mentors', people);
 
   return (
@@ -117,3 +118,7 @@ export default function CoreMentorsPage() {
     </>
   );
 }
+
+// Renders the current roster into the HTML so the page never shows the
+// shipped names first and swaps them after hydration.
+export const getStaticProps = peoplePageProps('mentors');
