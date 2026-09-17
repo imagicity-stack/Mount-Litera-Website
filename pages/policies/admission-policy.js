@@ -8,7 +8,7 @@ import ImageBanner from '@/components/ImageBanner';
 const policyText = `ADMISSION POLICY
 1. Overview
 
-The Elden Heights School follows a transparent and structured admission process designed to ensure fairness, discipline, and academic readiness. Admissions are open for classes UKG to Class 10 for the academic session 2026–27. The school reserves the right to approve or reject any application based on eligibility, document verification, and seat availability.
+The Elden Heights School follows a transparent and structured admission process designed to ensure fairness, discipline, and academic readiness. Admissions are open for classes UKG to Class 10 for the academic session 2027–28. The school reserves the right to approve or reject any application based on eligibility, document verification, and seat availability.
 
 2. Admission Funnel & Token Amount
 

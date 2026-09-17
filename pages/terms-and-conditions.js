@@ -11,7 +11,7 @@ const sections = [
   {
     heading: '1 · General Use',
     paragraph:
-      'This website is managed by The Elden Heights School, located in Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand. The content is intended to share information about our school, admission process, facilities, and events. You agree to use the website only for lawful purposes and in a way that does not violate the rights of, restrict, or inhibit anyone else’s use and enjoyment of it.'
+      'This website is managed by The Elden Heights School, located in Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand – 825301. The content is intended to share information about our school, admission process, facilities, and events. You agree to use the website only for lawful purposes and in a way that does not violate the rights of, restrict, or inhibit anyone else’s use and enjoyment of it.'
   },
   {
     heading: '2 · Accuracy of Information',
@@ -129,7 +129,7 @@ export default function TermsPage() {
                         Address
                       </span>
                       <span>
-                        The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand.
+                        The Elden Heights School, Katghara, Opp. BSF Firing Range, Silwar, Hazaribagh, Jharkhand – 825301.
                       </span>
                     </li>
                   </ul>

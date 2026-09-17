@@ -37,10 +37,10 @@ export default function Hero({ onCtaClick }) {
       <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="space-y-6 text-center md:text-left">
           <p className="inline-flex items-center justify-center md:justify-start px-4 py-1.5 rounded-full bg-cardinal/10 text-black font-semibold text-xs tracking-[0.3em] uppercase">
-            Admissions 2026–27
+            Admissions 2027–28
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight">
-            Admissions Open 2026–27
+            Admissions Open 2027–28
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
             Fastest way to secure your child’s seat. No pressure.

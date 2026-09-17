@@ -39,6 +39,7 @@ export default function Document() {
           streetAddress: 'Katghara, Opp. BSF Firing Range, Silwar',
           addressLocality: 'Hazaribagh',
           addressRegion: 'Jharkhand',
+          postalCode: '825301',
           addressCountry: 'IN'
         }
       },

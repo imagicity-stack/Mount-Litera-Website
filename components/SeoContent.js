@@ -23,7 +23,7 @@ const SEO_CONTENT = {
     ]
   },
   '/admission': {
-    heading: 'Admission guidance for families planning 2026–27',
+    heading: 'Admission guidance for families planning 2027–28',
     paragraphs: [
       'The Elden Heights School admission process is designed to be clear, supportive, and respectful of each family’s needs. Parents in Hazaribagh can learn the steps, required documents, and timelines in one place so there are no surprises. The school emphasizes transparency, from inquiry to confirmation, and provides counselor support for campus visits and admission interactions.',
       'If you are considering admission for Nursery through Class 10, Elden Heights offers a structured pathway that values readiness and student well-being. Families are encouraged to prepare documents early, ask questions, and explore the campus culture. This focus on clarity helps parents make confident decisions and ensures every child starts the academic year with a smooth transition.'
@@ -102,7 +102,7 @@ const SEO_CONTENT = {
   '/contact': {
     heading: 'Connect with Elden Heights for admissions support',
     paragraphs: [
-      'Parents in Hazaribagh can contact The Elden Heights School to learn about admissions, campus visits, or general inquiries. The contact team helps families understand eligibility, document requirements, and next steps for the 2026–27 academic session. Reaching out early ensures parents receive timely guidance and can plan visits with ease.',
+      'Parents in Hazaribagh can contact The Elden Heights School to learn about admissions, campus visits, or general inquiries. The contact team helps families understand eligibility, document requirements, and next steps for the 2027–28 academic session. Reaching out early ensures parents receive timely guidance and can plan visits with ease.',
       'The school values responsive communication, so families can connect via phone, email, or the contact form. Whether you want to discuss classroom approach, transportation considerations, or a campus tour, the team is ready to help. This supportive contact process reflects Elden Heights’ commitment to transparent, parent-first admissions.'
     ]
   },
