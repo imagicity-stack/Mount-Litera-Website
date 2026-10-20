@@ -34,7 +34,7 @@ export default function Admission() {
           className="grid gap-10 md:grid-cols-2 md:gap-16"
         >
           <h2 className="font-display text-[clamp(2.25rem,4.4vw,3.75rem)] font-medium leading-[1.06] text-white">
-            Admissions 2026 – 27
+            Admissions 2027 – 28
           </h2>
 
           <div className="flex flex-col items-start gap-8">

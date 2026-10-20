@@ -12,6 +12,7 @@ import MediaManager from '@/components/admin/MediaManager';
 import PeopleManager from '@/components/admin/PeopleManager';
 import ContentManager from '@/components/admin/ContentManager';
 import ParentRoomManager from '@/components/admin/parentRoom/ParentRoomManager';
+import ScholarshipManager from '@/components/admin/scholarship/ScholarshipManager';
 import SettingsManager from '@/components/admin/SettingsManager';
 import { Spinner } from '@/components/admin/ui';
 
@@ -20,6 +21,7 @@ const SECTIONS = [
   'media',
   'content',
   'people',
+  'scholarship',
   'parent-room',
   'blogs',
   'popups',
@@ -102,6 +104,14 @@ export default function AdminPortal() {
         {section === 'media' && <MediaManager user={user} getToken={getFreshToken} />}
         {section === 'content' && <ContentManager getToken={getFreshToken} />}
         {section === 'people' && <PeopleManager getToken={getFreshToken} />}
+        {section === 'scholarship' && (
+          <ScholarshipManager
+            getToken={getFreshToken}
+            focusRegistration={
+              typeof router.query.registration === 'string' ? router.query.registration : ''
+            }
+          />
+        )}
         {section === 'parent-room' && (
           <ParentRoomManager
             getToken={getFreshToken}

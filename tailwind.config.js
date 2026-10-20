@@ -22,6 +22,22 @@ module.exports = {
           800: "#4E0C17",
           900: "#30070E"
         },
+        /* Edenwoods Eduhub Foundation — sampled from the foundation's logo.
+           Used only on the scholarship pages, which the Foundation runs. */
+        eden: {
+          DEFAULT: "#0C5A54",
+          50: "#EDF5F4",
+          100: "#D3E6E3",
+          200: "#A5CCC7",
+          300: "#6FACA5",
+          400: "#2E8077",
+          500: "#0C5A54",
+          600: "#0A4A45",
+          700: "#06423C",
+          800: "#05322E",
+          900: "#03211F",
+          bright: "#0D746C"
+        },
         /* Legacy token kept so existing markup keeps compiling — now Harvard crimson */
         cardinal: {
           DEFAULT: "#A51C30",

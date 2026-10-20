@@ -59,6 +59,7 @@ const navItems = [
     href: '/admission',
     subItems: [
       { label: 'Admission', href: '/admission' },
+      { label: 'Scholarships', href: '/admission/scholarships' },
       { label: 'Why Choose The Elden Heights School', href: '/admission#why-choose-elden-heights' },
       { label: 'Admission Inquiry Form', href: '/admission#admission-inquiry' },
       { label: 'Admission Policy', href: '/policies/admission-policy' }
@@ -368,7 +369,7 @@ export default function Navbar() {
 
                   <div className="mt-10 border border-white/20 p-6">
                     <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/60">
-                      Admissions 2026 – 27
+                      Admissions 2027 – 28
                     </p>
                     <p className="mt-3 font-display text-2xl leading-snug text-white">
                       Limited seats remain for the coming session.
