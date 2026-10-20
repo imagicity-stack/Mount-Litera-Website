@@ -18,6 +18,10 @@ state-of-the-art admin portal at **`/admin`** (Google sign-in).
   the house roster — all schema-driven, with image and PDF uploads.
 - **School details**: one place for phone, address, emails and social links,
   read by every page that shows them.
+- **Scholarships**: `/admission/scholarships`, with the Edenwoods Merit
+  Scholarship 2027 — a ₹199 merit test with a native registration flow,
+  server-verified payment, an instant receipt and admit card, and its own
+  portal section.
 - **The Parent Room**: a private parent guidance initiative at `/parent-room` —
   a native Calendly-style booking flow with atomic slot reservation,
   server-verified payment, campaign attribution, and its own portal section.
@@ -193,6 +197,7 @@ ADMISSION_TO=admission@yourdomain.com   # /api/admission (parent gets an auto-ac
 SUCCESS_METER_TO=contact@yourdomain.com # /api/successmeter
 PARENT_ROOM_TO=contact@yourdomain.com   # /parent-room bookings (falls back to ADMISSION_TO,
                                         # then CONTACT_TO — nothing new to configure to go live)
+SCHOLARSHIP_TO=admissions@yourdomain.com # scholarship registrations (same fallback chain)
 
 # Payments — already used by the admission priority token, reused by The Parent Room
 RAZORPAY_KEY_ID=
@@ -704,6 +709,97 @@ repository, and on a page whose whole proposition is trust, a stock face would
 be the one thing that undoes it. Until a real photograph is uploaded the page
 shows her initials. Upload one in the portal and it appears everywhere with no
 code change.
+
+---
+
+## Scholarships
+
+`/admission/scholarships` is the Scholarships section of Admission: a list, not
+a page about one scholarship, because there will be a second. Each entry in
+`scholarships` in `pages/admission/scholarships/index.js` becomes a card, and a
+closed scholarship stays listed with its dates rather than vanishing.
+
+### Edenwoods Merit Scholarship 2027
+
+Offered by **Edenwoods Eduhub Foundation**, for children taking new admission to
+TEHS in Nursery to Class IX for 2027-28. A ₹199 merit test on 5 November 2026;
+up to a 100% tuition waiver, with eight full scholarships across all classes.
+
+| Layer | Where |
+| --- | --- |
+| Domain — dates, tiers, classes, localities, validation | `lib/scholarship.js` |
+| Page copy, FAQs, full Terms | `lib/scholarshipCopy.js` |
+| Firestore access and the duplicate guard | `lib/scholarshipStore.js` |
+| Receipt and admit card | `lib/scholarshipEmails.js` |
+| Landing page, form, Terms, admit card | `pages/admission/scholarships/…` |
+| Portal section | `components/admin/scholarship/` |
+
+The figures in `lib/scholarship.js` are taken from the signed Terms and
+Conditions. Where the two could ever disagree, the document is what parents are
+held to — **change both together**.
+
+### The Foundation's colours
+
+The scholarship pages carry Edenwoods teal (sampled from the Foundation's logo:
+`#06423C`, `#0C5A54`, `#0D746C`) rather than the school's crimson, because the
+scholarship is the Foundation's. Rather than duplicate every component in a
+second colour, `.eden-theme` in `globals.css` repoints the one accent variable
+the design system is built on — so `.rule-heavy`, `.hv-link`, `.arrow-cta`,
+focus rings and the rest retheme themselves, and Tailwind's `eden-*` scale
+matches them exactly. Typography, bands, rules and spacing are unchanged.
+
+### One registration per child
+
+The Terms promise it, and the honest place to enforce it is **before** the
+parent pays rather than by cancelling afterwards and keeping the ₹199. A claim
+document keyed on a hash of the child's name, date of birth and class makes
+that a single-document transaction: two submissions of the same child contend
+for one id and exactly one wins. An unpaid registration holds that slot for 30
+minutes, after which the clock releases it — so an abandoned payment never
+locks a child out, even if no sweep ever runs.
+
+### Payment
+
+Reuses the site's existing Razorpay integration (`lib/razorpayClient.js`). The
+amount is fixed on the server; a price posted by the browser is ignored. The
+HMAC is recomputed from the order id, payment id and secret, and that alone
+marks a registration paid.
+
+> The ₹199 is collected through **the school's** Razorpay account on behalf of
+> the Foundation, which is a deliberate choice. Terms clause 3.1 and the
+> receipt both say so in those words, so the document and the money agree. To
+> move it to a Foundation account later, point `RAZORPAY_KEY_ID` /
+> `RAZORPAY_KEY_SECRET` at it and reword that one clause.
+
+### Receipt and admit card
+
+On a confirmed payment the parent is emailed a receipt **and** an admit card in
+the same message — an HTML table, not a PDF, so it renders in every mail client
+and prints from a phone without a reader app. The admit card is also a page,
+linked from that email.
+
+That link carries the registration's **token**, not just its number: the public
+merit list shows registration numbers, so a number-only link would hand a
+child's name and date of birth to anyone reading it. The same applies to the
+lookup endpoint, which answers identically for a wrong token and a missing
+registration so it cannot be used to enumerate numbers.
+
+Email is optional on the form. Plenty of parents here do not use one, and
+forcing a fake address loses the receipt rather than delivering it — so when
+there is no email the confirmation screen says plainly that WhatsApp is the
+only copy they will get, and the portal flags those registrations.
+
+### The portal
+
+**Scholarship** in the existing dashboard: an overview with paid registrations
+by class, the registrations table with filters and a CSV download for test day,
+and a **Where they came from** view breaking down locality and how each parent
+heard about it — which is the difference between guessing where to advertise
+and knowing.
+
+Per registration an admin can set the reporting time that appears on the admit
+card, mark appeared or absent, update the payment status, resend the receipt or
+admit card, keep staff-only internal notes, and cancel.
 
 ---
 

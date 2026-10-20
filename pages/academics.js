@@ -70,7 +70,7 @@ export default function AcademicsPage() {
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="chip">Next Session 2026 – 27</span>
+                    <span className="chip">Next Session 2027 – 28</span>
                     <span className="chip">Classes LKG – VIII</span>
                   </div>
                   <h2 className="font-garamond text-4xl font-semibold leading-[1.05] text-midnight sm:text-5xl md:text-[48px]">
@@ -78,7 +78,7 @@ export default function AcademicsPage() {
                   </h2>
                   <span className="block h-px w-20 bg-gradient-to-r from-gold to-transparent" />
                   <p className="text-base leading-relaxed text-midnight/75 md:text-lg">
-                    Beginning 2026 – 27, our classrooms from LKG to Grade VIII receive refreshed
+                    Beginning 2027 – 28, our classrooms from LKG to Grade VIII receive refreshed
                     content, measurable progress tracking, and added teacher support — for deeper
                     engagement, clearer outcomes, and confident learners.
                   </p>
@@ -124,7 +124,7 @@ export default function AcademicsPage() {
                       </div>
                       <div className="glass-panel-dark mt-6 rounded-2xl p-5">
                         <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-gold-300">
-                          What changes in 2026 – 27
+                          What changes in 2027 – 28
                         </p>
                         <ul className="mt-3 space-y-2 text-sm text-parchment/85">
                           {classroomKitChanges.map((item) => (

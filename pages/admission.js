@@ -39,7 +39,7 @@ export default function AdmissionPage() {
         <SubNav section={sectionNav.admission.section} links={sectionNav.admission.links} />
         <main className="flex-1">
           <ImageBanner
-            title="Admissions 2026 – 27"
+            title="Admissions 2027 – 28"
             subtitle="Explore the next chapter of learning with a campus designed for confidence and curiosity."
             eyebrow="Admissions Open"
             slot="admission.banner"
@@ -61,13 +61,68 @@ export default function AdmissionPage() {
                 </h1>
                 <span className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
                 <p className="mt-6 text-base leading-relaxed text-midnight/75 md:text-lg">
-                  The Elden Heights School is opening admissions for the 2026 – 27 academic session.
+                  The Elden Heights School is opening admissions for the 2027 – 28 academic session.
                   As we move through our transition, we continue to stand for the values that shaped
                   our legacy — discipline, curiosity, and academic excellence. Be part of the next
                   generation of learners who will experience an upgraded, modern, and future-ready
                   school environment.
                 </p>
               </motion.div>
+            </div>
+          </section>
+
+          {/* The scholarship route in, given its own band directly under the
+              introduction — a family who could only come on a scholarship
+              should not have to read the whole admission page to find out it
+              exists. */}
+          <section className="band-white">
+            <div className="shell py-14 md:py-16">
+              <div className="eden-theme border-[3px] border-eden-700 bg-eden-50">
+                <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+                  <div>
+                    <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-eden-600">
+                      Scholarships · Registration open
+                    </p>
+                    <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.5rem)] font-medium leading-[1.1] text-ink">
+                      Up to 100% tuition waiver, decided by a test
+                    </h2>
+                    <p className="mt-4 max-w-prose text-[1rem] leading-relaxed text-ink-soft">
+                      The Edenwoods Merit Scholarship 2027 is open to children joining Nursery to
+                      Class IX in 2027&ndash;28. Eight full scholarships across all classes. The
+                      test costs &#8377;199 and is held on 5 November 2026.
+                    </p>
+                    <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
+                      <Link
+                        href="/admission/scholarships/edenwoods-merit-2027"
+                        className="btn-primary"
+                      >
+                        Register &middot; &#8377;199
+                      </Link>
+                      <Link href="/admission/scholarships" className="hv-link font-bold">
+                        All scholarships
+                      </Link>
+                    </div>
+                  </div>
+
+                  <dl className="grid grid-cols-2 gap-px bg-eden-200">
+                    {[
+                      ['Classes', 'Nursery to IX'],
+                      ['Test fee', '₹199'],
+                      ['Test day', '5 Nov 2026'],
+                      ['Closes', '31 Oct 2026']
+                    ].map(([label, value]) => (
+                      <div key={label} className="bg-eden-50 px-5 py-4">
+                        <dt className="text-[0.62rem] font-bold uppercase tracking-[0.12em] text-ink-muted">
+                          {label}
+                        </dt>
+                        <dd className="mt-1.5 font-display text-[1.2rem] leading-tight text-ink">
+                          {value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -173,7 +228,7 @@ export default function AdmissionPage() {
               >
                 <span className="eyebrow">Eligibility</span>
                 <h2 className="mt-4 font-garamond text-3xl font-semibold leading-tight text-midnight md:text-4xl">
-                  Nursery through Grade 10 for 2026 – 27.
+                  Nursery through Grade 10 for 2027 – 28.
                 </h2>
                 <span className="mt-5 block h-px w-16 bg-gradient-to-r from-gold to-transparent" />
                 <p className="mt-5 text-base leading-relaxed text-midnight/75">
@@ -235,7 +290,7 @@ export default function AdmissionPage() {
                   <p className="text-base leading-relaxed text-white/80 md:text-lg">
                     Families who confirm early receive the first choice of interaction dates,
                     faster document processing, and priority in class allocation for the
-                    2026 &ndash; 27 session.
+                    2027 &ndash; 28 session.
                   </p>
 
                   <div className="flex flex-wrap items-center gap-x-10 gap-y-5">

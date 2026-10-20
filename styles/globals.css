@@ -37,6 +37,32 @@
   --color-graphite: #1F1F1F;
 }
 
+/* --------------------------------------------------------------------------
+   Edenwoods Eduhub Foundation
+   The scholarship pages are run by the Foundation, not the school, so they
+   carry the Foundation's own teal. Rather than duplicate every component in a
+   second colour, `.eden-theme` repoints the one accent variable the design
+   system is built on — so .rule-heavy, .hv-link, .arrow-cta, focus rings and
+   the rest retheme themselves, and anything written against Tailwind's
+   `eden-*` scale matches them exactly.
+   -------------------------------------------------------------------------- */
+
+.eden-theme {
+  --eden-deep: #06423C;
+  --eden: #0C5A54;
+  --eden-bright: #0D746C;
+
+  --crimson: var(--eden);
+  --crimson-deep: var(--eden-deep);
+  --color-cardinal: var(--eden);
+  --color-cardinal-deep: var(--eden-deep);
+}
+
+.eden-theme ::selection {
+  background-color: var(--eden-deep);
+  color: #FFFFFF;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;

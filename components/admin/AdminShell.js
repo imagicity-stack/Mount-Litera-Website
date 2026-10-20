@@ -6,6 +6,7 @@ const NAV = [
   { id: 'media', label: 'Site Images', icon: 'M4 5h16v14H4V5Zm0 10 4.5-4.5 3.5 3.5 3-3L20 15M9 9.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z' },
   { id: 'content', label: 'Content', icon: 'M5 4h14v16H5V4Zm3 4h8M8 12h8M8 16h5' },
   { id: 'people', label: 'People', icon: 'M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M12 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm9 12v-1a4 4 0 0 0-3-3.9M16.5 3.6a3.5 3.5 0 0 1 0 6.8' },
+  { id: 'scholarship', label: 'Scholarship', icon: 'M12 3 2.5 8.2 12 13.4l9.5-5.2L12 3Zm6 7.6v4.2c0 1.6-2.7 3-6 3s-6-1.4-6-3v-4.2M21 8.2v5.6' },
   { id: 'parent-room', label: 'Parent Room', icon: 'M7 4h10a1 1 0 0 1 1 1v15l-6-3-6 3V5a1 1 0 0 1 1-1Zm2 5h6M9 12h4' },
   { id: 'blogs', label: 'Blogs', icon: 'M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm2 5h8M7 13h8M7 17h5' },
   { id: 'popups', label: 'Popups', icon: 'M4 5h16v11H13l-4 3v-3H4V5Z' },

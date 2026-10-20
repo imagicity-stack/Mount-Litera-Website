@@ -39,6 +39,18 @@ service cloud.firestore {
     //   parent_room_settings  → /api/parent-room/availability (public subset),
     //                             /api/admin/parent-room/settings
     //
+    // The scholarship collections are the same case: a registration holds a
+    // child's name and date of birth, a parent's phone number, and what they
+    // paid. Nothing in the browser reads or writes them:
+    //
+    //   scholarship_registrations         → /api/scholarship/register, /order,
+    //                                         /confirm, /registration/[id]
+    //                                         (narrow view, token-gated),
+    //                                         /api/admin/scholarship/* (admin)
+    //   scholarship_registrations_claims  → written only inside the
+    //                                         one-registration-per-child
+    //                                         transaction; never read by a page
+    //
     // A signed-in parent has no more access to these than a stranger does,
     // which is correct: authentication in this application confers admin
     // access and nothing else.
