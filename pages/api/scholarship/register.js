@@ -12,7 +12,8 @@
 
 import {
   RegistrationConflict,
-  createRegistration
+  createRegistration,
+  loadScholarshipSettings
 } from '@/lib/scholarshipStore';
 import {
   hasErrors,
@@ -33,9 +34,14 @@ export default async function handler(req, res) {
 
   const body = req.body || {};
 
-  if (!registrationIsOpen()) {
+  // The published date and the office's own switch. The switch can only close
+  // registration early — it cannot extend past the date in the Terms.
+  const settings = await loadScholarshipSettings();
+  if (!registrationIsOpen() || !settings.registrationOpen) {
     return res.status(410).json({
-      message: 'Registration for the Edenwoods Merit Scholarship 2027 has closed.',
+      message:
+        settings.closedMessage ||
+        'Registration for the Edenwoods Merit Scholarship 2027 has closed.',
       code: 'closed'
     });
   }
@@ -56,6 +62,7 @@ export default async function handler(req, res) {
     const { registrationNumber, token } = await createRegistration({
       registration,
       campaign,
+      settings,
       meta: {
         amount: scholarship.registrationFee,
         landingPath: String(body.landingPath || '').slice(0, 300)
