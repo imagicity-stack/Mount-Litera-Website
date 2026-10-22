@@ -789,6 +789,53 @@ forcing a fake address loses the receipt rather than delivering it — so when
 there is no email the confirmation screen says plainly that WhatsApp is the
 only copy they will get, and the portal flags those registrations.
 
+### Registration numbers
+
+Every registration gets a unique number — `EMS27-K7M2QX` — which goes on the
+admit card, on the merit list, and is what a parent quotes on the phone.
+
+The **series and the numbering style are set in the portal**, under
+Scholarship → Settings, not in the code:
+
+- **Series** — `EMS27` today; next year change it to `EMS28` and nothing else
+  needs touching.
+- **Random** (default) — six unguessable characters, never using 0/O or 1/I/L
+  because these get read down the phone. Reveals nothing about how many have
+  registered.
+- **Sequential** — `EMS27-0001`, with a configurable width. Easier to read out
+  and to build a seating plan from, but it leaks the running total and leaves a
+  gap wherever a payment was abandoned. The counter is read and advanced inside
+  the same transaction that creates the registration, so two parents
+  registering at the same instant cannot be handed the same roll number.
+
+The validator is shape-based rather than locked to `EMS27`, so changing the
+series does not start rejecting the numbers already issued. What protects a
+registration is its token, not the unguessability of its number.
+
+Also here: a switch to stop taking entries **early** — the hall is full — with
+the message a parent then sees. It deliberately cannot extend past the closing
+date, because that date is in the Terms every parent agreed to at payment.
+
+The **fee and the dates are not editable here**, for the same reason: they are
+in that document, and a figure changeable in a portal while the document said
+something else would be the worst kind of mismatch. They change in
+`lib/scholarship.js` alongside the document.
+
+### Who gets told about a registration
+
+The alert goes to `SCHOLARSHIP_TO`, falling back to `ADMISSION_TO`, then
+`CONTACT_TO`, then a built-in address — and is sent from `MS_SENDER` or
+`SMTP_FROM` over whichever transport `lib/mailer.js` has configured. Nothing
+new is needed to go live.
+
+It fires the moment a ₹199 payment is confirmed, and never for a registration
+that was started and abandoned.
+
+Scholarship → Settings shows the addresses **actually in effect** and which
+variable supplied each, and has a **Send a test email** button — so "will we be
+told when someone registers?" has an answer you can watch land in the inbox,
+rather than one you have to take on trust from a deployment config.
+
 ### The portal
 
 **Scholarship** in the existing dashboard: an overview with paid registrations

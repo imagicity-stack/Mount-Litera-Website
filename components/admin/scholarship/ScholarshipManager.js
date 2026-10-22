@@ -14,6 +14,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Badge, Button, Card, Input, Select, Spinner, TextArea } from '@/components/admin/ui';
+import SettingsPanel from '@/components/admin/scholarship/SettingsPanel';
 import {
   LIMITS,
   PAYMENT_STATUS,
@@ -32,7 +33,8 @@ import {
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'registrations', label: 'Registrations' },
-  { id: 'localities', label: 'Where they came from' }
+  { id: 'localities', label: 'Where they came from' },
+  { id: 'settings', label: 'Settings' }
 ];
 
 const ALL = '__all__';
@@ -229,6 +231,7 @@ export default function ScholarshipManager({ getToken, focusRegistration }) {
             <RegistrationsTable rows={rows} onOpen={setSelected} onRefresh={load} />
           )}
           {view === 'localities' && <Localities rows={paid} />}
+          {view === 'settings' && <SettingsPanel request={request} />}
         </>
       )}
 
