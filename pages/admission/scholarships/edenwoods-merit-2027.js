@@ -27,7 +27,11 @@ import {
   ScholarshipHeader,
   SectionHead
 } from '@/components/scholarship/Chrome';
-import { trackFacebookCustomEvent, trackFacebookEvent } from '@/lib/facebookPixel';
+import {
+  SCHOLARSHIP_EVENTS,
+  trackScholarship,
+  trackScholarshipCompleted
+} from '@/lib/scholarshipAnalytics';
 import {
   CAMPAIGN_KEYS,
   classXNote,
@@ -83,25 +87,23 @@ export default function EdenwoodsMeritScholarship2027() {
 
     if (viewedRef.current) return;
     viewedRef.current = true;
-    trackFacebookEvent('ViewContent', {
-      content_name: scholarship.name,
-      content_category: 'scholarship'
+    trackScholarship(SCHOLARSHIP_EVENTS.VIEW, {
+      utm_source: fromUrl.utm_source || '',
+      utm_campaign: fromUrl.utm_campaign || ''
     });
-    trackFacebookCustomEvent('scholarship_view', { utm_source: fromUrl.utm_source || '' });
   }, [router.isReady, router.query]);
 
   const scrollToRegister = useCallback(() => {
-    trackFacebookCustomEvent('scholarship_register_clicked');
+    trackScholarship(SCHOLARSHIP_EVENTS.REGISTER_CLICKED);
     registerRef.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   }, [reduce]);
 
   const onComplete = useCallback((registration) => {
-    trackFacebookEvent('Purchase', {
-      content_name: scholarship.name,
-      value: registration?.amount ?? scholarship.registrationFee,
-      currency: 'INR'
+    trackScholarshipCompleted({
+      registrationNumber: registration?.registrationNumber || '',
+      amount: registration?.amount ?? scholarship.registrationFee,
+      classApplying: registration?.classApplying || ''
     });
-    trackFacebookCustomEvent('scholarship_registration_completed');
   }, []);
 
   const rise = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };

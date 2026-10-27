@@ -30,6 +30,7 @@ import {
   validateParentStep
 } from '@/lib/scholarship';
 import { feeDisclosure } from '@/lib/scholarshipCopy';
+import { SCHOLARSHIP_EVENTS, trackScholarship } from '@/lib/scholarshipAnalytics';
 import {
   ChoiceGrid,
   ConsentCheckbox,
@@ -155,10 +156,18 @@ export default function RegistrationForm({ campaign, onComplete }) {
   const [registration, setRegistration] = useState(null);
   const [done, setDone] = useState(null);
   const panelRef = useRef(null);
+  const startedRef = useRef(false);
 
   const set = (field) => (value) => {
     setDraft((cur) => ({ ...cur, [field]: value }));
     setErrors((cur) => (cur[field] ? { ...cur, [field]: undefined } : cur));
+    // Fires once, on the first thing the parent types — the difference
+    // between "saw the form" and "started filling it in" is where the real
+    // drop-off shows.
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackScholarship(SCHOLARSHIP_EVENTS.FORM_STARTED);
+    }
   };
 
   // A confirmed registration survives a refresh, so a parent who reloads after
@@ -208,6 +217,11 @@ export default function RegistrationForm({ campaign, onComplete }) {
       const found = validateChildStep(draft);
       setErrors(found);
       if (hasErrors(found)) return;
+      trackScholarship(SCHOLARSHIP_EVENTS.STEP_COMPLETED, {
+        step: 1,
+        step_name: 'child',
+        class_applying: draft.classApplying
+      });
       goTo(1);
       return;
     }
@@ -215,6 +229,12 @@ export default function RegistrationForm({ campaign, onComplete }) {
       const found = validateParentStep(draft);
       setErrors(found);
       if (hasErrors(found)) return;
+      trackScholarship(SCHOLARSHIP_EVENTS.STEP_COMPLETED, {
+        step: 2,
+        step_name: 'parent',
+        locality: draft.locality,
+        hear_about: draft.hearAbout
+      });
       goTo(2);
     }
   };
@@ -318,6 +338,11 @@ export default function RegistrationForm({ campaign, onComplete }) {
         }
         held = { registrationNumber: data.registrationNumber, token: data.token };
         setRegistration(held);
+        trackScholarship(SCHOLARSHIP_EVENTS.CHECKOUT_STARTED, {
+          value: data.amount,
+          currency: data.currency || 'INR',
+          transaction_id: data.registrationNumber
+        });
       }
 
       const orderRes = await fetch('/api/scholarship/order', {
