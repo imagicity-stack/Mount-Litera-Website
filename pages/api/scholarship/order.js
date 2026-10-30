@@ -18,6 +18,7 @@ import {
   scholarship
 } from '@/lib/scholarship';
 import { checkoutKeyId, createOrder, paymentsConfigured, toPaise } from '@/lib/parentRoomPayments';
+import { GATEWAY_FAULT, classifyGatewayError } from '@/lib/paymentDiagnostics';
 
 /** Room for a Firestore read plus a gateway round-trip on a cold start. */
 export const config = { maxDuration: 30 };
@@ -102,15 +103,15 @@ export default async function handler(req, res) {
       stack: error?.name === 'RazorpayError' ? undefined : error?.stack
     });
 
-    // Razorpay's descriptions are written to be shown and carry no secret, so
-    // passing one through turns an unactionable error into an actionable one.
-    const gatewayMessage = error?.name === 'RazorpayError' && error.message ? error.message : '';
+    // The gateway's wording stays in the log. A parent cannot act on
+    // "Authentication failed" — every order-creation fault is at our end — and
+    // showing it told them their payment had failed for a reason they could do
+    // nothing about, while advertising that our payment setup was broken.
+    const { fault, payerMessage } = classifyGatewayError(error);
 
-    return res.status(502).json({
-      message: gatewayMessage
-        ? `The payment gateway refused the request: ${gatewayMessage}`
-        : 'We could not start the payment. Please try again.',
-      code: error?.code || 'gateway_error'
+    return res.status(fault === GATEWAY_FAULT.TRANSIENT ? 503 : 502).json({
+      message: payerMessage,
+      code: fault === GATEWAY_FAULT.CONFIG ? 'gateway_unavailable' : error?.code || 'gateway_error'
     });
   }
 }

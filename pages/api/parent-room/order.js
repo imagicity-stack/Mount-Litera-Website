@@ -15,6 +15,7 @@ import {
 } from '@/lib/parentRoomStore';
 import { BOOKING_STATUS, isValidBookingId } from '@/lib/parentRoom';
 import { checkoutKeyId, createOrder, paymentsConfigured, toPaise } from '@/lib/parentRoomPayments';
+import { GATEWAY_FAULT, classifyGatewayError } from '@/lib/paymentDiagnostics';
 
 /**
  * Give the function room for a Firestore read plus a gateway round-trip on a
@@ -128,18 +129,15 @@ export default async function handler(req, res) {
       stack: error?.name === 'RazorpayError' ? undefined : error?.stack
     });
 
-    // Razorpay's descriptions are written to be shown ("amount must be at
-    // least 100", "authentication failed") and carry no secret, so passing one
-    // through turns an unactionable error into an actionable one. Anything
-    // unrecognised falls back to the neutral line.
-    const gatewayMessage =
-      error?.name === 'RazorpayError' && error.message ? error.message : '';
+    // The gateway's wording stays in the log above and never reaches the
+    // parent. None of these faults — bad credentials, a rejected amount, an
+    // unactivated account — is something a parent can do anything about, so
+    // the only useful distinction to them is whether retrying might work.
+    const { fault, payerMessage } = classifyGatewayError(error);
 
-    return res.status(502).json({
-      message: gatewayMessage
-        ? `The payment gateway refused the request: ${gatewayMessage}`
-        : 'We could not start the payment. Please try again.',
-      code: error?.code || 'gateway_error'
+    return res.status(fault === GATEWAY_FAULT.TRANSIENT ? 503 : 502).json({
+      message: payerMessage,
+      code: fault === GATEWAY_FAULT.CONFIG ? 'gateway_unavailable' : error?.code || 'gateway_error'
     });
   }
 }
