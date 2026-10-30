@@ -12,34 +12,18 @@
 
 import { requireAdmin } from '@/lib/adminAuth';
 import { createOrder, describePaymentConfig, paymentsConfigured } from '@/lib/parentRoomPayments';
+import { diagnoseCredentials, interpretProbeFailure } from '@/lib/paymentDiagnostics';
 import { loadSettings } from '@/lib/parentRoomStore';
 
-/** A plain-English reading of the configuration, most severe first. */
+/**
+ * A plain-English reading of the configuration, most severe first. The
+ * credential half is shared with the site-wide check in
+ * `pages/api/admin/payment-check.js`; only the booking-settings reasons a
+ * checkout might not appear are particular to the Parent Room.
+ */
 const diagnose = (config, settings) => {
-  const problems = [];
+  const problems = diagnoseCredentials(config);
 
-  if (!config.keyIdPresent) problems.push('RAZORPAY_KEY_ID is not set.');
-  if (!config.keySecretPresent) problems.push('RAZORPAY_KEY_SECRET is not set.');
-  if (config.keyIdHadWhitespace) {
-    problems.push(
-      'RAZORPAY_KEY_ID has whitespace around it (a stray newline from pasting). It is trimmed before use, but fix it at the source.'
-    );
-  }
-  if (config.keySecretHadWhitespace) {
-    problems.push(
-      'RAZORPAY_KEY_SECRET has whitespace around it. It is trimmed before use, but an untrimmed secret is the usual cause of both failed orders and failed signature checks.'
-    );
-  }
-  if (config.keyIdPresent && config.mode === 'unrecognised') {
-    problems.push(
-      'RAZORPAY_KEY_ID does not start with rzp_test_ or rzp_live_ — check it is the key id and not the secret.'
-    );
-  }
-  if (!config.publishableKeyMatchesSecretKey) {
-    problems.push(
-      'NEXT_PUBLIC_RAZORPAY_KEY_ID does not match RAZORPAY_KEY_ID. The checkout would open against a different account than the order was created in.'
-    );
-  }
   if (settings.paymentMode !== 'razorpay') {
     problems.push(
       'Parent Room settings are set to collect the fee offline, so no checkout is offered regardless of these keys.'
@@ -104,15 +88,18 @@ export default async function handler(req, res) {
       code: error?.code,
       details: error?.details
     });
+    const probe = {
+      ok: false,
+      message: error?.message || 'The gateway rejected the request.',
+      status: error?.status || null,
+      code: error?.code || null,
+      reason: error?.reason || ''
+    };
+
     return res.status(200).json({
       ...payload,
-      probe: {
-        ok: false,
-        message: error?.message || 'The gateway rejected the request.',
-        status: error?.status || null,
-        code: error?.code || null,
-        reason: error?.reason || ''
-      }
+      probe,
+      guidance: interpretProbeFailure(probe, config)
     });
   }
 }

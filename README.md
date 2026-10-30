@@ -596,12 +596,34 @@ If the gateway keys are absent the flow falls back to offline on its own rather
 than failing at checkout. Nothing anywhere presents an unpaid session as paid.
 A fee of `0` confirms as `waived` with no payment step at all.
 
-**If the pay button fails**, open **Parent Room → Settings → Test the payment
-connection**. It reports the shape of the credentials — present, trimmed, test
-or live, secret length, and whether the publishable key matches — never their
-value, then raises a real ₹1 order so Razorpay itself says what is wrong. The
-₹1 order is never charged; creating one only proves the credentials are
-accepted.
+**If the pay button fails anywhere on the site**, the credentials are the first
+thing to check, and `POST /api/admin/payment-check` (admin-only) is the way.
+It reports the shape of the credentials — present, trimmed, test or live,
+secret length, and whether the publishable key matches — never their value,
+then raises a real ₹1 order so Razorpay itself says whether they work. The ₹1
+order is never charged; creating one only proves the credentials are accepted.
+It reads no database, so a Firestore problem cannot obscure the answer.
+**Parent Room → Settings → Test the payment connection** runs the same check
+and adds the booking-settings reasons a checkout might not appear at all.
+
+When the shape is perfect and the gateway still answers **"Authentication
+failed"**, the credentials are well-formed and belong to nothing. A shape check
+cannot see this; only the ₹1 probe can, so the check reads that answer back as
+instructions (`interpretProbeFailure`). In order of how often each turns out to
+be the cause: the key was **regenerated in the Razorpay dashboard** and never
+copied here (regenerating invalidates the old secret immediately, and nothing
+in this project would notice); the id and secret come from **different key
+pairs**; the keys belong to a **different Razorpay account**; or the account is
+**not activated for live payments**. The fix is one fresh pair from Settings →
+API Keys into all three variables, **then a redeploy** — environment variables
+are read at build time, so changing one without redeploying leaves the old
+value live.
+
+A payer is never shown any of this. Every order-creation failure is at the
+school's end, so `classifyGatewayError` in `lib/paymentDiagnostics.js` reduces
+it to the only distinction a parent can act on — whether trying again might
+work — and the gateway's own words stay in the server log. Showing them was
+both alarming and an advertisement that the school's payment setup was broken.
 
 Credentials are **trimmed everywhere** (`cleanKey` in `lib/razorpayClient.js`).
 A key pasted into a hosting dashboard routinely picks up a trailing newline, and
